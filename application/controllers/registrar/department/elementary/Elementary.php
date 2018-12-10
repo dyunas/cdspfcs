@@ -17,9 +17,13 @@ class Elementary extends MY_Controller {
 
 	public function New_student()
 	{
+		$data = array(
+			"acad_yr" => $this->glob->get_acad_year()
+		);
+
 		$this->load->view('templates/header');
 		$this->load->view('templates/navigation');
-		$this->load->view('registrar/department/elementary/new_student');
+		$this->load->view('registrar/department/elementary/new_student', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -27,9 +31,10 @@ class Elementary extends MY_Controller {
 	{
 		if ($this->input->is_ajax_request())
 		{
+			// var_dump($this->input->post());
 			if ($this->elemdb->register_student())
 			{
-				// var_dump($this->input->post());
+				
 				echo json_encode(true);
 			}
 			else
@@ -40,6 +45,21 @@ class Elementary extends MY_Controller {
 		else
 		{
 			exit('No direct script access allowed');
+		}
+	}
+
+	public function Get_elem_table_data()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			if ($result = $this->elemdb->get_elem_table_data())
+			{
+				echo $result;
+			}
+			else
+			{
+				echo json_encode(false);
+			}
 		}
 	}
 }

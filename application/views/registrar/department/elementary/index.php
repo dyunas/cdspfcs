@@ -28,30 +28,7 @@
             <a href="<?php echo site_url('registrar/dept/elementary/new'); ?>" class="btn btn-sm btn-primary pull-right"><i class="ti ti-plus"></i> Register new student</a>
           </div><!-- /.card-header -->
           <div class="card-body">
-            <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th>LRN</th>
-                  <th>Name</th>
-                  <th>Grade Level</th>
-                  <th>Section</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>000000000001</td>
-                  <td>Juan Dela Cruz Jr.</td>
-                  <td>Grade 5</td>
-                  <td>Persimmon</td>
-                  <td><span>Enrolled</span></td>
-                  <td>
-                    <a href="#" style="color: #007bff!important;"><i class="ti ti-eye"></i> VIEW</a>
-                  </td>
-                </tr>
-              </tbody>
-            </table><!-- /.table -->
+            <table id="elemTbl" class="table table-striped table-bordered" width="100%"></table>
           </div><!-- /.card-body -->
         </div><!-- /.card -->
       </div><!-- /.col-md-12 -->
@@ -62,11 +39,32 @@
 <script src="<?php echo base_url('assets/vendors/datatables.net/js/jquery.dataTables.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/vendors/datatables.net-buttons/js/dataTables.buttons.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/vendors/jszip/dist/jszip.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/vendors/pdfmake/build/pdfmake.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/vendors/pdfmake/build/vfs_fonts.js'); ?>"></script>
-<script src="<?php echo base_url('assets/vendors/datatables.net-buttons/js/buttons.html5.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/vendors/datatables.net-buttons/js/buttons.print.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/vendors/datatables.net-buttons/js/buttons.colVis.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js'); ?>"></scr
 <script src="<?php echo base_url('assets/assets/js/init-scripts/data-table/datatables-init.js'); ?>"></script>
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+    jQuery.ajax({
+      type: 'POST',
+      dataType: 'json',
+      url: 'elementary/get_elem_table_data',
+      success:function(result){
+        // console.log(result);
+        jQuery('#elemTbl').DataTable({
+            "searching": true, //this is disabled because I have a custom search.
+            "aaData": [result], //here we get the array data from the ajax call.
+            "aoColumns": [
+              { "sTitle": "LRN" },
+              { "sTitle": "Last Name" },
+              { "sTitle": "First Name" },
+              { "sTitle": "Grade Level" },
+              { "sTitle": "Section" },
+              { "sTitle": "Status" },
+              { "sTitle": "Action" }
+            ] //this isn't necessary unless you want modify the header
+              //names without changing it in your html code. 
+              //I find it useful tho' to setup the headers this way.
+        });
+      }
+    });
+  });
+</script>

@@ -68,4 +68,5 @@ $route['logout'] = 'Login/Logout';
 	// ELEMENTARY
 	$route['registrar/dept/elementary/register_student'] = 'registrar/department/elementary/Elementary/Register_student';
 	$route['registrar/dept/elementary/new'] = 'registrar/department/elementary/Elementary/New_student';
+	$route['registrar/dept/elementary/get_elem_table_data'] = 'registrar/department/elementary/Elementary/Get_elem_table_data';
 	$route['registrar/dept/elementary'] = 'registrar/department/elementary/Elementary/Index';

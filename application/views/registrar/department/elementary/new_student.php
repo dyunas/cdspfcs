@@ -68,7 +68,7 @@
                 <label for="gender" class=" form-control-label">Gender</label>
               </div>
               <div class="col col-sm-3">
-                <select class="input-sm form-control-sm form-control" required>
+                <select class="input-sm form-control-sm form-control" name="gender" required>
                   <option value=""></option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -160,31 +160,60 @@
                 <div class="form-check">
                   <div class="checkbox col-sm-4 col-xs-12">
                     <label for="bCertPSA" class="form-check-label ">
-                      <input type="checkbox" id="bCertPSA" name="bCertPSA" value="" class="form-check-input docu">Birth Certificate (PSA)
+                      <input type="checkbox" id="bCertPSA" name="bCertPSA" value="0" class="form-check-input docu">Birth Certificate (PSA)
                     </label>
                   </div>
                   <div class="checkbox col-sm-4 col-xs-12">
                     <label for="certGMC" class="form-check-label ">
-                      <input type="checkbox" id="certGMC" name="certGMC" value="" class="form-check-input docu"> Certificate of Good Moral
+                      <input type="checkbox" id="certGMC" name="certGMC" value="0" class="form-check-input docu"> Certificate of Good Moral
                     </label>
                   </div>
                   <div class="checkbox col-sm-4 col-xs-12">
                     <label for="certHonDis" class="form-check-label ">
-                      <input type="checkbox" id="certHonDis" name="certHonDis" value="" class="form-check-input docu"> Certificate of Honourable Dismissal
+                      <input type="checkbox" id="certHonDis" name="certHonDis" value="0" class="form-check-input docu"> Certificate of Honourable Dismissal
                     </label>
                   </div>
                   <div class="checkbox col-sm-4 col-xs-12">
                     <label for="frm137" class="form-check-label ">
-                      <input type="checkbox" id="frm137" name="frm137" value="" class="form-check-input docu"> Form 137
+                      <input type="checkbox" id="frm137" name="frm137" value="0" class="form-check-input docu"> Form 137
                     </label>
                   </div>
                   <div class="checkbox col-sm-4 col-xs-12">
                     <label for="frm138" class="form-check-label ">
-                      <input type="checkbox" id="frm138" name="frm138" value="" class="form-check-input docu"> Form 138
+                      <input type="checkbox" id="frm138" name="frm138" value="0" class="form-check-input docu"> Form 138
                     </label>
                   </div>
                 </div>
               </div>
+            </div><!-- /.row form-group -->
+          </div><!-- /.card-body -->
+        </div><!-- /.card -->
+        <div class="card">
+          <div class="card-header">
+            <strong>Student Assessment</strong>
+          </div><!-- /.card-header -->
+          <div class="card-body form-horizontal">
+            <div class="row form-group">
+              <div class="col col-sm-1">
+                <label for="stud_grade_lvl" class="form-control-label">Grade</label>
+              </div><!-- col col-sm-1 -->
+              <div class="col col-sm-3">
+                <select class="input-sm form-control-sm form-control" name="stud_grade_lvl" required>
+                  <option value=""></option>
+                  <option value="Grade 1">Grade 1</option>
+                  <option value="Grade 2">Grade 2</option>
+                  <option value="Grade 3">Grade 3</option>
+                  <option value="Grade 4">Grade 4</option>
+                  <option value="Grade 5">Grade 5</option>
+                  <option value="Grade 6">Grade 6</option>
+                </select>
+              </div><!-- col col-sm-3 -->
+              <div class="col col-sm-1">
+                <label for="stud_acad_yr" class="form-control-label">School Year</label>
+              </div><!-- col col-sm-1 -->
+              <div class="col col-sm-3">
+                <input type="text" class="input-sm form-control-sm form-control" name="stud_acad_yr" value="<?php echo $acad_yr; ?>" readonly>
+              </div><!-- col col-sm-3 -->
             </div><!-- /.row form-group -->
           </div><!-- /.card-body -->
         </div><!-- /.card -->
@@ -214,10 +243,10 @@
   jQuery(document).ready(function() {
     jQuery(':checkbox').on('click', function(){
       if(jQuery(this).is(':checked')){
-        jQuery(this).val('ok');
+        jQuery(this).val(1);
       }
       else {
-        jQuery(this).val('');
+        jQuery(this).val(0);
       }
     });
 

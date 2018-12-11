@@ -70,3 +70,9 @@ $route['logout'] = 'Login/Logout';
 	$route['registrar/dept/elementary/new'] = 'registrar/department/elementary/Elementary/New_student';
 	$route['registrar/dept/elementary/get_elem_table_data'] = 'registrar/department/elementary/Elementary/Get_elem_table_data';
 	$route['registrar/dept/elementary'] = 'registrar/department/elementary/Elementary/Index';
+
+	// JUNIOR HIGH SCHOOL
+	$route['registrar/dept/juniorhs/register_student'] = 'registrar/department/juniorhs/Junior_high_school/Register_student';
+	$route['registrar/dept/juniorhs/new'] = 'registrar/department/juniorhs/Junior_high_school/New_student';
+	$route['registrar/dept/juniorhs/get_jhs_table_data'] = 'registrar/department/juniorhs/Junior_high_school/Get_elem_table_data';
+	$route['registrar/dept/juniorhs'] = 'registrar/department/juniorhs/Junior_high_school/Index';

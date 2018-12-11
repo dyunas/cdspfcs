@@ -42,13 +42,13 @@
                 <label for="lname" class=" form-control-label">Lastname</label>
               </div>
               <div class="col col-sm-3">
-                <input type="text" id="lname" name="lname" placeholder="Lastname" class="input-sm form-control-sm form-control" required data-parsley-required-message="This field is required">
+                <input type="text" id="lname" name="lname" placeholder="Lastname" class="input-sm form-control-sm form-control" required data-parsley-required-message="Please enter a last name">
               </div>
               <div class="col col-sm-1">
                 <label for="fname" class=" form-control-label">Firstname</label>
               </div>
               <div class="col col-sm-3">
-                <input type="text" id="fname" name="fname" placeholder="Firstname" class="input-sm form-control-sm form-control" required data-parsley-required-message="This field is required">
+                <input type="text" id="fname" name="fname" placeholder="Firstname" class="input-sm form-control-sm form-control" required data-parsley-required-message="Please enter a first name">
               </div>
               <div class="col col-sm-1">
                 <label for="mname" class=" form-control-label">M.N</label>
@@ -62,13 +62,13 @@
                 <label for="bdate" class=" form-control-label">Birthdate</label>
               </div>
               <div class="col col-sm-3">
-                <input type="date" id="bdate" name="bdate" placeholder="Birthdate" class="input-sm form-control-sm form-control" required data-parsley-type="date" data-parsley-required-message="This field is required" ata-parsley-date-message="Please enter a valid date">
+                <input type="date" id="bdate" name="bdate" placeholder="Birthdate" class="input-sm form-control-sm form-control" required data-parsley-type="date" data-parsley-required-message="This field is required" data-parsley-date-message="Please enter a valid date">
               </div>
               <div class="col col-sm-1">
                 <label for="gender" class=" form-control-label">Gender</label>
               </div>
               <div class="col col-sm-3">
-                <select class="input-sm form-control-sm form-control" name="gender" required>
+                <select class="input-sm form-control-sm form-control" name="gender" required data-parsley-required-message="Please select gender">
                   <option value=""></option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -78,7 +78,7 @@
                 <label for="cnum" class=" form-control-label">Tel. No.#</label>
               </div>
               <div class="col col-sm-3">
-                <input type="text" id="cnum" name="cnum" placeholder="Learner Reference Number" class="input-sm form-control-sm form-control" data-parsley-type="number"  maxlength="11" data-parsley-length="[7, 11]">
+                <input type="text" id="cnum" name="cnum" placeholder="Tel. No.#" class="input-sm form-control-sm form-control" data-parsley-type="number"  maxlength="11" data-parsley-length="[7, 11]">
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
@@ -94,7 +94,7 @@
                 <label for="addrs" class=" form-control-label">Address</label>
               </div>
               <div class="col col-sm-11">
-                <input type="text" id="addrs" name="addrs" placeholder="Address" class="input-sm form-control-sm form-control" required>
+                <input type="text" id="addrs" name="addrs" placeholder="Address" class="input-sm form-control-sm form-control" required data-parsley-required-message="This field is required">
               </div>
             </div><!-- /.row form-group -->
           </div><!-- /.card-body -->
@@ -198,7 +198,7 @@
                 <label for="stud_grade_lvl" class="form-control-label">Grade</label>
               </div><!-- col col-sm-1 -->
               <div class="col col-sm-3">
-                <select class="input-sm form-control-sm form-control" name="stud_grade_lvl" required>
+                <select class="input-sm form-control-sm form-control" name="stud_grade_lvl" required data-parsley-required-message="Please select grade level">
                   <option value=""></option>
                   <option value="Grade 1">Grade 1</option>
                   <option value="Grade 2">Grade 2</option>

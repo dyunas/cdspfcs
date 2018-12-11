@@ -20,8 +20,8 @@
             <li class="<?php echo ($this->uri->segment(3) == 'elementary') ? 'active' : ''; ?> menu-item-has-children">
               <a href="<?php echo site_url($this->uri->segment(1).'/dept/elementary'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Elementary</a>
             </li>
-            <li class="<?php echo ($this->uri->segment(3) == 'jhs') ? 'active' : ''; ?> menu-item-has-children">
-              <a href="<?php echo site_url($this->uri->segment(1).'/dept/jhs'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Junior High School</a>
+            <li class="<?php echo ($this->uri->segment(3) == 'juniorhs') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/dept/juniorhs'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Junior High School</a>
             </li>
             <li class="<?php echo ($this->uri->segment(3) == 'shs') ? 'active' : ''; ?> menu-item-has-children">
               <a href="<?php echo site_url($this->uri->segment(1).'/dept/shs'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Senior High School</a>

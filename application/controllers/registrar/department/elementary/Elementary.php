@@ -9,9 +9,12 @@ class Elementary extends MY_Controller {
 
 	public function Index()
 	{
+		$data = array(
+			'elem_tbl' => $this->elemdb->get_elem_table_data()
+		);
 		$this->load->view('templates/header');
 		$this->load->view('templates/navigation');
-		$this->load->view('registrar/department/elementary/index');
+		$this->load->view('registrar/department/elementary/index', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -52,13 +55,11 @@ class Elementary extends MY_Controller {
 	{
 		if ($this->input->is_ajax_request())
 		{
+			$data = array();
+
 			if ($result = $this->elemdb->get_elem_table_data())
 			{
 				echo $result;
-			}
-			else
-			{
-				echo json_encode(false);
 			}
 		}
 	}

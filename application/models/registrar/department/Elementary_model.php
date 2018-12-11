@@ -81,48 +81,49 @@ class Elementary_model extends CI_Model {
 
 		if ($query->num_rows() > 0)
 		{
-			$data = array();
-			foreach ($query->result() as $row)
-			{
-				if ($row->stud_status == 'registered')
-				{
-					$status = '<span class="badge badge-primary">'.$row->stud_status.'</span>';
-				}
-				elseif ($row->stud_status == 'enrolled')
-				{
-					$status = '<span class="badge badge-success">'.$row->stud_status.'</span>';
-				}
-				elseif ($row->stud_status == 'graduate')
-				{
-					$status = '<span class="badge badge-success">'.$row->stud_status.'</span>';
-				}
-				elseif ($row->stud_status == 'dropped')
-				{
-					$status = '<span class="badge badge-danger">'.$row->stud_status.'</span>';
-				}
-				elseif ($row->stud_status == 'reserved')
-				{
-					$status = '<span class="badge badge-info">'.$row->stud_status.'</span>';
-				}
-				elseif ($row->stud_status == 'transfered')
-				{
-					$status = '<span class="badge badge-warning">'.$row->stud_status.'</span>';
-				}
-				else
-				{
-					$status = '<span class="badge badge-secondary">'.$row->stud_status.'</span>';
-				}
+			return $query->result();
+			// $data = array();
+			// foreach ($query->result() as $row)
+			// {
+			// 	if ($row->stud_status == 'registered')
+			// 	{
+			// 		$status = '<span class="badge badge-primary">'.$row->stud_status.'</span>';
+			// 	}
+			// 	elseif ($row->stud_status == 'enrolled')
+			// 	{
+			// 		$status = '<span class="badge badge-success">'.$row->stud_status.'</span>';
+			// 	}
+			// 	elseif ($row->stud_status == 'graduate')
+			// 	{
+			// 		$status = '<span class="badge badge-success">'.$row->stud_status.'</span>';
+			// 	}
+			// 	elseif ($row->stud_status == 'dropped')
+			// 	{
+			// 		$status = '<span class="badge badge-danger">'.$row->stud_status.'</span>';
+			// 	}
+			// 	elseif ($row->stud_status == 'reserved')
+			// 	{
+			// 		$status = '<span class="badge badge-info">'.$row->stud_status.'</span>';
+			// 	}
+			// 	elseif ($row->stud_status == 'transfered')
+			// 	{
+			// 		$status = '<span class="badge badge-warning">'.$row->stud_status.'</span>';
+			// 	}
+			// 	else
+			// 	{
+			// 		$status = '<span class="badge badge-secondary">'.$row->stud_status.'</span>';
+			// 	}
 
-				$data[] = $row->stud_lrn;
-				$data[] = $row->stud_lname;
-				$data[] = $row->stud_fname;
-				$data[] = $row->stud_grade_lvl;
-				$data[] = $row->stud_section;
-				$data[] = $status;
-				$data[] = '<a href="elementary/view/'.$row->stud_lrn.'" style="color: #007bff!important;"><i class="ti ti-eye"></i> VIEW</a>';
-			}
+			// 	$data[] = $row->stud_lrn;
+			// 	$data[] = $row->stud_lname;
+			// 	$data[] = $row->stud_fname;
+			// 	$data[] = $row->stud_grade_lvl;
+			// 	$data[] = $row->stud_section;
+			// 	$data[] = $status;
+			// 	$data[] = '<a href="elementary/view/'.$row->stud_lrn.'" style="color: #007bff!important;"><i class="ti ti-eye"></i> VIEW</a>';
+			// }
 
-			return json_encode($data);
+			// return json_encode($data);
 		}
 	}
 }

@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Elementary_model extends CI_Model {
+class Junior_high_school_model extends CI_Model {
 	public function __construct()
 	{
 		parent::__construct();
@@ -25,7 +25,7 @@ class Elementary_model extends CI_Model {
 			"stud_adrs"   => 	$this->input->post('addrs')
 		);
 
-		if ($this->db->insert('tbl_stud_info_elem', $data))
+		if ($this->db->insert('tbl_stud_info_jhs', $data))
 		{
 			$adtnl_data = array(
 				"stud_lrn" 				=> $this->input->post('LRN'),
@@ -73,11 +73,10 @@ class Elementary_model extends CI_Model {
 		}
 	}
 
-	public function get_elem_table_data()
+	public function get_jhs_table_data()
 	{
 		$this->db->select('stud_lrn, stud_lname, stud_fname, stud_grade_lvl, stud_section, stud_status');
-		$this->db->from('tbl_stud_info_elem');
-
+		$this->db->from('tbl_stud_info_jhs');
 		$query = $this->db->get();
 		$data = array();
 		if ($query->num_rows() > 0)

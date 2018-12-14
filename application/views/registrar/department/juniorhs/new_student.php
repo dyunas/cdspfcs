@@ -70,7 +70,7 @@
               </div>
               <div class="col col-sm-3 col-xs-12">
                 <select class="input-sm form-control-sm form-control" name="gender" required data-parsley-required-message="Please select gender">
-                  <option value="">Choose gender</option>
+                  <option value=""></option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
@@ -285,7 +285,7 @@
             type: 'POST',
             data: form.serialize(),
             dataType: 'json',
-            url: '<?php echo site_url('registrar/dept/elementary/register_student'); ?>',
+            url: 'register_student',
             success:function(data){
               if (data == true) {
                 Swal(

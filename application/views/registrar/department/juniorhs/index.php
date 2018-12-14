@@ -25,7 +25,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <a href="<?php echo site_url('registrar/dept/elementary/new'); ?>" class="btn btn-sm btn-primary pull-right"><i class="ti ti-plus"></i> Register new student</a>
+            <a href="<?php echo site_url('registrar/dept/juniorhs/new'); ?>" class="btn btn-sm btn-primary pull-right"><i class="ti ti-plus"></i> Register new student</a>
           </div><!-- /.card-header -->
           <div class="card-body">
             <table id="elemTbl" class="table table-striped table-bordered" width="100%">
@@ -38,8 +38,7 @@
                 <th>Status</th>
                 <th>Action</th>
               </thead>
-              <tbody>
-              </tbody>
+              <tbody></tbody>
             </table>
           </div><!-- /.card-body -->
         </div><!-- /.card -->
@@ -61,7 +60,7 @@
       "searching": true,
       "ajax": {
         type: "POST",
-        url: 'elementary/get_elem_table_data',
+        url: 'juniorhs/get_jhs_table_data',
         dataType: 'json'
       }
     });

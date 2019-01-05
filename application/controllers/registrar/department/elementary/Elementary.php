@@ -64,7 +64,12 @@ class Elementary extends MY_Controller {
 	public function View_student($uniq_id)
 	{
 		$data = array(
-			"stud_info" => $this->elemdb->get_student_info($uniq_id);
+			"stud_info" => $this->elemdb->get_student_info($uniq_id)
 		);
+
+		$this->load->view('templates/header');
+		$this->load->view('templates/navigation');
+		$this->load->view('registrar/department/elementary/view_student', $data);
+		$this->load->view('templates/footer');
 	}
 }

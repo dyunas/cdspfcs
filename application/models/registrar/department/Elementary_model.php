@@ -22,7 +22,8 @@ class Elementary_model extends CI_Model {
 			"stud_tnum"   => 	$this->input->post('tnum'),
 			"stud_cnum"   => 	$this->input->post('cnum'),
 			"stud_gender" =>	$this->input->post('gender'),
-			"stud_adrs"   => 	$this->input->post('addrs')
+			"stud_cur_adrs"   => 	$this->input->post('cur_addrs'),
+			"stud_perm_adrs"   => 	$this->input->post('perm_addrs'),
 		);
 
 		if ($this->db->insert('tbl_stud_info_elem', $data))
@@ -151,5 +152,29 @@ class Elementary_model extends CI_Model {
 			);
 		}
 		return json_encode($json_data);
+	}
+
+	public function get_student_info($uniq_id)
+	{
+		$this->db->select('
+			a.stud_lrn, a.stud_avatar, a.stud_lname, a.stud_fname, a.stud_mname, a.stud_status, a.stud_rgstrtn_dte, a.stud_grade_lvl, a.stud_section, a.stud_acad_yr, a.stud_email, a.stud_bdate, a.stud_tnum, a.stud_cnum, a.stud_gender, a.stud_cur_adrs, a.stud_perm_adrs,
+			b.stud_fthrs_name, b.stud_fthrs_cnum, b.stud_fthrs_adrs, b.stud_mthrs_name, b.stud_mthrs_cnum, b.stud_mthrs_adrs,
+			c.bCertPSA, c.certGMC, c.certHonDis, c.frm137, c.frm138, c.TOR
+		');
+		$this->db->from('tbl_stud_info_elem a');
+		$this->db->join('tbl_stud_adtnl_info b', 'b.stud_lrn = a.stud_lrn');
+		$this->db->join('tbl_stud_documents c', 'c.stud_id = a.stud_lrn');
+		$this->db->where('a.stud_lrn', $uniq_id);
+
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0)
+		{
+			return $query->row();
+		}
+		else
+		{
+			return FALSE;
+		}
 	}
 }

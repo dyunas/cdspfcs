@@ -22,7 +22,8 @@ class Junior_high_school_model extends CI_Model {
 			"stud_tnum"   => 	$this->input->post('tnum'),
 			"stud_cnum"   => 	$this->input->post('cnum'),
 			"stud_gender" =>	$this->input->post('gender'),
-			"stud_adrs"   => 	$this->input->post('addrs')
+			"stud_cur_adrs"   => 	$this->input->post('cur_addrs'),
+			"stud_perm_adrs"   => 	$this->input->post('perm_addrs')
 		);
 
 		if ($this->db->insert('tbl_stud_info_jhs', $data))

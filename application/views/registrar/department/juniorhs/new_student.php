@@ -34,7 +34,7 @@
               <div class="col col-sm-1 d-none d-sm-block">
                 <label for="LRN" class=" form-control-label">*LRN</label>
               </div>
-              <div class="col-sm-11 col-xs-12">
+              <div class="col-sm-3 col-xs-12">
                 <input type="text" id="LRN" name="LRN" placeholder="Learner Reference Number" class="input-sm form-control-sm form-control" required data-parsley-type="number" data-parsley-required-message="This field is required" maxlength="12" data-parsley-length="[12, 12]">
               </div>
             </div><!-- /.row form-group -->
@@ -91,19 +91,31 @@
               </div><!-- /.col col-sm-3 -->
             </div><!-- /.row form-group -->
             <div class="row form-group">
-              <div class="col col-sm-1 d-none d-sm-block">
+              <div class="col col-sm-2 d-none d-sm-block">
                 <label for="eadd" class="form-control-label">E-mail Address</label>
               </div>
-              <div class="col col-sm-11">
+              <div class="col col-sm-10">
                 <input type="email" id="eadd" name="eadd" placeholder="E-mail Address" class="input-sm form-control-sm form-control" data-parsley-type="email" data-parsley-type-message="Please enter a valid e-mail address">
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
-              <div class="col col-sm-1 d-none d-sm-block">
-                <label for="addrs" class="form-control-label">*Address</label>
+              <div class="col col-sm-2 d-none d-sm-block">
+                <label for="cur_addrs" class="form-control-label">*Current Address</label>
               </div>
-              <div class="col col-sm-11">
-                <input type="text" id="addrs" name="addrs" placeholder="Address" class="input-sm form-control-sm form-control" required data-parsley-required-message="This field is required">
+              <div class="col col-sm-10">
+                <input type="text" id="cur_addrs" name="cur_addrs" placeholder="Current Address" class="input-sm form-control-sm form-control" required data-parsley-required-message="This field is required">
+              </div>
+            </div><!-- /.row form-group -->
+            <div class="row form-group">
+              <div class="col col-sm-2 d-none d-sm-block">
+                <label for="perm_addrs" class="form-control-label">*Permanent Address</label>
+              </div>
+              <div class="col col-sm-10">
+                <input type="text" id="perm_addrs" name="perm_addrs" placeholder="Permanent Address" class="input-sm form-control-sm form-control" required data-parsley-required-message="This field is required">
+                <small id="" class="form-text text-muted">
+                  <input type="checkbox" name="addr_ticker" id="addr_ticker">
+                  <label for="addr_ticker">Check this box if current address is the same with permanent address</label>
+                </small>
               </div>
             </div><!-- /.row form-group -->
           </div><!-- /.card-body -->
@@ -204,15 +216,15 @@
           <div class="card-body form-horizontal">
             <div class="row form-group">
               <div class="d-none d-sm-block col-sm-1 col-xs-2">
-                <label for="stud_grade_lvl" class="form-control-label" placeholder="Grade level">*Grade</label>
+                <label for="stud_grade_lvl" class="form-control-label" placeholder="Grade level">*Grade Level</label>
               </div><!-- col col-sm-1 -->
-              <div class="col-sm-3 col-xs-6">
+              <div class="col-sm-2 col-xs-6">
                 <select class="input-sm form-control-sm form-control" name="stud_grade_lvl" required data-parsley-required-message="Please select grade level">
-                  <option value="">Select grade level</option>
-                  <option value="Grade 7">Grade 7</option>
-                  <option value="Grade 8">Grade 8</option>
-                  <option value="Grade 9">Grade 9</option>
-                  <option value="Grade 10">Grade 10</option>
+                  <option value="">Select level</option>
+                  <option value="Grade 7">7</option>
+                  <option value="Grade 8">8</option>
+                  <option value="Grade 9">9</option>
+                  <option value="Grade 10">10</option>
                 </select>
               </div><!-- col col-sm-3 -->
               <div class="d-none d-sm-block col col-sm-1">
@@ -245,68 +257,4 @@
 <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 <script src="<?php echo base_url('assets/parsley/dist/parsley.min.js'); ?>"></script>
-
-<script>
-  jQuery(document).ready(function() {
-    jQuery(':checkbox').on('click', function(){
-      if(jQuery(this).is(':checked')){
-        jQuery(this).val(1);
-      }
-      else {
-        jQuery(this).val(0);
-      }
-    });
-
-    var form = jQuery('#regForm');
-    form.parsley({
-      errorClass: 'is-invalid text-danger',
-      // successClass: 'is-valid', // Comment this option if you don't want the field to become green when valid. Recommended in Google material design to prevent too many hints for user experience. Only report when a field is wrong.
-      errorsWrapper: '<span class="form-text text-danger" style="font-size: 12px;"></span>',
-      errorTemplate: '<span></span>',
-      trigger: 'change'
-    });
-
-    form.on('submit', function(e) {
-      e.preventDefault();
-      // var f = jQuery(this);
-      // f.parsley().validate();
-
-      Swal({
-        title: 'Register Student?',
-        text: "",
-        type: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, continue.'
-      }).then((result) => {
-        if (result.value) {
-          jQuery.ajax({
-            type: 'POST',
-            data: form.serialize(),
-            dataType: 'json',
-            url: 'register_student',
-            success:function(data){
-              if (data == true) {
-                Swal(
-                  'Registered!',
-                  'Student has been added to the record.',
-                  'success',
-                );
-                // form.find("input[type=text], input[type=date], textarea").val("");
-                jQuery(':input').not(':button, :submit, :reset, :hidden').removeAttr('checked').removeAttr('selected').val('');
-              }
-              else {
-                Swal(
-                  'Error!',
-                  'Failed to add student to the record! Please try again.',
-                  'error'
-                );
-              }
-            }
-          });
-        }
-      })
-    })
-  });
-</script>
+<script src="<?php echo base_url('assets/assets/js/pages/registrar/juniorhs/stud_frm_validation.js'); ?>"></script>

@@ -9,33 +9,30 @@ class Junior_high_school_model extends CI_Model {
 	public function register_student()
 	{
 		$data = array(
-			"stud_lrn"    => 	$this->input->post('LRN'),
-			"stud_lname"  => 	$this->input->post('lname'),
-			"stud_fname"  => 	$this->input->post('fname'),
-			"stud_mname"  => 	$this->input->post('mname'),
-			"stud_status" =>  'registered',
-			"stud_rgstrtn_dte" =>  date('Y-m-d'),
-			"stud_grade_lvl" => $this->input->post('stud_grade_lvl'),
-			"stud_acad_yr" => $this->input->post('stud_acad_yr'),
-			"stud_email"  => 	$this->input->post('eadd'),
-			"stud_bdate"  => 	$this->input->post('bdate'),
-			"stud_tnum"   => 	$this->input->post('tnum'),
-			"stud_cnum"   => 	$this->input->post('cnum'),
-			"stud_gender" =>	$this->input->post('gender'),
-			"stud_cur_adrs"   => 	$this->input->post('cur_addrs'),
-			"stud_perm_adrs"   => 	$this->input->post('perm_addrs')
+			"stud_lrn"    			=> $this->input->post('LRN'),
+			"stud_lname"  			=> $this->input->post('lname'),
+			"stud_fname"  			=> $this->input->post('fname'),
+			"stud_mname"  			=> $this->input->post('mname'),
+			"stud_status" 			=> 'registered',
+			"stud_rgstrtn_dte" 	=> date('Y-m-d'),
+			"stud_grade_lvl" 		=> $this->input->post('stud_grade_lvl'),
+			"stud_acad_yr" 			=> $this->input->post('stud_acad_yr'),
+			"stud_email"  			=> $this->input->post('eadd'),
+			"stud_bdate"  			=> $this->input->post('bdate'),
+			"stud_tnum"   			=> $this->input->post('tnum'),
+			"stud_cnum"   			=> $this->input->post('cnum'),
+			"stud_gender" 			=> $this->input->post('gender'),
+			"stud_cur_adrs"   	=> $this->input->post('cur_addrs'),
+			"stud_perm_adrs"   	=> $this->input->post('perm_addrs'),
 		);
 
 		if ($this->db->insert('tbl_stud_info_jhs', $data))
 		{
 			$adtnl_data = array(
 				"stud_lrn" 				=> $this->input->post('LRN'),
-				"stud_fthrs_name" => $this->input->post('fthrsName'),
-				"stud_fthrs_cnum" => $this->input->post('cnum1'),
-				"stud_fthrs_adrs" => $this->input->post('addrs2'),
-				"stud_mthrs_name" => $this->input->post('mthrsName'),
-				"stud_mthrs_cnum" => $this->input->post('cnum2'),
-				"stud_mthrs_adrs" => $this->input->post('addrs3'),
+				"stud_grdns_name" => $this->input->post('grdns_name'),
+				"stud_grdns_cnum" => $this->input->post('cnum1'),
+				"stud_grdns_adrs" => $this->input->post('addrs2'),
 			);
 
 			if ($this->db->insert('tbl_stud_adtnl_info', $adtnl_data))
@@ -120,7 +117,7 @@ class Junior_high_school_model extends CI_Model {
 				$sbdata[] = $row->stud_grade_lvl;
 				$sbdata[] = $row->stud_section;
 				$sbdata[] = $status;
-				$sbdata[] = '<a href="elementary/view/'.$row->stud_lrn.'" style="color: #007bff!important;"><i class="ti ti-eye"></i> VIEW</a>';
+				$sbdata[] = '<a href="juniorhs/view/'.$row->stud_lrn.'" class="btn btn-outline-primary btn-sm"><i class="ti ti-eye"></i> VIEW</a>';
 
 				$data[] = $sbdata;
 			}

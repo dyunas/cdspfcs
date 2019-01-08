@@ -127,46 +127,24 @@
           <div class="card-body form-horizontal">
             <div class="row form-group">
               <div class="col col-sm-1 d-none d-sm-block">
-                <label for="fthrsName" class=" form-control-label">Father's Name</label>
+                <label for="grdnsName" class=" form-control-label">*Guardian's Name</label>
               </div>
               <div class="col col-sm-6">
-                <input type="text" id="fthrsName" name="fthrsName" placeholder="Father's Name" class="input-sm form-control-sm form-control">
+                <input type="text" id="grdnsName" name="grdns_name" placeholder="Guardian's Name" class="input-sm form-control-sm form-control" required data-parsley-required-message="This field is required">
               </div>
               <div class="col col-sm-1 d-none d-sm-block">
-                <label for="cnum1" class=" form-control-label">Contact Number</label>
+                <label for="cnum1" class=" form-control-label">*Contact Number</label>
               </div>
               <div class="col col-sm-3">
-                <input type="text" id="cnum1" name="cnum1" placeholder="Contact Number" class="input-sm form-control-sm form-control" data-parsley-type="number">
+                <input type="text" id="cnum1" name="cnum1" placeholder="Contact Number" class="input-sm form-control-sm form-control" data-parsley-type="number" required data-parsley-required-message="This field is required">
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
               <div class="col col-sm-1 d-none d-sm-block">
-                <label for="addrs2" class=" form-control-label">Address</label>
+                <label for="addrs2" class=" form-control-label">*Address</label>
               </div>
               <div class="col col-sm-11">
-                <input type="text" id="addrs2" name="addrs2" placeholder="Address" class="input-sm form-control-sm form-control">
-              </div>
-            </div><!-- /.row form-group -->
-            <div class="row form-group">
-              <div class="col col-sm-1 d-none d-sm-block">
-                <label for="mthrsName" class=" form-control-label">Mother's Name</label>
-              </div>
-              <div class="col col-sm-6">
-                <input type="text" id="mthrsName" name="mthrsName" placeholder="Mother's Name" class="input-sm form-control-sm form-control">
-              </div>
-              <div class="col col-sm-1 d-none d-sm-block">
-                <label for="cnum2" class=" form-control-label">Contact Number</label>
-              </div>
-              <div class="col col-sm-3">
-                <input type="text" id="cnum2" name="cnum2" placeholder="Contact Number" class="input-sm form-control-sm form-control" data-parsley-type="number">
-              </div>
-            </div><!-- /.row form-group -->
-            <div class="row form-group">
-              <div class="col col-sm-1 d-none d-sm-block">
-                <label for="addrs3" class=" form-control-label">Address</label>
-              </div>
-              <div class="col col-sm-11">
-                <input type="text" id="addrs3" name="addrs3" placeholder="Address" class="input-sm form-control-sm form-control">
+                <input type="text" id="addrs2" name="addrs2" placeholder="Address" class="input-sm form-control-sm form-control" required data-parsley-required-message="This field is required">
               </div>
             </div><!-- /.row form-group -->
           </div><!-- /.card-body -->

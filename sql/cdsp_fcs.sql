@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2019 at 07:07 AM
+-- Generation Time: Jan 08, 2019 at 03:58 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -83,10 +83,7 @@ CREATE TABLE `tbl_logs` (
 --
 
 INSERT INTO `tbl_logs` (`row_id`, `emp_id`, `c_log`, `mod_date`) VALUES
-(1, '5c080710142a2', 'Registered student with LRN/Student ID of 123123123123', '2018-12-10 03:33:00'),
-(2, '5c080710142a2', 'Registered student with LRN/Student ID of 341343414432', '2018-12-11 03:11:44'),
-(3, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789123', '2018-12-11 05:35:17'),
-(4, '5c080710142a2', 'Registered student with LRN/Student ID of 432143243124', '2018-12-23 07:06:55');
+(1, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789012', '2019-01-07 01:03:25');
 
 -- --------------------------------------------------------
 
@@ -97,23 +94,17 @@ INSERT INTO `tbl_logs` (`row_id`, `emp_id`, `c_log`, `mod_date`) VALUES
 CREATE TABLE `tbl_stud_adtnl_info` (
   `row_id` int(11) NOT NULL,
   `stud_lrn` bigint(12) NOT NULL,
-  `stud_fthrs_name` varchar(255) NOT NULL,
-  `stud_fthrs_cnum` int(11) NOT NULL,
-  `stud_fthrs_adrs` text NOT NULL,
-  `stud_mthrs_name` varchar(255) NOT NULL,
-  `stud_mthrs_cnum` int(11) NOT NULL,
-  `stud_mthrs_adrs` text NOT NULL
+  `stud_grdns_name` varchar(255) NOT NULL,
+  `stud_grdns_cnum` int(11) NOT NULL,
+  `stud_grdns_adrs` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_stud_adtnl_info`
 --
 
-INSERT INTO `tbl_stud_adtnl_info` (`row_id`, `stud_lrn`, `stud_fthrs_name`, `stud_fthrs_cnum`, `stud_fthrs_adrs`, `stud_mthrs_name`, `stud_mthrs_cnum`, `stud_mthrs_adrs`) VALUES
-(1, 123123123123, 'Juan Dela Cruz', 0, 'Sample Address', 'Maria Dela Cruz', 0, 'Sample Address'),
-(2, 341343414432, '', 0, '', '', 0, ''),
-(3, 123456789123, 'tatay', 0, '', 'nanay', 0, ''),
-(4, 432143243124, 'IDK', 0, 'IDK', 'IDK', 0, 'IDK');
+INSERT INTO `tbl_stud_adtnl_info` (`row_id`, `stud_lrn`, `stud_grdns_name`, `stud_grdns_cnum`, `stud_grdns_adrs`) VALUES
+(1, 123456789012, 'Maria Dela Cruz', 2147483647, 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna');
 
 -- --------------------------------------------------------
 
@@ -137,10 +128,7 @@ CREATE TABLE `tbl_stud_documents` (
 --
 
 INSERT INTO `tbl_stud_documents` (`row_id`, `stud_id`, `bCertPSA`, `certGMC`, `certHonDis`, `frm137`, `frm138`, `TOR`) VALUES
-(1, '123123123123', '1', 1, 0, 0, 1, 0),
-(2, '341343414432', '1', 0, 0, 1, 1, 0),
-(3, '123456789123', '1', 1, 0, 1, 1, 0),
-(4, '432143243124', '1', 1, 0, 1, 1, 0);
+(1, '123456789012', '1', 1, 0, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -174,10 +162,7 @@ CREATE TABLE `tbl_stud_info_elem` (
 --
 
 INSERT INTO `tbl_stud_info_elem` (`stud_row`, `stud_lrn`, `stud_avatar`, `stud_lname`, `stud_fname`, `stud_mname`, `stud_status`, `stud_rgstrtn_dte`, `stud_grade_lvl`, `stud_section`, `stud_acad_yr`, `stud_email`, `stud_bdate`, `stud_tnum`, `stud_cnum`, `stud_gender`, `stud_cur_adrs`, `stud_perm_adrs`) VALUES
-(1, 123123123123, '', 'Dela Cruz', 'Juan', '', 'registered', '2018-12-10', 'Grade 1', '', '2018-2019', 'juandelacruzjr@gmail.com', '2011-12-25', 0, 0, 'Male', 'sample address', ''),
-(2, 341343414432, '', 'fajardo', 'mico', 'tulabut', 'registered', '2018-12-11', 'Grade 6', '', '2018-2019', 'bmfajardo@gmail.com', '1995-12-12', 0, 87687631223, 'Male', 'sample address', ''),
-(3, 123456789123, '', 'Canillo', 'Wendy', 'Carcer', 'registered', '2018-12-11', 'Grade 2', '', '2018-2019', '', '1234-02-12', 0, 9123444444, 'Female', '123 binan laguna', ''),
-(4, 432143243124, '', 'Montoya', 'Jhonas Vincent', '', 'registered', '2018-12-23', 'Grade 1', '', '2018-2019', '', '2018-12-31', 0, 0, 'Male', 'Biñan City, Laguna', 'Biñan City, Laguna');
+(1, 123456789012, '', 'Dela Cruz', 'Juan Jr', '', 'registered', '2019-01-07', 'Grade 1', '', '2018-2019', '', '2013-06-27', 0, 0, 'Male', 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna', 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna');
 
 -- --------------------------------------------------------
 
@@ -277,25 +262,25 @@ ALTER TABLE `tbl_accounts`
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `row_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `row_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_stud_adtnl_info`
 --
 ALTER TABLE `tbl_stud_adtnl_info`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_stud_documents`
 --
 ALTER TABLE `tbl_stud_documents`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_stud_info_elem`
 --
 ALTER TABLE `tbl_stud_info_elem`
-  MODIFY `stud_row` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `stud_row` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_stud_info_jhs`

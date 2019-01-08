@@ -6,8 +6,8 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa fa-bars"></i>
         </button>
-        <a class="navbar-brand" href="./"><img src="<?php echo base_url('assets/images/fcs_logo.png'); ?>" alt="Logo"></a>
-        <a class="navbar-brand hidden" href="./"><img src="<?php echo base_url('assets/images/logo2.png'); ?>" alt="Logo"></a>
+        <a class="navbar-brand" href="<?php echo site_url($this->uri->segment(1).'/dashboard'); ?>"><img src="<?php echo base_url('assets/images/fcs_logo.png'); ?>" alt="Logo"></a>
+        <a class="navbar-brand hidden" href="<?php echo site_url($this->uri->segment(1).'/dashboard'); ?>"><img src="<?php echo base_url('assets/images/logo2.png'); ?>" alt="Logo"></a>
       </div><!-- /.navbar-header -->
 
       <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -56,8 +56,6 @@
 
             <div class="user-menu dropdown-menu">
               <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
-              <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a>
-              <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
               <a class="nav-link" href="<?php echo site_url('logout'); ?>"><i class="fa fa-power-off"></i> Logout</a>
             </div><!-- /.user-menu -->
           </div><!-- /.user-area -->

@@ -4,7 +4,7 @@
   <div class="col-sm-4">
     <div class="page-header float-left">
       <div class="page-title">
-        <h1>Junior High School</h1>
+        <h1>Senior High School</h1>
       </div><!-- /.page-title -->
     </div><!-- /.page-header -->
   </div><!-- /.col-sm-4 -->
@@ -12,7 +12,7 @@
     <div class="page-header float-right">
       <div class="page-title">
         <ol class="breadcrumb text-right">
-          <li class="active">Junior High School</li>
+          <li class="active">Senior High School</li>
         </ol>
       </div><!-- /.page-title -->
     </div><!-- /.page-header -->
@@ -25,10 +25,10 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <a href="<?php echo site_url('registrar/dept/juniorhs/new'); ?>" class="btn btn-sm btn-primary pull-right"><i class="ti ti-plus"></i> Register new student</a>
+            <a href="<?php echo site_url('registrar/dept/shs/new'); ?>" class="btn btn-sm btn-primary pull-right"><i class="ti ti-plus"></i> Register new student</a>
           </div><!-- /.card-header -->
           <div class="card-body">
-            <table id="elemTbl" class="table table-striped table-bordered" width="100%">
+            <table id="shsTbl" class="table table-striped table-bordered" width="100%">
               <thead>
                 <th>LRN</th>
                 <th>Last Name</th>
@@ -54,13 +54,13 @@
 <script src="<?php echo base_url('assets/assets/js/init-scripts/data-table/datatables-init.js'); ?>"></script>
 <script type="text/javascript">
   jQuery(document).ready(function() {
-    var dtble = jQuery('#elemTbl').DataTable({
+    var dtble = jQuery('#shsTbl').DataTable({
       // "processing": true,
       // "serverSide": true,
       "searching": true,
       "ajax": {
         type: "POST",
-        url: 'juniorhs/get_jhs_table_data',
+        url: 'shs/get_shs_table_data',
         dataType: 'json'
       }
     });

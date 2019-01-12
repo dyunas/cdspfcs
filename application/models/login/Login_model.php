@@ -24,7 +24,7 @@ class Login_model extends CI_Model {
 				{
 					if ($row->password == md5($this->input->post('pword')))
 					{
-							$user_data = array('row_id' => $row->row_id, 'uname' => $row->uname, 'fname' => $row->fname, 'lname' => $row->lname, 'uniq_id' => $row->uniq_id, 'role' => $row->role, 'is_in' => 1);
+							$user_data = array('row_id' => $row->row_id, 'uname' => $row->uname, 'fname' => $row->fname, 'lname' => $row->lname, 'uniq_id' => $row->emp_uniq_id, 'role' => $row->role, 'is_in' => 1);
 						  $this->session->set_userdata($user_data);
 						  $this->session->set_flashdata('success', 'Welcome! '.$row->fname.' '.$row->lname);
 

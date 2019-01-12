@@ -2,7 +2,7 @@
   <div class="col-sm-4">
     <div class="page-header float-left">
       <div class="page-title">
-        <h1>Elementary</h1>
+        <h1>Junior High School</h1>
       </div><!-- /.page-title -->
     </div><!-- /.page-header -->
   </div><!-- /.col-sm-4 -->
@@ -10,7 +10,7 @@
     <div class="page-header float-right">
       <div class="page-title">
         <ol class="breadcrumb text-right">
-          <li><?php echo anchor(site_url('registrar/dept/'.$this->uri->segment(3)), 'Elementary'); ?></li>
+          <li><?php echo anchor(site_url('registrar/dept/'.$this->uri->segment(3)), 'Junior High School'); ?></li>
           <li class="active"><?php echo $this->uri->segment(4); ?></li>
           <li class="active"><?php echo $this->uri->segment(5); ?></li>
         </ol>
@@ -39,7 +39,7 @@
               <div class="col-sm-1 d-none d-sm-block">
                 <label for="LRN" class=" form-control-label">LRN</label>
               </div>
-              <div class="col-sm-3 col-xs-12">
+              <div class="col-sm-4 col-xs-12">
                 <?php echo $stud_info->stud_lrn ?>
               </div>
             </div><!-- /.row form-group -->

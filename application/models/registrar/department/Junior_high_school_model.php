@@ -35,10 +35,10 @@ class Junior_high_school_model extends CI_Model {
 				"stud_grdns_adrs" => $this->input->post('addrs2'),
 			);
 
-			if ($this->db->insert('tbl_stud_adtnl_info', $adtnl_data))
+			if ($this->db->insert('tbl_stud_adtnl_info_jhs', $adtnl_data))
 			{
 				$sub_docs = array(
-					"stud_id" 		=> $this->input->post('LRN'),
+					"stud_lrn" 		=> $this->input->post('LRN'),
 					"bCertPSA"		=> ($this->input->post('bCertPSA') != NULL) ? $this->input->post('bCertPSA') : 0,
 					"certGMC"			=> ($this->input->post('certGMC') != NULL) ? $this->input->post('certGMC') : 0,
 					"certHonDis"	=> ($this->input->post('certHonDis') != NULL) ? $this->input->post('certHonDis') : 0,
@@ -46,7 +46,7 @@ class Junior_high_school_model extends CI_Model {
 					"frm138"			=> ($this->input->post('frm138') != NULL) ? $this->input->post('frm138') : 0
 				);
 
-				if ($this->db->insert('tbl_stud_documents', $sub_docs))
+				if ($this->db->insert('tbl_stud_documents_jhs', $sub_docs))
 				{
 					$logs = array(
 						"emp_id" => $this->session->userdata('uniq_id'),
@@ -117,7 +117,7 @@ class Junior_high_school_model extends CI_Model {
 				$sbdata[] = $row->stud_grade_lvl;
 				$sbdata[] = $row->stud_section;
 				$sbdata[] = $status;
-				$sbdata[] = '<a href="juniorhs/view/'.$row->stud_lrn.'" class="btn btn-outline-primary btn-sm"><i class="ti ti-eye"></i> VIEW</a>';
+				$sbdata[] = '<a href="juniorhs/view/'.$row->stud_lrn.'" class="btn btn-outline-primary btn-sm"><i class="ti ti-eye"></i></a>';
 
 				$data[] = $sbdata;
 			}
@@ -148,5 +148,29 @@ class Junior_high_school_model extends CI_Model {
 			);
 		}
 		return json_encode($json_data);
+	}
+
+	public function get_student_info($uniq_id)
+	{
+		$this->db->select('
+			a.stud_lrn, a.stud_avatar, a.stud_lname, a.stud_fname, a.stud_mname, a.stud_status, a.stud_rgstrtn_dte, a.stud_grade_lvl, a.stud_section, a.stud_acad_yr, a.stud_email, a.stud_bdate, a.stud_tnum, a.stud_cnum, a.stud_gender, a.stud_cur_adrs, a.stud_perm_adrs,
+			b.stud_grdns_name, b.stud_grdns_cnum, b.stud_grdns_adrs,
+			c.bCertPSA, c.certGMC, c.certHonDis, c.frm137, c.frm138
+		');
+		$this->db->from('tbl_stud_info_jhs a');
+		$this->db->join('tbl_stud_adtnl_info_jhs b', 'b.stud_lrn = a.stud_lrn');
+		$this->db->join('tbl_stud_documents_jhs c', 'c.stud_lrn = a.stud_lrn');
+		$this->db->where('a.stud_lrn', $uniq_id);
+
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0)
+		{
+			return $query->row();
+		}
+		else
+		{
+			return FALSE;
+		}
 	}
 }

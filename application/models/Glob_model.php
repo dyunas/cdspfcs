@@ -8,7 +8,7 @@ class Glob_model extends CI_Model {
 
 	public function get_acad_year()
 	{
-		$this->db->select('acad_year');
+		$this->db->select();
 		$this->db->where('status', 1);
 		$this->db->from('tbl_acad_year');
 
@@ -16,7 +16,7 @@ class Glob_model extends CI_Model {
 
 		if ($query->num_rows() > 0)
 		{
-			return $query->row('acad_year');
+			return $query->row();
 		}
 		else
 		{

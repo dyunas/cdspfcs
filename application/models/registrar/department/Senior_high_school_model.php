@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Elementary_model extends CI_Model {
+class Senior_high_school_model extends CI_Model {
 	public function __construct()
 	{
 		parent::__construct();
@@ -26,7 +26,7 @@ class Elementary_model extends CI_Model {
 			"stud_perm_adrs"   	=> $this->input->post('perm_addrs'),
 		);
 
-		if ($this->db->insert('tbl_stud_info_elem', $data))
+		if ($this->db->insert('tbl_stud_info_shs', $data))
 		{
 			$adtnl_data = array(
 				"stud_lrn" 				=> $this->input->post('LRN'),
@@ -35,7 +35,7 @@ class Elementary_model extends CI_Model {
 				"stud_grdns_adrs" => $this->input->post('addrs2'),
 			);
 
-			if ($this->db->insert('tbl_stud_adtnl_info_elem', $adtnl_data))
+			if ($this->db->insert('tbl_stud_adtnl_info_shs', $adtnl_data))
 			{
 				$sub_docs = array(
 					"stud_lrn" 		=> $this->input->post('LRN'),
@@ -46,7 +46,7 @@ class Elementary_model extends CI_Model {
 					"frm138"			=> ($this->input->post('frm138') != NULL) ? $this->input->post('frm138') : 0
 				);
 
-				if ($this->db->insert('tbl_stud_documents', $sub_docs))
+				if ($this->db->insert('tbl_stud_documents_shs', $sub_docs))
 				{
 					$logs = array(
 						"emp_id" => $this->session->userdata('uniq_id'),
@@ -71,11 +71,10 @@ class Elementary_model extends CI_Model {
 		}
 	}
 
-	public function get_elem_table_data()
+	public function get_shs_table_data()
 	{
 		$this->db->select('stud_lrn, stud_lname, stud_fname, stud_grade_lvl, stud_section, stud_status');
-		$this->db->from('tbl_stud_info_elem');
-
+		$this->db->from('tbl_stud_info_shs');
 		$query = $this->db->get();
 		$data = array();
 		if ($query->num_rows() > 0)
@@ -118,7 +117,7 @@ class Elementary_model extends CI_Model {
 				$sbdata[] = $row->stud_grade_lvl;
 				$sbdata[] = $row->stud_section;
 				$sbdata[] = $status;
-				$sbdata[] = '<a href="elementary/view/'.$row->stud_lrn.'" class="btn btn-outline-primary btn-sm"><i class="ti ti-eye"></i></a>';
+				$sbdata[] = '<a href="shs/view/'.$row->stud_lrn.'" class="btn btn-outline-primary btn-sm"><i class="ti ti-eye"></i></a>';
 
 				$data[] = $sbdata;
 			}
@@ -158,9 +157,9 @@ class Elementary_model extends CI_Model {
 			b.stud_grdns_name, b.stud_grdns_cnum, b.stud_grdns_adrs,
 			c.bCertPSA, c.certGMC, c.certHonDis, c.frm137, c.frm138
 		');
-		$this->db->from('tbl_stud_info_elem a');
-		$this->db->join('tbl_stud_adtnl_info_elem b', 'b.stud_lrn = a.stud_lrn');
-		$this->db->join('tbl_stud_documents c', 'c.stud_lrn = a.stud_lrn');
+		$this->db->from('tbl_stud_info_shs a');
+		$this->db->join('tbl_stud_adtnl_info_shs b', 'b.stud_lrn = a.stud_lrn');
+		$this->db->join('tbl_stud_documents_shs c', 'c.stud_lrn = a.stud_lrn');
 		$this->db->where('a.stud_lrn', $uniq_id);
 
 		$query = $this->db->get();
@@ -174,4 +173,4 @@ class Elementary_model extends CI_Model {
 			return FALSE;
 		}
 	}
-}
+}	

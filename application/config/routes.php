@@ -73,7 +73,22 @@ $route['logout'] = 'Login/Logout';
 	$route['registrar/dept/elementary'] = 'registrar/department/elementary/Elementary/Index';
 
 	// JUNIOR HIGH SCHOOL
+	$route['registrar/dept/juniorhs/view/(:any)'] = 'registrar/department/juniorhs/Junior_high_school/View_student/$1';
 	$route['registrar/dept/juniorhs/register_student'] = 'registrar/department/juniorhs/Junior_high_school/Register_student';
 	$route['registrar/dept/juniorhs/new'] = 'registrar/department/juniorhs/Junior_high_school/New_student';
-	$route['registrar/dept/juniorhs/get_jhs_table_data'] = 'registrar/department/juniorhs/Junior_high_school/Get_elem_table_data';
+	$route['registrar/dept/juniorhs/get_jhs_table_data'] = 'registrar/department/juniorhs/Junior_high_school/Get_jhs_table_data';
 	$route['registrar/dept/juniorhs'] = 'registrar/department/juniorhs/Junior_high_school/Index';
+
+	// SENIOR HIGH SCHOOL
+	$route['registrar/dept/shs/view/(:any)'] = 'registrar/department/seniorhs/Senior_high_school/View_student/$1';
+	$route['registrar/dept/shs/register_student'] = 'registrar/department/seniorhs/Senior_high_school/Register_student';
+	$route['registrar/dept/shs/new'] = 'registrar/department/seniorhs/Senior_high_school/New_student';
+	$route['registrar/dept/shs/get_shs_table_data'] = 'registrar/department/seniorhs/Senior_high_school/Get_shs_table_data';
+	$route['registrar/dept/shs'] = 'registrar/department/seniorhs/Senior_high_school/Index';
+
+	// COLLEGE
+	$route['registrar/dept/college/view/(:any)'] = 'registrar/department/college/College/View_student/$1';
+	$route['registrar/dept/college/register_student'] = 'registrar/department/college/College/Register_student';
+	$route['registrar/dept/college/new'] = 'registrar/department/college/College/New_student';
+	$route['registrar/dept/college/get_col_table_data'] = 'registrar/department/college/College/Get_col_table_data';
+	$route['registrar/dept/college'] = 'registrar/department/college/College/Index';

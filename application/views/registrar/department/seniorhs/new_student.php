@@ -4,7 +4,7 @@
   <div class="col-sm-4">
     <div class="page-header float-left">
       <div class="page-title">
-        <h1>Junior High School</h1>
+        <h1>Senior High School</h1>
       </div><!-- /.page-title -->
     </div><!-- /.page-header -->
   </div><!-- /.col-sm-4 -->
@@ -12,13 +12,14 @@
     <div class="page-header float-right">
       <div class="page-title">
         <ol class="breadcrumb text-right">
-          <li><a href="<?php echo site_url('registrar/dept/'.$this->uri->segment(3)); ?>">Junior High School</a></li>
+          <li><?php echo anchor(site_url('registrar/dept/'.$this->uri->segment(3)), 'Senior High School'); ?></li>
           <li class="active"><?php echo $this->uri->segment(4); ?></li>
         </ol>
       </div><!-- /.page-title -->
     </div><!-- /.page-header -->
   </div><!-- /.col-sm-8 -->
 </div>
+
 <div class="content mt-3">
   <div class="animated fadeIn">
     <div class="row">
@@ -35,7 +36,7 @@
                 <label for="LRN" class=" form-control-label">*LRN</label>
               </div>
               <div class="col-sm-3 col-xs-12">
-                <input type="text" id="LRN" name="LRN" placeholder="Learner Reference Number" class="input-sm form-control-sm form-control" required data-parsley-type="number" data-parsley-required-message="This field is required" maxlength="12" data-parsley-length="[12, 12]">
+                <input type="text" id="LRN" name="LRN" placeholder="Learner Reference Number" class="input-sm form-control-sm form-control resFld" required data-parsley-type="number" data-parsley-required-message="This field is required" maxlength="12" data-parsley-length="[12, 12]">
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
@@ -43,19 +44,19 @@
                 <label for="lname" class="form-control-label">*Lastname</label>
               </div>
               <div class="col col-sm-3 col-xs-12">
-                <input type="text" id="lname" name="lname" placeholder="Lastname" class="input-sm form-control-sm form-control" required data-parsley-required-message="Please enter a last name">
+                <input type="text" id="lname" name="lname" placeholder="Lastname" class="input-sm form-control-sm form-control resFld" required data-parsley-required-message="Please enter a last name">
               </div>
               <div class="col col-sm-1 d-none d-sm-block">
                 <label for="fname" class="form-control-label">*Firstname</label>
               </div>
               <div class="col col-sm-3 col-xs-12">
-                <input type="text" id="fname" name="fname" placeholder="Firstname" class="input-sm form-control-sm form-control" required data-parsley-required-message="Please enter a first name">
+                <input type="text" id="fname" name="fname" placeholder="Firstname" class="input-sm form-control-sm form-control resFld" required data-parsley-required-message="Please enter a first name">
               </div>
               <div class="col col-sm-1 d-none d-sm-block">
                 <label for="mname" class="form-control-label">M.N</label>
               </div>
               <div class="col col-sm-3 col-xs-12">
-                <input type="text" id="mname" name="mname" placeholder="Middlename" class="input-sm form-control-sm form-control">
+                <input type="text" id="mname" name="mname" placeholder="Middlename" class="input-sm form-control-sm form-control resFld">
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
@@ -63,13 +64,13 @@
                 <label for="bdate" class="form-control-label">*Birthdate</label>
               </div>
               <div class="col col-sm-3 col-xs-12">
-                <input type="date" id="bdate" name="bdate" placeholder="Birthdate" class="input-sm form-control-sm form-control" required data-parsley-type="date" data-parsley-required-message="This field is required" data-parsley-date-message="Please enter a valid date">
+                <input type="date" id="bdate" name="bdate" placeholder="Birthdate" class="input-sm form-control-sm form-control resFld" required data-parsley-type="date" data-parsley-required-message="This field is required" data-parsley-date-message="Please enter a valid date">
               </div>
               <div class="col col-sm-1 d-none d-sm-block">
                 <label for="gender" class=" form-control-label">*Gender</label>
               </div>
               <div class="col col-sm-3 col-xs-12">
-                <select class="input-sm form-control-sm form-control" name="gender" required data-parsley-required-message="Please select gender">
+                <select class="input-sm form-control-sm form-control resFld" name="gender" required data-parsley-required-message="Please select gender">
                   <option value=""></option>
                   <option value="1">Male</option>
                   <option value="2">Female</option>
@@ -81,13 +82,13 @@
                 <label for="tnum" class="form-control-label">Tel. No.#</label>
               </div><!-- /.col col-sm-1 -->
               <div class="col col-sm-3">
-                <input type="text" id="tnum" name="tnum" placeholder="Tel. No.#" class="input-sm form-control-sm form-control" data-parsley-type="number"  maxlength="7" data-parsley-length="[7, 7]">
+                <input type="text" id="tnum" name="tnum" placeholder="Tel. No.#" class="input-sm form-control-sm form-control resFld" data-parsley-type="number"  maxlength="7" data-parsley-length="[7, 7]">
               </div><!-- /.col col-sm-3 -->
               <div class="col col-sm-1 d-none d-sm-block">
                 <label for="cnum" class="form-control-label">Cel. No.#</label>
               </div><!-- /.col col-sm-1 -->
               <div class="col col-sm-3">
-                <input type="text" id="cnum" name="cnum" placeholder="Cel. No.#" class="input-sm form-control-sm form-control" data-parsley-type="number"  maxlength="11" data-parsley-length="[11, 11]">
+                <input type="text" id="cnum" name="cnum" placeholder="Cel. No.#" class="input-sm form-control-sm form-control resFld" data-parsley-type="number"  maxlength="11" data-parsley-length="[11, 11]">
               </div><!-- /.col col-sm-3 -->
             </div><!-- /.row form-group -->
             <div class="row form-group">
@@ -95,7 +96,7 @@
                 <label for="eadd" class="form-control-label">E-mail Address</label>
               </div>
               <div class="col col-sm-10">
-                <input type="email" id="eadd" name="eadd" placeholder="E-mail Address" class="input-sm form-control-sm form-control" data-parsley-type="email" data-parsley-type-message="Please enter a valid e-mail address">
+                <input type="email" id="eadd" name="eadd" placeholder="E-mail Address" class="input-sm form-control-sm form-control resFld" data-parsley-type="email" data-parsley-type-message="Please enter a valid e-mail address">
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
@@ -103,7 +104,7 @@
                 <label for="cur_addrs" class="form-control-label">*Current Address</label>
               </div>
               <div class="col col-sm-10">
-                <input type="text" id="cur_addrs" name="cur_addrs" placeholder="Current Address" class="input-sm form-control-sm form-control" required data-parsley-required-message="This field is required">
+                <input type="text" id="cur_addrs" name="cur_addrs" placeholder="Current Address" class="input-sm form-control-sm form-control resFld" required data-parsley-required-message="This field is required">
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
@@ -111,7 +112,7 @@
                 <label for="perm_addrs" class="form-control-label">*Permanent Address</label>
               </div>
               <div class="col col-sm-10">
-                <input type="text" id="perm_addrs" name="perm_addrs" placeholder="Permanent Address" class="input-sm form-control-sm form-control" required data-parsley-required-message="This field is required">
+                <input type="text" id="perm_addrs" name="perm_addrs" placeholder="Permanent Address" class="input-sm form-control-sm form-control resFld" required data-parsley-required-message="This field is required">
                 <small id="" class="form-text text-muted">
                   <input type="checkbox" name="addr_ticker" id="addr_ticker">
                   <label for="addr_ticker">Check this box if current address is the same with permanent address</label>
@@ -130,13 +131,13 @@
                 <label for="grdnsName" class=" form-control-label">*Guardian's Name</label>
               </div>
               <div class="col col-sm-6">
-                <input type="text" id="grdnsName" name="grdns_name" placeholder="Guardian's Name" class="input-sm form-control-sm form-control" required data-parsley-required-message="This field is required">
+                <input type="text" id="grdnsName" name="grdns_name" placeholder="Guardian's Name" class="input-sm form-control-sm form-control resFld" required data-parsley-required-message="This field is required">
               </div>
               <div class="col col-sm-1 d-none d-sm-block">
                 <label for="cnum1" class=" form-control-label">*Contact Number</label>
               </div>
               <div class="col col-sm-3">
-                <input type="text" id="cnum1" name="cnum1" placeholder="Contact Number" class="input-sm form-control-sm form-control" data-parsley-type="number" required data-parsley-required-message="This field is required">
+                <input type="text" id="cnum1" name="cnum1" placeholder="Contact Number" class="input-sm form-control-sm form-control resFld" data-parsley-type="number" required data-parsley-required-message="This field is required">
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
@@ -144,7 +145,7 @@
                 <label for="addrs2" class=" form-control-label">*Address</label>
               </div>
               <div class="col col-sm-11">
-                <input type="text" id="addrs2" name="addrs2" placeholder="Address" class="input-sm form-control-sm form-control" required data-parsley-required-message="This field is required">
+                <input type="text" id="addrs2" name="addrs2" placeholder="Address" class="input-sm form-control-sm form-control resFld" required data-parsley-required-message="This field is required">
               </div>
             </div><!-- /.row form-group -->
           </div><!-- /.card-body -->
@@ -199,10 +200,8 @@
               <div class="col-sm-2 col-xs-6">
                 <select class="input-sm form-control-sm form-control" name="stud_grade_lvl" required data-parsley-required-message="Please select grade level">
                   <option value="">Select level</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
                 </select>
               </div><!-- col col-sm-3 -->
               <div class="d-none d-sm-block col col-sm-1">
@@ -236,4 +235,4 @@
 <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 <script src="<?php echo base_url('assets/parsley/dist/parsley.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/assets/js/pages/registrar/juniorhs/stud_frm_validation.js'); ?>"></script>
+<script src="<?php echo base_url('assets/assets/js/pages/registrar/seniorhs/stud_frm_validation.js'); ?>"></script>

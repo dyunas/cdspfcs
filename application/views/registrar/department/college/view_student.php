@@ -2,7 +2,7 @@
   <div class="col-sm-4">
     <div class="page-header float-left">
       <div class="page-title">
-        <h1>Elementary</h1>
+        <h1>College</h1>
       </div><!-- /.page-title -->
     </div><!-- /.page-header -->
   </div><!-- /.col-sm-4 -->
@@ -10,7 +10,7 @@
     <div class="page-header float-right">
       <div class="page-title">
         <ol class="breadcrumb text-right">
-          <li><?php echo anchor(site_url('registrar/dept/'.$this->uri->segment(3)), 'Elementary'); ?></li>
+          <li><?php echo anchor(site_url('registrar/dept/'.$this->uri->segment(3)), 'College'); ?></li>
           <li class="active"><?php echo $this->uri->segment(4); ?></li>
           <li class="active"><?php echo $this->uri->segment(5); ?></li>
         </ol>
@@ -36,26 +36,26 @@
           </div><!-- /.card-header -->
           <div class="card-body form-horizontal">
             <div class="row form-group">
-              <div class="col-sm-1 d-none d-sm-block">
-                <label for="LRN" class=" form-control-label">LRN</label>
+              <div class="col-sm-2 d-none d-sm-block">
+                <label for="LRN" class=" form-control-label">Student ID</label>
               </div>
               <div class="col-sm-3 col-xs-12">
-                <?php echo $stud_info->stud_lrn ?>
+                <?php echo $stud_info->stud_id ?>
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
-              <div class="col-sm-1 d-none d-sm-block">
+              <div class="col col-sm-2 d-none d-sm-block">
                 <label class="form-control-label">Name</label>
               </div>
-              <div class="col-sm-9 col-xs-12">
+              <div class="col col-sm-9 col-xs-12">
                 <?php echo $stud_info->stud_lname.', '.$stud_info->stud_fname.' '.$stud_info->stud_mname ?>
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
-              <div class="col-sm-2 d-none d-sm-block">
+              <div class="col col-sm-2 d-none d-sm-block">
                 <label for="bdate" class="form-control-label">Birthdate</label>
               </div>
-              <div class="col-sm-3 col-xs-12">
+              <div class="col col-sm-3 col-xs-12">
                 <?php echo $stud_info->stud_bdate ?>
               </div>
               <div class="col-sm-1 d-none d-sm-block">
@@ -177,6 +177,11 @@
                   <div class="checkbox col-sm-4 col-xs-12">
                     <label for="frm138" class="form-check-label ">
                       <input type="checkbox" id="frm138" name="frm138" value="0" class="form-check-input docu" <?php echo ($stud_info->frm138) ? 'checked="checked"' : '' ?> disabled> Form 138
+                    </label>
+                  </div>
+                  <div class="checkbox col-sm-4 col-xs-12">
+                    <label for="TOR" class="form-check-label ">
+                      <input type="checkbox" id="TOR" name="TOR" value="0" class="form-check-input docu" <?php echo ($stud_info->TOR) ? 'checked="checked"' : '' ?> disabled> Transcript of Record
                     </label>
                   </div>
                 </div>

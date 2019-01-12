@@ -1,21 +1,81 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Elementary_model extends CI_Model {
-	public function __construct()
-	{
+<?php defined('BASEPATH') OR exit ('No direct script access allowed');
+class College_model extends CI_Model {
+	public function __construct(){
 		parent::__construct();
+	}
+
+	public function get_semester()
+	{
+		$this->db->select();
+		$this->db->from('tbl_semester');
+		$this->db->where('status', 1);
+
+		$query = $this->db->get();
+
+		return $query->row();
 	}
 
 	public function register_student()
 	{
+		$sem = $this->get_semester();
+
+		$this->db->select('stud_id');
+		$this->db->from('tbl_stud_info_col');
+		$this->db->order_by('row_id', 'ASC');
+		$this->db->limit(1);
+
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0)
+		{
+			$row = $query->row();
+			$arr_id = explode('-', $row->stud_id);
+			if ($arr_id[0] == date(y))
+			{
+				$yr = $arr_id[0];
+			}
+			else
+			{
+				$yr = date('y');
+			}
+
+			$ctr = intval($arr_id[1]) + intval(1);
+
+			$num_length = strlen((string)$ctr);
+			if($num_length == 1)
+			{
+				$cnt = '000'.$ctr;
+			}
+			else if ($num_length == 2)
+			{
+				$cnt = '00'.$ctr;
+			}
+			else if ($num_length == 3)
+			{
+				$cnt = '0'.$ctr;
+			}
+			else
+			{
+				$cnt = $ctr;
+			}
+
+			$stud_id = $yr.'-'.$cnt.'-5'.$sem;
+		}
+		else
+		{
+			$stud_id = date('y').'-'.'0001'.'-'.'5'.$sem->sem_id;
+		}
+
 		$data = array(
-			"stud_lrn"    			=> $this->input->post('LRN'),
+			"stud_id"  					=> $stud_id,
 			"stud_lname"  			=> $this->input->post('lname'),
 			"stud_fname"  			=> $this->input->post('fname'),
 			"stud_mname"  			=> $this->input->post('mname'),
 			"stud_status" 			=> 'registered',
 			"stud_rgstrtn_dte" 	=> date('Y-m-d'),
-			"stud_grade_lvl" 		=> $this->input->post('stud_grade_lvl'),
+			"stud_course" 			=> $this->input->post('stud_course'),
+			"stud_year_lvl" 		=> $this->input->post('stud_year_lvl'),
+			"stud_sem" 					=> $sem->sem_id,
 			"stud_acad_yr" 			=> $this->input->post('stud_acad_yr'),
 			"stud_email"  			=> $this->input->post('eadd'),
 			"stud_bdate"  			=> $this->input->post('bdate'),
@@ -26,31 +86,32 @@ class Elementary_model extends CI_Model {
 			"stud_perm_adrs"   	=> $this->input->post('perm_addrs'),
 		);
 
-		if ($this->db->insert('tbl_stud_info_elem', $data))
+		if ($this->db->insert('tbl_stud_info_col', $data))
 		{
 			$adtnl_data = array(
-				"stud_lrn" 				=> $this->input->post('LRN'),
+				"stud_id" 				=> $stud_id,
 				"stud_grdns_name" => $this->input->post('grdns_name'),
 				"stud_grdns_cnum" => $this->input->post('cnum1'),
 				"stud_grdns_adrs" => $this->input->post('addrs2'),
 			);
 
-			if ($this->db->insert('tbl_stud_adtnl_info_elem', $adtnl_data))
+			if ($this->db->insert('tbl_stud_adtnl_info_col', $adtnl_data))
 			{
 				$sub_docs = array(
-					"stud_lrn" 		=> $this->input->post('LRN'),
+					"stud_id" 		=> $stud_id,
 					"bCertPSA"		=> ($this->input->post('bCertPSA') != NULL) ? $this->input->post('bCertPSA') : 0,
 					"certGMC"			=> ($this->input->post('certGMC') != NULL) ? $this->input->post('certGMC') : 0,
 					"certHonDis"	=> ($this->input->post('certHonDis') != NULL) ? $this->input->post('certHonDis') : 0,
 					"frm137"			=> ($this->input->post('frm137') != NULL) ? $this->input->post('frm137') : 0,
-					"frm138"			=> ($this->input->post('frm138') != NULL) ? $this->input->post('frm138') : 0
+					"frm138"			=> ($this->input->post('frm138') != NULL) ? $this->input->post('frm138') : 0,
+					"TOR"					=> ($this->input->post('TOR') != NULL) ? $this->input->post('TOR') : 0
 				);
 
-				if ($this->db->insert('tbl_stud_documents', $sub_docs))
+				if ($this->db->insert('tbl_stud_documents_col', $sub_docs))
 				{
 					$logs = array(
 						"emp_id" => $this->session->userdata('uniq_id'),
-						"c_log" => "Registered student with LRN/Student ID of ".$this->input->post('LRN'),
+						"c_log" => "Registered student with LRN/Student ID of ".$stud_id,
 						"mod_date" => date('Y-m-d h:i:s a')
 					);
 
@@ -71,10 +132,10 @@ class Elementary_model extends CI_Model {
 		}
 	}
 
-	public function get_elem_table_data()
+	public function get_col_table_data()
 	{
-		$this->db->select('stud_lrn, stud_lname, stud_fname, stud_grade_lvl, stud_section, stud_status');
-		$this->db->from('tbl_stud_info_elem');
+		$this->db->select('stud_id, stud_lname, stud_fname, stud_course, stud_year_lvl, stud_status');
+		$this->db->from('tbl_stud_info_col');
 
 		$query = $this->db->get();
 		$data = array();
@@ -112,13 +173,13 @@ class Elementary_model extends CI_Model {
 				}
 
 				$sbdata = array();
-				$sbdata[] = $row->stud_lrn;
+				$sbdata[] = $row->stud_id;
 				$sbdata[] = $row->stud_lname;
 				$sbdata[] = $row->stud_fname;
-				$sbdata[] = $row->stud_grade_lvl;
-				$sbdata[] = $row->stud_section;
+				$sbdata[] = $row->stud_course;
+				$sbdata[] = $row->stud_year_lvl;
 				$sbdata[] = $status;
-				$sbdata[] = '<a href="elementary/view/'.$row->stud_lrn.'" class="btn btn-outline-primary btn-sm"><i class="ti ti-eye"></i></a>';
+				$sbdata[] = '<a href="college/view/'.$row->stud_id.'" class="btn btn-outline-primary btn-sm"><i class="ti ti-eye"></i></a>';
 
 				$data[] = $sbdata;
 			}
@@ -154,14 +215,14 @@ class Elementary_model extends CI_Model {
 	public function get_student_info($uniq_id)
 	{
 		$this->db->select('
-			a.stud_lrn, a.stud_avatar, a.stud_lname, a.stud_fname, a.stud_mname, a.stud_status, a.stud_rgstrtn_dte, a.stud_grade_lvl, a.stud_section, a.stud_acad_yr, a.stud_email, a.stud_bdate, a.stud_tnum, a.stud_cnum, a.stud_gender, a.stud_cur_adrs, a.stud_perm_adrs,
+			a.stud_id, a.stud_avatar, a.stud_lname, a.stud_fname, a.stud_mname, a.stud_status, a.stud_rgstrtn_dte, a.stud_year_lvl, a.stud_sem, a.stud_course, a.stud_acad_yr, a.stud_email, a.stud_bdate, a.stud_tnum, a.stud_cnum, a.stud_gender, a.stud_cur_adrs, a.stud_perm_adrs,
 			b.stud_grdns_name, b.stud_grdns_cnum, b.stud_grdns_adrs,
-			c.bCertPSA, c.certGMC, c.certHonDis, c.frm137, c.frm138
+			c.bCertPSA, c.certGMC, c.certHonDis, c.frm137, c.frm138, c.TOR
 		');
-		$this->db->from('tbl_stud_info_elem a');
-		$this->db->join('tbl_stud_adtnl_info_elem b', 'b.stud_lrn = a.stud_lrn');
-		$this->db->join('tbl_stud_documents c', 'c.stud_lrn = a.stud_lrn');
-		$this->db->where('a.stud_lrn', $uniq_id);
+		$this->db->from('tbl_stud_info_col a');
+		$this->db->join('tbl_stud_adtnl_info_col b', 'b.stud_id = a.stud_id');
+		$this->db->join('tbl_stud_documents_col c', 'c.stud_id = a.stud_id');
+		$this->db->where('a.stud_id', $uniq_id);
 
 		$query = $this->db->get();
 

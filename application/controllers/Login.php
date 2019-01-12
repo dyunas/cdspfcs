@@ -32,11 +32,11 @@ class Login extends CI_Controller {
 	{
 		if ($this->login->check_user_credentials())
 		{
-			if ($this->session->userdata('role') == 'registrar')
+			if ($this->session->userdata('role') == '2')
 			{
 				redirect('registrar/dashboard');
 			}
-			elseif ($this->session->userdata('role') == 'cashier')
+			elseif ($this->session->userdata('role') == '3')
 			{
 				redirect();
 			}

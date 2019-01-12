@@ -4,7 +4,7 @@
   <div class="col-sm-4">
     <div class="page-header float-left">
       <div class="page-title">
-        <h1><?php echo ucfirst($this->uri->segment(3)); ?></h1>
+        <h1>Elementary</h1>
       </div><!-- /.page-title -->
     </div><!-- /.page-header -->
   </div><!-- /.col-sm-4 -->
@@ -12,8 +12,8 @@
     <div class="page-header float-right">
       <div class="page-title">
         <ol class="breadcrumb text-right">
-          <li><a href="<?php echo site_url('registrar/dept/'.$this->uri->segment(3)); ?>"><?php echo $this->uri->segment(3); ?></a></li>
-          <li class="active">Register new student</li>
+          <li><a href="<?php echo site_url('registrar/dept/'.$this->uri->segment(3)); ?>">Elementary</a></li>
+          <li class="active"><?php echo $this->uri->segment(4); ?></li>
         </ol>
       </div><!-- /.page-title -->
     </div><!-- /.page-header -->
@@ -71,8 +71,8 @@
               <div class="col col-sm-3 col-xs-12">
                 <select class="input-sm form-control-sm form-control" name="gender" required data-parsley-required-message="Please select gender">
                   <option value="">Choose gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
+                  <option value="1">Male</option>
+                  <option value="2">Female</option>
                 </select>
               </div>
             </div><!-- /.row form-group -->
@@ -199,19 +199,20 @@
               <div class="col-sm-2 col-xs-6">
                 <select class="input-sm form-control-sm form-control" name="stud_grade_lvl" required data-parsley-required-message="Please select grade level">
                   <option value="">Select level</option>
-                  <option value="Grade 1">1</option>
-                  <option value="Grade 2">2</option>
-                  <option value="Grade 3">3</option>
-                  <option value="Grade 4">4</option>
-                  <option value="Grade 5">5</option>
-                  <option value="Grade 6">6</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
                 </select>
               </div><!-- col col-sm-3 -->
               <div class="d-none d-sm-block col col-sm-1">
                 <label for="stud_acad_yr" class="form-control-label">School Year</label>
               </div><!-- col col-sm-1 -->
               <div class="col col-sm-3">
-                <input type="text" class="input-sm form-control-sm form-control" name="stud_acad_yr" value="<?php echo $acad_yr; ?>" readonly>
+                <?php echo $acad_yr->acad_yr ?>
+                <input type="hidden" class="input-sm form-control-sm form-control" name="stud_acad_yr" value="<?php echo $acad_yr->acad_id; ?>">
               </div><!-- col col-sm-3 -->
             </div><!-- /.row form-group -->
           </div><!-- /.card-body -->

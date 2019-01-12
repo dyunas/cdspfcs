@@ -4,7 +4,7 @@
   <div class="col-sm-4">
     <div class="page-header float-left">
       <div class="page-title">
-        <h1><?php echo ucfirst($this->uri->segment(3)); ?></h1>
+        <h1>Elementary</h1>
       </div><!-- /.page-title -->
     </div><!-- /.page-header -->
   </div><!-- /.col-sm-4 -->
@@ -12,7 +12,7 @@
     <div class="page-header float-right">
       <div class="page-title">
         <ol class="breadcrumb text-right">
-          <li class="active"><?php echo $this->uri->segment(3); ?></li>
+          <li class="active">Elementary</li>
         </ol>
       </div><!-- /.page-title -->
     </div><!-- /.page-header -->

@@ -34,7 +34,8 @@
                 <th>Last Name</th>
                 <th>First Name</th>
                 <th>Grade Level</th>
-                <th>Section</th>
+                <th>Track</th>
+                <th>Strand</th>
                 <th>Status</th>
                 <th>Action</th>
               </thead>

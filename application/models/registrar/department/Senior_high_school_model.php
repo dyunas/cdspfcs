@@ -16,6 +16,8 @@ class Senior_high_school_model extends CI_Model {
 			"stud_status" 			=> 'registered',
 			"stud_rgstrtn_dte" 	=> date('Y-m-d'),
 			"stud_grade_lvl" 		=> $this->input->post('stud_grade_lvl'),
+			"stud_track" 				=> $this->input->post('stud_track'),
+			"stud_strand" 			=> $this->input->post('stud_strand'),
 			"stud_acad_yr" 			=> $this->input->post('stud_acad_yr'),
 			"stud_email"  			=> $this->input->post('eadd'),
 			"stud_bdate"  			=> $this->input->post('bdate'),
@@ -31,6 +33,7 @@ class Senior_high_school_model extends CI_Model {
 			$adtnl_data = array(
 				"stud_lrn" 				=> $this->input->post('LRN'),
 				"stud_grdns_name" => $this->input->post('grdns_name'),
+				"stud_grdns_tnum" => $this->input->post('tnum1'),
 				"stud_grdns_cnum" => $this->input->post('cnum1'),
 				"stud_grdns_adrs" => $this->input->post('addrs2'),
 			);
@@ -73,8 +76,11 @@ class Senior_high_school_model extends CI_Model {
 
 	public function get_shs_table_data()
 	{
-		$this->db->select('stud_lrn, stud_lname, stud_fname, stud_grade_lvl, stud_section, stud_status');
-		$this->db->from('tbl_stud_info_shs');
+		$this->db->select('a.stud_lrn, a.stud_lname, a.stud_fname, a.stud_grade_lvl, a.stud_status, b.grd_lvl, c.track, d.strand');
+		$this->db->from('tbl_stud_info_shs a');
+		$this->db->join('tbl_grd_level b', 'b.grd_id = a.stud_grade_lvl');
+		$this->db->join('tbl_shs_track c', 'c.trk_id = a.stud_trk_id');
+		$this->db->join('tbl_shs_strand d', 'd.strnd_id = a.stud_strnd_id');
 		$query = $this->db->get();
 		$data = array();
 		if ($query->num_rows() > 0)
@@ -114,8 +120,9 @@ class Senior_high_school_model extends CI_Model {
 				$sbdata[] = $row->stud_lrn;
 				$sbdata[] = $row->stud_lname;
 				$sbdata[] = $row->stud_fname;
-				$sbdata[] = $row->stud_grade_lvl;
-				$sbdata[] = $row->stud_section;
+				$sbdata[] = $row->grd_lvl;
+				$sbdata[] = $row->track;
+				$sbdata[] = $row->strand;
 				$sbdata[] = $status;
 				$sbdata[] = '<a href="shs/view/'.$row->stud_lrn.'" class="btn btn-outline-primary btn-sm"><i class="ti ti-eye"></i></a>';
 
@@ -150,16 +157,59 @@ class Senior_high_school_model extends CI_Model {
 		return json_encode($json_data);
 	}
 
+	public function get_track_list()
+	{
+		$this->db->select('trk_id, track');
+		$this->db->from('tbl_shs_track');
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0)
+		{
+			return json_encode($query->result());
+		}
+		else
+		{
+			return json_encode(false);
+		}
+	}
+
+	public function get_strand_list($id)
+	{
+		$this->db->select('strnd_id, strand');
+		$this->db->from('tbl_shs_strand');
+		$this->db->where('trk_id', $id);
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0)
+		{
+			return json_encode($query->result());
+		}
+		else
+		{
+			return json_encode(false);
+		}
+	}
+
 	public function get_student_info($uniq_id)
 	{
 		$this->db->select('
 			a.stud_lrn, a.stud_avatar, a.stud_lname, a.stud_fname, a.stud_mname, a.stud_status, a.stud_rgstrtn_dte, a.stud_grade_lvl, a.stud_section, a.stud_acad_yr, a.stud_email, a.stud_bdate, a.stud_tnum, a.stud_cnum, a.stud_gender, a.stud_cur_adrs, a.stud_perm_adrs,
-			b.stud_grdns_name, b.stud_grdns_cnum, b.stud_grdns_adrs,
-			c.bCertPSA, c.certGMC, c.certHonDis, c.frm137, c.frm138
+			b.stud_grdns_name, b.stud_grdns_tnum, b.stud_grdns_cnum, b.stud_grdns_adrs,
+			c.bCertPSA, c.certGMC, c.certHonDis, c.frm137, c.frm138,
+			d.grd_lvl,
+			e.trk_id, e.track,
+			f.strand,
+			g.acad_yr,
+			h.gender
 		');
 		$this->db->from('tbl_stud_info_shs a');
 		$this->db->join('tbl_stud_adtnl_info_shs b', 'b.stud_lrn = a.stud_lrn');
 		$this->db->join('tbl_stud_documents_shs c', 'c.stud_lrn = a.stud_lrn');
+		$this->db->join('tbl_grd_level d', 'd.grd_id = a.stud_grade_lvl');
+		$this->db->join('tbl_shs_track e', 'e.trk_id = a.stud_trk_id');
+		$this->db->join('tbl_shs_strand f', 'f.trk_id = e.trk_id');
+		$this->db->join('tbl_acad_year g', 'g.acad_id = a.stud_acad_yr');
+		$this->db->join('tbl_gender h', 'h.gdr_id = a.stud_gender');
 		$this->db->where('a.stud_lrn', $uniq_id);
 
 		$query = $this->db->get();

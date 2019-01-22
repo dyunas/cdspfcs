@@ -35,19 +35,19 @@
                 <label for="lname" class="form-control-label">*Lastname</label>
               </div>
               <div class="col col-sm-3 col-xs-12">
-                <input type="text" id="lname" name="lname" placeholder="Lastname" class="input-sm form-control-sm form-control" required data-parsley-required-message="Please enter a last name">
+                <input type="text" id="lname" name="lname" placeholder="Lastname" class="input-sm form-control-sm form-control" required data-parsley-required-message="" maxlength="50">
               </div>
               <div class="col col-sm-1 d-none d-sm-block">
                 <label for="fname" class="form-control-label">*Firstname</label>
               </div>
               <div class="col col-sm-3 col-xs-12">
-                <input type="text" id="fname" name="fname" placeholder="Firstname" class="input-sm form-control-sm form-control" required data-parsley-required-message="Please enter a first name">
+                <input type="text" id="fname" name="fname" placeholder="Firstname" class="input-sm form-control-sm form-control" required data-parsley-required-message="" maxlength="50">
               </div>
               <div class="col col-sm-1 d-none d-sm-block">
-                <label for="mname" class="form-control-label">M.N</label>
+                <label for="mname" class="form-control-label">Middlename</label>
               </div>
               <div class="col col-sm-3 col-xs-12">
-                <input type="text" id="mname" name="mname" placeholder="Middlename" class="input-sm form-control-sm form-control">
+                <input type="text" id="mname" name="mname" placeholder="Middlename" class="input-sm form-control-sm form-control" maxlength="50">
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
@@ -55,7 +55,7 @@
                 <label for="bdate" class="form-control-label">*Birthdate</label>
               </div>
               <div class="col col-sm-3 col-xs-12">
-                <input type="date" id="bdate" name="bdate" placeholder="Birthdate" class="input-sm form-control-sm form-control" required data-parsley-type="date" data-parsley-required-message="This field is required" data-parsley-date-message="Please enter a valid date">
+                <input type="date" id="bdate" name="bdate" placeholder="Birthdate" class="input-sm form-control-sm form-control" required data-parsley-type="date" data-parsley-required-message="" data-parsley-date-message="">
               </div>
               <div class="col col-sm-1 d-none d-sm-block">
                 <label for="gender" class=" form-control-label">*Gender</label>
@@ -73,13 +73,13 @@
                 <label for="tnum" class="form-control-label">Tel. No.#</label>
               </div><!-- /.col col-sm-1 -->
               <div class="col col-sm-3">
-                <input type="text" id="tnum" name="tnum" placeholder="Tel. No.#" class="input-sm form-control-sm form-control" data-parsley-type="number"  maxlength="7" data-parsley-length="[7, 7]">
+                <input type="text" id="tnum" name="tnum" placeholder="Tel. No.#" class="input-sm form-control-sm form-control" data-parsley-type="number"  maxlength="7" data-parsley-length="[7, 7]" data-parsley-type-message="" data-parsley-length="">
               </div><!-- /.col col-sm-3 -->
               <div class="col col-sm-1 d-none d-sm-block">
                 <label for="cnum" class="form-control-label">Cel. No.#</label>
               </div><!-- /.col col-sm-1 -->
               <div class="col col-sm-3">
-                <input type="text" id="cnum" name="cnum" placeholder="Cel. No.#" class="input-sm form-control-sm form-control" data-parsley-type="number"  maxlength="11" data-parsley-length="[11, 11]">
+                <input type="text" id="cnum" name="cnum" placeholder="Cel. No.#" class="input-sm form-control-sm form-control" data-parsley-type="number"  maxlength="11" data-parsley-length="[11, 11]" data-parsley-type-message="" data-parsley-length="">
               </div><!-- /.col col-sm-3 -->
             </div><!-- /.row form-group -->
             <div class="row form-group">
@@ -87,7 +87,7 @@
                 <label for="eadd" class="form-control-label">E-mail Address</label>
               </div>
               <div class="col col-sm-10">
-                <input type="email" id="eadd" name="eadd" placeholder="E-mail Address" class="input-sm form-control-sm form-control" data-parsley-type="email" data-parsley-type-message="Please enter a valid e-mail address">
+                <input type="email" id="eadd" name="eadd" placeholder="E-mail Address" class="input-sm form-control-sm form-control" data-parsley-type="email" data-parsley-type-message="">
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
@@ -95,15 +95,15 @@
                 <label for="cur_addrs" class="form-control-label">*Current Address</label>
               </div>
               <div class="col col-sm-10">
-                <input type="text" id="cur_addrs" name="cur_addrs" placeholder="Current Address" class="input-sm form-control-sm form-control" required data-parsley-required-message="This field is required">
+                <input type="text" id="cur_addrs" name="cur_addrs" placeholder="Current Address" class="input-sm form-control-sm form-control" required data-parsley-required-message="">
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
-              <div class="col col-sm-2 d-none d-sm-block">
+              <div class="col col-sm-2 d-none d-sm-block" style="padding: 0px 0px 0px 15px;">
                 <label for="perm_addrs" class="form-control-label">*Permanent Address</label>
               </div>
               <div class="col col-sm-10">
-                <input type="text" id="perm_addrs" name="perm_addrs" placeholder="Permanent Address" class="input-sm form-control-sm form-control" required data-parsley-required-message="This field is required">
+                <input type="text" id="perm_addrs" name="perm_addrs" placeholder="Permanent Address" class="input-sm form-control-sm form-control" required data-parsley-required-message="">
                 <small id="" class="form-text text-muted">
                   <input type="checkbox" name="addr_ticker" id="addr_ticker">
                   <label for="addr_ticker">Check this box if current address is the same with permanent address</label>
@@ -118,25 +118,33 @@
           </div><!-- /.card-header -->
           <div class="card-body form-horizontal">
             <div class="row form-group">
-              <div class="col col-sm-1 d-none d-sm-block">
-                <label for="grdnsName" class=" form-control-label">*Guardian's Name</label>
+              <div class="col col-sm-2 d-none d-sm-block">
+                <label for="grdnsName" class="form-control-label">*Guardian's Name</label>
               </div>
-              <div class="col col-sm-6">
-                <input type="text" id="grdnsName" name="grdns_name" placeholder="Guardian's Name" class="input-sm form-control-sm form-control" required data-parsley-required-message="This field is required">
-              </div>
-              <div class="col col-sm-1 d-none d-sm-block">
-                <label for="cnum1" class=" form-control-label">*Contact Number</label>
-              </div>
-              <div class="col col-sm-3">
-                <input type="text" id="cnum1" name="cnum1" placeholder="Contact Number" class="input-sm form-control-sm form-control" data-parsley-type="number" required data-parsley-required-message="This field is required">
+              <div class="col col-sm-10">
+                <input type="text" id="grdnsName" name="grdns_name" placeholder="Guardian's Name" class="input-sm form-control-sm form-control" required data-parsley-required-message="" maxlength="50">
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
-              <div class="col col-sm-1 d-none d-sm-block">
-                <label for="addrs2" class=" form-control-label">*Address</label>
+              <div class="col col-sm-2 d-none d-sm-block">
+                <label for="tnum1" class=" form-control-label">*Telephone Number</label>
               </div>
-              <div class="col col-sm-11">
-                <input type="text" id="addrs2" name="addrs2" placeholder="Address" class="input-sm form-control-sm form-control" required data-parsley-required-message="This field is required">
+              <div class="col col-sm-3">
+                <input type="text" id="tnum1" name="tnum1" placeholder="Tel. No.#" class="input-sm form-control-sm form-control" data-parsley-type="number" required data-parsley-required-message="" maxlength="7" data-parsley-length="[7, 7]" data-parsley-type-message="" data-parsley-length-message="">
+              </div>
+              <div class="col col-sm-2 d-none d-sm-block">
+                <label for="cnum1" class=" form-control-label">*Cellphone Number</label>
+              </div>
+              <div class="col col-sm-3">
+                <input type="text" id="cnum1" name="cnum1" placeholder="Cel. No.#" class="input-sm form-control-sm form-control" data-parsley-type="number" required data-parsley-required-message="" maxlength="11" data-parsley-length="[11, 11]" data-parsley-type-message="" data-parsley-length-message="">
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col col-sm-2 d-none d-sm-block" style="padding: 0px 0px 0px 15px;">
+                <label for="addrs2" class=" form-control-label">*Residing Address</label>
+              </div>
+              <div class="col col-sm-10">
+                <input type="text" id="addrs2" name="addrs2" placeholder="Address" class="input-sm form-control-sm form-control" required data-parsley-required-message="">
               </div>
             </div><!-- /.row form-group -->
           </div><!-- /.card-body -->
@@ -176,7 +184,7 @@
                   </div>
                   <div class="checkbox col-sm-4 col-xs-12">
                     <label for="TOR" class="form-check-label ">
-                      <input type="checkbox" id="TOR" name="TOR" value="0" class="form-check-input docu"> Transcript of Records
+                      <input type="checkbox" id="TOR" name="TOR" value="0" class="form-check-input docu"> Transcript of Record
                     </label>
                   </div>
                 </div>
@@ -186,7 +194,7 @@
         </div><!-- /.card -->
         <div class="card">
           <div class="card-header">
-            <strong>Student Assessment</strong>
+            <strong>Admission Status</strong>
           </div><!-- /.card-header -->
           <div class="card-body form-horizontal">
             <div class="row form-group">
@@ -194,31 +202,21 @@
                 <label for="stud_course" class="form-control-label" placeholder="Course">*Course</label>
               </div><!-- col col-sm-1 -->
               <div class="col-sm-2 col-xs-6">
-                <select class="input-sm form-control-sm form-control" name="stud_course" required data-parsley-required-message="Please select course">
-                  <option value="">Select level</option>
-                  <option value="1">BSA</option>
-                  <option value="2">BSEn</option>
-                  <option value="3">BSIT</option>
-                  <option value="4">BSOA</option>
+                <select class="input-sm form-control-sm form-control" id="stud_course" name="stud_course" required data-parsley-required-message="">
                 </select>
               </div><!-- col col-sm-3 -->
-              <div class="d-none d-sm-block col-sm-1 col-xs-2">
-                <label for="stud_year_lvl" class="form-control-label" placeholder="Year level">*Year Level</label>
+              <div class="d-none d-sm-block col-sm-1 col-xs-1">
+                <label for="stud_year_lvl" class="form-control-label" placeholder="level">*Level</label>
               </div><!-- col col-sm-1 -->
-              <div class="col-sm-2 col-xs-6">
-                <select class="input-sm form-control-sm form-control" name="stud_year_lvl" required data-parsley-required-message="Please select year level">
-                  <option value="">Select level</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
+              <div class="col-sm-1 col-xs-6">
+                <select class="input-sm form-control-sm form-control" id="yr_lvl" name="stud_year_lvl" required data-parsley-required-message="">
+                  <option value="">---</option>
                 </select>
               </div><!-- col col-sm-3 -->
-              <div class="d-none d-sm-block col col-sm-1">
-                <label for="stud_acad_yr" class="form-control-label">Academic Year</label>
+              <div class="d-none d-sm-block col-sm-1">
+                <label for="stud_acad_yr" class="form-control-label">A.Y.</label>
               </div><!-- col col-sm-1 -->
-              <div class="col col-sm-3">
+              <div class="col col-sm-2">
                 <?php echo $acad_yr->acad_yr ?>
                 <input type="hidden" class="input-sm form-control-sm form-control" name="stud_acad_yr" value="<?php echo $acad_yr->acad_id; ?>" readonly>
               </div><!-- col col-sm-3 -->
@@ -227,11 +225,11 @@
         </div><!-- /.card -->
         <div class="card">
           <div class="card-footer">
-            <button type="submit" id="submitBtn" class="btn btn-primary btn-sm">
-              <i class="fa fa-dot-circle-o"></i> Submit
+            <button type="submit" id="submitBtn" class="btn btn-outline-primary btn-sm">
+              <i class="fa fa-check"></i> Submit
             </button>
-            <button type="reset" class="btn btn-danger btn-sm">
-              <i class="fa fa-ban"></i> Reset
+            <button type="reset" class="btn btn-outline-danger btn-sm">
+              <i class="fa fa-refresh"></i> Reset
             </button>
           </div><!-- /.card-footer -->
         </div><!-- /.card -->
@@ -247,3 +245,4 @@
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 <script src="<?php echo base_url('assets/parsley/dist/parsley.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/assets/js/pages/registrar/college/stud_frm_validation.js'); ?>"></script>
+<script src="<?php echo base_url('assets/assets/js/pages/registrar/college/student_course.js'); ?>"></script>

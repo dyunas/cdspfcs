@@ -72,4 +72,31 @@ class Senior_high_school extends MY_Controller {
 		$this->load->view('registrar/department/seniorhs/view_student', $data);
 		$this->load->view('templates/footer');
 	}
+
+	public function Get_track_list()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$result = $this->shsdb->get_track_list();
+			echo $result;
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
+	public function Get_strand_list()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$id = $this->input->get('id');
+			$result = $this->shsdb->get_strand_list($id);
+			echo $result;
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
 }

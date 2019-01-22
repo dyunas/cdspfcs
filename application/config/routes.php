@@ -61,6 +61,10 @@ $route['login'] = 'Login/Index';
 // LOGOUT
 $route['logout'] = 'Login/Logout';
 
+// ADMIN
+	// DASHBOARD
+	$route['admin/dashboard'] = 'admin/dashboard/Dashboard/Index';
+
 // REGISTRAR
 	// DASHBOARD
 	$route['registrar/dashboard'] = 'registrar/dashboard/Dashboard/Index';
@@ -83,6 +87,8 @@ $route['logout'] = 'Login/Logout';
 	$route['registrar/dept/shs/view/(:any)'] = 'registrar/department/seniorhs/Senior_high_school/View_student/$1';
 	$route['registrar/dept/shs/register_student'] = 'registrar/department/seniorhs/Senior_high_school/Register_student';
 	$route['registrar/dept/shs/new'] = 'registrar/department/seniorhs/Senior_high_school/New_student';
+	$route['registrar/dept/shs/get_strand_list'] = 'registrar/department/seniorhs/Senior_high_school/Get_strand_list';
+	$route['registrar/dept/shs/get_track_list'] = 'registrar/department/seniorhs/Senior_high_school/Get_track_list';
 	$route['registrar/dept/shs/get_shs_table_data'] = 'registrar/department/seniorhs/Senior_high_school/Get_shs_table_data';
 	$route['registrar/dept/shs'] = 'registrar/department/seniorhs/Senior_high_school/Index';
 
@@ -90,5 +96,11 @@ $route['logout'] = 'Login/Logout';
 	$route['registrar/dept/college/view/(:any)'] = 'registrar/department/college/College/View_student/$1';
 	$route['registrar/dept/college/register_student'] = 'registrar/department/college/College/Register_student';
 	$route['registrar/dept/college/new'] = 'registrar/department/college/College/New_student';
+	$route['registrar/dept/college/get_course_years'] = 'registrar/department/college/College/Get_course_years';
+	$route['registrar/dept/college/get_student_course'] = 'registrar/department/college/College/Get_student_course';
 	$route['registrar/dept/college/get_col_table_data'] = 'registrar/department/college/College/Get_col_table_data';
 	$route['registrar/dept/college'] = 'registrar/department/college/College/Index';
+
+// ASSESSOR
+	// DASHBOARD
+	$route['assessor/dashboard'] = 'assessor/dashboard/Dashboard/Index';

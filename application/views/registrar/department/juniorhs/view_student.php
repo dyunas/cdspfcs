@@ -37,31 +37,34 @@
           <div class="card-body form-horizontal">
             <div class="row form-group">
               <div class="col-sm-1 d-none d-sm-block">
-                <label for="LRN" class=" form-control-label">LRN</label>
+                <label for="LRN" class=" form-control-label">LRN:</label>
               </div>
-              <div class="col-sm-4 col-xs-12">
+              <div class="col-sm-3 col-xs-12">
                 <?php echo $stud_info->stud_lrn ?>
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
-              <div class="col-sm-1 d-none d-sm-block">
-                <label class="form-control-label">Name</label>
+              <div class="col col-sm-1 d-none d-sm-block">
+                <label class="form-control-label">Name:</label>
               </div>
-              <div class="col-sm-9 col-xs-12">
+              <div class="col col-sm-9 col-xs-12">
                 <?php echo $stud_info->stud_lname.', '.$stud_info->stud_fname.' '.$stud_info->stud_mname ?>
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
-              <div class="col-sm-2 d-none d-sm-block">
-                <label for="bdate" class="form-control-label">Birthdate</label>
+              <div class="col col-sm-1 d-none d-sm-block">
+                <label for="bdate" class="form-control-label">Birthdate:</label>
               </div>
-              <div class="col-sm-3 col-xs-12">
-                <?php echo $stud_info->stud_bdate ?>
+              <div class="col col-sm-2 col-xs-12">
+                <?php
+                  $date = new DateTime($stud_info->stud_bdate);
+                  echo date_format($date, 'M d, Y');
+                ?>
               </div>
               <div class="col-sm-1 d-none d-sm-block">
-                <label for="gender" class=" form-control-label">Age</label>
+                <label for="gender" class=" form-control-label">Age:</label>
               </div>
-              <div class="col-sm-2 col-xs-12">
+              <div class="col-sm-1 col-xs-12">
                 <?php
                   $bdate = $stud_info->stud_bdate;
                   $now = date('Y-m-d');
@@ -71,21 +74,21 @@
                 ?>
               </div>
               <div class="col-sm-1 d-none d-sm-block">
-                <label for="gender" class=" form-control-label">Gender</label>
+                <label for="gender" class=" form-control-label">Gender:</label>
               </div>
               <div class="col-sm-3 col-xs-12">
-                <?php echo $stud_info->stud_gender ?>
+                <?php echo $stud_info->gender ?>
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
-              <div class="col-sm-2 d-none d-sm-block">
-                <label for="tnum" class="form-control-label">Tel. No.#</label>
+              <div class="col-sm-2 d-none d-sm-block" style="padding: 0px 0px 0px 15px;">
+                <label for="tnum" class="form-control-label">Telephone Number:</label>
               </div><!-- /.col-sm-1 -->
-              <div class="col-sm-3">
+              <div class="col-sm-2">
                 <?php echo (intval($stud_info->stud_tnum) != 0) ? $stud_info->stud_tnum : 'N/A'; ?>
               </div><!-- /.col-sm-3 -->
-              <div class="col-sm-2 d-none d-sm-block">
-                <label for="cnum" class="form-control-label">Cel. No.#</label>
+              <div class="col-sm-2 d-none d-sm-block" style="padding: 0px 0px 0px 15px;">
+                <label for="cnum" class="form-control-label">Cellphone Number:</label>
               </div><!-- /.col-sm-1 -->
               <div class="col-sm-3">
                 <?php echo (intval($stud_info->stud_cnum) != 0) ? $stud_info->stud_cnum : 'N/A'; ?>
@@ -93,7 +96,7 @@
             </div><!-- /.row form-group -->
             <div class="row form-group">
               <div class="col-sm-2 d-none d-sm-block">
-                <label for="eadd" class="form-control-label">E-mail Address</label>
+                <label for="eadd" class="form-control-label">E-mail Address:</label>
               </div>
               <div class="col-sm-10">
                 <?php echo $stud_info->stud_email ?>
@@ -101,15 +104,15 @@
             </div><!-- /.row form-group -->
             <div class="row form-group">
               <div class="col-sm-2 d-none d-sm-block">
-                <label for="cur_addrs" class="form-control-label">Current Address</label>
+                <label for="cur_addrs" class="form-control-label">Current Address:</label>
               </div>
               <div class="col-sm-10">
                 <?php echo $stud_info->stud_cur_adrs ?>
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
-              <div class="col-sm-2 d-none d-sm-block">
-                <label for="perm_addrs" class="form-control-label">Permanent Address</label>
+              <div class="col-sm-2 d-none d-sm-block" style="padding: 0px 0px 0px 15px;">
+                <label for="perm_addrs" class="form-control-label">Permanent Address:</label>
               </div>
               <div class="col-sm-10">
                 <?php echo $stud_info->stud_perm_adrs ?>
@@ -123,24 +126,32 @@
           </div><!-- /.card-header -->
           <div class="card-body form-horizontal">
             <div class="row form-group">
-              <div class="col-sm-2 d-none d-sm-block">
-                <label for="grdnsName" class=" form-control-label">Guardian's Name</label>
+              <div class="col col-sm-2 d-none d-sm-block">
+                <label for="grdnsName" class="form-control-label">Guardian's Name:</label>
               </div>
-              <div class="col-sm-5">
+              <div class="col col-sm-6">
                 <?php echo $stud_info->stud_grdns_name ?>
-              </div>
-              <div class="col-sm-2 d-none d-sm-block">
-                <label for="cnum1" class=" form-control-label">Contact Number</label>
-              </div>
-              <div class="col-sm-3">
-                <?php echo $stud_info->stud_grdns_cnum ?>
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
-              <div class="col-sm-2 d-none d-sm-block">
-                <label for="addrs2" class=" form-control-label">Address</label>
+              <div class="col col-sm-2 d-none d-sm-block" style="padding: 0px 0px 0px 15px;">
+                <label for="cnum1" class=" form-control-label">Telephone Number:</label>
               </div>
-              <div class="col-sm-10">
+              <div class="col col-sm-3">
+                <?php echo (intval($stud_info->stud_grdns_tnum) != 0) ? $stud_info->stud_grdns_tnum : 'N/A'; ?>
+              </div>
+              <div class="col col-sm-2 d-none d-sm-block" style="padding: 0px 0px 0px 15px;">
+                <label for="cnum1" class=" form-control-label">Cellphone Number:</label>
+              </div>
+              <div class="col col-sm-3">
+                <?php echo $stud_info->stud_grdns_cnum ?>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col col-sm-2 d-none d-sm-block">
+                <label for="addrs2" class=" form-control-label">Residing Address:</label>
+              </div>
+              <div class="col col-sm-10">
                 <?php echo $stud_info->stud_grdns_adrs ?>
               </div>
             </div><!-- /.row form-group -->
@@ -190,10 +201,29 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <strong>Assessment</strong>
+            <strong>Admission Status</strong>
           </div><!-- /.card-header -->
-          <div class="card-body">
-            //
+          <div class="card-body form-horizontal">
+            <div class="row form-group">
+              <div class="d-none d-sm-block col-sm-1">
+                <label for="stud_grade_lvl" class="form-control-label" placeholder="level">Level:</label>
+              </div><!-- col col-sm-1 -->
+              <div class="col-sm-1 col-xs-6">
+                <?php echo $stud_info->grd_lvl ?>
+              </div><!-- col col-sm-3 -->
+              <div class="d-none d-sm-block col col-sm-1">
+                <label for="stud_acad_yr" class="form-control-label">S.Y.:</label>
+              </div><!-- col col-sm-1 -->
+              <div class="col col-sm-2">
+                <?php echo $stud_info->acad_yr ?>
+              </div><!-- col col-sm-2 -->
+              <div class="col-sm-1 d-none d-sm-block">
+                <label class=" form-control-label">Status:</label>
+              </div>
+              <div class="col-sm-2 col-xs-12">
+                <?php echo $stud_info->stud_status ?>
+              </div><!-- /.col-sm-2 -->
+            </div><!-- /.row form-group -->
           </div><!-- /.card-body -->
         </div><!-- /.card -->
       </div><!-- /.col-md-12 -->

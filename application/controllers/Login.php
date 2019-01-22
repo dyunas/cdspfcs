@@ -11,13 +11,25 @@ class Login extends CI_Controller {
 	{
 		if ($this->session->userdata('is_in'))
 		{
-			if ($this->session->userdata('role') == 'registrar')
+			switch($this->session->userdata('role'))
 			{
-				redirect('registrar/dashboard');
-			}
-			elseif ($this->session->userdata('role') == 'cashier')
-			{
-				redirect();
+				case 1:
+					redirect('admin/dashboard');
+				break;
+				case 2:
+					redirect('registrar/dashboard');
+				break;
+				case 3:
+					redirect('assessor/dashboard');
+				break;
+				case 4:
+					redirect('cashier/dashboard');
+				break;
+				case 5:
+					redirect('finance/dashboard');
+				break;
+				default:
+				break;
 			}
 		}
 		else
@@ -32,13 +44,25 @@ class Login extends CI_Controller {
 	{
 		if ($this->login->check_user_credentials())
 		{
-			if ($this->session->userdata('role') == '2')
+			switch($this->session->userdata('role'))
 			{
-				redirect('registrar/dashboard');
-			}
-			elseif ($this->session->userdata('role') == '3')
-			{
-				redirect();
+				case 1:
+					redirect('admin/dashboard');
+				break;
+				case 2:
+					redirect('registrar/dashboard');
+				break;
+				case 3:
+					redirect('assessor/dashboard');
+				break;
+				case 4:
+					redirect('cashier/dashboard');
+				break;
+				case 5:
+					redirect('finance/dashboard');
+				break;
+				default:
+				break;
 			}
 		}
 		else

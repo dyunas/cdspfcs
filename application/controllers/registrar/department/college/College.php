@@ -61,6 +61,33 @@ class College extends MY_Controller {
 		}
 	}
 
+	public function Get_student_course()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$result = $this->coldb->get_student_course();
+			echo $result;
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
+	public function Get_course_years()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$id = $this->input->get('id');
+			$result = $this->coldb->get_course_years($id);
+			echo $result;
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
 	public function View_student($uniq_id)
 	{
 		$data = array(

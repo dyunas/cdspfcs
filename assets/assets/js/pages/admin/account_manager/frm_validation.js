@@ -42,7 +42,7 @@ jQuery(document).ready(function() {
 	          else {
 	            Swal(
 	              'Error!',
-	              'Failed to add student to the record! Please try again.',
+	              'Failed to add account to the record! Please try again.',
 	              'error'
 	            );
 	          }

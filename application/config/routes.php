@@ -81,6 +81,8 @@ $route['logout'] = 'Login/Logout';
 	$route['admin/fee-mgr'] = 'admin/fee_manager/Fee_manager/Index';
 
 	// DISCOUNTS
+	$route['admin/discounts/create_new_discount'] = 'admin/discount_manager/Discount_manager/Create_new_discount';
+	$route['admin/discounts/check_disccode'] = 'admin/discount_manager/Discount_manager/Check_disccode';
 	$route['admin/discounts/get_discount_table'] = 'admin/discount_manager/Discount_manager/Get_discount_table';
 	$route['admin/discounts'] = 'admin/discount_manager/Discount_manager/Index';
 

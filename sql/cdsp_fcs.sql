@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2019 at 09:13 PM
+-- Generation Time: Feb 02, 2019 at 07:21 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -56,17 +56,19 @@ CREATE TABLE `tbl_accounts` (
   `fname` varchar(255) NOT NULL,
   `lname` varchar(255) NOT NULL,
   `role` int(11) NOT NULL,
-  `status` tinyint(4) NOT NULL
+  `status` tinyint(4) NOT NULL,
+  `created_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_accounts`
 --
 
-INSERT INTO `tbl_accounts` (`row_id`, `emp_uniq_id`, `uname`, `password`, `fname`, `lname`, `role`, `status`) VALUES
-(1, '5c080710142a2', 'juancruz', '5f4dcc3b5aa765d61d8327deb882cf99', 'Juan', 'Cruz', 2, 1),
-(2, '5c3f86c85a1d6', 'admin', '5f4dcc3b5aa765d61d8327deb882cf99', 'Admin', 'Admin', 1, 1),
-(3, '5c40dd75c74fc', 'pencil', '5f4dcc3b5aa765d61d8327deb882cf99', 'Pencil', 'Manalo', 3, 1);
+INSERT INTO `tbl_accounts` (`row_id`, `emp_uniq_id`, `uname`, `password`, `fname`, `lname`, `role`, `status`, `created_date`) VALUES
+(1, '5c080710142a2', 'juancruz', '5f4dcc3b5aa765d61d8327deb882cf99', 'Juan', 'Cruz', 2, 1, '2018-12-12'),
+(2, '5c3f86c85a1d6', 'admin', '5f4dcc3b5aa765d61d8327deb882cf99', 'Admin', 'Admin', 1, 1, '2018-12-12'),
+(3, '5c40dd75c74fc', 'pencil', '5f4dcc3b5aa765d61d8327deb882cf99', 'Pencil', 'Manalo', 3, 1, '2019-01-05'),
+(4, '5c4b64932da13', 'ballpen', '5f4dcc3b5aa765d61d8327deb882cf99', 'Pilot', 'Ballpen', 4, 1, '2019-01-26');
 
 -- --------------------------------------------------------
 
@@ -87,9 +89,11 @@ CREATE TABLE `tbl_act_type` (
 INSERT INTO `tbl_act_type` (`row_id`, `role_id`, `role_type`) VALUES
 (1, 1, 'admin'),
 (2, 2, 'registrar'),
-(3, 3, 'assessor'),
-(4, 4, 'cashier'),
-(5, 5, 'finance');
+(3, 3, 'assessor_elem'),
+(4, 4, 'assessor_jhs'),
+(5, 5, 'assessor_shs'),
+(6, 6, 'cashier'),
+(7, 7, 'finance');
 
 -- --------------------------------------------------------
 
@@ -114,6 +118,81 @@ INSERT INTO `tbl_col_course` (`row_id`, `course_id`, `course_code`, `course_name
 (2, 2, 'BSEn', 'Bachelor of Science in Entrepreneurship', 4),
 (3, 3, 'BSIT', 'Bachelor of Science in Information Technology', 4),
 (4, 4, 'BSOA', 'Bachelor of Science in Office Administration', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_departments`
+--
+
+CREATE TABLE `tbl_departments` (
+  `row_id` int(11) NOT NULL,
+  `dept_id` int(11) NOT NULL,
+  `dept_code` varchar(10) NOT NULL,
+  `department` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_departments`
+--
+
+INSERT INTO `tbl_departments` (`row_id`, `dept_id`, `dept_code`, `department`) VALUES
+(1, 1, 'PRE', 'Pre-Elem'),
+(2, 2, 'ELEM', 'Elementary'),
+(3, 3, 'JHS', 'Junior High School'),
+(4, 4, 'SHS', 'Senior High School'),
+(5, 5, 'COL', 'College');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_discount`
+--
+
+CREATE TABLE `tbl_discount` (
+  `row_id` int(11) NOT NULL,
+  `disc_code` char(11) NOT NULL,
+  `discount` varchar(50) NOT NULL,
+  `disc_amnt` decimal(5,2) NOT NULL,
+  `disc_for` int(11) NOT NULL,
+  `status` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_discount`
+--
+
+INSERT INTO `tbl_discount` (`row_id`, `disc_code`, `discount`, `disc_amnt`, `disc_for`, `status`) VALUES
+(1, 'EEP-EL', 'Early Enrollment Program', '10.00', 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_fees`
+--
+
+CREATE TABLE `tbl_fees` (
+  `row_id` int(11) NOT NULL,
+  `fee_code` char(10) NOT NULL,
+  `fee_name` varchar(50) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `fee_for` int(2) NOT NULL,
+  `status` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_fees`
+--
+
+INSERT INTO `tbl_fees` (`row_id`, `fee_code`, `fee_name`, `amount`, `fee_for`, `status`) VALUES
+(1, 'TFEL', 'Tuition Fee', '12550.00', 2, 1),
+(2, 'MSCEL', 'Miscellaneous', '8550.00', 2, 1),
+(3, 'CFEL', 'Computer Fee', '3500.00', 2, 1),
+(4, 'ENFEL', 'Energy Fee', '3000.00', 2, 1),
+(5, 'BKSEL', 'Books - Elementary', '5470.00', 2, 1),
+(6, 'EDTR', 'Educational Tour', '2200.00', 2, 1),
+(7, 'FDAY', 'Foundation Day T-Shirt', '250.00', 2, 1),
+(8, 'LIP', 'Learner\'s Insurance Premium', '150.00', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -144,26 +223,27 @@ INSERT INTO `tbl_gender` (`row_id`, `gdr_id`, `gender`) VALUES
 CREATE TABLE `tbl_grd_level` (
   `row_id` int(11) NOT NULL,
   `grd_id` int(11) NOT NULL,
-  `grd_lvl` varchar(50) NOT NULL
+  `grd_lvl` varchar(50) NOT NULL,
+  `dept_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_grd_level`
 --
 
-INSERT INTO `tbl_grd_level` (`row_id`, `grd_id`, `grd_lvl`) VALUES
-(1, 1, 'Grade 1'),
-(2, 2, 'Grade 2'),
-(3, 3, 'Grade 3'),
-(4, 4, 'Grade 4'),
-(5, 5, 'Grade 5'),
-(6, 6, 'Grade 6'),
-(7, 7, 'Grade 7'),
-(8, 8, 'Grade 8'),
-(9, 9, 'Grade 9'),
-(10, 10, 'Grade 10'),
-(11, 11, 'Grade 11'),
-(12, 12, 'Grade 12');
+INSERT INTO `tbl_grd_level` (`row_id`, `grd_id`, `grd_lvl`, `dept_id`) VALUES
+(1, 1, 'Grade 1', 2),
+(2, 2, 'Grade 2', 2),
+(3, 3, 'Grade 3', 2),
+(4, 4, 'Grade 4', 2),
+(5, 5, 'Grade 5', 2),
+(6, 6, 'Grade 6', 2),
+(7, 7, 'Grade 7', 3),
+(8, 8, 'Grade 8', 3),
+(9, 9, 'Grade 9', 3),
+(10, 10, 'Grade 10', 3),
+(11, 11, 'Grade 11', 4),
+(12, 12, 'Grade 12', 4);
 
 -- --------------------------------------------------------
 
@@ -175,7 +255,7 @@ CREATE TABLE `tbl_logs` (
   `row_id` int(11) NOT NULL,
   `emp_id` char(32) NOT NULL,
   `c_log` text NOT NULL,
-  `mod_date` date NOT NULL
+  `mod_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -183,13 +263,14 @@ CREATE TABLE `tbl_logs` (
 --
 
 INSERT INTO `tbl_logs` (`row_id`, `emp_id`, `c_log`, `mod_date`) VALUES
-(1, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789012', '2019-01-12'),
-(2, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0001-52', '2019-01-12'),
-(3, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789013', '2019-01-12'),
-(4, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789014', '2019-01-12'),
-(6, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0002-52', '2019-01-16'),
-(7, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789015', '2019-01-16'),
-(8, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0003-52', '2019-01-17');
+(1, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789012', '2019-01-12 00:00:00'),
+(2, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0001-52', '2019-01-12 00:00:00'),
+(3, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789013', '2019-01-12 00:00:00'),
+(4, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789014', '2019-01-12 00:00:00'),
+(6, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0002-52', '2019-01-16 00:00:00'),
+(7, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789015', '2019-01-16 00:00:00'),
+(8, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0003-52', '2019-01-17 00:00:00'),
+(9, '5c3f86c85a1d6', 'Created a new fee: EEP-EL - Early Enrollment Program - 10.00 for 2', '2019-02-02 06:55:44');
 
 -- --------------------------------------------------------
 
@@ -278,7 +359,7 @@ CREATE TABLE `tbl_stud_adtnl_info_col` (
 --
 
 INSERT INTO `tbl_stud_adtnl_info_col` (`row_id`, `stud_id`, `stud_grdns_name`, `stud_grdns_tnum`, `stud_grdns_cnum`, `stud_grdns_adrs`) VALUES
-(1, '19-0001-52', 'Allen Christian Mendoza', 0, 9121234567, 'sample'),
+(1, '19-0001-52', 'Nanay Ochoa', 0, 9121234567, 'sample'),
 (3, '19-0002-52', 'Amelia A. Quebral', 0, 9229298026, 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna'),
 (4, '19-0003-52', 'Eric Lehnsherr', 0, 639561234567, 'Sokovia');
 
@@ -478,7 +559,7 @@ CREATE TABLE `tbl_stud_info_col` (
 --
 
 INSERT INTO `tbl_stud_info_col` (`row_id`, `stud_id`, `stud_avatar`, `stud_lname`, `stud_fname`, `stud_mname`, `stud_status`, `stud_rgstrtn_dte`, `stud_year_lvl`, `stud_sem`, `stud_course`, `stud_acad_yr`, `stud_email`, `stud_bdate`, `stud_tnum`, `stud_cnum`, `stud_gender`, `stud_cur_adrs`, `stud_perm_adrs`) VALUES
-(1, '19-0001-52', '', 'Ochoa', 'Cara', '', 'registered', '2019-01-12', 4, 2, 3, 1, '', '1997-02-04', 0, 0, 2, 'sample', 'sample'),
+(1, '19-0001-52', '', 'Ochoa', 'Cara', 'Martillosa', 'registered', '2019-01-12', 4, 2, 3, 1, '', '1997-02-04', 0, 0, 2, 'sample', 'sample'),
 (3, '19-0002-52', '', 'Quebral', 'Jonathan', 'Almodiel', 'registered', '2019-01-16', 4, 2, 3, 1, 'jonathan.almodiel.quebral@gmail.com', '1992-06-27', 0, 9566031598, 1, 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna', 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna'),
 (5, '19-0003-52', '', 'Maximoff', 'Wanda', '', 'registered', '2019-01-17', 2, 2, 1, 1, 'wanda.maximoff@gmail.com', '1992-02-06', 0, 0, 2, 'Sokovia', 'Sokovia');
 
@@ -643,6 +724,27 @@ ALTER TABLE `tbl_col_course`
   ADD KEY `course_id` (`course_id`);
 
 --
+-- Indexes for table `tbl_departments`
+--
+ALTER TABLE `tbl_departments`
+  ADD PRIMARY KEY (`row_id`),
+  ADD UNIQUE KEY `dept_id` (`dept_id`);
+
+--
+-- Indexes for table `tbl_discount`
+--
+ALTER TABLE `tbl_discount`
+  ADD PRIMARY KEY (`row_id`);
+
+--
+-- Indexes for table `tbl_fees`
+--
+ALTER TABLE `tbl_fees`
+  ADD PRIMARY KEY (`row_id`),
+  ADD UNIQUE KEY `fee_code` (`fee_code`),
+  ADD KEY `fee_for` (`fee_for`);
+
+--
 -- Indexes for table `tbl_gender`
 --
 ALTER TABLE `tbl_gender`
@@ -654,7 +756,8 @@ ALTER TABLE `tbl_gender`
 --
 ALTER TABLE `tbl_grd_level`
   ADD PRIMARY KEY (`row_id`),
-  ADD UNIQUE KEY `grd_id` (`grd_id`);
+  ADD UNIQUE KEY `grd_id` (`grd_id`),
+  ADD KEY `dept_id` (`dept_id`);
 
 --
 -- Indexes for table `tbl_logs`
@@ -806,19 +909,37 @@ ALTER TABLE `tbl_acad_year`
 -- AUTO_INCREMENT for table `tbl_accounts`
 --
 ALTER TABLE `tbl_accounts`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_act_type`
 --
 ALTER TABLE `tbl_act_type`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_col_course`
 --
 ALTER TABLE `tbl_col_course`
   MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_departments`
+--
+ALTER TABLE `tbl_departments`
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tbl_discount`
+--
+ALTER TABLE `tbl_discount`
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_fees`
+--
+ALTER TABLE `tbl_fees`
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_gender`
@@ -836,7 +957,7 @@ ALTER TABLE `tbl_grd_level`
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_semester`
@@ -943,6 +1064,18 @@ ALTER TABLE `tbl_yr_level`
 --
 ALTER TABLE `tbl_accounts`
   ADD CONSTRAINT `tbl_accounts_ibfk_1` FOREIGN KEY (`role`) REFERENCES `tbl_act_type` (`role_id`);
+
+--
+-- Constraints for table `tbl_fees`
+--
+ALTER TABLE `tbl_fees`
+  ADD CONSTRAINT `tbl_fees_ibfk_1` FOREIGN KEY (`fee_for`) REFERENCES `tbl_departments` (`dept_id`);
+
+--
+-- Constraints for table `tbl_grd_level`
+--
+ALTER TABLE `tbl_grd_level`
+  ADD CONSTRAINT `tbl_grd_level_ibfk_1` FOREIGN KEY (`dept_id`) REFERENCES `tbl_departments` (`dept_id`);
 
 --
 -- Constraints for table `tbl_logs`

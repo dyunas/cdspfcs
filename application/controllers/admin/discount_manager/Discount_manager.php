@@ -27,4 +27,46 @@ class Discount_manager extends MY_Controller {
 			exit ('No direct script access allowed.');
 		}
 	}
+
+	public function Check_disccode()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$dCode = $this->input->get('dCode');
+			$result = $this->discdb->check_disccode($dCode);
+			if ($result == TRUE)
+			{
+				$this->output->set_status_header(200);
+			}
+			else
+			{
+				$this->output->set_status_header(500);
+			}
+		}
+		else
+		{
+			exit ('No direct script access allowed.');
+		}
+	}
+
+	public function Create_new_discount()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$result = $this->discdb->create_discount();
+			if ($result != FALSE)
+			{
+				$this->output->set_status_header(200);
+				echo $result;
+			}
+			else
+			{
+				$this->output->set_status_header(500);
+			}
+		}
+		else
+		{
+			exit ('No direct script access allowed.');
+		}
+	}
 }

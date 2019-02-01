@@ -30,7 +30,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <button type="button" id="createDiscBtn" data-toggle="modal" data-target="#newDiscModal" data-backdrop="static" data-keyboard="false" class="btn btn-sm btn-primary pull-right"><i class="ti ti-plus"></i> Create new fee</button>
+            <button type="button" id="createDiscBtn" data-toggle="modal" data-target="#newDiscModal" data-backdrop="static" data-keyboard="false" class="btn btn-sm btn-primary pull-right"><i class="ti ti-plus"></i> Create new discount</button>
           </div><!-- /.card-header -->
           <div class="card-body">
             <table id="feeTbl" class="table table-striped table-bordered" width="100%">
@@ -62,38 +62,38 @@
           <!-- <span aria-hidden="true">&times;</span> -->
         </button>
       </div>
-      <?php echo form_open('', 'role="form" id="feeForm"'); ?>
+      <?php echo form_open('', 'role="form" id="discForm"'); ?>
       <div class="modal-body">
         <small style="display:block;padding: 10px 10px 10px 0px;font-size: 11px;"><i>Fields with (*) are mandatory. Please don't leave it blank</i></small>
         <div class="row form-group">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="col-lg-1 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*Fee Name:</label></div>
+            <div class="col-lg-2 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*Discount Name:</label></div>
             <div class="col-lg-9 col-sm-10 col-xs-12">
-              <input type="text" id="fname" name="fname" placeholder="Fee Name" class="form-control form-control-sm" required data-parsley-required-message="This field is required" maxlength="50">
+              <input type="text" id="dname" name="dname" placeholder="Fee Name" class="form-control form-control-sm" required data-parsley-required-message="This field is required" maxlength="50">
             </div>
           </div>
         </div><!-- /.row form-group -->
         <div class="row form-group">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="col-lg-1 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*Fee Code:</label></div>
+            <div class="col-lg-2 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*Discount Code:</label></div>
             <div class="col-lg-3 col-sm-3 col-xs-12">
-              <input type="text" id="fcode" name="fcode" placeholder="Fee Code" class="form-control form-control-sm" data-parsley-remote="fee-mgr/check_feecode" data-parsley-remote-options="{ 'type': 'GET', 'dataType': 'json', 'data': { 'fcode': 'value' } }" data-parsley-remote-message="Code already exists" required data-parsley-required-message="This field is required" maxlength="10">
+              <input type="text" id="dcode" name="dcode" placeholder="Fee Code" class="form-control form-control-sm" data-parsley-remote="discounts/check_disccode" data-parsley-remote-options="{ 'type': 'GET', 'dataType': 'json', 'data': { 'dCode': 'value' } }" data-parsley-remote-message="Code already exists" required data-parsley-required-message="This field is required" maxlength="10">
             </div>
           </div>
         </div><!-- /.row form-group -->
         <div class="row form-group">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="col-lg-1 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*Amount:</label></div>
+            <div class="col-lg-2 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*Percentage:</label></div>
             <div class="col-lg-3 col-sm-3 col-xs-12">
-              <input type="text" id="amnt" name="amnt" placeholder="Amount" class="form-control form-control-sm" data-parsley-type="integer" required data-parsley-required-message="This field is required" maxlength="5">
+              <input type="text" id="pcnt" name="pcnt" placeholder="Percentage" class="form-control form-control-sm" data-parsley-type="integer" required data-parsley-required-message="This field is required" maxlength="3">
             </div>
           </div>
         </div><!-- /.row form-group -->
         <div class="row form-group">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="col-lg-1 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*For:</label></div>
+            <div class="col-lg-2 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*For:</label></div>
             <div class="col-lg-3 col-sm-3 col-xs-12">
-              <select name="fFor" class="fFor form-control form-control-sm" required data-parsley-required-message="This field is required">
+              <select name="dFor" class="dFor form-control form-control-sm" required data-parsley-required-message="This field is required">
                 <option value="">---</option>
               </select>
             </div>

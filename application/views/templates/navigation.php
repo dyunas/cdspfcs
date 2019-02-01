@@ -27,7 +27,7 @@
               <a href="<?php echo site_url($this->uri->segment(1).'/discounts'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-percent"></i>Discounts</a>
             </li>
             <li class="<?php echo ($this->uri->segment(2) == 'aysem') ? 'active' : ''; ?> menu-item-has-children">
-              <a href="<?php echo site_url($this->uri->segment(1).'/aysem'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-percent"></i>A.Y and Semester</a>
+              <a href="<?php echo site_url($this->uri->segment(1).'/aysem'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-calendar"></i>A.Y and Semester</a>
             </li>
             <h3 class="menu-title">Reports</h3><!-- /.menu-title -->
           <?php elseif ($this->uri->segment(1) == 'registrar'): ?>

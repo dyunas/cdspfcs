@@ -90,7 +90,7 @@ jQuery(document).ready(function(){
 	          else {
 	            Swal(
 	              'Error!',
-	              'Failed to add student to the record! Please try again.',
+	              'Failed to add fee to the record! Please try again.',
 	              'error'
 	            );
 	          }

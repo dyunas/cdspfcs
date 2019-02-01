@@ -65,6 +65,28 @@ $route['logout'] = 'Login/Logout';
 	// DASHBOARD
 	$route['admin/dashboard'] = 'admin/dashboard/Dashboard/Index';
 
+	// ACCOUNT MANAGER
+	$route['admin/accnt-mgr/register_account'] = 'admin/account_manager/Account_manager/Register_account';
+	$route['admin/accnt-mgr/check_username'] = 'admin/account_manager/Account_manager/Check_username';
+	$route['admin/accnt-mgr/new'] = 'admin/account_manager/Account_manager/New_account';
+	$route['admin/accnt-mgr/get_account_roles'] = 'admin/account_manager/Account_manager/Get_account_roles';
+	$route['admin/accnt-mgr/get_account_table_data'] = 'admin/account_manager/Account_manager/Get_account_table_data';
+	$route['admin/accnt-mgr'] = 'admin/account_manager/Account_manager/Index';
+
+	// FEE MANAGER
+	$route['admin/fee-mgr/create_new_fee'] = 'admin/fee_manager/Fee_manager/Create_new_fee';
+	$route['admin/fee-mgr/check_feecode'] = 'admin/fee_manager/Fee_manager/Check_feecode';
+	$route['admin/fee-mgr/get_departments'] = 'admin/fee_manager/Fee_manager/Get_departments';
+	$route['admin/fee-mgr/get_fee_table'] = 'admin/fee_manager/Fee_manager/Get_fee_table';
+	$route['admin/fee-mgr'] = 'admin/fee_manager/Fee_manager/Index';
+
+	// DISCOUNTS
+	$route['admin/discounts/get_discount_table'] = 'admin/discount_manager/Discount_manager/Get_discount_table';
+	$route['admin/discounts'] = 'admin/discount_manager/Discount_manager/Index';
+
+	// ACADEMIC YEAR AND SEMESTER
+	$route['admin/aysem'] = 'admin/aysem_manager/Aysem_manager/Index';
+
 // REGISTRAR
 	// DASHBOARD
 	$route['registrar/dashboard'] = 'registrar/dashboard/Dashboard/Index';

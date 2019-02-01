@@ -15,7 +15,22 @@
           <li <?php echo ($this->uri->segment(2) == 'dashboard') ? 'class="active"' : ''; ?>>
             <a href="<?php echo site_url($this->uri->segment(1).'/dashboard'); ?>"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
           </li>
-          <?php if ($this->uri->segment(1) == 'registrar'): ?>
+          <?php if ($this->uri->segment(1) == 'admin'): ?>
+            <h3 class="menu-title">Settings</h3><!-- /.menu-title -->
+            <li class="<?php echo ($this->uri->segment(2) == 'accnt-mgr') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/accnt-mgr'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Account Manager</a>
+            </li>
+            <li class="<?php echo ($this->uri->segment(2) == 'fee-mgr') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/fee-mgr'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-credit-card"></i>Fee's Manager</a>
+            </li>
+            <li class="<?php echo ($this->uri->segment(2) == 'discounts') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/discounts'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-percent"></i>Discounts</a>
+            </li>
+            <li class="<?php echo ($this->uri->segment(2) == 'aysem') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/aysem'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-percent"></i>A.Y and Semester</a>
+            </li>
+            <h3 class="menu-title">Reports</h3><!-- /.menu-title -->
+          <?php elseif ($this->uri->segment(1) == 'registrar'): ?>
             <h3 class="menu-title">Departments</h3><!-- /.menu-title -->
             <li class="<?php echo ($this->uri->segment(3) == 'elementary') ? 'active' : ''; ?> menu-item-has-children">
               <a href="<?php echo site_url($this->uri->segment(1).'/dept/elementary'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Elementary</a>

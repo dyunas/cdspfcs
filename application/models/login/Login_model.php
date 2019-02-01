@@ -65,6 +65,17 @@ class Login_model extends CI_Model {
 		}
 	}
 
+	public function get_user_role($role)
+	{
+		$this->db->select('role_type');
+		$this->db->from('tbl_act_type');
+		$this->db->where('role_id', $role);
+
+		$query = $this->db->get();
+		$rle = $query->row();
+		return $rle->role_type;
+	}
+
 	public function Log_out()
 	{
 		// unset userdata session

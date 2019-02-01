@@ -20,12 +20,18 @@ class Login extends CI_Controller {
 					redirect('registrar/dashboard');
 				break;
 				case 3:
-					redirect('assessor/dashboard');
+					redirect('assessor/elementary/dashboard');
 				break;
 				case 4:
-					redirect('cashier/dashboard');
+					redirect('assessor/juniorhs/dashboard');
 				break;
 				case 5:
+					redirect('assessor/seniorhs/dashboard');
+				break;
+				case 6:
+					redirect('cashier/dashboard');
+				break;
+				case 7:
 					redirect('finance/dashboard');
 				break;
 				default:
@@ -53,12 +59,18 @@ class Login extends CI_Controller {
 					redirect('registrar/dashboard');
 				break;
 				case 3:
-					redirect('assessor/dashboard');
+					redirect('assessor/elementary/dashboard');
 				break;
 				case 4:
-					redirect('cashier/dashboard');
+					redirect('assessor/juniorhs/dashboard');
 				break;
 				case 5:
+					redirect('assessor/seniorhs/dashboard');
+				break;
+				case 6:
+					redirect('cashier/dashboard');
+				break;
+				case 7:
 					redirect('finance/dashboard');
 				break;
 				default:

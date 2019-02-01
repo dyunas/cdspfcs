@@ -6,6 +6,7 @@ class MY_Controller extends CI_Controller {
 		parent::__construct();
 		$this->load->model('login/Login_model', 'login');
 		$this->Is_logged_in();
+		$this->Check_user_type();
 	}
 
 	public function Is_logged_in()
@@ -28,6 +29,15 @@ class MY_Controller extends CI_Controller {
 		{
 			$this->session->set_flashdata('error', 'Please log-in to access the system');
 			redirect(site_url('login'));
+		}
+	}
+
+	public function Check_user_type()
+	{
+		$role = $this->login->get_user_role($this->session->userdata('role'));
+		if ($this->uri->segment(1) != $role)
+		{
+			redirect(site_url($role.'/dashboard'));
 		}
 	}
 }

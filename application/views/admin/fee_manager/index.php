@@ -4,7 +4,7 @@
   <div class="col-sm-4">
     <div class="page-header float-left">
       <div class="page-title">
-        <h1>Fee's Manager</h1>
+        <h1>Payment Authorizer</h1>
       </div><!-- /.page-title -->
     </div><!-- /.page-header -->
   </div><!-- /.col-sm-4 -->
@@ -12,7 +12,7 @@
     <div class="page-header float-right">
       <div class="page-title">
         <ol class="breadcrumb text-right">
-          <li class="active">Fee's Manager</li>
+          <li class="active">Payment Authorizer</li>
         </ol>
       </div><!-- /.page-title -->
     </div><!-- /.page-header -->
@@ -30,14 +30,14 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <button type="button" id="createFeeBtn" data-toggle="modal" data-target="#newFeeModal" data-backdrop="static" data-keyboard="false" class="btn btn-sm btn-primary pull-right"><i class="ti ti-plus"></i> Create new fee</button>
+            <button type="button" id="createPaymentBtn" data-toggle="modal" data-target="#newPaymentModal" data-backdrop="static" data-keyboard="false" class="btn btn-sm btn-primary pull-right"><i class="ti ti-plus"></i> Create new payment</button>
           </div><!-- /.card-header -->
           <div class="card-body">
-            <table id="feeTbl" class="table table-striped table-bordered" width="100%">
+            <table id="PaymentTbl" class="table table-striped table-bordered" width="100%">
               <thead>
                 <th></th>
-                <th>Fee Code</th>
-                <th>Fee Name</th>
+                <th>Payment Code</th>
+                <th>Payment Name</th>
                 <th class="text-right">Amount</th>
                 <th class="text-center">For</th>
                 <th class="text-center">Status</th>
@@ -53,31 +53,31 @@
   </div><!-- /.animated fadeIn -->
 </div> <!-- .content -->
 
-<div class="modal fade" id="newFeeModal" tabindex="-1" role="dialog" aria-labelledby="newFeeModalLabel" aria-hidden="true">
+<div class="modal fade" id="newPaymentModal" tabindex="-1" role="dialog" aria-labelledby="newPaymentModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="newFeeModalLabel">New Fee</h5>
+        <h5 class="modal-title" id="newPaymentModalLabel">New Payment</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <!-- <span aria-hidden="true">&times;</span> -->
         </button>
       </div>
-      <?php echo form_open('', 'role="form" id="feeForm"'); ?>
+      <?php echo form_open('', 'role="form" id="PaymentForm"'); ?>
       <div class="modal-body">
         <small style="display:block;padding: 10px 10px 10px 0px;font-size: 11px;"><i>Fields with (*) are mandatory. Please don't leave it blank</i></small>
         <div class="row form-group">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="col-lg-1 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*Fee Name:</label></div>
+            <div class="col-lg-1 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*Payment Name:</label></div>
             <div class="col-lg-9 col-sm-10 col-xs-12">
-              <input type="text" id="fname" name="fname" placeholder="Fee Name" class="form-control form-control-sm" required data-parsley-required-message="This field is required" maxlength="50">
+              <input type="text" id="fname" name="fname" placeholder="Payment Name" class="form-control form-control-sm" required data-parsley-required-message="This field is required" maxlength="50">
             </div>
           </div>
         </div><!-- /.row form-group -->
         <div class="row form-group">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="col-lg-1 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*Fee Code:</label></div>
+            <div class="col-lg-1 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*Payment Code:</label></div>
             <div class="col-lg-3 col-sm-3 col-xs-12">
-              <input type="text" id="fcode" name="fcode" placeholder="Fee Code" class="form-control form-control-sm" data-parsley-remote="fee-mgr/check_feecode" data-parsley-remote-options="{ 'type': 'GET', 'dataType': 'json', 'data': { 'fcode': 'value' } }" data-parsley-remote-message="Code already exists" required data-parsley-required-message="This field is required" maxlength="10">
+              <input type="text" id="fcode" name="fcode" placeholder="Payment Code" class="form-control form-control-sm" data-parsley-remote="fee-mgr/check_feecode" data-parsley-remote-options="{ 'type': 'GET', 'dataType': 'json', 'data': { 'fcode': 'value' } }" data-parsley-remote-message="Code already exists" required data-parsley-required-message="This field is required" maxlength="10">
             </div>
           </div>
         </div><!-- /.row form-group -->
@@ -119,8 +119,8 @@
 <script src="<?php echo base_url('assets/vendors/datatables.net-buttons/js/dataTables.buttons.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/assets/js/init-scripts/data-table/datatables-init.js'); ?>"></script>
-<script src="<?php echo base_url('assets/assets/js/pages/admin/fee_manager/feeManager.js'); ?>"></script>
 <script src="<?php echo base_url('assets/parsley/dist/parsley.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/assets/js/pages/admin/fee_manager/feeManager.js'); ?>"></script>
 <script type="text/javascript">
   jQuery(document).ready(function() {
     var notice = jQuery('#notice');

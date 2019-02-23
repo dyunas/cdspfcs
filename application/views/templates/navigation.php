@@ -21,7 +21,7 @@
               <a href="<?php echo site_url($this->uri->segment(1).'/accnt-mgr'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Account Manager</a>
             </li>
             <li class="<?php echo ($this->uri->segment(2) == 'fee-mgr') ? 'active' : ''; ?> menu-item-has-children">
-              <a href="<?php echo site_url($this->uri->segment(1).'/fee-mgr'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-credit-card"></i>Fee's Manager</a>
+              <a href="<?php echo site_url($this->uri->segment(1).'/fee-mgr'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-credit-card"></i>Payment Authorizer</a>
             </li>
             <li class="<?php echo ($this->uri->segment(2) == 'discounts') ? 'active' : ''; ?> menu-item-has-children">
               <a href="<?php echo site_url($this->uri->segment(1).'/discounts'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-percent"></i>Discounts</a>

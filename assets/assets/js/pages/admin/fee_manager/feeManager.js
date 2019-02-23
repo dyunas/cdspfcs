@@ -1,5 +1,5 @@
 jQuery(document).ready(function(){
-	var dtble = jQuery('#feeTbl').DataTable({
+	var dtble = jQuery('#PaymentTbl').DataTable({
       // "processing": true,
       // "serverSide": true,
       "searching": true,
@@ -29,11 +29,11 @@ jQuery(document).ready(function(){
 		}
 	});
 
-	jQuery('#newFeeModal').on('hidden.bs.modal', function() {
+	jQuery('#newPaymentModal').on('hidden.bs.modal', function() {
 		 jQuery(this).find('form')[0].reset();
 	});
 
-	var form = jQuery('#feeForm');
+	var form = jQuery('#PaymentForm');
 
 	form.parsley({
 	  errorClass: 'is-invalid text-danger',
@@ -47,7 +47,7 @@ jQuery(document).ready(function(){
 	  e.preventDefault();
 
 	  Swal({
-	    title: 'Create new fee?',
+	    title: 'Create new payment?',
 	    text: "",
 	    type: 'question',
 	    showCancelButton: true,
@@ -65,7 +65,7 @@ jQuery(document).ready(function(){
 	          if (data != false) {
 	            Swal(
 	              'Created!',
-	              'New fee has been added to the record.',
+	              'New payment has been added to the record.',
 	              'success',
 	            );
 	            console.log(data);
@@ -82,7 +82,7 @@ jQuery(document).ready(function(){
 	                '<span class="text-right" style="display:block">'+data.amount+'</span>',
 	                '<span class="text-center" style="display:block">'+data.dept_code+'</span>',
 	                '<span class="text-center" style="display:block">'+status+'</span>',
-	                '<button type="button" data-id="'+data.row_id+'" data-toggle="modal" data-target="#editFeeModal" data-backdrop="static" data-keyboard="false" class="editRow btn btn-outline-primary btn-sm"><i class="ti ti-pencil"></i></button>',
+	                '<button type="button" data-id="'+data.row_id+'" data-toggle="modal" data-target="#editPaymentModal" data-backdrop="static" data-keyboard="false" class="editRow btn btn-outline-primary btn-sm"><i class="ti ti-pencil"></i></button>',
 	              ]).draw();
 
 	            jQuery(':input').not(':button, :submit, :reset, :hidden').removeAttr('checked').removeAttr('selected').val('');
@@ -90,7 +90,7 @@ jQuery(document).ready(function(){
 	          else {
 	            Swal(
 	              'Error!',
-	              'Failed to add fee to the record! Please try again.',
+	              'Failed to add payment to the record! Please try again.',
 	              'error'
 	            );
 	          }

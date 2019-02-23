@@ -25,7 +25,7 @@
   </div><!-- /.row -->
   <div class="animated fadeIn">
     <div class="row">
-      <div class="col-lg-4 col-md-12">
+      <div class="col-lg-6 col-md-12">
         <div class="card">
         <a href="<?php echo site_url(); ?>" style="color:#000;">
           <div class="card-body">
@@ -43,8 +43,8 @@
           </div><!-- /.card-body -->
         </a>
         </div><!-- /.card -->
-      </div><!-- /.col-lg-4 col-md-12 -->
-      <div class="col-lg-4 col-md-12">
+      </div><!-- /.col-lg-6 col-md-12 -->
+      <div class="col-lg-6 col-md-12">
         <div class="card">
         <a href="<?php echo site_url(); ?>" style="color:#000;">
           <div class="card-body">
@@ -62,26 +62,7 @@
           </div><!-- /.card-body -->
         </a>
         </div><!-- /.card -->
-      </div><!-- /.col-lg-4 col-md-12 -->
-      <div class="col-lg-4 col-md-12">
-        <div class="card">
-        <a href="<?php echo site_url(); ?>" style="color:#000;">
-          <div class="card-body">
-            <div class="stat-widget-four">
-              <div class="stat-icon dib">
-                <!-- <i class="ti-calendar text-muted"></i> -->
-              </div><!-- stat-icon dib -->
-              <div class="stat-content">
-                <div class="text-left dib">
-                  <div class="stat-heading"></div><!-- /.stat-heading -->
-                  <div class="stat-text"></div><!-- /.stat-text -->
-                </div><!-- /.text-left dib -->
-              </div><!-- /.stat-content -->
-            </div><!-- /.stat-widget-four -->
-          </div><!-- /.card-body -->
-        </a>
-        </div><!-- /.card -->
-      </div><!-- /.col-lg-4 col-md-12 -->
+      </div><!-- /.col-lg-6 col-md-12 -->
     </div><!-- /.row -->
     <div class="row">
       <div class="col-sm-12 mb-4">

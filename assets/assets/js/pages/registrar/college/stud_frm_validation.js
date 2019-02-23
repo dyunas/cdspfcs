@@ -55,6 +55,13 @@ jQuery(document).ready(function() {
                 'error'
               );
             }
+          },
+          error:function(){
+            Swal(
+              'Error!',
+              'Failed to add student to the record! Please try again.',
+              'error'
+            );
           }
         });
       }

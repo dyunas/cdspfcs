@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2019 at 07:21 AM
+-- Generation Time: Feb 23, 2019 at 11:02 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -51,6 +51,7 @@ INSERT INTO `tbl_acad_year` (`acad_id`, `acad_yr`, `status`) VALUES
 CREATE TABLE `tbl_accounts` (
   `row_id` int(11) NOT NULL,
   `emp_uniq_id` char(32) NOT NULL,
+  `avatar` char(32) NOT NULL,
   `uname` varchar(150) NOT NULL,
   `password` char(32) NOT NULL,
   `fname` varchar(255) NOT NULL,
@@ -64,11 +65,11 @@ CREATE TABLE `tbl_accounts` (
 -- Dumping data for table `tbl_accounts`
 --
 
-INSERT INTO `tbl_accounts` (`row_id`, `emp_uniq_id`, `uname`, `password`, `fname`, `lname`, `role`, `status`, `created_date`) VALUES
-(1, '5c080710142a2', 'juancruz', '5f4dcc3b5aa765d61d8327deb882cf99', 'Juan', 'Cruz', 2, 1, '2018-12-12'),
-(2, '5c3f86c85a1d6', 'admin', '5f4dcc3b5aa765d61d8327deb882cf99', 'Admin', 'Admin', 1, 1, '2018-12-12'),
-(3, '5c40dd75c74fc', 'pencil', '5f4dcc3b5aa765d61d8327deb882cf99', 'Pencil', 'Manalo', 3, 1, '2019-01-05'),
-(4, '5c4b64932da13', 'ballpen', '5f4dcc3b5aa765d61d8327deb882cf99', 'Pilot', 'Ballpen', 4, 1, '2019-01-26');
+INSERT INTO `tbl_accounts` (`row_id`, `emp_uniq_id`, `avatar`, `uname`, `password`, `fname`, `lname`, `role`, `status`, `created_date`) VALUES
+(1, '5c080710142a2', '', 'juancruz', '5f4dcc3b5aa765d61d8327deb882cf99', 'Juan', 'Cruz', 2, 1, '2018-12-12'),
+(2, '5c3f86c85a1d6', '', 'admin', '5f4dcc3b5aa765d61d8327deb882cf99', 'Admin', 'Admin', 1, 1, '2018-12-12'),
+(3, '5c40dd75c74fc', '', 'pencil', '5f4dcc3b5aa765d61d8327deb882cf99', 'Pencil', 'Manalo', 3, 1, '2019-01-05'),
+(4, '5c4b64932da13', '', 'ballpen', '5f4dcc3b5aa765d61d8327deb882cf99', 'Pilot', 'Ballpen', 4, 1, '2019-01-26');
 
 -- --------------------------------------------------------
 
@@ -92,8 +93,9 @@ INSERT INTO `tbl_act_type` (`row_id`, `role_id`, `role_type`) VALUES
 (3, 3, 'assessor_elem'),
 (4, 4, 'assessor_jhs'),
 (5, 5, 'assessor_shs'),
-(6, 6, 'cashier'),
-(7, 7, 'finance');
+(6, 6, 'assessor_col'),
+(7, 7, 'cashier'),
+(8, 8, 'finance');
 
 -- --------------------------------------------------------
 
@@ -192,7 +194,8 @@ INSERT INTO `tbl_fees` (`row_id`, `fee_code`, `fee_name`, `amount`, `fee_for`, `
 (5, 'BKSEL', 'Books - Elementary', '5470.00', 2, 1),
 (6, 'EDTR', 'Educational Tour', '2200.00', 2, 1),
 (7, 'FDAY', 'Foundation Day T-Shirt', '250.00', 2, 1),
-(8, 'LIP', 'Learner\'s Insurance Premium', '150.00', 2, 1);
+(8, 'LIP', 'Learner\'s Insurance Premium', '150.00', 2, 1),
+(9, 'TFJHS', 'Tuition Fee', '12500.00', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -270,7 +273,9 @@ INSERT INTO `tbl_logs` (`row_id`, `emp_id`, `c_log`, `mod_date`) VALUES
 (6, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0002-52', '2019-01-16 00:00:00'),
 (7, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789015', '2019-01-16 00:00:00'),
 (8, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0003-52', '2019-01-17 00:00:00'),
-(9, '5c3f86c85a1d6', 'Created a new fee: EEP-EL - Early Enrollment Program - 10.00 for 2', '2019-02-02 06:55:44');
+(9, '5c3f86c85a1d6', 'Created a new fee: EEP-EL - Early Enrollment Program - 10.00 for 2', '2019-02-02 06:55:44'),
+(10, '5c3f86c85a1d6', 'Created a new fee: TFJHS - Tuition Fee - 12,500.00', '2019-02-12 11:14:52'),
+(11, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0004-52', '2019-02-22 07:12:05');
 
 -- --------------------------------------------------------
 
@@ -361,7 +366,8 @@ CREATE TABLE `tbl_stud_adtnl_info_col` (
 INSERT INTO `tbl_stud_adtnl_info_col` (`row_id`, `stud_id`, `stud_grdns_name`, `stud_grdns_tnum`, `stud_grdns_cnum`, `stud_grdns_adrs`) VALUES
 (1, '19-0001-52', 'Nanay Ochoa', 0, 9121234567, 'sample'),
 (3, '19-0002-52', 'Amelia A. Quebral', 0, 9229298026, 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna'),
-(4, '19-0003-52', 'Eric Lehnsherr', 0, 639561234567, 'Sokovia');
+(4, '19-0003-52', 'Eric Lehnsherr', 0, 639561234567, 'Sokovia'),
+(5, '19-0004-52', 'nanay nikas', 1223467, 12424214142, 'dito lang sa dulo');
 
 -- --------------------------------------------------------
 
@@ -478,7 +484,8 @@ CREATE TABLE `tbl_stud_documents_col` (
 INSERT INTO `tbl_stud_documents_col` (`row_id`, `stud_id`, `bCertPSA`, `certGMC`, `certHonDis`, `frm137`, `frm138`, `TOR`) VALUES
 (1, '19-0001-52', 1, 1, 1, 1, 1, 0),
 (3, '19-0002-52', 1, 1, 1, 1, 1, 0),
-(4, '19-0003-52', 1, 1, 1, 1, 1, 1);
+(4, '19-0003-52', 1, 1, 1, 1, 1, 1),
+(5, '19-0004-52', 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -561,7 +568,8 @@ CREATE TABLE `tbl_stud_info_col` (
 INSERT INTO `tbl_stud_info_col` (`row_id`, `stud_id`, `stud_avatar`, `stud_lname`, `stud_fname`, `stud_mname`, `stud_status`, `stud_rgstrtn_dte`, `stud_year_lvl`, `stud_sem`, `stud_course`, `stud_acad_yr`, `stud_email`, `stud_bdate`, `stud_tnum`, `stud_cnum`, `stud_gender`, `stud_cur_adrs`, `stud_perm_adrs`) VALUES
 (1, '19-0001-52', '', 'Ochoa', 'Cara', 'Martillosa', 'registered', '2019-01-12', 4, 2, 3, 1, '', '1997-02-04', 0, 0, 2, 'sample', 'sample'),
 (3, '19-0002-52', '', 'Quebral', 'Jonathan', 'Almodiel', 'registered', '2019-01-16', 4, 2, 3, 1, 'jonathan.almodiel.quebral@gmail.com', '1992-06-27', 0, 9566031598, 1, 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna', 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna'),
-(5, '19-0003-52', '', 'Maximoff', 'Wanda', '', 'registered', '2019-01-17', 2, 2, 1, 1, 'wanda.maximoff@gmail.com', '1992-02-06', 0, 0, 2, 'Sokovia', 'Sokovia');
+(5, '19-0003-52', '', 'Maximoff', 'Wanda', '', 'registered', '2019-01-17', 2, 2, 1, 1, 'wanda.maximoff@gmail.com', '1992-02-06', 0, 0, 2, 'Sokovia', 'Sokovia'),
+(11, '19-0004-52', '', 'Español', 'Kastin', '', 'registered', '2019-02-22', 4, 2, 3, 1, 'kas.español@gmail.com', '1998-12-30', 0, 0, 2, 'dito lang sa dulo', 'dito lang sa dulo');
 
 -- --------------------------------------------------------
 
@@ -578,7 +586,7 @@ CREATE TABLE `tbl_stud_info_elem` (
   `stud_mname` varchar(255) NOT NULL,
   `stud_status` char(50) NOT NULL,
   `stud_rgstrtn_dte` date NOT NULL,
-  `stud_grade_lvl` varchar(10) NOT NULL,
+  `stud_grade_lvl` int(2) NOT NULL,
   `stud_section` varchar(50) NOT NULL,
   `stud_acad_yr` int(11) NOT NULL,
   `stud_email` varchar(255) NOT NULL,
@@ -595,8 +603,8 @@ CREATE TABLE `tbl_stud_info_elem` (
 --
 
 INSERT INTO `tbl_stud_info_elem` (`row_id`, `stud_lrn`, `stud_avatar`, `stud_lname`, `stud_fname`, `stud_mname`, `stud_status`, `stud_rgstrtn_dte`, `stud_grade_lvl`, `stud_section`, `stud_acad_yr`, `stud_email`, `stud_bdate`, `stud_tnum`, `stud_cnum`, `stud_gender`, `stud_cur_adrs`, `stud_perm_adrs`) VALUES
-(1, 123456789012, '', 'Dela Cruz', 'Juan Jr', '', 'registered', '2019-01-12', '1', '', 1, '', '2013-02-06', 0, 0, 1, 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna', 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna'),
-(2, 123456789015, '', 'Dela Cruz', 'Leonor', 'Rivera', 'registered', '2019-01-16', '3', '', 1, '', '2010-09-21', 0, 0, 2, 'dyan sa tabi', 'dyan sa tabi');
+(1, 123456789012, '', 'Dela Cruz', 'Juan Jr', '', 'registered', '2019-01-12', 1, '', 1, '', '2013-02-06', 0, 0, 1, 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna', 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna'),
+(2, 123456789015, '', 'Dela Cruz', 'Leonor', 'Rivera', 'registered', '2019-01-16', 3, '', 1, '', '2010-09-21', 0, 0, 2, 'dyan sa tabi', 'dyan sa tabi');
 
 -- --------------------------------------------------------
 
@@ -613,7 +621,7 @@ CREATE TABLE `tbl_stud_info_jhs` (
   `stud_mname` varchar(255) NOT NULL,
   `stud_status` char(50) NOT NULL,
   `stud_rgstrtn_dte` date NOT NULL,
-  `stud_grade_lvl` varchar(10) NOT NULL,
+  `stud_grade_lvl` int(2) NOT NULL,
   `stud_section` varchar(50) NOT NULL,
   `stud_acad_yr` int(11) NOT NULL,
   `stud_email` varchar(255) NOT NULL,
@@ -630,7 +638,7 @@ CREATE TABLE `tbl_stud_info_jhs` (
 --
 
 INSERT INTO `tbl_stud_info_jhs` (`row_id`, `stud_lrn`, `stud_avatar`, `stud_lname`, `stud_fname`, `stud_mname`, `stud_status`, `stud_rgstrtn_dte`, `stud_grade_lvl`, `stud_section`, `stud_acad_yr`, `stud_email`, `stud_bdate`, `stud_tnum`, `stud_cnum`, `stud_gender`, `stud_cur_adrs`, `stud_perm_adrs`) VALUES
-(1, 123456789013, '', 'Tornea', 'Erick Joseph', 'Bucayan', 'registered', '2019-01-12', '8', '', 1, 'ericktornea@yahoo.com', '2006-06-19', 0, 0, 1, '#16 Kamagong St. Pacita Complex 1 San Pedro City Laguna', '#16 Kamagong St. Pacita Complex 1 San Pedro City Laguna');
+(1, 123456789013, '', 'Tornea', 'Erick Joseph', 'Bucayan', 'registered', '2019-01-12', 8, '', 1, 'ericktornea@yahoo.com', '2006-06-19', 0, 0, 1, '#16 Kamagong St. Pacita Complex 1 San Pedro City Laguna', '#16 Kamagong St. Pacita Complex 1 San Pedro City Laguna');
 
 -- --------------------------------------------------------
 
@@ -647,7 +655,7 @@ CREATE TABLE `tbl_stud_info_shs` (
   `stud_mname` varchar(255) NOT NULL,
   `stud_status` char(50) NOT NULL,
   `stud_rgstrtn_dte` date NOT NULL,
-  `stud_grade_lvl` varchar(10) NOT NULL,
+  `stud_grade_lvl` int(2) NOT NULL,
   `stud_trk_id` int(11) NOT NULL,
   `stud_strnd_id` int(11) NOT NULL,
   `stud_section` varchar(50) NOT NULL,
@@ -666,7 +674,7 @@ CREATE TABLE `tbl_stud_info_shs` (
 --
 
 INSERT INTO `tbl_stud_info_shs` (`row_id`, `stud_lrn`, `stud_avatar`, `stud_lname`, `stud_fname`, `stud_mname`, `stud_status`, `stud_rgstrtn_dte`, `stud_grade_lvl`, `stud_trk_id`, `stud_strnd_id`, `stud_section`, `stud_acad_yr`, `stud_email`, `stud_bdate`, `stud_tnum`, `stud_cnum`, `stud_gender`, `stud_cur_adrs`, `stud_perm_adrs`) VALUES
-(1, 123456789014, '', 'Fajardo', 'Bernard Mico', 'Tulabut', 'registered', '2019-01-12', '12', 2, 5, '', 1, 'bmfajardo@gmail.com', '1999-12-11', 0, 0, 1, 'Cade de Amor Str. Phase 6 Pacita Complex 1 San Pedro City Laguna', 'Cade de Amor Str. Phase 6 Pacita Complex 1 San Pedro City Laguna');
+(1, 123456789014, '', 'Fajardo', 'Bernard Mico', 'Tulabut', 'registered', '2019-01-12', 12, 2, 5, '', 1, 'bmfajardo@gmail.com', '1999-12-11', 0, 0, 1, 'Cade de Amor Str. Phase 6 Pacita Complex 1 San Pedro City Laguna', 'Cade de Amor Str. Phase 6 Pacita Complex 1 San Pedro City Laguna');
 
 -- --------------------------------------------------------
 
@@ -677,19 +685,20 @@ INSERT INTO `tbl_stud_info_shs` (`row_id`, `stud_lrn`, `stud_avatar`, `stud_lnam
 CREATE TABLE `tbl_yr_level` (
   `row_id` int(11) NOT NULL,
   `yr_id` int(11) NOT NULL,
-  `yr_level` char(11) NOT NULL
+  `yr_level` char(11) NOT NULL,
+  `dept_id` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_yr_level`
 --
 
-INSERT INTO `tbl_yr_level` (`row_id`, `yr_id`, `yr_level`) VALUES
-(1, 1, '1st Yr'),
-(2, 2, '2nd Yr'),
-(3, 3, '3rd Yr'),
-(4, 4, '4th Yr'),
-(5, 5, '5th Yr');
+INSERT INTO `tbl_yr_level` (`row_id`, `yr_id`, `yr_level`, `dept_id`) VALUES
+(1, 1, '1st Yr', 5),
+(2, 2, '2nd Yr', 5),
+(3, 3, '3rd Yr', 5),
+(4, 4, '4th Yr', 5),
+(5, 5, '5th Yr', 5);
 
 --
 -- Indexes for dumped tables
@@ -734,7 +743,8 @@ ALTER TABLE `tbl_departments`
 -- Indexes for table `tbl_discount`
 --
 ALTER TABLE `tbl_discount`
-  ADD PRIMARY KEY (`row_id`);
+  ADD PRIMARY KEY (`row_id`),
+  ADD KEY `disc_for` (`disc_for`);
 
 --
 -- Indexes for table `tbl_fees`
@@ -893,7 +903,8 @@ ALTER TABLE `tbl_stud_info_shs`
 --
 ALTER TABLE `tbl_yr_level`
   ADD PRIMARY KEY (`row_id`),
-  ADD UNIQUE KEY `lvl_id` (`yr_id`);
+  ADD UNIQUE KEY `lvl_id` (`yr_id`),
+  ADD KEY `dept_id` (`dept_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -915,7 +926,7 @@ ALTER TABLE `tbl_accounts`
 -- AUTO_INCREMENT for table `tbl_act_type`
 --
 ALTER TABLE `tbl_act_type`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_col_course`
@@ -939,7 +950,7 @@ ALTER TABLE `tbl_discount`
 -- AUTO_INCREMENT for table `tbl_fees`
 --
 ALTER TABLE `tbl_fees`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_gender`
@@ -957,7 +968,7 @@ ALTER TABLE `tbl_grd_level`
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_semester`
@@ -981,7 +992,7 @@ ALTER TABLE `tbl_shs_track`
 -- AUTO_INCREMENT for table `tbl_stud_adtnl_info_col`
 --
 ALTER TABLE `tbl_stud_adtnl_info_col`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_stud_adtnl_info_elem`
@@ -1011,7 +1022,7 @@ ALTER TABLE `tbl_stud_documents`
 -- AUTO_INCREMENT for table `tbl_stud_documents_col`
 --
 ALTER TABLE `tbl_stud_documents_col`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_stud_documents_jhs`
@@ -1029,7 +1040,7 @@ ALTER TABLE `tbl_stud_documents_shs`
 -- AUTO_INCREMENT for table `tbl_stud_info_col`
 --
 ALTER TABLE `tbl_stud_info_col`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_stud_info_elem`
@@ -1064,6 +1075,12 @@ ALTER TABLE `tbl_yr_level`
 --
 ALTER TABLE `tbl_accounts`
   ADD CONSTRAINT `tbl_accounts_ibfk_1` FOREIGN KEY (`role`) REFERENCES `tbl_act_type` (`role_id`);
+
+--
+-- Constraints for table `tbl_discount`
+--
+ALTER TABLE `tbl_discount`
+  ADD CONSTRAINT `tbl_discount_ibfk_1` FOREIGN KEY (`disc_for`) REFERENCES `tbl_departments` (`dept_id`);
 
 --
 -- Constraints for table `tbl_fees`
@@ -1152,23 +1169,28 @@ ALTER TABLE `tbl_stud_info_col`
 --
 ALTER TABLE `tbl_stud_info_elem`
   ADD CONSTRAINT `tbl_stud_info_elem_ibfk_1` FOREIGN KEY (`stud_acad_yr`) REFERENCES `tbl_acad_year` (`acad_id`),
-  ADD CONSTRAINT `tbl_stud_info_elem_ibfk_2` FOREIGN KEY (`stud_gender`) REFERENCES `tbl_gender` (`gdr_id`);
+  ADD CONSTRAINT `tbl_stud_info_elem_ibfk_2` FOREIGN KEY (`stud_gender`) REFERENCES `tbl_gender` (`gdr_id`),
+  ADD CONSTRAINT `tbl_stud_info_elem_ibfk_3` FOREIGN KEY (`stud_grade_lvl`) REFERENCES `tbl_grd_level` (`grd_id`);
 
 --
 -- Constraints for table `tbl_stud_info_jhs`
 --
 ALTER TABLE `tbl_stud_info_jhs`
-  ADD CONSTRAINT `tbl_stud_info_jhs_ibfk_1` FOREIGN KEY (`stud_acad_yr`) REFERENCES `tbl_acad_year` (`acad_id`),
-  ADD CONSTRAINT `tbl_stud_info_jhs_ibfk_2` FOREIGN KEY (`stud_gender`) REFERENCES `tbl_gender` (`gdr_id`);
+  ADD CONSTRAINT `tbl_stud_info_jhs_ibfk_1` FOREIGN KEY (`stud_grade_lvl`) REFERENCES `tbl_grd_level` (`grd_id`);
 
 --
 -- Constraints for table `tbl_stud_info_shs`
 --
 ALTER TABLE `tbl_stud_info_shs`
-  ADD CONSTRAINT `tbl_stud_info_shs_ibfk_1` FOREIGN KEY (`stud_acad_yr`) REFERENCES `tbl_acad_year` (`acad_id`),
+  ADD CONSTRAINT `tbl_stud_info_shs_ibfk_1` FOREIGN KEY (`stud_grade_lvl`) REFERENCES `tbl_grd_level` (`grd_id`),
   ADD CONSTRAINT `tbl_stud_info_shs_ibfk_2` FOREIGN KEY (`stud_strnd_id`) REFERENCES `tbl_shs_strand` (`strnd_id`),
-  ADD CONSTRAINT `tbl_stud_info_shs_ibfk_3` FOREIGN KEY (`stud_trk_id`) REFERENCES `tbl_shs_track` (`trk_id`),
-  ADD CONSTRAINT `tbl_stud_info_shs_ibfk_4` FOREIGN KEY (`stud_gender`) REFERENCES `tbl_gender` (`gdr_id`);
+  ADD CONSTRAINT `tbl_stud_info_shs_ibfk_3` FOREIGN KEY (`stud_trk_id`) REFERENCES `tbl_shs_track` (`trk_id`);
+
+--
+-- Constraints for table `tbl_yr_level`
+--
+ALTER TABLE `tbl_yr_level`
+  ADD CONSTRAINT `tbl_yr_level_ibfk_1` FOREIGN KEY (`dept_id`) REFERENCES `tbl_departments` (`dept_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

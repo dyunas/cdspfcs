@@ -125,6 +125,10 @@ $route['logout'] = 'Login/Logout';
 	$route['registrar/dept/college/get_col_table_data'] = 'registrar/department/college/College/Get_col_table_data';
 	$route['registrar/dept/college'] = 'registrar/department/college/College/Index';
 
-// ASSESSOR
+// ASSESSOR - ELEMENTARY
 	// DASHBOARD
-	$route['assessor/dashboard'] = 'assessor/dashboard/Dashboard/Index';
+	$route['assessor_elem/dashboard/view/(:any)'] = 'assessor/elementary/dashboard/Dashboard/View_student/$1';
+	$route['assessor_elem/dashboard/get_tuition_fee'] = 'assessor/elementary/dashboard/Dashboard/Get_tuition_fee';
+	$route['assessor_elem/dashboard/get_discount_amount'] = 'assessor/elementary/dashboard/Dashboard/Get_discount_amount';
+	$route['assessor_elem/dashboard/get_elem_table_data'] = 'assessor/elementary/dashboard/Dashboard/Get_elem_table_data';
+	$route['assessor_elem/dashboard'] = 'assessor/elementary/dashboard/Dashboard/Index';

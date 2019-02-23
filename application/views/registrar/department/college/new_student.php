@@ -63,8 +63,8 @@
               <div class="col col-sm-3 col-xs-12">
                 <select class="input-sm form-control-sm form-control" name="gender" required data-parsley-required-message="Please select gender">
                   <option value="">Choose gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
+                  <option value="1">Male</option>
+                  <option value="2">Female</option>
                 </select>
               </div>
             </div><!-- /.row form-group -->

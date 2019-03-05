@@ -4,22 +4,22 @@ class Dashboard extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('assessor/elementary/Elementary_model', 'elemdb');
+		$this->load->model('assessor/juniorhs/Juniorhigh_model', 'jhsdb');
 	}
 
 	public function Index()
 	{
 		$this->load->view('templates/header');
 		$this->load->view('templates/navigation');
-		$this->load->view('assessor/elementary/dashboard/index');
+		$this->load->view('assessor/juniorhs/dashboard/index');
 		$this->load->view('templates/footer');
 	}
 
-	public function Get_elem_table_data()
+	public function Get_jhs_table_data()
 	{
 		if ($this->input->is_ajax_request())
 		{
-			$result = $this->elemdb->get_elem_table_data();
+			$result = $this->jhsdb->get_jhs_table_data();
 			echo $result;
 		}
 		else
@@ -31,15 +31,15 @@ class Dashboard extends MY_Controller {
 	public function View_student($uniq_id)
 	{
 		$data = array(
-			"stud_info" => $this->elemdb->get_student_info($uniq_id),
-			"fees" => $this->elemdb->get_school_fees(),
-			"discounts" => $this->elemdb->get_discounts(),
-			"assessmentInfo" => $this->elemdb->get_assessment_info($uniq_id)
+			"stud_info" => $this->jhsdb->get_student_info($uniq_id),
+			"fees" => $this->jhsdb->get_school_fees(),
+			"discounts" => $this->jhsdb->get_discounts(),
+			"assessmentInfo" => $this->jhsdb->get_assessment_info($uniq_id)
 		);
 
 		$this->load->view('templates/header');
 		$this->load->view('templates/navigation');
-		$this->load->view('assessor/elementary/dashboard/view_student', $data);
+		$this->load->view('assessor/juniorhs/dashboard/view_student', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -48,7 +48,7 @@ class Dashboard extends MY_Controller {
 		if ($this->input->is_ajax_request())
 		{
 			$id = $this->input->get('id');
-			$result = $this->elemdb->get_discounts($id);
+			$result = $this->jhsdb->get_discounts($id);
 			echo $result;
 		}
 		else
@@ -61,7 +61,7 @@ class Dashboard extends MY_Controller {
 	{
 		if ($this->input->is_ajax_request())
 		{
-			$result = $this->elemdb->get_tuition_fee();
+			$result = $this->jhsdb->get_tuition_fee();
 			echo $result;
 		}
 		else
@@ -74,7 +74,7 @@ class Dashboard extends MY_Controller {
 	{
 		if ($this->input->is_ajax_request())
 		{
-			if ($this->elemdb->insert_student_assessment_info())
+			if ($this->jhsdb->insert_student_assessment_info())
 			{
 				echo json_encode(true);
 			}
@@ -95,7 +95,7 @@ class Dashboard extends MY_Controller {
 		{
 			$id = $this->input->get('id');
 			$assessmentID = $this->input->get('assessmentID');
-			$result = $this->elemdb->get_assessment_details($id, $assessmentID);
+			$result = $this->jhsdb->get_assessment_details($id, $assessmentID);
 
 			echo json_encode($result);
 		}
@@ -111,7 +111,7 @@ class Dashboard extends MY_Controller {
 		{
 			$id = $this->input->get('id');
 			$assessmentID = $this->input->get('assessmentID');
-			$result = $this->elemdb->check_fee_row($id, $assessmentID);
+			$result = $this->jhsdb->check_fee_row($id, $assessmentID);
 			echo json_encode($result);
 		}
 		else

@@ -1,12 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Elementary_model extends CI_Model {
+class Juniorhigh_model extends CI_Model {
 	public function get_school_fees()
 	{
 		$this->db->select('a.department, b.row_id, b.fee_code, b.fee_name, b.amount');
 		$this->db->from('tbl_departments a');
 		$this->db->join('tbl_fees b', 'b.fee_for = a.dept_id');
-		$this->db->like('a.department', 'elementary', 'both');
+		$this->db->like('a.department', 'junior high', 'both');
 		$this->db->where('b.status', 1);
 		$query = $this->db->get();
 
@@ -27,7 +27,7 @@ class Elementary_model extends CI_Model {
 			$this->db->select('a.department, b.row_id, b.disc_code, b.disc_amnt');
 			$this->db->from('tbl_departments a');
 			$this->db->join('tbl_discount b', 'b.disc_for = a.dept_id');
-			$this->db->like('a.department', 'elementary', 'both');
+			$this->db->like('a.department', 'junior high', 'both');
 			$this->db->where('b.status', 1);
 			$query = $this->db->get();
 
@@ -61,7 +61,7 @@ class Elementary_model extends CI_Model {
 		$this->db->select('b.fee_code, b.amount');
 		$this->db->from('tbl_departments a');
 		$this->db->join('tbl_fees b', 'b.fee_for = a.dept_id');
-		$this->db->like('a.department', 'elementary', 'both');
+		$this->db->like('a.department', 'junior high', 'both');
 		$this->db->like('b.fee_name', 'tuition', 'both');
 		$query = $this->db->get();
 
@@ -75,10 +75,10 @@ class Elementary_model extends CI_Model {
 		}
 	}
 
-	public function get_elem_table_data()
+	public function get_jhs_table_data()
 	{
 		$this->db->select('a.stud_lrn, a.stud_lname, a.stud_fname, a.stud_grade_lvl, a.stud_section, a.stud_status, b.grd_lvl');
-		$this->db->from('tbl_stud_info_elem a');
+		$this->db->from('tbl_stud_info_jhs a');
 		$this->db->join('tbl_grd_level b', 'b.grd_id = a.stud_grade_lvl');
 
 		$query = $this->db->get();
@@ -166,9 +166,9 @@ class Elementary_model extends CI_Model {
 			g.acad_yr,
 			h.gender
 		');
-		$this->db->from('tbl_stud_info_elem a');
-		$this->db->join('tbl_stud_adtnl_info_elem b', 'b.stud_lrn = a.stud_lrn');
-		$this->db->join('tbl_stud_documents c', 'c.stud_lrn = a.stud_lrn');
+		$this->db->from('tbl_stud_info_jhs a');
+		$this->db->join('tbl_stud_adtnl_info_jhs b', 'b.stud_lrn = a.stud_lrn');
+		$this->db->join('tbl_stud_documents_jhs c', 'c.stud_lrn = a.stud_lrn');
 		$this->db->join('tbl_grd_level d', 'd.grd_id = a.stud_grade_lvl');
 		$this->db->join('tbl_acad_year g', 'g.acad_id = a.stud_acad_yr');
 		$this->db->join('tbl_gender h', 'h.gdr_id = a.stud_gender');
@@ -199,11 +199,13 @@ class Elementary_model extends CI_Model {
 			$assessmentData = array(
 				'studID' 					=> $this->input->post('stud_id'),
 				'gradeLevel' 			=> $this->input->post('gradeLevel'),
-				'assessmentID' 			=> $assessmentID,
+				'assessmentID' 		=> $assessmentID,
 				'paymentScheme' 	=> $this->input->post('paymentScheme'),
 				'discount'				=> $this->input->post('discount'),
 				'totalDiscount'		=> $this->input->post('totalDiscount'),
 				'totalDiscAmount'	=> $this->input->post('totalDiscAmount'),
+				'escGrant'				=> $this->input->post('escGrant'),
+				'escGrantAmnt'		=> $this->input->post('escGrantAmnt'),
 				'totalAmt'				=> $this->input->post('totalAmount'),
 				'grandTotal'			=> $this->input->post('grandTotal')
 			);

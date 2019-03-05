@@ -2,7 +2,7 @@
   <div class="col-sm-4">
     <div class="page-header float-left">
       <div class="page-title">
-        <h1>Elementary</h1>
+        <h1>Junior High School</h1>
       </div><!-- /.page-title -->
     </div><!-- /.page-header -->
   </div><!-- /.col-sm-4 -->
@@ -10,7 +10,7 @@
     <div class="page-header float-right">
       <div class="page-title">
         <ol class="breadcrumb text-right">
-          <li><?php echo anchor(site_url('assessor_elem/'.$this->uri->segment(2)), 'Elementary'); ?></li>
+          <li><?php echo anchor(site_url('assessor_elem/'.$this->uri->segment(2)), 'Junior High School'); ?></li>
           <li class="active"><?php echo $this->uri->segment(3); ?></li>
           <li class="active"><?php echo $this->uri->segment(4); ?></li>
         </ol>
@@ -304,8 +304,8 @@
       <?php echo form_open('', 'role="form" id="assessmentForm"'); ?>
       <input type="hidden" name="stud_id" value="<?php echo $stud_info->stud_lrn ?>">
       <input type="hidden" name="gradeLevel" value="<?php echo $stud_info->stud_grade_lvl ?>">
-      <input type="hidden" id="totalDiscount" name="totalDiscount" value="0.00">
-      <input type="hidden" id="totalDiscAmount" name="totalDiscAmount" value="0.00">
+      <input type="hidden" id="totalDiscount" name="totalDiscount" value="0">
+      <input type="hidden" id="totalDiscAmount" name="totalDiscAmount" value="0">
       <div class="modal-body">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -394,6 +394,20 @@
                         </div>
                       </td>
                     </tr>
+                    <tr>
+                      <td>
+                        <div class="checkbox col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <label for="escGrant" class="form-check-label ">
+                            <input type="checkbox" name="escGrant" id="escGrant" class="form-check-input" value="1" disabled>
+                            ESC Grantee
+                          </label>
+                        </div>
+                      </td>
+                      <td>
+                        <span id="escGrantDiscount"></span>
+                        <input type="hidden" id="escGrantAmnt" name="escGrantAmnt" value="0">
+                      </td>
+                    </tr>
                     <tr id="discHere"></tr>
                     <tr>
                       <td style="font-weight: bold;font-size: 14px;"><em>TOTAL AMOUNT:</em></td>
@@ -447,5 +461,5 @@
 </div>
 <script src="<?php echo base_url('assets/sweet-alert/dist/sweetalert2.all.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/parsley/dist/parsley.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/assets/js/pages/assessor/elementary/assessment.js'); ?>"></script>
-<script src="<?php echo base_url('assets/assets/js/pages/assessor/elementary/assessmentInfo.js'); ?>"></script>
+<script src="<?php echo base_url('assets/assets/js/pages/assessor/juniorhs/assessment.js'); ?>"></script>
+<script src="<?php echo base_url('assets/assets/js/pages/assessor/juniorhs/assessmentInfo.js'); ?>"></script>

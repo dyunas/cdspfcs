@@ -1,7 +1,5 @@
 jQuery(document).ready(function(){
 	var dtble = jQuery('#PaymentTbl').DataTable({
-      // "processing": true,
-      // "serverSide": true,
       "searching": true,
       "ajax": {
         type: "GET",

@@ -3,6 +3,7 @@ window.onload = function() {
 	var payment = 0;
 	var computedDiscount = 0;
 	var discount = jQuery('#discount');
+	var escGrant = jQuery('#escGrant');
 	var paymentScheme = jQuery('#paymentScheme');
 	var hiddenDiscount = jQuery('#hidDiscount');
 	var hiddenSchemeDiscount = jQuery('#hidSchemeDiscount');
@@ -33,6 +34,55 @@ window.onload = function() {
     return s.join(dec);
 	}
 
+	function payables(upon, monthly) {
+		var payables ='<tr>'+
+											'<td>'+
+											  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>Upon Enrollment</strong></div>'+
+											'</td>'+
+											'<td>'+
+											 'Php '+number_format(upon, 2,'.', ',')+
+											'</td>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>July</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>August</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>September</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>October</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>November</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>December</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>January</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>February</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>March</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+										'</tr>';
+
+		return payables;
+	}
+
 	jQuery('#newAssessment').on('hidden.bs.modal', function() {
 		 form[0].reset();
 		 jQuery('#total').html('');
@@ -46,6 +96,9 @@ window.onload = function() {
 		 payment = 0;
 		 hiddenDiscount.val(0);
 		 hiddenSchemeDiscount.val(0);
+		 tuition = 0;
+		 jQuery('#escGrantDiscount').html('');
+		 jQuery('#escGrantAmnt').val(0);
 	});
 
 	jQuery.getJSON('../get_tuition_fee',function(data){ 
@@ -59,10 +112,12 @@ window.onload = function() {
 			if(jQuery(this).is(':checked')) {
 				discount.prop('disabled', false);
 				paymentScheme.prop('disabled', false);
+				escGrant.prop('disabled', false);
 				payment += parseFloat(jQuery('#rowAmount'+id).val());
 			} else {
 				discount.prop('disabled', true);
 				paymentScheme.prop('disabled', true);
+				escGrant.prop('disabled', true);
 				discount.val('');
 				paymentScheme.val('');
 				hiddenDiscount.val(0);
@@ -90,15 +145,18 @@ window.onload = function() {
 		jQuery.getJSON('../get_discount_amount',{id:discount.val()},function(data){
 			if (data != false) {
 				var computedDiscount = ((parseFloat(data.disc_amnt) + parseFloat(hiddenSchemeDiscount.val())) / 100) * parseFloat(tuition);
+				if(jQuery('#escGrant').is(':checked')) {
+					computedDiscount = computedDiscount + parseFloat(9000);
+				}
 				var html ='<td>'+
 								  '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">'+number_format(parseFloat(data.disc_amnt) + parseFloat(hiddenSchemeDiscount.val()), 2, '.')+'%</div>'+
 								  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>in Tuition Fee</strong></div>'+
 								'</td>'+
 								'<td>'+
-								 'Php '+number_format(computedDiscount, 2,'.', ',')+
+								 'Php '+number_format(((parseFloat(data.disc_amnt) + parseFloat(hiddenSchemeDiscount.val())) / 100) * parseFloat(tuition), 2,'.', ',')+
 								'</td>';
 				jQuery('#totalDiscount').val((parseFloat(data.disc_amnt) + parseFloat(hiddenSchemeDiscount.val())));
-				jQuery('#totalDiscAmount').val(computedDiscount);
+				jQuery('#totalDiscAmount').val(((parseFloat(data.disc_amnt) + parseFloat(hiddenSchemeDiscount.val())) / 100) * parseFloat(tuition));
 				hiddenDiscount.val(data.disc_amnt);
 				if (scheme == 'CASH') {
 					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount));
@@ -120,15 +178,18 @@ window.onload = function() {
 				}
 			} else {
 				var computedDiscount = ((parseFloat(0) + parseFloat(hiddenSchemeDiscount.val())) / 100) * parseFloat(tuition);
+				if(jQuery('#escGrant').is(':checked')) {
+					computedDiscount = computedDiscount + parseFloat(9000);
+				}
 				var html ='<td>'+
 								  '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">'+number_format(parseFloat(0) + parseFloat(hiddenSchemeDiscount.val()), 2, '.')+'%</div>'+
 								  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>in Tuition Fee</strong></div>'+
 								'</td>'+
 								'<td>'+
-								 'Php '+number_format(computedDiscount, 2,'.', ',')+
+								 'Php '+number_format((parseFloat(hiddenSchemeDiscount.val()) / 100) * parseFloat(tuition), 2,'.', ',')+
 								'</td>';
-				jQuery('#totalDiscount').val((parseFloat(data.disc_amnt) + parseFloat(hiddenSchemeDiscount.val())));
-				jQuery('#totalDiscAmount').val(computedDiscount);
+				jQuery('#totalDiscount').val((parseFloat(hiddenSchemeDiscount.val())));
+				jQuery('#totalDiscAmount').val((parseFloat(hiddenSchemeDiscount.val()) / 100) * parseFloat(tuition));
 				hiddenDiscount.val(0);
 				if (scheme == 'CASH') {
 					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount));
@@ -150,52 +211,7 @@ window.onload = function() {
 				}
 			}
 
-			var payables ='<tr>'+
-												'<td>'+
-												  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>Upon Enrollment</strong></div>'+
-												'</td>'+
-												'<td>'+
-												 'Php '+number_format(upon, 2,'.', ',')+
-												'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>July</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>August</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>September</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>October</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>November</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>December</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>January</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>February</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>March</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>';
-
-			jQuery('#payables').html(payables);
+			jQuery('#payables').html(payables(upon, monthly));
 			jQuery('#discHere').html(html);
 			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)), 2, '.', ','));
 			jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)));
@@ -207,15 +223,18 @@ window.onload = function() {
 
 		if (scheme == 'CASH') {
 			var computedDiscount = ((parseFloat(hiddenDiscount.val()) + 10) / 100) * parseFloat(tuition);
+			if(jQuery('#escGrant').is(':checked')) {
+				computedDiscount = computedDiscount + parseFloat(9000);
+			}
 			var html ='<td>'+
 							  '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">'+number_format(parseFloat(hiddenDiscount.val()) + parseFloat(10), 2, '.')+'%</div>'+
 							  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>in Tuition Fee</strong></div>'+
 							'</td>'+
 							'<td>'+
-							 'Php '+number_format(computedDiscount, 2,'.', ',')+
+							 'Php '+number_format(((parseFloat(hiddenDiscount.val()) + 10) / 100) * parseFloat(tuition), 2,'.', ',')+
 							'</td>';
 			jQuery('#totalDiscount').val(parseFloat(hiddenDiscount.val()) + 10);
-			jQuery('#totalDiscAmount').val(computedDiscount);
+			jQuery('#totalDiscAmount').val(((parseFloat(hiddenDiscount.val()) + 10) / 100) * parseFloat(tuition));
 			jQuery('#discHere').html(html);
 			hiddenSchemeDiscount.val(10.00);
 			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)), 2, '.', ','));
@@ -226,17 +245,20 @@ window.onload = function() {
 		}
 		else {
 			var computedDiscount = (parseFloat(hiddenDiscount.val()) / 100) * parseFloat(tuition);
+			if(jQuery('#escGrant').is(':checked')) {
+				computedDiscount = computedDiscount + parseFloat(9000);
+			}
 			var html ='<td>'+
 							  '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">'+number_format(parseFloat(hiddenDiscount.val()) + parseFloat(0), 2, '.')+'%</div>'+
 							  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>in Tuition Fee</strong></div>'+
 							'</td>'+
 							'<td>'+
-							 'Php '+number_format(computedDiscount, 2,'.', ',')+
+							 'Php '+number_format((parseFloat(hiddenDiscount.val()) / 100) * parseFloat(tuition), 2,'.', ',')+
 							'</td>';
 
 			hiddenSchemeDiscount.val(0);
 			jQuery('#totalDiscount').val(0);
-			jQuery('#totalDiscAmount').val(computedDiscount);				
+			jQuery('#totalDiscAmount').val((parseFloat(hiddenDiscount.val()) / 100) * parseFloat(tuition));				
 			jQuery('#discHere').html(html);
 			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)), 2, '.', ','));
 			jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)));
@@ -257,52 +279,100 @@ window.onload = function() {
 			}
 		}
 
-		var payables ='<tr>'+
-											'<td>'+
-											  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>Upon Enrollment</strong></div>'+
+		jQuery('#payables').html(payables(upon, monthly));
+	});
+
+	escGrant.on('change', function(){
+		var computedDiscount = (((parseFloat(hiddenDiscount.val()) + parseFloat(hiddenSchemeDiscount.val())) / 100) * parseFloat(tuition));
+		var scheme = paymentScheme.val();
+		if(jQuery(this).is(':checked')) {
+			if (jQuery('#totalDiscount').val() < 50){
+				computedDiscount = computedDiscount + parseFloat(9000);
+				var html ='<td>'+
+											  '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">'+number_format(parseFloat(hiddenDiscount.val()) + parseFloat(0), 2, '.')+'%</div>'+
+											  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>in Tuition Fee</strong></div>'+
 											'</td>'+
 											'<td>'+
-											 'Php '+number_format(upon, 2,'.', ',')+
-											'</td> <input type="hidden" name="uponEnroll" value="'+upon+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>July</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[july]" value="'+monthly+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>August</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[august]" value="'+monthly+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>September</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[september]" value="'+monthly+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>October</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[october]" value="'+monthly+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>November</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[november]" value="'+monthly+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>December</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[december]" value="'+monthly+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>January</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[january]" value="'+monthly+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>February</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[february]" value="'+monthly+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>March</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[march]" value="'+monthly+'"/>'+
-										'</tr>';
+											 'Php '+number_format(((parseFloat(hiddenDiscount.val()) + parseFloat(hiddenSchemeDiscount.val())) / 100) * parseFloat(tuition), 2,'.', ',')+
+											'</td>';
 
-		jQuery('#payables').html(payables);
+				jQuery('#discHere').html(html);
+				jQuery('#totalDiscount').val(parseFloat(hiddenDiscount.val()) + parseFloat(hiddenSchemeDiscount.val()));
+				jQuery('#totalDiscAmount').val(((parseFloat(hiddenDiscount.val()) + parseFloat(hiddenSchemeDiscount.val())) / 100) * parseFloat(tuition));
+				jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)), 2, '.', ','));
+				jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)));
+				if (scheme == 'CASH') {
+					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount));
+					var monthly = 0;
+				}
+				else if (scheme == 'MINIMUM')
+				{
+					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.40;
+					var monthly = parseFloat(upon) / 9;
+				}
+				else if(scheme == 'PARTIAL')
+				{
+					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.50;
+					var monthly = parseFloat(upon) / 9;
+				}
+				else if (scheme == 'ENPL'){
+					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 10;
+					var monthly  = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 10;
+				}
+			} else {
+				var html ='<td>'+
+											  '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">'+number_format(parseFloat(hiddenDiscount.val()) + parseFloat(0), 2, '.')+'%</div>'+
+											  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>in Tuition Fee</strong></div>'+
+											'</td>'+
+											'<td>'+
+											 'Php '+number_format(computedDiscount, 2,'.', ',')+
+											'</td>';
+				jQuery('#discHere').html(html);
+				jQuery('#totalDiscount').val(parseFloat(hiddenDiscount.val()) + parseFloat(hiddenSchemeDiscount.val()));
+				jQuery('#totalDiscAmount').val(((parseFloat(hiddenDiscount.val()) + parseFloat(hiddenSchemeDiscount.val())) / 100) * parseFloat(tuition));
+				jQuery('#totAmount').html(number_format(((parseFloat(jQuery('#totalAmount').val()) - parseFloat(9000)) - parseFloat(computedDiscount)), 2, '.', ','));
+				jQuery('#grandTotal').val(((parseFloat(jQuery('#totalAmount').val()) - parseFloat(9000)) - parseFloat(computedDiscount)));
+			}
+			jQuery('#escGrantDiscount').html('Php '+ number_format(9000, 2, '.', ','));
+			jQuery('#escGrantAmnt').val(9000);
+		} else {
+			if (scheme == 'CASH') {
+				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount));
+				var monthly = 0;
+			}
+			else if (scheme == 'MINIMUM')
+			{
+				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.40;
+				var monthly = parseFloat(upon) / 9;
+			}
+			else if(scheme == 'PARTIAL')
+			{
+				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.50;
+				var monthly = parseFloat(upon) / 9;
+			}
+			else if (scheme == 'ENPL'){
+				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 10;
+				var monthly  = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 10;
+			}
+
+			var html ='<td>'+
+										  '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">'+number_format(parseFloat(hiddenDiscount.val()) + parseFloat(0), 2, '.')+'%</div>'+
+										  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>in Tuition Fee</strong></div>'+
+										'</td>'+
+										'<td>'+
+										 'Php '+number_format(((parseFloat(hiddenDiscount.val()) + parseFloat(hiddenSchemeDiscount.val())) / 100) * parseFloat(tuition), 2,'.', ',')+
+										'</td>';
+
+			jQuery('#discHere').html(html);
+			jQuery('#escGrantDiscount').html('');
+			jQuery('#totalDiscount').val(parseFloat(hiddenDiscount.val()) + parseFloat(hiddenSchemeDiscount.val()));
+			jQuery('#totalDiscAmount').val(((parseFloat(hiddenDiscount.val()) + parseFloat(hiddenSchemeDiscount.val())) / 100) * parseFloat(tuition));
+			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)), 2, '.', ','));
+			jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)));
+			jQuery('#escGrantAmnt').val(0);
+		}
+
+		jQuery('#payables').html(payables(upon, monthly));
 	});
 
 	form.parsley({

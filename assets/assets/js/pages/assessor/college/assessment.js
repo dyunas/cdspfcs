@@ -217,7 +217,7 @@ window.onload = function() {
 			jQuery('#totalDiscount').val(parseFloat(hiddenDiscount.val()) + 10);
 			jQuery('#totalDiscAmount').val(computedDiscount);
 			jQuery('#discHere').html(html);
-			hiddenSchemeDiscount.val(10.00);
+			hiddenSchemeDiscount.val('10.00');
 			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)), 2, '.', ','));
 			jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)));
 
@@ -225,7 +225,7 @@ window.onload = function() {
 			var monthly = 0.00;
 		}
 		else {
-			var computedDiscount = (parseFloat(hiddenDiscount.val()) / 100) * parseFloat(tuition);
+			var computedDiscount = ((parseFloat(hiddenDiscount.val()) + 0) / 100) * parseFloat(tuition);
 			var html ='<td>'+
 							  '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">'+number_format(parseFloat(hiddenDiscount.val()) + parseFloat(0), 2, '.')+'%</div>'+
 							  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>in Tuition Fee</strong></div>'+
@@ -233,11 +233,10 @@ window.onload = function() {
 							'<td>'+
 							 'Php '+number_format(computedDiscount, 2,'.', ',')+
 							'</td>';
-
-			hiddenSchemeDiscount.val(0);
-			jQuery('#totalDiscount').val(0);
+			jQuery('#totalDiscount').val(parseFloat(hiddenDiscount.val()) + 10);
 			jQuery('#totalDiscAmount').val(computedDiscount);				
 			jQuery('#discHere').html(html);
+			hiddenSchemeDiscount.val('0');
 			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)), 2, '.', ','));
 			jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)));
 

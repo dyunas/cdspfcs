@@ -2469,3 +2469,7 @@ header .form-inline {
 .modal-full .modal-content {
     min-height: 90vh;
 }
+
+.strikethrough {
+	text-decoration: line-through;
+}

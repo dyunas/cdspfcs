@@ -127,8 +127,22 @@ $route['logout'] = 'Login/Logout';
 
 // ASSESSOR - ELEMENTARY
 	// DASHBOARD
+	$route['assessor_elem/dashboard/view/check_fee_row'] = 'assessor/elementary/dashboard/Dashboard/Check_fee_row';
+	$route['assessor_elem/dashboard/view/get_assessment_info'] = 'assessor/elementary/dashboard/Dashboard/Get_assessment_info';
+	$route['assessor_elem/dashboard/view/add_assessment'] = 'assessor/elementary/dashboard/Dashboard/Add_assessment';
 	$route['assessor_elem/dashboard/view/(:any)'] = 'assessor/elementary/dashboard/Dashboard/View_student/$1';
 	$route['assessor_elem/dashboard/get_tuition_fee'] = 'assessor/elementary/dashboard/Dashboard/Get_tuition_fee';
 	$route['assessor_elem/dashboard/get_discount_amount'] = 'assessor/elementary/dashboard/Dashboard/Get_discount_amount';
 	$route['assessor_elem/dashboard/get_elem_table_data'] = 'assessor/elementary/dashboard/Dashboard/Get_elem_table_data';
 	$route['assessor_elem/dashboard'] = 'assessor/elementary/dashboard/Dashboard/Index';
+
+// ASSESSOR - JUNIOR HIGH SCHOOL
+	// DASHBOARD
+	$route['assessor_jhs/dashboard/view/check_fee_row'] = 'assessor/juniorhs/dashboard/Dashboard/Check_fee_row';
+	$route['assessor_jhs/dashboard/view/get_assessment_info'] = 'assessor/juniorhs/dashboard/Dashboard/Get_assessment_info';
+	$route['assessor_jhs/dashboard/view/add_assessment'] = 'assessor/juniorhs/dashboard/Dashboard/Add_assessment';
+	$route['assessor_jhs/dashboard/view/(:any)'] = 'assessor/juniorhs/dashboard/Dashboard/View_student/$1';
+	$route['assessor_jhs/dashboard/get_tuition_fee'] = 'assessor/juniorhs/dashboard/Dashboard/Get_tuition_fee';
+	$route['assessor_jhs/dashboard/get_discount_amount'] = 'assessor/juniorhs/dashboard/Dashboard/Get_discount_amount';
+	$route['assessor_jhs/dashboard/get_jhs_table_data'] = 'assessor/juniorhs/dashboard/Dashboard/Get_jhs_table_data';
+	$route['assessor_jhs/dashboard'] = 'assessor/juniorhs/dashboard/Dashboard/Index';

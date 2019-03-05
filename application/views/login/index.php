@@ -24,11 +24,6 @@
               </div>
               <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
               <br/><br/>
-              <div class="checkbox">
-                <label class="pull-right">
-                  <a href="#">Forgotten Password?</a>
-                </label>
-              </div>
             <?php echo form_close(); ?>
             <br/>
         </div>

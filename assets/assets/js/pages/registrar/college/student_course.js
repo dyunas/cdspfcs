@@ -26,9 +26,10 @@ jQuery(document).ready(function() {
 			success:function(yrLvl){
 				console.log(yrLvl);
 				var html = '<option value="">---</option>';
+				var suffix = ['st Yr', 'nd Yr', 'rd Yr', 'th Yr', 'th Yr'];
 				if (yrLvl != false) {
 					for(var x = 1; x <= yrLvl.no_of_yrs; x++){
-						html += '<option value="'+x+'">'+x+'</option>';
+						html += '<option value="'+x+suffix[x-1]+'">'+x+'</option>';
 					}
 				}
 				// console.log(html);

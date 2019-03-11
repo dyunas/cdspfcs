@@ -36,11 +36,11 @@ class Fee_manager extends MY_Controller {
 		}
 	}
 
-	public function Get_departments()
+	public function Get_grade_levels()
 	{
 		if ($this->input->is_ajax_request())
 		{
-			$result = $this->feedb->get_departments();
+			$result = $this->feedb->get_grade_levels();
 			echo $result;
 		}
 		else
@@ -49,26 +49,26 @@ class Fee_manager extends MY_Controller {
 		}
 	}
 
-	public function Check_feecode()
-	{
-		if ($this->input->is_ajax_request())
-		{
-			$fcode = $this->input->get('fcode');
-			$result = $this->feedb->check_feecode($fcode);
-			if ($result == TRUE)
-			{
-				$this->output->set_status_header(200);
-			}
-			else
-			{
-				$this->output->set_status_header(404);
-			}
-		}
-		else
-		{
-			exit('No direct script access allowed!');
-		}
-	}
+	// public function Check_feecode()
+	// {
+	// 	if ($this->input->is_ajax_request())
+	// 	{
+	// 		$fcode = $this->input->get('fcode');
+	// 		$result = $this->feedb->check_feecode($fcode);
+	// 		if ($result == TRUE)
+	// 		{
+	// 			$this->output->set_status_header(200);
+	// 		}
+	// 		else
+	// 		{
+	// 			$this->output->set_status_header(404);
+	// 		}
+	// 	}
+	// 	else
+	// 	{
+	// 		exit('No direct script access allowed!');
+	// 	}
+	// }
 
 	public function Create_new_fee()
 	{

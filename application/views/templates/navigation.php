@@ -48,6 +48,20 @@
             <li class="<?php echo ($this->uri->segment(3) == 'sysem') ? 'active' : ''; ?> menu-item-has-children">
               <a href="<?php echo site_url($this->uri->segment(1).'/settings/sysem'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cog"></i>School Year & Semester</a>
             </li>
+            <?php elseif ($this->uri->segment(1) == 'cashier'): ?>
+            <h3 class="menu-title">Departments</h3><!-- /.menu-title -->
+            <li class="<?php echo ($this->uri->segment(3) == 'elementary') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/dept/elementary'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Elementary</a>
+            </li>
+            <li class="<?php echo ($this->uri->segment(3) == 'juniorhs') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/dept/juniorhs'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Junior High School</a>
+            </li>
+            <li class="<?php echo ($this->uri->segment(3) == 'shs') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/dept/shs'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Senior High School</a>
+            </li>
+            <li class="<?php echo ($this->uri->segment(3) == 'college') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/dept/college'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>College</a>
+            </li>
           <?php endif; ?>
         </ul>
       </div><!-- /.navbar-collapse -->

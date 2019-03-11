@@ -208,8 +208,8 @@
               <div class="col-sm-1 col-xs-6">
                 <select class="input-sm form-control-sm form-control" name="stud_grade_lvl" required data-parsley-required-message="">
                   <option value="">---</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
+                  <option value="Grade 11">11</option>
+                  <option value="Grade 12">12</option>
                 </select>
               </div><!-- col col-sm-3 -->
               <div class="d-none d-sm-block col-sm-1 col-xs-2">

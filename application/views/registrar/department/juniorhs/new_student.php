@@ -35,7 +35,7 @@
                 <label for="LRN" class=" form-control-label">*LRN</label>
               </div>
               <div class="col-sm-3 col-xs-12">
-                <input type="text" id="LRN" name="LRN" placeholder="Learner Reference Number" class="input-sm form-control-sm form-control resFld" required data-parsley-type="number" data-parsley-required-message="" maxlength="12" data-parsley-length="[12, 12]" data-parsley-length-message="" data-parsley-length-message="">
+                <input type="text" id="LRN" name="LRN" placeholder="Learner Reference Number" class="input-sm form-control-sm form-control resFld" required data-parsley-type="number" data-parsley-required-message="" maxlength="12" data-parsley-length="[12, 12]" data-parsley-length-message="" data-parsley-type-message="">
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
@@ -207,10 +207,10 @@
               <div class="col-sm-2 col-xs-6">
                 <select class="input-sm form-control-sm form-control" name="stud_grade_lvl" required data-parsley-required-message="">
                   <option value="">Select level</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
+                  <option value="Grade 7">7</option>
+                  <option value="Grade 8">8</option>
+                  <option value="Grade 9">9</option>
+                  <option value="Grade 10">10</option>
                 </select>
               </div><!-- col col-sm-3 -->
               <div class="d-none d-sm-block col col-sm-1" style="padding: 0px 0px 0px 15px;">

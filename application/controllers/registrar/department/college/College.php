@@ -91,12 +91,90 @@ class College extends MY_Controller {
 	public function View_student($uniq_id)
 	{
 		$data = array(
-			"stud_info" => $this->coldb->get_student_info($uniq_id)
+			"stud_info" => $this->coldb->get_student_info($uniq_id),
+			"fees" 			=> $this->coldb->get_school_fees(),
+			"assessmentInfo" => $this->coldb->get_assessment_info($uniq_id)
 		);
 
 		$this->load->view('templates/header');
 		$this->load->view('templates/navigation');
 		$this->load->view('registrar/department/college/view_student', $data);
 		$this->load->view('templates/footer');
+	}
+
+	public function Get_tuition_fee()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$result = $this->coldb->get_tuition_fee();
+			echo $result;
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
+	public function Get_thesis_fee()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$result = $this->coldb->get_thesis_fee();
+			echo $result;
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
+	public function Add_assessment()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			if ($this->coldb->insert_student_assessment_info())
+			{
+				echo json_encode(true);
+			}
+			else
+			{
+				echo json_encode(false);
+			}
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
+	public function Get_assessment_info()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$id = $this->input->get('id');
+			$assessmentID = $this->input->get('assessmentID');
+			$result = $this->coldb->get_assessment_details($id, $assessmentID);
+
+			echo json_encode($result);
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
+	public function Check_fee_row()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$id = $this->input->get('id');
+			$assessmentID = $this->input->get('assessmentID');
+			$result = $this->coldb->check_fee_row($id, $assessmentID);
+			echo json_encode($result);
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
 	}
 }

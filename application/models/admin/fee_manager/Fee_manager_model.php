@@ -1,10 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed.');
 
 class Fee_manager_model extends CI_model {
-	public function get_departments()
+	public function get_grade_levels()
 	{
-		$this->db->select('dept_id, dept_code');
-		$this->db->from('tbl_departments');
+		$this->db->select('grd_lvl');
+		$this->db->from('tbl_grd_level');
 		$query = $this->db->get();
 
 		if ($query->num_rows() > 0)
@@ -21,9 +21,8 @@ class Fee_manager_model extends CI_model {
 	{
 		if ($id === FALSE)
 		{
-			$this->db->select('a.row_id, a.fee_code, a.fee_name, a.amount, a.fee_for, a.status, b.dept_code');
+			$this->db->select('a.row_id, a.fee_name, a.amount, a.fee_for, a.status');
 			$this->db->from('tbl_fees a');
-			$this->db->join('tbl_departments b', 'b.dept_id = a.fee_for');
 			$this->db->order_by('a.row_id', 'ASC');
 			$query = $this->db->get();
 
@@ -43,10 +42,9 @@ class Fee_manager_model extends CI_model {
 
 					$sbdata = array();
 					$sbdata[] = $row->row_id;
-					$sbdata[] = $row->fee_code;
 					$sbdata[] = $row->fee_name;
 					$sbdata[] = '<span class="text-right" style="display:block">'.number_format($row->amount, 2, '.', ',').'</span>';
-					$sbdata[] = '<span class="text-center" style="display:block">'.$row->dept_code.'</span>';
+					$sbdata[] = '<span class="text-center" style="display:block">'.$row->fee_for.'</span>';
 					$sbdata[] = '<span class="text-center" style="display:block">'.$status.'</span>';
 					$sbdata[] = '<button type="button" data-id="'.$row->row_id.'" data-toggle="modal" data-target="#editFeeModal" data-backdrop="static" data-keyboard="false" class="editRow btn btn-outline-primary btn-sm"><i class="ti ti-pencil"></i></button>';
 
@@ -68,7 +66,6 @@ class Fee_manager_model extends CI_model {
 				$sbdata[] = '';
 				$sbdata[] = '';
 				$sbdata[] = '';
-				$sbdata[] = '';
 
 				$data[] = $sbdata;
 
@@ -82,9 +79,8 @@ class Fee_manager_model extends CI_model {
 		}
 		else
 		{
-			$this->db->select('a.row_id, a.fee_code, a.fee_name, a.amount, a.fee_for, a.status, b.dept_code');
+			$this->db->select('a.row_id, a.fee_name, a.amount, a.fee_for, a.status');
 			$this->db->from('tbl_fees a');
-			$this->db->join('tbl_departments b', 'b.dept_id = a.fee_for');
 			$this->db->where('a.row_id', $id);
 			$query = $this->db->get();
 
@@ -120,7 +116,6 @@ class Fee_manager_model extends CI_model {
 	{
 		$data = array(
 			'fee_name' => $this->input->post('fname'),
-			'fee_code' => $this->input->post('fcode'),
 			'amount'   => $this->input->post('amnt'),
 			'fee_for'  => $this->input->post('fFor'),
 			'status'   => 1
@@ -130,15 +125,14 @@ class Fee_manager_model extends CI_model {
 		{
 			$log = array(
 				'emp_id' => $this->session->userdata('uniq_id'),
-				'c_log' => 'Created a new fee: '.$this->input->post('fcode').' - '.$this->input->post('fname').' - '.number_format($this->input->post('amnt'), 2, '.', ','),
+				'c_log' => 'Created a new fee: '.$this->input->post('fname').' - '.number_format($this->input->post('amnt'), 2, '.', ',').' for '.$this->input->post('fFor'),
 				'mod_date' => date('Y-m-d h:i:s a')
 			);
 
 			if ($this->db->insert('tbl_logs', $log))
 			{
-				$this->db->select('a.row_id, a.fee_code, a.fee_name, a.amount, a.fee_for, a.status, b.dept_code');
+				$this->db->select('a.row_id, a.fee_name, a.amount, a.fee_for, a.status');
 				$this->db->from('tbl_fees a');
-				$this->db->join('tbl_departments b', 'b.dept_id = a.fee_for');
 				$this->db->order_by('a.row_id', 'DESC');
 				$this->db->limit(1);
 				$query = $this->db->get();

@@ -10,14 +10,14 @@ jQuery(document).ready(function(){
 
 	jQuery.ajax({
 		type: 'GET',
-		url: 'fee-mgr/get_departments',
+		url: 'fee-mgr/get_grade_levels',
 		dataType: 'json',
 		success:function(data){
 			// console.log(data);
 			var html = '<option value="">---</option>';
 			if (data != false){
 				for(let x = 0;x <= data.length - 1;x++) {
-					html += '<option value="'+data[x].dept_id+'">'+data[x].dept_id+' - '+data[x].dept_code+'</option>';
+					html += '<option value="'+data[x].grd_lvl+'">'+data[x].grd_lvl+'</option>';
 				}
 
 				jQuery('.fFor').html(html);
@@ -66,7 +66,7 @@ jQuery(document).ready(function(){
 	              'New payment has been added to the record.',
 	              'success',
 	            );
-	            console.log(data);
+	            // console.log(data);
 	            var status = '';
 	            if (data.status == 1){
 	            	status = '<span class="badge badge-success">Active</span>';
@@ -75,10 +75,9 @@ jQuery(document).ready(function(){
 	            }
 	            dtble.row.add([
 	                data.row_id,
-	                data.fee_code,
 	                data.fee_name,
 	                '<span class="text-right" style="display:block">'+data.amount+'</span>',
-	                '<span class="text-center" style="display:block">'+data.dept_code+'</span>',
+	                '<span class="text-center" style="display:block">'+data.fee_for+'</span>',
 	                '<span class="text-center" style="display:block">'+status+'</span>',
 	                '<button type="button" data-id="'+data.row_id+'" data-toggle="modal" data-target="#editPaymentModal" data-backdrop="static" data-keyboard="false" class="editRow btn btn-outline-primary btn-sm"><i class="ti ti-pencil"></i></button>',
 	              ]).draw();

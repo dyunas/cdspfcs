@@ -64,8 +64,11 @@ class Senior_high_school extends MY_Controller {
 	public function View_student($uniq_id)
 	{
 		$data = array(
-			"stud_info" => $this->shsdb->get_student_info($uniq_id)
+			"stud_info" => $this->shsdb->get_student_info($uniq_id),
+			"assessmentInfo" => $this->shsdb->get_assessment_info($uniq_id)
 		);
+
+		$data["fees"] = $this->shsdb->get_school_fees($data["stud_info"]->stud_grade_lvl);
 
 		$this->load->view('templates/header');
 		$this->load->view('templates/navigation');
@@ -93,6 +96,70 @@ class Senior_high_school extends MY_Controller {
 			$id = $this->input->get('id');
 			$result = $this->shsdb->get_strand_list($id);
 			echo $result;
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
+	public function Get_tuition_fee()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$gradeLevel = $this->input->get('gradeLevel');
+			$result = $this->shsdb->get_tuition_fee($gradeLevel);
+			echo $result;
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
+	public function Add_assessment()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			if ($this->shsdb->insert_student_assessment_info())
+			{
+				echo json_encode(true);
+			}
+			else
+			{
+				echo json_encode(false);
+			}
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
+	public function Get_assessment_info()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$id = $this->input->get('id');
+			$assessmentID = $this->input->get('assessmentID');
+			$result = $this->shsdb->get_assessment_details($id, $assessmentID);
+
+			echo json_encode($result);
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
+	public function Check_fee_row()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$id = $this->input->get('id');
+			$assessmentID = $this->input->get('assessmentID');
+			$result = $this->shsdb->check_fee_row($id, $assessmentID);
+			echo json_encode($result);
 		}
 		else
 		{

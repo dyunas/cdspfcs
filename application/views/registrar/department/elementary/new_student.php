@@ -35,7 +35,7 @@
                 <label for="LRN" class=" form-control-label">*LRN</label>
               </div>
               <div class="col-sm-3 col-xs-12">
-                <input type="text" id="LRN" name="LRN" placeholder="Learner Reference Number" class="input-sm form-control-sm form-control resFld" required data-parsley-type="number" data-parsley-required-message="" maxlength="12" data-parsley-length="[12, 12]" data-parsley-length-message="" data-parsley-length-message="">
+                <input type="text" id="LRN" name="LRN" placeholder="Learner Reference Number" class="input-sm form-control-sm form-control resFld" required data-parsley-type="number" data-parsley-required-message="" maxlength="12" data-parsley-length="[12, 12]" data-parsley-length-message="">
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">
@@ -207,12 +207,12 @@
               <div class="col-sm-2 col-xs-6">
                 <select class="input-sm form-control-sm form-control" name="stud_grade_lvl" required data-parsley-required-message="">
                   <option value="">Select level</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
+                  <option value="Grade 1">1</option>
+                  <option value="Grade 2">2</option>
+                  <option value="Grade 3">3</option>
+                  <option value="Grade 4">4</option>
+                  <option value="Grade 5">5</option>
+                  <option value="Grade 6">6</option>
                 </select>
               </div><!-- col col-sm-3 -->
               <div class="d-none d-sm-block col col-sm-1" style="padding: 0px 0px 0px 15px;">

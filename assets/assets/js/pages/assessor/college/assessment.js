@@ -7,7 +7,12 @@ window.onload = function() {
 	var hiddenDiscount = jQuery('#hidDiscount');
 	var hiddenSchemeDiscount = jQuery('#hidSchemeDiscount');
 	var tuition = 0;
-	var tuitionCode;
+	var misc = 0;
+	var tuitionId;
+	var numUnits = jQuery('#numUnits');
+	var numThesis = jQuery('#numThesis');
+	var thesisAmnt = 0;
+	var thesisId;
 
 	function number_format (number, decimals, dec_point, thousands_sep) {
     // Strip all characters but numerical ones.
@@ -43,54 +48,127 @@ window.onload = function() {
 		 jQuery('#payables').html('');
 		 discount.prop('disabled', true);
 		 paymentScheme.prop('disabled', true);
+		 numUnits.prop('disabled', true);
+		 numUnits.val(0);
 		 payment = 0;
 		 hiddenDiscount.val(0);
 		 hiddenSchemeDiscount.val(0);
 	});
 
-	jQuery.getJSON('../get_tuition_fee',function(data){ 
+	jQuery.getJSON('get_tuition_fee',function(data){ 
 		tuition = data.amount; 
-		tuitionCode = data.fee_code;
+		tuitionId = data.row_id;
+	});
+
+	jQuery.getJSON('get_thesis_fee',function(data){ 
+		thesisAmnt = data.amount; 
+		thesisId = data.row_id;
 	});
 
 	jQuery('[class^=fees]').on('change', function() {
 		var id = jQuery(this).attr('data-id');
-		if (tuitionCode == jQuery(this).attr('data-name')) {
+		var totalTuitionFee = jQuery('#totalTuitionFee');
+		var totalThesisFee = jQuery('#totalThesisFee');
+		if (tuitionId == jQuery(this).attr('data-id')) {
 			if(jQuery(this).is(':checked')) {
 				discount.prop('disabled', false);
 				paymentScheme.prop('disabled', false);
-				payment += parseFloat(jQuery('#rowAmount'+id).val());
+				numUnits.prop('disabled', false);
+
+				numUnits.on('keyup', function(){
+					var units = jQuery(this).val();
+					var id = jQuery(this).attr('data-id');
+					var tuitionFee = jQuery('#tuitionFee');
+					var tuitionTotal = parseFloat(units) * parseFloat(tuitionFee.val())
+					tuition = tuitionTotal;
+					payment = misc + tuitionTotal;
+					totalTuitionFee.val(tuitionTotal);
+					jQuery('#rowAmount'+id).val(parseFloat(units) * parseFloat(tuitionFee.val()));
+					jQuery('#totalTuitionHere').html('Php '+number_format(parseFloat(units) * parseFloat(tuitionFee.val()), 2, '.', ','));
+
+					jQuery('#total').html('Php '+ number_format(payment, 2,'.', ','));
+					jQuery('#totalAmount').val(payment);
+
+					jQuery('#totAmount').html('Php '+number_format((parseFloat(payment)), 2, '.', ','));
+					jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)));
+				});
 			} else {
 				discount.prop('disabled', true);
 				paymentScheme.prop('disabled', true);
+				numUnits.prop('disabled', true);
 				discount.val('');
 				paymentScheme.val('');
 				hiddenDiscount.val(0);
 				hiddenSchemeDiscount.val(0);
+				numUnits.val('');
 				jQuery('#discHere').html('');
-				payment -= parseFloat(jQuery('#rowAmount'+id).val());
+				payment -= parseFloat(totalTuitionFee.val());
+				tuition = 0;
+				jQuery('#rowAmount'+id).val(0);
+				jQuery('#totalTuitionHere').html('Php '+number_format(0, 2, '.', ','));
+
+				jQuery('#total').html('Php '+ number_format(payment, 2,'.', ','));
+				jQuery('#totalAmount').val(payment);
+
+				jQuery('#totAmount').html('Php '+number_format((parseFloat(payment)), 2, '.', ','));
+				jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)));
+			}
+		} else if (thesisId == jQuery(this).attr('data-id')){
+			if(jQuery(this).is(':checked')) {
+				numThesis.prop('disabled', false);
+				numThesis.on('keyup', function(){
+					var units = jQuery(this).val();
+					var id = jQuery(this).attr('data-id');
+					var thesisFee = jQuery('#thesisFee');
+					var thesisTotal = parseFloat(units) * parseFloat(thesisFee.val())
+					payment = misc + parseFloat(totalTuitionFee.val()) + thesisTotal;
+					totalThesisFee.val(thesisTotal);
+					jQuery('#rowAmount'+id).val(parseFloat(units) * parseFloat(thesisFee.val()));
+					jQuery('#totalThesisHere').html('Php '+number_format(parseFloat(units) * parseFloat(thesisFee.val()), 2, '.', ','));
+
+					jQuery('#total').html('Php '+ number_format(payment, 2,'.', ','));
+					jQuery('#totalAmount').val(payment);
+
+					jQuery('#totAmount').html('Php '+number_format((parseFloat(payment)), 2, '.', ','));
+					jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)));
+				});
+			} else {
+				numThesis.prop('disabled', true);
+				numThesis.val('');
+				jQuery('#rowAmount'+id).val(0);
+				payment -= parseFloat(totalThesisFee.val());
+				totalThesisFee.val(0);
+				jQuery('#totalThesisHere').html('Php '+number_format(0, 2, '.', ','));
+
+				jQuery('#total').html('Php '+ number_format(payment, 2,'.', ','));
+				jQuery('#totalAmount').val(payment);
+
+				jQuery('#totAmount').html('Php '+number_format((parseFloat(payment)), 2, '.', ','));
+				jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)));
 			}
 		} else {
 			if(jQuery(this).is(':checked')) {
-				payment += parseFloat(jQuery('#rowAmount'+id).val());
+				misc += parseFloat(jQuery('#rowAmount'+id).val());
+				payment = misc + parseFloat(totalTuitionFee.val()) + parseFloat(totalThesisFee.val());
 			} else {
-				payment -= parseFloat(jQuery('#rowAmount'+id).val());
+				misc -= parseFloat(jQuery('#rowAmount'+id).val());
+				payment = misc + parseFloat(totalTuitionFee.val()) + parseFloat(totalThesisFee.val());
 			}
 		}
 
 		jQuery('#total').html('Php '+ number_format(payment, 2,'.', ','));
 		jQuery('#totalAmount').val(payment);
 
-		jQuery('#totAmount').html(number_format((parseFloat(payment)), 2, '.', ','));
+		jQuery('#totAmount').html('Php '+number_format((parseFloat(payment)), 2, '.', ','));
 		jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)));
 	});
 
 	discount.on('change', function(){
 		var scheme = paymentScheme.val();
-		jQuery.getJSON('../get_discount_amount',{id:discount.val()},function(data){
+		jQuery.getJSON('get_discount_amount',{id:discount.val()},function(data){
 			if (data != false) {
 				var computedDiscount = ((parseFloat(data.disc_amnt) + parseFloat(hiddenSchemeDiscount.val())) / 100) * parseFloat(tuition);
-				var html ='<td>'+
+				var html ='<td colspan="2">'+
 								  '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">'+number_format(parseFloat(data.disc_amnt) + parseFloat(hiddenSchemeDiscount.val()), 2, '.')+'%</div>'+
 								  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>in Tuition Fee</strong></div>'+
 								'</td>'+
@@ -120,7 +198,7 @@ window.onload = function() {
 				}
 			} else {
 				var computedDiscount = ((parseFloat(0) + parseFloat(hiddenSchemeDiscount.val())) / 100) * parseFloat(tuition);
-				var html ='<td>'+
+				var html ='<td colspan="2">'+
 								  '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">'+number_format(parseFloat(0) + parseFloat(hiddenSchemeDiscount.val()), 2, '.')+'%</div>'+
 								  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>in Tuition Fee</strong></div>'+
 								'</td>'+
@@ -207,7 +285,7 @@ window.onload = function() {
 
 		if (scheme == 'CASH') {
 			var computedDiscount = ((parseFloat(hiddenDiscount.val()) + 10) / 100) * parseFloat(tuition);
-			var html ='<td>'+
+			var html ='<td colspan="2">'+
 							  '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">'+number_format(parseFloat(hiddenDiscount.val()) + parseFloat(10), 2, '.')+'%</div>'+
 							  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>in Tuition Fee</strong></div>'+
 							'</td>'+
@@ -226,7 +304,7 @@ window.onload = function() {
 		}
 		else {
 			var computedDiscount = ((parseFloat(hiddenDiscount.val()) + 0) / 100) * parseFloat(tuition);
-			var html ='<td>'+
+			var html ='<td colspan="2">'+
 							  '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">'+number_format(parseFloat(hiddenDiscount.val()) + parseFloat(0), 2, '.')+'%</div>'+
 							  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>in Tuition Fee</strong></div>'+
 							'</td>'+

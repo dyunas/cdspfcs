@@ -43,7 +43,7 @@
           </div><!-- /.card-body -->
         </a>
         </div><!-- /.card -->
-      </div><!-- /.col-lg-6 col-md-6 -->
+      </div><!-- /.col-lg-3 col-md-6 -->
       <div class="col-lg-6 col-md-12">
         <div class="card">
         <a href="<?php echo site_url(); ?>" style="color:#000;">
@@ -62,7 +62,7 @@
           </div><!-- /.card-body -->
         </a>
         </div><!-- /.card -->
-      </div><!-- /.col-lg-6 col-md-6 -->
+      </div><!-- /.col-lg-3 col-md-6 -->
     </div><!-- /.row -->
     <div class="row">
       <div class="col-lg-6 col-md-12">

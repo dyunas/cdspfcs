@@ -8,7 +8,7 @@ window.onload = function() {
 	var hiddenDiscount = jQuery('#hidDiscount');
 	var hiddenSchemeDiscount = jQuery('#hidSchemeDiscount');
 	var tuition = 0;
-	var tuitionCode;
+	var tuitionID;
 
 	function number_format (number, decimals, dec_point, thousands_sep) {
     // Strip all characters but numerical ones.
@@ -41,43 +41,43 @@ window.onload = function() {
 											'</td>'+
 											'<td>'+
 											 'Php '+number_format(upon, 2,'.', ',')+
-											'</td>'+
+											'</td> <input type="hidden" name="uponEnroll" value="'+upon+'"/>'+
 										'</tr>'+
 										'<tr>'+
 											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>July</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[july]" value="'+monthly+'"/>'+
 										'</tr>'+
 										'<tr>'+
 											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>August</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[august]" value="'+monthly+'"/>'+
 										'</tr>'+
 										'<tr>'+
 											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>September</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[september]" value="'+monthly+'"/>'+
 										'</tr>'+
 										'<tr>'+
 											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>October</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[october]" value="'+monthly+'"/>'+
 										'</tr>'+
 										'<tr>'+
 											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>November</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[november]" value="'+monthly+'"/>'+
 										'</tr>'+
 										'<tr>'+
 											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>December</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[december]" value="'+monthly+'"/>'+
 										'</tr>'+
 										'<tr>'+
 											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>January</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[january]" value="'+monthly+'"/>'+
 										'</tr>'+
 										'<tr>'+
 											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>February</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[february]" value="'+monthly+'"/>'+
 										'</tr>'+
 										'<tr>'+
 											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>March</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[march]" value="'+monthly+'"/>'+
 										'</tr>';
 
 		return payables;
@@ -101,14 +101,14 @@ window.onload = function() {
 		 jQuery('#escGrantAmnt').val(0);
 	});
 
-	jQuery.getJSON('../get_tuition_fee',function(data){ 
+	jQuery.getJSON('get_tuition_fee',{gradeLevel: jQuery('#gradeLevel').val()},function(data){ 
 		tuition = data.amount; 
-		tuitionCode = data.fee_code;
+		tuitionID = data.row_id;
 	});
 
 	jQuery('[class^=fees]').on('change', function() {
 		var id = jQuery(this).attr('data-id');
-		if (tuitionCode == jQuery(this).attr('data-name')) {
+		if (tuitionID == jQuery(this).attr('data-id')) {
 			if(jQuery(this).is(':checked')) {
 				discount.prop('disabled', false);
 				paymentScheme.prop('disabled', false);
@@ -142,7 +142,7 @@ window.onload = function() {
 
 	discount.on('change', function(){
 		var scheme = paymentScheme.val();
-		jQuery.getJSON('../get_discount_amount',{id:discount.val()},function(data){
+		jQuery.getJSON('get_discount_amount',{id:discount.val()},function(data){
 			if (data != false) {
 				var computedDiscount = ((parseFloat(data.disc_amnt) + parseFloat(hiddenSchemeDiscount.val())) / 100) * parseFloat(tuition);
 				if(jQuery('#escGrant').is(':checked')) {
@@ -165,7 +165,7 @@ window.onload = function() {
 				else if (scheme == 'MINIMUM')
 				{
 					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.40;
-					var monthly = parseFloat(upon) / 9;
+					var monthly =(parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.60 / 9;
 				}
 				else if(scheme == 'PARTIAL')
 				{
@@ -198,7 +198,7 @@ window.onload = function() {
 				else if (scheme == 'MINIMUM')
 				{
 					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.40;
-					var monthly = parseFloat(upon) / 9;
+					var monthly = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.60 / 9;
 				}
 				else if(scheme == 'PARTIAL')
 				{
@@ -266,7 +266,7 @@ window.onload = function() {
 			if (scheme == 'MINIMUM')
 			{
 				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.40;
-				var monthly = parseFloat(upon) / 9;
+				var monthly = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.60 / 9;
 			}
 			else if(scheme == 'PARTIAL')
 			{
@@ -308,7 +308,7 @@ window.onload = function() {
 				else if (scheme == 'MINIMUM')
 				{
 					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.40;
-					var monthly = parseFloat(upon) / 9;
+					var monthly = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.60 / 9;
 				}
 				else if(scheme == 'PARTIAL')
 				{
@@ -343,7 +343,7 @@ window.onload = function() {
 			else if (scheme == 'MINIMUM')
 			{
 				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.40;
-				var monthly = parseFloat(upon) / 9;
+				var monthly = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.60 / 9;
 			}
 			else if(scheme == 'PARTIAL')
 			{

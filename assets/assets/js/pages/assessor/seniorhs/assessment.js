@@ -6,8 +6,9 @@ window.onload = function() {
 	var paymentScheme = jQuery('#paymentScheme');
 	var hiddenDiscount = jQuery('#hidDiscount');
 	var hiddenSchemeDiscount = jQuery('#hidSchemeDiscount');
+	var voucher = jQuery('#voucher');
 	var tuition = 0;
-	var tuitionCode;
+	var tuitionId;
 
 	function number_format (number, decimals, dec_point, thousands_sep) {
     // Strip all characters but numerical ones.
@@ -37,32 +38,37 @@ window.onload = function() {
 		 form[0].reset();
 		 jQuery('#total').html('');
 		 jQuery('#totalAmount').val();
+		 jQuery('#voucherDisc').val();
 		 jQuery('#discHere').html('');
 		 jQuery('#totAmount').html('');
 		 jQuery('#grandTotal').val();
 		 jQuery('#payables').html('');
+		 jQuery('#vouchDischere').html('');
 		 discount.prop('disabled', true);
 		 paymentScheme.prop('disabled', true);
 		 payment = 0;
 		 hiddenDiscount.val(0);
 		 hiddenSchemeDiscount.val(0);
+		 voucher.prop('disabled', true);
 	});
 
-	jQuery.getJSON('../get_tuition_fee',function(data){ 
+	jQuery.getJSON('get_tuition_fee',{gradeLevel: jQuery('#gradeLevel').val()},function(data){ 
 		tuition = data.amount; 
-		tuitionCode = data.fee_code;
+		tuitionId = data.row_id;
 	});
 
 	jQuery('[class^=fees]').on('change', function() {
 		var id = jQuery(this).attr('data-id');
-		if (tuitionCode == jQuery(this).attr('data-name')) {
+		if (tuitionId == jQuery(this).attr('data-name')) {
 			if(jQuery(this).is(':checked')) {
 				discount.prop('disabled', false);
 				paymentScheme.prop('disabled', false);
+				voucher.prop('disabled', false);
 				payment += parseFloat(jQuery('#rowAmount'+id).val());
 			} else {
 				discount.prop('disabled', true);
 				paymentScheme.prop('disabled', true);
+				voucher.prop('disabled', true);
 				discount.val('');
 				paymentScheme.val('');
 				hiddenDiscount.val(0);
@@ -85,175 +91,126 @@ window.onload = function() {
 		jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)));
 	});
 
-	discount.on('change', function(){
+	voucher.on('change', function() {
+		var id = jQuery(this).val();
+		var voucherDisc;
+		if (id == 1){
+			voucherDisc = 17500;
+
+		} else if (id == 2) {
+			voucherDisc = 14000;
+		} else {
+			voucherDisc = 0;
+		}
+
+		jQuery('#voucherDisc').val(parseFloat(voucherDisc));
+		jQuery('#vouchDischere').html('Php '+number_format(voucherDisc, 2, '.', ','));
+
 		var scheme = paymentScheme.val();
-		jQuery.getJSON('../get_discount_amount',{id:discount.val()},function(data){
-			if (data != false) {
-				var computedDiscount = ((parseFloat(data.disc_amnt) + parseFloat(hiddenSchemeDiscount.val())) / 100) * parseFloat(tuition);
-				var html ='<td>'+
-								  '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">'+number_format(parseFloat(data.disc_amnt) + parseFloat(hiddenSchemeDiscount.val()), 2, '.')+'%</div>'+
-								  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>in Tuition Fee</strong></div>'+
-								'</td>'+
-								'<td>'+
-								 'Php '+number_format(computedDiscount, 2,'.', ',')+
-								'</td>';
-				jQuery('#totalDiscount').val((parseFloat(data.disc_amnt) + parseFloat(hiddenSchemeDiscount.val())));
-				jQuery('#totalDiscAmount').val(computedDiscount);
-				hiddenDiscount.val(data.disc_amnt);
-				if (scheme == 'CASH') {
-					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount));
-					var monthly = 0;
-				}
-				else if (scheme == 'MINIMUM')
-				{
-					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.40;
-					var monthly = parseFloat(upon) / 9;
-				}
-				else if(scheme == 'PARTIAL')
-				{
-					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.50;
-					var monthly = parseFloat(upon) / 9;
-				}
-				else if (scheme == 'ENPL'){
-					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 10;
-					var monthly  = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 10;
-				}
-			} else {
-				var computedDiscount = ((parseFloat(0) + parseFloat(hiddenSchemeDiscount.val())) / 100) * parseFloat(tuition);
-				var html ='<td>'+
-								  '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">'+number_format(parseFloat(0) + parseFloat(hiddenSchemeDiscount.val()), 2, '.')+'%</div>'+
-								  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>in Tuition Fee</strong></div>'+
-								'</td>'+
-								'<td>'+
-								 'Php '+number_format(computedDiscount, 2,'.', ',')+
-								'</td>';
-				jQuery('#totalDiscount').val((parseFloat(data.disc_amnt) + parseFloat(hiddenSchemeDiscount.val())));
-				jQuery('#totalDiscAmount').val(computedDiscount);
-				hiddenDiscount.val(0);
-				if (scheme == 'CASH') {
-					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount));
-					var monthly = 0;
-				}
-				else if (scheme == 'MINIMUM')
-				{
-					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.40;
-					var monthly = parseFloat(upon) / 9;
-				}
-				else if(scheme == 'PARTIAL')
-				{
-					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.50;
-					var monthly = parseFloat(upon) / 9;
-				}
-				else if (scheme == 'ENPL'){
-					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 10;
-					var monthly  = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 10;
-				}
+
+		if (scheme == 'CASH') {
+			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)), 2, '.', ','));
+			jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)));
+
+			var upon = parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc);
+			var monthly = 0.00;
+		}
+		else {
+			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)), 2, '.', ','));
+			jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)));
+
+			if (scheme == 'MINIMUM')
+			{
+				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) * 0.40;
+				var monthly = ((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) * 0.60) / 9;
 			}
+			else if(scheme == 'PARTIAL')
+			{
+				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) * 0.50;
+				var monthly = parseFloat(upon) / 9;
+			}
+			else if (scheme == 'ENPL'){
+				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) / 10;
+				var monthly  = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) / 10;
+			}
+		}
 
-			var payables ='<tr>'+
-												'<td>'+
-												  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>Upon Enrollment</strong></div>'+
-												'</td>'+
-												'<td>'+
-												 'Php '+number_format(upon, 2,'.', ',')+
-												'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>July</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>August</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>September</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>October</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>November</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>December</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>January</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>February</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>March</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>';
+		var payables ='<tr>'+
+											'<td>'+
+											  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>Upon Enrollment</strong></div>'+
+											'</td>'+
+											'<td>'+
+											 'Php '+number_format(upon, 2,'.', ',')+
+											'</td> <input type="hidden" name="uponEnroll" value="'+upon+'"/>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>July</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[july]" value="'+monthly+'"/>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>August</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[august]" value="'+monthly+'"/>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>September</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[september]" value="'+monthly+'"/>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>October</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[october]" value="'+monthly+'"/>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>November</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[november]" value="'+monthly+'"/>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>December</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[december]" value="'+monthly+'"/>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>January</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[january]" value="'+monthly+'"/>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>February</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[february]" value="'+monthly+'"/>'+
+										'</tr>'+
+										'<tr>'+
+											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>March</strong></div></td>'+
+											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[march]" value="'+monthly+'"/>'+
+										'</tr>';
 
-			jQuery('#payables').html(payables);
-			jQuery('#discHere').html(html);
-			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)), 2, '.', ','));
-			jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)));
-		});
+		jQuery('#payables').html(payables);
 	});
 
 	paymentScheme.on('change', function(){
 		var scheme = paymentScheme.val();
+		var voucherDisc = jQuery('#voucherDisc').val();
 
 		if (scheme == 'CASH') {
-			var computedDiscount = ((parseFloat(hiddenDiscount.val()) + 10) / 100) * parseFloat(tuition);
-			var html ='<td>'+
-							  '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">'+number_format(parseFloat(hiddenDiscount.val()) + parseFloat(10), 2, '.')+'%</div>'+
-							  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>in Tuition Fee</strong></div>'+
-							'</td>'+
-							'<td>'+
-							 'Php '+number_format(computedDiscount, 2,'.', ',')+
-							'</td>';
-			jQuery('#totalDiscount').val(parseFloat(hiddenDiscount.val()) + 10);
-			jQuery('#totalDiscAmount').val(computedDiscount);
-			jQuery('#discHere').html(html);
-			hiddenSchemeDiscount.val(10.00);
-			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)), 2, '.', ','));
-			jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)));
+			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)), 2, '.', ','));
+			jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)));
 
-			var upon = parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount);
+			var upon = parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc);
 			var monthly = 0.00;
 		}
 		else {
-			var computedDiscount = (parseFloat(hiddenDiscount.val()) / 100) * parseFloat(tuition);
-			var html ='<td>'+
-							  '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">'+number_format(parseFloat(hiddenDiscount.val()) + parseFloat(0), 2, '.')+'%</div>'+
-							  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>in Tuition Fee</strong></div>'+
-							'</td>'+
-							'<td>'+
-							 'Php '+number_format(computedDiscount, 2,'.', ',')+
-							'</td>';
-
-			hiddenSchemeDiscount.val(0);
-			jQuery('#totalDiscount').val(0);
-			jQuery('#totalDiscAmount').val(computedDiscount);				
-			jQuery('#discHere').html(html);
-			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)), 2, '.', ','));
-			jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)));
+			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)), 2, '.', ','));
+			jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)));
 
 			if (scheme == 'MINIMUM')
 			{
-				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.40;
-				var monthly = parseFloat(upon) / 9;
+				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) * 0.40;
+				var monthly = ((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) * 0.60) / 9;
 			}
 			else if(scheme == 'PARTIAL')
 			{
-				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.50;
+				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) * 0.50;
 				var monthly = parseFloat(upon) / 9;
 			}
 			else if (scheme == 'ENPL'){
-				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 10;
-				var monthly  = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 10;
+				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) / 10;
+				var monthly  = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) / 10;
 			}
 		}
 

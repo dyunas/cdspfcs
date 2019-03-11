@@ -32,10 +32,10 @@ class Dashboard extends MY_Controller {
 	{
 		$data = array(
 			"stud_info" => $this->elemdb->get_student_info($uniq_id),
-			"fees" => $this->elemdb->get_school_fees(),
 			"discounts" => $this->elemdb->get_discounts(),
 			"assessmentInfo" => $this->elemdb->get_assessment_info($uniq_id)
 		);
+		$data["fees"] = $this->elemdb->get_school_fees($data["stud_info"]->stud_grade_lvl);
 
 		$this->load->view('templates/header');
 		$this->load->view('templates/navigation');
@@ -61,7 +61,8 @@ class Dashboard extends MY_Controller {
 	{
 		if ($this->input->is_ajax_request())
 		{
-			$result = $this->elemdb->get_tuition_fee();
+			$feeFor = $this->input->get('gradeLevel');
+			$result = $this->elemdb->get_tuition_fee($feeFor);
 			echo $result;
 		}
 		else

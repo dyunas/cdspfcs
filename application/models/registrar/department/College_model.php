@@ -135,10 +135,9 @@ class College_model extends CI_Model {
 
 	public function get_col_table_data()
 	{
-		$this->db->select('a.stud_id, a.stud_lname, a.stud_fname, a.stud_course, a.stud_year_lvl, a.stud_status, b.course_code, c.yr_level');
+		$this->db->select('a.stud_id, a.stud_lname, a.stud_fname, a.stud_course, a.stud_year_lvl, a.stud_status, b.course_code');
 		$this->db->from('tbl_stud_info_col a');
 		$this->db->join('tbl_col_course b', 'b.course_id = a.stud_course');
-		$this->db->join('tbl_yr_level c', 'c.yr_id = a.stud_year_lvl');
 
 		$query = $this->db->get();
 		$data = array();
@@ -180,7 +179,7 @@ class College_model extends CI_Model {
 				$sbdata[] = $row->stud_lname;
 				$sbdata[] = $row->stud_fname;
 				$sbdata[] = $row->course_code;
-				$sbdata[] = $row->yr_level;
+				$sbdata[] = $row->stud_year_lvl;
 				$sbdata[] = $status;
 				$sbdata[] = '<a href="college/view/'.$row->stud_id.'" class="btn btn-outline-primary btn-sm"><i class="ti ti-eye"></i></a>';
 
@@ -254,7 +253,6 @@ class College_model extends CI_Model {
 			a.stud_id, a.stud_avatar, a.stud_lname, a.stud_fname, a.stud_mname, a.stud_status, a.stud_rgstrtn_dte, a.stud_year_lvl, a.stud_sem, a.stud_course, a.stud_acad_yr, a.stud_email, a.stud_bdate, a.stud_tnum, a.stud_cnum, a.stud_gender, a.stud_cur_adrs, a.stud_perm_adrs,
 			b.stud_grdns_name, b.stud_grdns_cnum, b.stud_grdns_adrs,
 			c.bCertPSA, c.certGMC, c.certHonDis, c.frm137, c.frm138, c.TOR,
-			d.yr_level,
 			e.semester,
 			f.course_code,
 			g.gender,
@@ -263,7 +261,6 @@ class College_model extends CI_Model {
 		$this->db->from('tbl_stud_info_col a');
 		$this->db->join('tbl_stud_adtnl_info_col b', 'b.stud_id = a.stud_id');
 		$this->db->join('tbl_stud_documents_col c', 'c.stud_id = a.stud_id');
-		$this->db->join('tbl_yr_level d', 'd.yr_id = a.stud_year_lvl');
 		$this->db->join('tbl_semester e', 'e.sem_id = a.stud_sem');
 		$this->db->join('tbl_col_course f', 'f.course_id = a.stud_course');
 		$this->db->join('tbl_gender g', 'g.gdr_id = a.stud_gender');
@@ -279,6 +276,228 @@ class College_model extends CI_Model {
 		else
 		{
 			return FALSE;
+		}
+	}
+
+	public function get_school_fees()
+	{
+		$this->db->select('row_id, fee_name, amount');
+		$this->db->from('tbl_fees');
+		$this->db->where('fee_for', 'College');
+		$this->db->where('status', 1);
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0)
+		{
+			return $query->result();
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
+	public function get_tuition_fee()
+	{
+		$this->db->select('row_id, amount');
+		$this->db->from('tbl_fees');
+		$this->db->where('fee_for', 'College');
+		$this->db->like('fee_name', 'tuition', 'both');
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0)
+		{
+			return json_encode($query->row());
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
+	public function get_thesis_fee()
+	{
+		$this->db->select('row_id, amount');
+		$this->db->from('tbl_fees');
+		$this->db->where('fee_for', 'College');
+		$this->db->like('fee_name', 'thesis', 'both');
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0)
+		{
+			return json_encode($query->row());
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
+	public function insert_student_assessment_info()
+	{
+		$this->db->select('rowID');
+		$this->db->from('tbl_assessment_info');
+		$this->db->where('studID', $this->input->post('stud_id'));
+		$this->db->where('gradeLevel', $this->input->post('gradeLevel'));
+		$query = $this->db->get();
+		if($query->num_rows() == 0)
+		{
+			$assessmentID = str_pad(rand(0, pow(10, 6)-1), 6, '0', STR_PAD_LEFT);
+			$assessmentData = array(
+				'studID' 					=> $this->input->post('stud_id'),
+				'gradeLevel' 			=> $this->input->post('gradeLevel'),
+				'course_id' 			=> $this->input->post('course_id'),
+				'assessmentID' 		=> $assessmentID,
+				'paymentScheme' 	=> $this->input->post('paymentScheme'),
+				'discount'				=> $this->input->post('discount'),
+				'totalDiscount'		=> $this->input->post('totalDiscount'),
+				'totalDiscAmount'	=> $this->input->post('totalDiscAmount'),
+				'numUnits'				=> $this->input->post('numUnits'),
+				'numThesis'				=> $this->input->post('numThesis'),
+				'totalAmt'				=> $this->input->post('totalAmount'),
+				'grandTotal'			=> $this->input->post('grandTotal')
+			);
+
+			if ($this->db->insert('tbl_assessment_info', $assessmentData))
+			{
+				$feesPayablesData = array();
+				foreach($this->input->post('paymentCode') as $key => $value)
+				{
+					array_push(
+					 	$feesPayablesData,
+					 	array(
+							'studID' 		=> $this->input->post('stud_id'),
+							'assessmentID' => $assessmentID,
+							'feeId' 	=> $value
+						)
+					);
+				}
+
+				if ($this->db->insert_batch('tbl_feespayables_info', $feesPayablesData))
+				{
+					$payablesData = array();
+
+					if ($this->input->post('paymentScheme') == 'CASH')
+					{
+						array_push(
+							$payablesData,
+							array(
+								'studID' 		 => $this->input->post('stud_id'),
+								'gradeLevel' => $this->input->post('gradeLevel'),
+								'assessmentID'  => $assessmentID,
+								'payables' 	 => 'uponEnroll',
+								'amountDue'  => $this->input->post('uponEnroll'),
+							)
+						);
+					}
+					else
+					{
+						array_push(
+							$payablesData,
+							array(
+								'studID' 		 => $this->input->post('stud_id'),
+								'gradeLevel' => $this->input->post('gradeLevel'),
+								'assessmentID'  => $assessmentID,
+								'payables' 	 => 'uponEnroll',
+								'amountDue'  => $this->input->post('uponEnroll')
+							)
+						);
+
+						foreach($this->input->post('monthly') as $key => $value)
+						{
+							array_push(
+							 	$payablesData,
+							 	array(
+									'studID' 		 => $this->input->post('stud_id'),
+									'gradeLevel' => $this->input->post('gradeLevel'),
+									'assessmentID'  => $assessmentID,
+									'payables' 	 => $key,
+									'amountDue'  => $value
+								)
+							);
+						}
+					}
+
+					if ($this->db->insert_batch('tbl_payables_info', $payablesData))
+					{
+						return TRUE;
+					}
+					else
+					{
+						return FALSE;
+					}
+				}
+				else
+				{
+					return FALSE;
+				}
+			}
+			else
+			{
+				return FALSE;
+			}
+		}
+		else
+		{
+			$this->output->set_status_header(501);
+		}
+	}
+
+	public function get_assessment_info($uniq_id)
+	{
+		$this->db->select('a.rowID, a.gradeLevel, a.course_id, a.assessmentID, a.paymentScheme, a.discount, a.totalDiscount, a.totalDiscAmount, a.numUnits, a.numThesis, a.totalAmt, a.grandTotal, b.course_code, c.disc_code');
+		$this->db->from('tbl_assessment_info a');
+		$this->db->join('tbl_col_course b', 'b.course_id = a.course_id', 'left');
+		$this->db->join('tbl_discount c', 'c.row_id = a.discount', 'left');
+		$this->db->where('a.studID', $uniq_id);
+		$this->db->order_by('a.rowID', 'DESC');
+		$queryAssessment = $this->db->get();
+
+		if ($queryAssessment->num_rows() > 0)
+		{
+			return $queryAssessment->result();
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
+	public function get_assessment_details($id, $assessmentID)
+	{
+		$this->db->select('rowID, payables, amountDue, amountPaid');
+		$this->db->from('tbl_payables_info');
+		$this->db->where('gradeLevel', $id);
+		$this->db->where('assessmentID', $assessmentID);
+
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0)
+		{
+			return $query->result();
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
+	public function check_fee_row($id, $assessmentID)
+	{
+		$this->db->select('rowID');
+		$this->db->from('tbl_feespayables_info');
+		$this->db->where('feeId', $id);
+		$this->db->where('assessmentID', $assessmentID);
+
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 }

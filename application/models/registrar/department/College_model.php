@@ -420,7 +420,20 @@ class College_model extends CI_Model {
 
 					if ($this->db->insert_batch('tbl_payables_info', $payablesData))
 					{
-						return TRUE;
+						$logs = array(
+							"emp_id" => $this->session->userdata('uniq_id'),
+							"c_log" => "Generated assessment for student with LRN/Student ID of ".$this->input->post('stud_id')." with Assessment ID of ".$assessmentID,
+							"mod_date" => date('Y-m-d h:i:s a')
+						);
+
+						if ($this->db->insert('tbl_logs', $logs))
+						{
+							return TRUE;
+						}
+						else
+						{
+							return FALSE;
+						}
 					}
 					else
 					{
@@ -445,7 +458,7 @@ class College_model extends CI_Model {
 
 	public function get_assessment_info($uniq_id)
 	{
-		$this->db->select('a.rowID, a.gradeLevel, a.course_id, a.assessmentID, a.paymentScheme, a.discount, a.totalDiscount, a.totalDiscAmount, a.numUnits, a.numThesis, a.totalAmt, a.grandTotal, b.course_code, c.disc_code');
+		$this->db->select('a.rowID, a.gradeLevel, a.course_id, a.assessmentID, a.paymentScheme, a.discount, a.totalDiscount, a.totalDiscAmount, a.numUnits, a.numThesis, a.totalAmt, a.grandTotal, b.course_code, c.discount');
 		$this->db->from('tbl_assessment_info a');
 		$this->db->join('tbl_col_course b', 'b.course_id = a.course_id', 'left');
 		$this->db->join('tbl_discount c', 'c.row_id = a.discount', 'left');
@@ -465,12 +478,8 @@ class College_model extends CI_Model {
 
 	public function get_assessment_details($id, $assessmentID)
 	{
-		$this->db->select('rowID, payables, amountDue, amountPaid');
-		$this->db->from('tbl_payables_info');
-		$this->db->where('gradeLevel', $id);
-		$this->db->where('assessmentID', $assessmentID);
-
-		$query = $this->db->get();
+		$sql = 'SELECT a.rowID, a.payables, a.amountDue, SUM(b.amountPaid) as amountPaid, ABS(a.amountDue - SUM(b.amountPaid)) as balance FROM tbl_payables_info a LEFT JOIN tbl_transaction_tbl b ON b.assessmentRowId = a.rowID WHERE a.gradeLevel = "'.$id.'" AND a.assessmentID = '.$assessmentID.' GROUP BY a.rowID';
+		$query = $this->db->query($sql);
 
 		if ($query->num_rows() > 0)
 		{

@@ -37,7 +37,6 @@
               <thead>
                 <th></th>
                 <th>Discount Name</th>
-                <th class="text-center">Code</th>
                 <th class="text-right">Amount</th>
                 <th class="text-center">For</th>
                 <th class="text-center">Status</th>
@@ -70,14 +69,6 @@
             <div class="col-lg-2 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*Discount Name:</label></div>
             <div class="col-lg-9 col-sm-10 col-xs-12">
               <input type="text" id="dname" name="dname" placeholder="Fee Name" class="form-control form-control-sm" required data-parsley-required-message="This field is required" maxlength="50">
-            </div>
-          </div>
-        </div><!-- /.row form-group -->
-        <div class="row form-group">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="col-lg-2 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*Discount Code:</label></div>
-            <div class="col-lg-3 col-sm-3 col-xs-12">
-              <input type="text" id="dcode" name="dcode" placeholder="Fee Code" class="form-control form-control-sm" data-parsley-remote="discounts/check_disccode" data-parsley-remote-options="{ 'type': 'GET', 'dataType': 'json', 'data': { 'dCode': 'value' } }" data-parsley-remote-message="Code already exists" required data-parsley-required-message="This field is required" maxlength="10">
             </div>
           </div>
         </div><!-- /.row form-group -->
@@ -121,30 +112,3 @@
 <script src="<?php echo base_url('assets/assets/js/init-scripts/data-table/datatables-init.js'); ?>"></script>
 <script src="<?php echo base_url('assets/assets/js/pages/admin/discount_manager/discManager.js'); ?>"></script>
 <script src="<?php echo base_url('assets/parsley/dist/parsley.min.js'); ?>"></script>
-<script type="text/javascript">
-  jQuery(document).ready(function() {
-    var notice = jQuery('#notice');
-    var error = '<div class="alert  alert-danger alert-dismissible fade show" role="alert">'+
-                      '<?php echo $this->session->flashdata('error'); ?>'+
-                      '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
-                        '<span aria-hidden="true">&times;</span>'+
-                      '</button>'+
-                    '</div>';
-    var success = '<div class="alert  alert-success alert-dismissible fade show" role="alert">'+
-                      '<?php echo $this->session->flashdata('success'); ?>'+
-                      '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
-                        '<span aria-hidden="true">&times;</span>'+
-                      '</button>'+
-                    '</div>';
-
-    var flashNotice = "<?php echo $this->session->flashdata('error'); ?>";
-    var flashSuccess = "<?php echo $this->session->flashdata('success'); ?>";
-
-    if (flashNotice) {
-      notice.append(error);
-    }
-    if (flashSuccess) {
-      notice.append(success);
-    }
-  });
-</script>

@@ -28,20 +28,12 @@ class Discount_manager extends MY_Controller {
 		}
 	}
 
-	public function Check_disccode()
+	public function Get_departments()
 	{
 		if ($this->input->is_ajax_request())
 		{
-			$dCode = $this->input->get('dCode');
-			$result = $this->discdb->check_disccode($dCode);
-			if ($result == TRUE)
-			{
-				$this->output->set_status_header(200);
-			}
-			else
-			{
-				$this->output->set_status_header(500);
-			}
+			$result = $this->discdb->get_departments();
+			echo $result;
 		}
 		else
 		{

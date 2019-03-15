@@ -39,12 +39,17 @@ String.prototype.capitalize = function() {
 
 jQuery.getJSON('get_assessment_info',{id: dataId, assessmentID: assessmentID}, function(result){
 	var payables;
-
+	var balance = 0;
 	for(let x = 0;x <= result.length-1;x++){
-		var balance = parseFloat(result[x].amountPaid) - parseFloat(result[x].amountDue);
-		if (balance < 0) {
-			balance = 0;
-		}
+		balance = result[x].balance;
+			
+			if (balance == null) {
+				balance = parseFloat(result[x].amountDue);
+			} else if (parseFloat(balance) < 0) {
+				balance = 0;
+			} else {
+				balance = parseFloat(result[x].balance);
+			}
 
 		payables +='<tr>'+
 									'<td>'+
@@ -72,10 +77,9 @@ jQuery('[class^=nav-item]').on('click', function() {
 
 	jQuery.getJSON('get_assessment_info',{id: dataId, assessmentID: assessmentID}, function(result){
 		var payables;
-
 		for(let x = 0;x <= result.length-1;x++){
-			var balance = parseFloat(result[x].amountDue) - parseFloat(result[x].amountPaid);
-			if (balance < 0) {
+			var balance = parseFloat(result[x].balance);
+			if (balance > 0) {
 				balance = 0;
 			}
 

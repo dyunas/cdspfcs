@@ -12,10 +12,9 @@ jQuery(document).ready(function(){
 
 	jQuery.ajax({
 		type: 'GET',
-		url: 'fee-mgr/get_departments',
+		url: 'discounts/get_departments',
 		dataType: 'json',
 		success:function(data){
-			// console.log(data);
 			var html = '<option value="">---</option>';
 			if (data != false){
 				for(let x = 0;x <= data.length - 1;x++) {
@@ -77,7 +76,6 @@ jQuery(document).ready(function(){
             dtble.row.add([
                 data.row_id,
                 data.discount,
-                '<span class="text-center" style="display:block">'+data.disc_code+'</span>',
                 '<span class="text-right" style="display:block">'+data.disc_amnt+'</span>',
                 '<span class="text-center" style="display:block">'+data.dept_code+'</span>',
                 '<span class="text-center" style="display:block">'+status+'</span>',

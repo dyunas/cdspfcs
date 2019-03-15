@@ -241,7 +241,7 @@
               <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                   <?php foreach($assessmentInfo as $row): ?>
-                    <a class="nav-item nav-link" id="<?php echo $row->rowID; ?>" data-id="<?php echo $row->gradeLevel ?>" data-assessmentID="<?php echo $row->assessmentID ?>" data-toggle="tab" href="<?php echo '#custom-nav-'.$row->rowID; ?>" role="tab" aria-controls="custom-nav-profile" aria-selected="false"><?php echo $row->gradeLevel; ?></a>
+                    <a class="nav-items nav-item nav-link" id="<?php echo $row->rowID; ?>" data-id="<?php echo $row->gradeLevel ?>" data-assessmentID="<?php echo $row->assessmentID ?>" data-toggle="tab" href="<?php echo '#custom-nav-'.$row->rowID; ?>" role="tab" aria-controls="custom-nav-profile" aria-selected="false"><?php echo $row->gradeLevel; ?></a>
                   <?php endforeach; ?>
                   <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-profile" role="tab" aria-controls="custom-nav-profile" aria-selected="false">Others</a>
                   <a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab" href="#custom-nav-contact" role="tab" aria-controls="custom-nav-contact" aria-selected="false">History</a>
@@ -288,24 +288,6 @@
                                 <td><?php echo 'Php '.number_format($row->totalAmt, 2, '.', ','); ?></td>
                               </tr>
                               <tr>
-                                <td colspan="2">
-                                  <div class="col col-sm-2 d-none d-sm-block">
-                                    <label for="tnum1" class=" form-control-label">Discount</label>
-                                  </div>
-                                  <div class="col col-sm-6">
-                                    <strong><?php echo $row->disc_code; ?></strong>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>                            
-                                <?php
-                                  if ($row->totalDiscount > 0):
-                                    echo "<td><strong>".$row->totalDiscount."% in Tuition Fee</strong></td>";
-                                    echo "<td><strong>Php ".number_format($row->totalDiscAmount, 2, '.', ',')."</strong></td>";
-                                  endif;
-                                ?>                            
-                              </tr>
-                              <tr>
                                 <td style="font-weight: bold;font-size: 14px;"><em>TOTAL AMOUNT:</em></td>
                                 <td style="text-align: right;font-style: italic;"><?php echo "Php ".number_format($row->grandTotal, 2, '.', ',') ?></span></td>
                               </tr>
@@ -323,6 +305,32 @@
                           <div class="col col-sm-6">
                             Payment Scheme:
                             <strong><?php echo $row->paymentScheme ?></strong>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <div class="card-header">
+                          <strong>Discounts</strong>
+                        </div>
+                        <div class="card-body">
+                          <div class="col col-sm-12">
+                            <table class="table">
+                              <tbody>
+                                <tr>
+                                  <td colspan="3">
+                                    <strong><?php echo ($row->discount) ? $row->discount : 'No discount'; ?></strong>
+                                  </td>
+                                </tr>
+                                <tr>                            
+                                  <?php
+                                    if ($row->totalDiscount > 0):
+                                      echo "<td><strong>".$row->totalDiscount."% in Tuition Fee</strong></td>";
+                                      echo "<td><strong>Php ".number_format($row->totalDiscAmount, 2, '.', ',')."</strong></td>";
+                                    endif;
+                                  ?>
+                                </tr>
+                              </tbody>
+                            </table>
                           </div>
                         </div>
                       </div>
@@ -455,23 +463,6 @@
                       <td><span id="total"></span><input type="hidden" name="totalAmount" id="totalAmount" value=""></td>
                     </tr>
                     <tr>
-                      <td colspan="2">
-                        <div class="col col-sm-2 d-none d-sm-block">
-                          <label for="tnum1" class=" form-control-label">Discount</label>
-                        </div>
-                        <div class="col col-sm-6">
-                          <select name="discount" id="discount" class="form-control form-control-sm" disabled>
-                            <option value="">---</option>
-                            <?php foreach ($discounts as $discount): ?>
-                              <option value="<?php echo $discount->row_id ?>"><?php echo $discount->disc_code ?></option>
-                            <?php endforeach ?>
-                          </select>
-                          <input type="hidden" id="hidDiscount" value="0">
-                        </div>
-                      </td>
-                    </tr>
-                    <tr id="discHere"></tr>
-                    <tr>
                       <td style="font-weight: bold;font-size: 14px;"><em>TOTAL AMOUNT:</em></td>
                       <td style="text-align: right;font-style: italic;"><span id="totAmount"></span><input type="hidden" name="grandTotal" id="grandTotal" value=""></td>
                     </tr>
@@ -495,6 +486,36 @@
                     <option value="ENPL">ENPL</option>
                   </select>
                   <input type="hidden" id="hidSchemeDiscount" value="0">
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <strong>Discounts</strong>
+              </div>
+              <div class="card-body">
+                <div class="col col-sm-12">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td colspan="3">
+                          <div class="col col-sm-2 d-none d-sm-block">
+                            <label for="tnum1" class=" form-control-label">Discount</label>
+                          </div>
+                          <div class="col col-sm-6">
+                            <select name="discount" id="discount" class="form-control form-control-sm" disabled>
+                              <option value="">---</option>
+                              <?php foreach ($discounts as $discount): ?>
+                                <option value="<?php echo $discount->row_id ?>"><?php echo $discount->discount ?></option>
+                              <?php endforeach ?>
+                            </select>
+                            <input type="hidden" id="hidDiscount" value="0">
+                          </div>
+                        </td>
+                      </tr>
+                      <tr id="discHere"></tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>

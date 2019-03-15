@@ -202,7 +202,7 @@ class Junior_high_school_model extends CI_Model {
 	{
 		if ($id === FALSE)
 		{
-			$this->db->select('a.department, b.row_id, b.disc_code, b.disc_amnt');
+			$this->db->select('a.department, b.row_id, b.discount, b.disc_amnt');
 			$this->db->from('tbl_departments a');
 			$this->db->join('tbl_discount b', 'b.disc_for = a.dept_id');
 			$this->db->like('a.department', 'junior high', 'both');
@@ -363,7 +363,7 @@ class Junior_high_school_model extends CI_Model {
 
 	public function get_assessment_info($uniq_id)
 	{
-		$this->db->select('a.rowID, a.gradeLevel, a.assessmentID, a.paymentScheme, a.discount, a.totalDiscount, a.totalDiscAmount, a.totalAmt, a.grandTotal, b.grd_lvl, c.disc_code');
+		$this->db->select('a.rowID, a.gradeLevel, a.assessmentID, a.paymentScheme, a.discount, a.totalDiscount, a.totalDiscAmount, a.totalAmt, a.grandTotal, b.grd_lvl, c.discount');
 		$this->db->from('tbl_assessment_info a');
 		$this->db->join('tbl_grd_level b', 'b.grd_id = a.gradeLevel', 'left');
 		$this->db->join('tbl_discount c', 'c.row_id = a.discount', 'left');
@@ -383,12 +383,8 @@ class Junior_high_school_model extends CI_Model {
 
 	public function get_assessment_details($id, $assessmentID)
 	{
-		$this->db->select('rowID, payables, amountDue, amountPaid');
-		$this->db->from('tbl_payables_info');
-		$this->db->where('gradeLevel', $id);
-		$this->db->where('assessmentID', $assessmentID);
-
-		$query = $this->db->get();
+		$sql = 'SELECT a.rowID, a.payables, a.amountDue, SUM(b.amountPaid) as amountPaid, ABS(a.amountDue - SUM(b.amountPaid)) as balance FROM tbl_payables_info a LEFT JOIN tbl_transaction_tbl b ON b.assessmentRowId = a.rowID WHERE a.gradeLevel = "'.$id.'" AND a.assessmentID = '.$assessmentID.' GROUP BY a.rowID';
+		$query = $this->db->query($sql);
 
 		if ($query->num_rows() > 0)
 		{

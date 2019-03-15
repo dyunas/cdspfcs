@@ -121,6 +121,7 @@ window.onload = function() {
 					var id = jQuery(this).attr('data-id');
 					var thesisFee = jQuery('#thesisFee');
 					var thesisTotal = parseFloat(units) * parseFloat(thesisFee.val())
+					jQuery('#numOfThesis').val(units);
 					payment = misc + parseFloat(totalTuitionFee.val()) + thesisTotal;
 					totalThesisFee.val(thesisTotal);
 					jQuery('#rowAmount'+id).val(parseFloat(units) * parseFloat(thesisFee.val()));
@@ -136,6 +137,7 @@ window.onload = function() {
 				numThesis.prop('disabled', true);
 				numThesis.val('');
 				jQuery('#rowAmount'+id).val(0);
+				jQuery('#numOfThesis').val(0);
 				payment -= parseFloat(totalThesisFee.val());
 				totalThesisFee.val(0);
 				jQuery('#totalThesisHere').html('Php '+number_format(0, 2, '.', ','));
@@ -180,21 +182,12 @@ window.onload = function() {
 				hiddenDiscount.val(data.disc_amnt);
 				if (scheme == 'CASH') {
 					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount));
-					var monthly = 0;
+					var term = 0;
 				}
-				else if (scheme == 'MINIMUM')
+				else
 				{
-					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.40;
-					var monthly = parseFloat(upon) / 9;
-				}
-				else if(scheme == 'PARTIAL')
-				{
-					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.50;
-					var monthly = parseFloat(upon) / 9;
-				}
-				else if (scheme == 'ENPL'){
-					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 10;
-					var monthly  = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 10;
+					var upon = parseFloat(5000);
+					var term = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 3;
 				}
 			} else {
 				var computedDiscount = ((parseFloat(0) + parseFloat(hiddenSchemeDiscount.val())) / 100) * parseFloat(tuition);
@@ -212,66 +205,33 @@ window.onload = function() {
 					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount));
 					var monthly = 0;
 				}
-				else if (scheme == 'MINIMUM')
+				else
 				{
-					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.40;
-					var monthly = parseFloat(upon) / 9;
-				}
-				else if(scheme == 'PARTIAL')
-				{
-					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.50;
-					var monthly = parseFloat(upon) / 9;
-				}
-				else if (scheme == 'ENPL'){
-					var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 10;
-					var monthly  = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 10;
+					var upon = parseFloat(5000);
+					var term = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 3;
 				}
 			}
 
 			var payables ='<tr>'+
-												'<td>'+
-												  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>Upon Enrollment</strong></div>'+
-												'</td>'+
-												'<td>'+
-												 'Php '+number_format(upon, 2,'.', ',')+
-												'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>July</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>August</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>September</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>October</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>November</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>December</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>January</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>February</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>'+
-											'<tr>'+
-												'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>March</strong></div></td>'+
-												'<td>Php '+number_format(monthly, 2,'.', ',')+'</td>'+
-											'</tr>';
+														'<td>'+
+														  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>Upon Enrollment</strong></div>'+
+														'</td>'+
+														'<td>'+
+														 'Php '+number_format(upon, 2,'.', ',')+
+														'</td> <input type="hidden" name="uponEnroll" value="'+upon+'"/>'+
+													'</tr>'+
+													'<tr>'+
+														'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>Prelim</strong></div></td>'+
+														'<td>Php '+number_format(term, 2,'.', ',')+'</td><input type="hidden" name="monthly[prelim]" value="'+term+'"/>'+
+													'</tr>'+
+													'<tr>'+
+														'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>Midterm</strong></div></td>'+
+														'<td>Php '+number_format(term, 2,'.', ',')+'</td><input type="hidden" name="monthly[midterm]" value="'+term+'"/>'+
+													'</tr>'+
+													'<tr>'+
+														'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>Finals</strong></div></td>'+
+														'<td>Php '+number_format(term, 2,'.', ',')+'</td><input type="hidden" name="monthly[finals]" value="'+term+'"/>'+
+													'</tr>';
 
 			jQuery('#payables').html(payables);
 			jQuery('#discHere').html(html);
@@ -305,79 +265,42 @@ window.onload = function() {
 		else {
 			var computedDiscount = ((parseFloat(hiddenDiscount.val()) + 0) / 100) * parseFloat(tuition);
 			var html ='<td colspan="2">'+
-							  '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">'+number_format(parseFloat(hiddenDiscount.val()) + parseFloat(0), 2, '.')+'%</div>'+
-							  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>in Tuition Fee</strong></div>'+
-							'</td>'+
-							'<td>'+
-							 'Php '+number_format(computedDiscount, 2,'.', ',')+
-							'</td>';
-			jQuery('#totalDiscount').val(parseFloat(hiddenDiscount.val()) + 10);
+								  number_format(parseFloat(hiddenDiscount.val()) + parseFloat(0), 2, '.')+'%'+
+								  '<strong>in Tuition Fee</strong>'+
+								'</td>'+
+								'<td>'+
+								 'Php '+number_format(computedDiscount, 2,'.', ',')+
+								'</td>';
+			jQuery('#totalDiscount').val(parseFloat(hiddenDiscount.val()));
 			jQuery('#totalDiscAmount').val(computedDiscount);				
 			jQuery('#discHere').html(html);
 			hiddenSchemeDiscount.val('0');
 			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)), 2, '.', ','));
 			jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)));
-
-			if (scheme == 'MINIMUM')
-			{
-				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.40;
-				var monthly = parseFloat(upon) / 9;
-			}
-			else if(scheme == 'PARTIAL')
-			{
-				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) * 0.50;
-				var monthly = parseFloat(upon) / 9;
-			}
-			else if (scheme == 'ENPL'){
-				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 10;
-				var monthly  = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 10;
-			}
+			var upon = parseFloat(5000);
+			var term = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(computedDiscount)) / 3;
 		}
 
 		var payables ='<tr>'+
-											'<td>'+
-											  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>Upon Enrollment</strong></div>'+
-											'</td>'+
-											'<td>'+
-											 'Php '+number_format(upon, 2,'.', ',')+
-											'</td> <input type="hidden" name="uponEnroll" value="'+upon+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>July</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[july]" value="'+monthly+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>August</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[august]" value="'+monthly+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>September</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[september]" value="'+monthly+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>October</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[october]" value="'+monthly+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>November</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[november]" value="'+monthly+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>December</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[december]" value="'+monthly+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>January</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[january]" value="'+monthly+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>February</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[february]" value="'+monthly+'"/>'+
-										'</tr>'+
-										'<tr>'+
-											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>March</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[march]" value="'+monthly+'"/>'+
-										'</tr>';
+										'<td>'+
+										  '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>Upon Enrollment</strong></div>'+
+										'</td>'+
+										'<td>'+
+										 'Php '+number_format(upon, 2,'.', ',')+
+										'</td> <input type="hidden" name="uponEnroll" value="'+upon+'"/>'+
+									'</tr>'+
+									'<tr>'+
+										'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>Prelim</strong></div></td>'+
+										'<td>Php '+number_format(term, 2,'.', ',')+'</td><input type="hidden" name="monthly[prelim]" value="'+term+'"/>'+
+									'</tr>'+
+									'<tr>'+
+										'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>Midterm</strong></div></td>'+
+										'<td>Php '+number_format(term, 2,'.', ',')+'</td><input type="hidden" name="monthly[midterm]" value="'+term+'"/>'+
+									'</tr>'+
+									'<tr>'+
+										'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>Finals</strong></div></td>'+
+										'<td>Php '+number_format(term, 2,'.', ',')+'</td><input type="hidden" name="monthly[finals]" value="'+term+'"/>'+
+									'</tr>';
 
 		jQuery('#payables').html(payables);
 	});

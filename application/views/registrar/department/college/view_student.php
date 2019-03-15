@@ -326,24 +326,6 @@
                                 <td><?php echo 'Php '.number_format($row->totalAmt, 2, '.', ','); ?></td>
                               </tr>
                               <tr>
-                                <td colspan="2">
-                                  <div class="col col-sm-2 d-none d-sm-block">
-                                    <label for="tnum1" class=" form-control-label">Discount</label>
-                                  </div>
-                                  <div class="col col-sm-6">
-                                    <strong><?php echo $row->disc_code; ?></strong>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>                            
-                                <?php
-                                  if ($row->totalDiscount > 0):
-                                    echo "<td><strong>".$row->totalDiscount."% in Tuition Fee</strong></td>";
-                                    echo "<td><strong>Php ".number_format($row->totalDiscAmount, 2, '.', ',')."</strong></td>";
-                                  endif;
-                                ?>                            
-                              </tr>
-                              <tr>
                                 <td style="font-weight: bold;font-size: 14px;" colspan="2"><em>TOTAL AMOUNT:</em></td>
                                 <td style="text-align: right;font-style: italic;"><?php echo "Php ".number_format($row->grandTotal, 2, '.', ',') ?></span></td>
                               </tr>
@@ -361,6 +343,32 @@
                           <div class="col col-sm-6">
                             Payment Scheme:
                             <strong><?php echo $row->paymentScheme ?></strong>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <div class="card-header">
+                          <strong>Discounts</strong>
+                        </div>
+                        <div class="card-body">
+                          <div class="col col-sm-12">
+                            <table class="table">
+                              <tbody>
+                                <tr>
+                                  <td colspan="3">
+                                    <strong><?php echo ($row->discount) ? $row->discount : 'No discount'; ?></strong>
+                                  </td>
+                                </tr>
+                                <tr>                            
+                                  <?php
+                                    if ($row->totalDiscount > 0):
+                                      echo "<td><strong>".$row->totalDiscount."% in Tuition Fee</strong></td>";
+                                      echo "<td><strong>Php ".number_format($row->totalDiscAmount, 2, '.', ',')."</strong></td>";
+                                    endif;
+                                  ?>
+                                </tr>
+                              </tbody>
+                            </table>
                           </div>
                         </div>
                       </div>
@@ -488,7 +496,7 @@
                             <input type="hidden" id="tuitionFee" value="<?php echo $fee->amount; ?>">
                             <input type="hidden" id="totalTuitionFee" value="0">
                           <?php elseif(stripos($fee->fee_name, 'thesis') !== FALSE): ?>
-                            <input type="text" class="form-control-sm form-control tuition-fee" name="numThesis" id="numThesis" data-id="<?php echo $fee->row_id ?>" value="" data-parsley-type="number" data-parsley-type-message="" maxlength="2" disabled>
+                            <input type="text" class="form-control-sm form-control tuition-fee" id="numThesis" data-id="<?php echo $fee->row_id ?>" value="" data-parsley-type="number" data-parsley-type-message="" maxlength="2" disabled>
                             <input type="hidden" id="thesisFee" value="<?php echo $fee->amount; ?>">
                             <input type="hidden" id="totalThesisFee" value="0">
                           <?php endif; ?>
@@ -507,6 +515,7 @@
                         </td>
                       </tr>
                       <?php endforeach ?>
+                      <input type="hidden" name="numThesis" id="numOfThesis" value="0">
                     <?php else: ?>
                     <?php endif ?>
                   </tbody>
@@ -516,23 +525,6 @@
                       <td></td>
                       <td><span id="total"></span><input type="hidden" name="totalAmount" id="totalAmount" value=""></td>
                     </tr>
-                    <tr>
-                      <td colspan="3">
-                        <div class="col col-sm-2 d-none d-sm-block">
-                          <label for="tnum1" class=" form-control-label">Discount</label>
-                        </div>
-                        <div class="col col-sm-6">
-                          <select name="discount" id="discount" class="form-control form-control-sm" disabled>
-                            <option value="">---</option>
-                            <?php foreach ($discounts as $discount): ?>
-                              <option value="<?php echo $discount->row_id ?>"><?php echo $discount->disc_code ?></option>
-                            <?php endforeach ?>
-                          </select>
-                          <input type="hidden" id="hidDiscount" value="0">
-                        </div>
-                      </td>
-                    </tr>
-                    <tr id="discHere"></tr>
                     <tr>
                       <td style="font-weight: bold;font-size: 14px;"><em>TOTAL AMOUNT:</em></td>
                       <td></td>
@@ -553,10 +545,38 @@
                   <select name="paymentScheme" id="paymentScheme" class="form-control form-control-sm" disabled required>
                     <option value="">---</option>
                     <option value="CASH">CASH</option>
-                    <option value="MINIMUM">MINIMUM</option>
-                    <option value="PARTIAL">PARTIAL</option>
-                    <option value="ENPL">ENPL</option>
+                    <option value="INSTALLMENT">INSTALLMENT</option>
                   </select>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <strong>Discounts</strong>
+              </div>
+              <div class="card-body">
+                <div class="col col-sm-12">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td colspan="3">
+                          <div class="col col-sm-2 d-none d-sm-block">
+                            <label for="tnum1" class=" form-control-label">Discount</label>
+                          </div>
+                          <div class="col col-sm-6">
+                            <select name="discount" id="discount" class="form-control form-control-sm" disabled>
+                              <option value="">---</option>
+                              <?php foreach ($discounts as $discount): ?>
+                                <option value="<?php echo $discount->row_id ?>"><?php echo $discount->discount ?></option>
+                              <?php endforeach ?>
+                            </select>
+                            <input type="hidden" id="hidDiscount" value="0">
+                          </div>
+                        </td>
+                      </tr>
+                      <tr id="discHere"></tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>

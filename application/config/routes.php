@@ -83,10 +83,13 @@ $route['logout'] = 'Login/Logout';
 	// DISCOUNTS
 	$route['admin/discounts/create_new_discount'] = 'admin/discount_manager/Discount_manager/Create_new_discount';
 	$route['admin/discounts/check_disccode'] = 'admin/discount_manager/Discount_manager/Check_disccode';
+	$route['admin/discounts/get_departments'] = 'admin/discount_manager/Discount_manager/Get_departments';
 	$route['admin/discounts/get_discount_table'] = 'admin/discount_manager/Discount_manager/Get_discount_table';
 	$route['admin/discounts'] = 'admin/discount_manager/Discount_manager/Index';
 
 	// ACADEMIC YEAR AND SEMESTER
+	$route['admin/aysem/update_semester'] = 'admin/aysem_manager/Aysem_manager/Update_semester';
+	$route['admin/aysem/update_acadyear'] = 'admin/aysem_manager/Aysem_manager/Update_acadyear';
 	$route['admin/aysem'] = 'admin/aysem_manager/Aysem_manager/Index';
 
 // REGISTRAR
@@ -156,3 +159,13 @@ $route['logout'] = 'Login/Logout';
 	$route['cashier/dept/elementary/view/(:any)'] = 'cashier/department/elementary/Elementary/View_student/$1';
 	$route['cashier/dept/elementary/get_elem_table_data'] = 'registrar/department/elementary/Elementary/Get_elem_table_data';
 	$route['cashier/dept/elementary'] = 'cashier/department/elementary/Elementary/Index';
+
+	// DEPARTMENT
+	$route['cashier/dept/college/view/process_payment'] = 'cashier/department/college/College/Process_payment';
+	$route['cashier/dept/college/view/get_payables_info'] = 'cashier/department/college/College/Get_payables_info';
+	$route['cashier/dept/college/view/check_fee_row'] = 'cashier/department/college/College/Check_fee_row';
+	$route['cashier/dept/college/view/get_assessment_info'] = 'cashier/department/college/College/Get_assessment_info';
+	$route['cashier/dept/college/view/get_discount_amount'] = 'cashier/department/college/College/Get_discount_amount';
+	$route['cashier/dept/college/view/(:any)'] = 'cashier/department/college/College/View_student/$1';
+	$route['cashier/dept/college/get_col_table_data'] = 'cashier/department/college/College/Get_col_table_data';
+	$route['cashier/dept/college'] = 'cashier/department/college/College/Index';

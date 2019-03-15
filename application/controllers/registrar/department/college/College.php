@@ -31,7 +31,6 @@ class College extends MY_Controller {
 	{
 		if ($this->input->is_ajax_request())
 		{
-			// var_dump($this->input->post());
 			if ($this->coldb->register_student())
 			{
 				

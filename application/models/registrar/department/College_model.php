@@ -333,6 +333,42 @@ class College_model extends CI_Model {
 		}
 	}
 
+	public function get_discounts($id = FALSE)
+	{
+		if ($id === FALSE)
+		{
+			$this->db->select('a.department, b.row_id, b.discount, b.disc_amnt');
+			$this->db->from('tbl_departments a');
+			$this->db->join('tbl_discount b', 'b.disc_for = a.dept_id');
+			$this->db->like('a.department', 'College', 'both');
+			$this->db->where('b.status', 1);
+			$query = $this->db->get();
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->result();
+			}
+			else
+			{
+				return FALSE;
+			}
+		}
+
+		$this->db->select('disc_amnt');
+		$this->db->from('tbl_discount');
+		$this->db->where('row_id', $id);
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0)
+		{
+			return json_encode($query->row());
+		}
+		else
+		{
+			return json_encode(false);
+		}
+	}
+
 	public function insert_student_assessment_info()
 	{
 		$this->db->select('rowID');
@@ -507,6 +543,21 @@ class College_model extends CI_Model {
 		else
 		{
 			return false;
+		}
+	}
+
+	public function upload_avatar($file_name)
+	{
+		$this->db->set('stud_avatar', $file_name);
+		$this->db->where('stud_id', $this->input->post('studId'));
+
+		if($this->db->update('tbl_stud_info_col'))
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
 		}
 	}
 }

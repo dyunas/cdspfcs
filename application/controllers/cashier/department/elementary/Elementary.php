@@ -23,6 +23,7 @@ class Elementary extends MY_Controller {
 		);
 
 		$data["fees"] = $this->elemCashierdb->get_school_fees($data["stud_info"]->stud_grade_lvl);
+		$data["paymentHistory"] = $this->glob->get_payment_history($studID);
 
 		$this->load->view('templates/header');
 		$this->load->view('templates/navigation');
@@ -60,6 +61,22 @@ class Elementary extends MY_Controller {
 		}
 	}
 
+	public function Get_payables_info()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$id = $this->input->get('id');
+			$assessmentID = $this->input->get('assessmentID');
+			$result = $this->elemCashierdb->get_payables_details($id, $assessmentID);
+
+			echo json_encode($result);
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
 	public function Check_fee_row()
 	{
 		if ($this->input->is_ajax_request())
@@ -79,7 +96,28 @@ class Elementary extends MY_Controller {
 	{
 		if ($this->input->is_ajax_request())
 		{
-			print_r($this->input->post());
+			if ($this->elemCashierdb->process_payment())
+			{
+				echo json_encode(true);
+			}
+			else
+			{
+				echo json_encode(false);
+			}
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
+	public function Get_payment_history()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$orNum = $this->input->get('orNum');
+			$result = $this->glob->get_payment_history_dtls($orNum);
+			echo $result;
 		}
 		else
 		{

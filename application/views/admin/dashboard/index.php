@@ -27,38 +27,30 @@
     <div class="row">
       <div class="col-lg-6 col-md-12">
         <div class="card">
-        <a href="<?php echo site_url(); ?>" style="color:#000;">
+        <a href="#" data-toggle="modal" data-target="#acadYrModal" data-backdrop="static" data-keyboard="false" style="color:#000;">
           <div class="card-body">
-            <div class="stat-widget-four">
-              <div class="stat-icon dib">
-                <i class="ti-calendar text-muted"></i>
-              </div><!-- stat-icon dib -->
-              <div class="stat-content">
-                <div class="text-left dib">
-                  <div class="stat-heading">2018 - 2019</div><!-- /.stat-heading -->
-                  <div class="stat-text">Academic Year</div><!-- /.stat-text -->
-                </div><!-- /.text-left dib -->
-              </div><!-- /.stat-content -->
-            </div><!-- /.stat-widget-four -->
+            <div class="stat-widget-one">
+              <div class="stat-icon dib"><i class="ti-calendar text-warning border-danger"></i></div>
+              <div class="stat-content dib">
+                <div class="stat-text">Academic Year</div>
+                <div class="stat-digit"><span id="acadYear"><?php echo $activeAcadYear->acad_yr; ?></span></div>
+              </div>
+            </div>
           </div><!-- /.card-body -->
         </a>
         </div><!-- /.card -->
       </div><!-- /.col-lg-6 col-md-12 -->
       <div class="col-lg-6 col-md-12">
         <div class="card">
-        <a href="<?php echo site_url(); ?>" style="color:#000;">
+        <a href="#" data-toggle="modal" data-target="#semesterModal" data-backdrop="static" data-keyboard="false" style="color:#000;">
           <div class="card-body">
-            <div class="stat-widget-four">
-              <div class="stat-icon dib">
-                <i class="ti-calendar text-muted"></i>
-              </div><!-- stat-icon dib -->
-              <div class="stat-content">
-                <div class="text-left dib">
-                  <div class="stat-heading">2nd Semester</div><!-- /.stat-heading -->
-                  <div class="stat-text">Semester</div><!-- /.stat-text -->
-                </div><!-- /.text-left dib -->
-              </div><!-- /.stat-content -->
-            </div><!-- /.stat-widget-four -->
+            <div class="stat-widget-one">
+              <div class="stat-icon dib"><i class="ti-calendar text-warning border-danger"></i></div>
+              <div class="stat-content dib">
+                <div class="stat-text">Semester</div>
+                <div class="stat-digit"><span id="semester"><?php echo $activeSemester->semester.' Semester'; ?></span></div>
+              </div>
+            </div>
           </div><!-- /.card-body -->
         </a>
         </div><!-- /.card -->

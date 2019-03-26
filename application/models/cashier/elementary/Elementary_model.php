@@ -54,7 +54,7 @@ class Elementary_model extends CI_Model {
 
 	public function get_assessment_info($studID)
 	{
-		$this->db->select('a.rowID, a.gradeLevel, a.assessmentID, a.paymentScheme, a.discount, a.totalDiscount, a.totalDiscAmount, a.totalAmt, a.grandTotal, b.grd_lvl, c.disc_code');
+		$this->db->select('a.rowID, a.gradeLevel, a.assessmentID, a.paymentScheme, a.discount, a.totalDiscount, a.totalDiscAmount, a.totalAmt, a.grandTotal, b.grd_lvl, c.discount');
 		$this->db->from('tbl_assessment_info a');
 		$this->db->join('tbl_grd_level b', 'b.grd_id = a.gradeLevel', 'left');
 		$this->db->join('tbl_discount c', 'c.row_id = a.discount', 'left');
@@ -74,16 +74,27 @@ class Elementary_model extends CI_Model {
 
 	public function get_assessment_details($id, $assessmentID)
 	{
-		$this->db->select('rowID, payables, amountDue, amountPaid');
-		$this->db->from('tbl_payables_info');
-		$this->db->where('gradeLevel', $id);
-		$this->db->where('assessmentID', $assessmentID);
-
-		$query = $this->db->get();
+		$sql = 'SELECT a.rowID, a.payables, a.amountDue, SUM(b.amountPaid) as amountPaid, ABS(a.amountDue - SUM(b.amountPaid)) as balance FROM tbl_payables_info a LEFT JOIN tbl_transaction_tbl b ON b.assessmentRowId = a.rowID WHERE a.gradeLevel = "'.$id.'" AND a.assessmentID = '.$assessmentID.' GROUP BY a.rowID';
+		$query = $this->db->query($sql);
 
 		if ($query->num_rows() > 0)
 		{
 			return $query->result();
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
+	public function get_payables_details($id, $assessmentID)
+	{
+		$sql = 'SELECT a.rowID, a.payables, a.amountDue, SUM(b.amountPaid) as prevPymnt, ABS(a.amountDue - SUM(b.amountPaid)) as balance FROM tbl_payables_info a LEFT JOIN tbl_transaction_tbl b on b.assessmentRowId = a.rowID WHERE a.rowID = '.$id.' AND a.assessmentID = '.$assessmentID;
+		$query = $this->db->query($sql);
+
+		if ($query->num_rows() > 0)
+		{
+			return $query->row();
 		}
 		else
 		{
@@ -107,6 +118,105 @@ class Elementary_model extends CI_Model {
 		else
 		{
 			return false;
+		}
+	}
+
+	public function process_payment()
+	{
+		$this->db->select('rowID');
+		$this->db->from('tbl_transaction_tbl');
+		$this->db->where('assessmentRowId', $this->input->post('assessmentRowId'));
+		$this->db->where('assessmentID', $this->input->post('assessmentID'));
+		$query = $this->db->get();
+		if ($query->num_rows() > 0)
+		{
+			$data = array(
+				"assessmentRowId"	=> $this->input->post('assessmentRowId'),
+				"assessmentID"		=> $this->input->post('assessmentID'),
+				"studid"					=> $this->input->post('studid'),
+				"emp_uniq_id"			=> $this->session->userdata('uniq_id'),
+				"transDate"				=> date('Y-m-d h:i:s a'),
+				"invoiceNum"			=> $this->input->post('invoiceNum'),
+				"orNum"						=> $this->input->post('orNum'),
+				"amountPaid"			=> $this->input->post('amountPaid'),
+				"balanceAmt"			=> $this->input->post('balanceAmt'),
+			);
+
+			if ($this->db->insert('tbl_transaction_tbl', $data))
+			{
+				$logs = array(
+					"emp_id" => $this->session->userdata('uniq_id'),
+					"c_log" => "Processed payment of student with LRN/Student ID of ".$this->input->post('studid')." with Invoice No.# of ".$this->input->post('invoiceNum')." and with O.R. No# of ".$this->input->post('orNum'),
+					"mod_date" => date('Y-m-d h:i:s a')
+				);
+
+				if ($this->db->insert('tbl_logs', $logs))
+				{
+					return TRUE;
+				}
+				else
+				{
+					return FALSE;
+				}
+			} 
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			$data = array(
+				"assessmentRowId"	=> $this->input->post('assessmentRowId'),
+				"assessmentID"		=> $this->input->post('assessmentID'),
+				"studid"					=> $this->input->post('studid'),
+				"emp_uniq_id"			=> $this->session->userdata('uniq_id'),
+				"transDate"				=> date('Y-m-d h:i:s a'),
+				"invoiceNum"			=> $this->input->post('invoiceNum'),
+				"orNum"						=> $this->input->post('orNum'),
+				"amountPaid"			=> $this->input->post('amountPaid'),
+				"balanceAmt"			=> $this->input->post('balanceAmt'),
+			);
+
+			if ($this->db->insert('tbl_transaction_tbl', $data))
+			{
+				if (intval($this->input->post('amountPaid')) <= 1000)
+				{
+					$status = 'reserved';
+				}
+				else
+				{
+					$status = 'enrolled';
+				}
+
+				$this->db->set('stud_status', $status);
+				$this->db->where('stud_lrn', $this->input->post('studid'));
+				if ($this->db->update('tbl_stud_info_elem'))
+				{
+					$logs = array(
+						"emp_id" => $this->session->userdata('uniq_id'),
+						"c_log" => "Processed payment of student with LRN/Student ID of ".$this->input->post('studid')." with Invoice No.# of ".$this->input->post('invoiceNum')." and with O.R. No# of ".$this->input->post('orNum'),
+						"mod_date" => date('Y-m-d h:i:s a')
+					);
+
+					if ($this->db->insert('tbl_logs', $logs))
+					{
+						return TRUE;
+					}
+					else
+					{
+						return FALSE;
+					}
+				}
+				else
+				{
+					return false;
+				}
+			} 
+			else
+			{
+				return false;
+			}
 		}
 	}
 }

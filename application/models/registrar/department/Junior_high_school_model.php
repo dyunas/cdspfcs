@@ -6,6 +6,22 @@ class Junior_high_school_model extends CI_Model {
 		parent::__construct();
 	}
 
+	public function check_stud_lrn($lrn)
+	{
+		$this->db->select('stud_lrn');
+		$this->db->from('tbl_stud_info_jhs');
+		$this->db->where('stud_lrn', $lrn);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0)
+		{
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
+	}
+
 	public function register_student()
 	{
 		$data = array(
@@ -338,7 +354,20 @@ class Junior_high_school_model extends CI_Model {
 
 					if ($this->db->insert_batch('tbl_payables_info', $payablesData))
 					{
-						return TRUE;
+						$logs = array(
+							"emp_id" => $this->session->userdata('uniq_id'),
+							"c_log" => "Generated assessment for student with LRN/Student ID of ".$this->input->post('LRN')." with Assessment ID of ".$assessmentID,
+							"mod_date" => date('Y-m-d h:i:s a')
+						);
+
+						if($this->db->insert('tbl_logs', $logs))
+						{
+							return TRUE;
+						}
+						else
+						{
+							return FALSE;
+						}
 					}
 					else
 					{
@@ -363,7 +392,7 @@ class Junior_high_school_model extends CI_Model {
 
 	public function get_assessment_info($uniq_id)
 	{
-		$this->db->select('a.rowID, a.gradeLevel, a.assessmentID, a.paymentScheme, a.discount, a.totalDiscount, a.totalDiscAmount, a.totalAmt, a.grandTotal, b.grd_lvl, c.discount');
+		$this->db->select('a.rowID, a.gradeLevel, a.assessmentID, a.paymentScheme, a.discount, a.totalDiscount, a.totalDiscAmount, a.escGrant, a.escGrantAmnt, a.totalAmt, a.grandTotal, b.grd_lvl, c.discount');
 		$this->db->from('tbl_assessment_info a');
 		$this->db->join('tbl_grd_level b', 'b.grd_id = a.gradeLevel', 'left');
 		$this->db->join('tbl_discount c', 'c.row_id = a.discount', 'left');
@@ -412,6 +441,21 @@ class Junior_high_school_model extends CI_Model {
 		else
 		{
 			return false;
+		}
+	}
+
+	public function upload_avatar($file_name)
+	{
+		$this->db->set('stud_avatar', $file_name);
+		$this->db->where('stud_lrn', $this->input->post('studLrn'));
+
+		if($this->db->update('tbl_stud_info_jhs'))
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
 		}
 	}
 }

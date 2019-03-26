@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="<?php echo base_url('assets/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css'); ?>">
 <div class="breadcrumbs">
   <div class="col-sm-4">
     <div class="page-header float-left">
@@ -25,8 +27,15 @@
       <div class="col-md-3">
         <div class="card">
           <div class="card-body">
-            <img class="mx-auto d-block" src="<?php echo base_url('assets/images/avatar/blank_profile_pic.jpg'); ?>">
+            <?php if ($stud_info->stud_avatar == ""): ?>
+              <img class="mx-auto d-block" src="<?php echo base_url('assets/images/avatar/blank_profile_pic.jpg'); ?>">
+            <?php else: ?>
+              <img class="mx-auto d-block" src="<?php echo base_url('assets/uploads/avatars/'.$stud_info->stud_avatar); ?>">
+            <?php endif; ?>
           </div><!-- /.card-body -->
+          <div class="card-footer">
+            <button type="button" id="uploadMod" data-toggle="modal" data-target="#uploadModal" data-backdrop="static" data-keyboard="false" class="btn btn-sm btn-outline-primary ml-5"><i class="ti ti-plus"></i> Upload Avatar</button>
+          </div>
         </div><!-- /.card -->
       </div><!-- /.col-md-3 -->
       <div class="col-md-9">
@@ -253,10 +262,10 @@
               <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                   <?php foreach($assessmentInfo as $row): ?>
-                    <a class="nav-item nav-link" id="<?php echo $row->rowID; ?>" data-id="<?php echo $row->gradeLevel ?>" data-assessmentID="<?php echo $row->assessmentID ?>" data-toggle="tab" href="<?php echo '#custom-nav-'.$row->rowID; ?>" role="tab" aria-controls="custom-nav-profile" aria-selected="false"><?php echo $row->gradeLevel; ?></a>
+                    <a class="nav-items nav-item nav-link" id="<?php echo $row->rowID; ?>" data-id="<?php echo $row->gradeLevel ?>" data-assessmentID="<?php echo $row->assessmentID ?>" data-toggle="tab" href="<?php echo '#custom-nav-'.$row->rowID; ?>" role="tab" aria-controls="custom-nav-profile" aria-selected="false"><?php echo $row->gradeLevel; ?></a>
                   <?php endforeach; ?>
-                  <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-profile" role="tab" aria-controls="custom-nav-profile" aria-selected="false">Others</a>
-                  <a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab" href="#custom-nav-contact" role="tab" aria-controls="custom-nav-contact" aria-selected="false">History</a>
+                  <a class="nav-item nav-link" id="custom-nav-other-tab" data-toggle="tab" href="#custom-nav-other" role="tab" aria-controls="custom-nav-other" aria-selected="false">Others</a>
+                  <a class="nav-item nav-link" id="custom-nav-history-tab" data-toggle="tab" data-id="<?php echo $stud_info->stud_lrn ?>" href="#custom-nav-history" role="tab" aria-controls="custom-nav-history" aria-selected="false">History</a>
                 </div>
               </nav>
               <div class="tab-content pl-3 pt-2" id="nav-tabContent">
@@ -322,6 +331,33 @@
                       </div>
                       <div class="card">
                         <div class="card-header">
+                          <strong>Voucher</strong>
+                        </div>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col col-sm-6">
+                              <?php
+                                if ($row->voucher > 0){
+                                  $voucherArr = array('', 'Public Voucher', 'Private Voucher', 'Payee');
+                                  echo '<strong>'.$voucherArr[$row->voucher].'</strong>';
+                                }
+                              ?>
+                            </div>
+                          </div>
+                          <br/>
+                          <div class="row">
+                            <div class="col col-sm-12 d-none d-sm-block">
+                              <?php
+                                if ($row->voucher > 0){
+                                  echo '<strong>Voucher Discount: '.$row->voucherDisc.'</strong>';
+                                }
+                              ?>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <div class="card-header">
                           <strong>Payables</strong>
                         </div>
                         <div class="card-body">
@@ -341,15 +377,44 @@
                     </div><!-- /.col-lg-6 col-md-6 col-sm-12 col-xs-12 -->
                   </div>
                 <?php endforeach; ?>
-                <div class="tab-pane fade" id="custom-nav-profile" role="tabpanel" aria-labelledby="custom-nav-profile-tab">
+                <div class="tab-pane fade" id="custom-nav-other" role="tabpanel" aria-labelledby="custom-nav-other-tab">
                   <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit
                       butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, irure terry richardson ex sd. Alip placeat salvia cillum iphone. Seitan alip s cardigan american apparel, butcher voluptate nisi .
                   </p>
                 </div>
-                <div class="tab-pane fade" id="custom-nav-contact" role="tabpanel" aria-labelledby="custom-nav-contact-tab">
-                  <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit
-                      butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, irure terry richardson ex sd. Alip placeat salvia cillum iphone. Seitan alip s cardigan american apparel, butcher voluptate nisi .
-                  </p>
+                <div class="tab-pane fade" id="custom-nav-history" role="tabpanel" aria-labelledby="custom-nav-history-tab">
+                  <table id="historyTbl" class="table table-striped table-bordered" width="100%">
+                    <thead>
+                      <th></th>
+                      <th style="text-align: center;">O.R. Number</th>
+                      <th style="text-align: center;">Invoice Number</th>
+                      <th style="text-align: center;">Assessment ID</th>
+                      <th>Cashier</th>
+                      <th style="text-align: center;">Transaction Date</th>
+                      <th style="text-align: center;">Action</th>
+                    </thead>
+                    <tbody>
+                      <?php if ($paymentHistory): ?>
+                        <?php foreach($paymentHistory as $row): ?>
+                          <tr>
+                            <td><?php echo $row->rowID ?></td>
+                            <td><?php echo $row->orNum ?></td>
+                            <td><?php echo $row->invoiceNum ?></td>
+                            <td><?php echo $row->assessmentID ?></td>
+                            <td><?php echo $row->fname.' '.$row->lname ?></td>
+                            <td><?php echo $row->transDate ?></td>
+                            <td><a href="#" data-toggle="modal" data-target="#historyModal" data-id="<?php echo $row->orNum ?>" data-backdrop="static" data-keyboard="false" class="checkHistory btn btn-outline-primary btn-sm"><i class="ti ti-eye"></i></a></td>
+                          </tr>
+                        <?php endforeach; ?>
+                      <?php else: ?>
+                        <tr>
+                          <td colspan="7">
+                            <strong><div style="text-align: center;">Table emtpy</div></strong>
+                          </td>
+                        </tr>
+                      <?php endif; ?>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div><!-- /.custom-tab -->
@@ -370,11 +435,9 @@
           <!-- <span aria-hidden="true">&times;</span> -->
         </button>
       </div>
-      <?php echo form_open('', 'role="form" id="assessmentForm"'); ?>
+      <form action="#" role="form" id="assessmentForm">
       <input type="hidden" name="stud_id" value="<?php echo $stud_info->stud_lrn ?>">
       <input type="hidden" name="gradeLevel" id="gradeLevel" value="<?php echo $stud_info->stud_grade_lvl ?>">
-      <input type="hidden" id="totalDiscount" name="totalDiscount" value="0.00">
-      <input type="hidden" id="totalDiscAmount" name="totalDiscAmount" value="0.00">
       <div class="modal-body">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -448,24 +511,6 @@
                       <td><span id="total"></span><input type="hidden" name="totalAmount" id="totalAmount" value=""></td>
                     </tr>
                     <tr>
-                      <td colspan="2">
-                        <div class="col col-sm-2 d-none d-sm-block">
-                          <label for="voucher" class=" form-control-label">Voucher</label>
-                        </div>
-                        <div class="col col-sm-6">
-                          <select name="voucher" id="voucher" class="form-control form-control-sm" disabled>
-                            <option value="">---</option>
-                            <option value="1">Public Voucher</option>
-                            <option value="2">Private Voucher</option>
-                          </select>
-                          <input type="hidden" id="voucherDisc" name="voucherDisc" value="0">
-                        </div>
-                        <div class="col col-sm-2 d-none d-sm-block">
-                          <span id="vouchDischere"></span>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
                       <td style="font-weight: bold;font-size: 14px;"><em>TOTAL AMOUNT:</em></td>
                       <td style="text-align: right;font-style: italic;"><span id="totAmount"></span><input type="hidden" name="grandTotal" id="grandTotal" value=""></td>
                     </tr>
@@ -484,10 +529,33 @@
                   <select name="paymentScheme" id="paymentScheme" class="form-control form-control-sm" disabled required>
                     <option value="">---</option>
                     <option value="CASH">CASH</option>
-                    <option value="MINIMUM">MINIMUM</option>
-                    <option value="PARTIAL">PARTIAL</option>
-                    <option value="ENPL">ENPL</option>
+                    <option value="MONTHLY">MONTHLY</option>
                   </select>
+                  <input type="hidden" id="hidSchemeDiscount" value="0">
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <strong>Vouhcer</strong>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col col-sm-6">
+                    <select name="voucher" id="voucher" class="form-control form-control-sm" required disabled>
+                      <option value="">---</option>
+                      <option value="1">Public Voucher</option>
+                      <option value="2">Private Voucher</option>
+                      <option value="3">Payee</option>
+                    </select>
+                    <input type="hidden" id="voucherDisc" name="voucherDisc" value="0">
+                  </div>
+                </div>
+                <br/>
+                <div class="row">
+                  <div class="col col-sm-12 d-none d-sm-block">
+                    <strong>Voucher Discount: <span id="vouchDischere"></span></strong>
+                  </div>
                 </div>
               </div>
             </div>
@@ -510,11 +578,168 @@
         </button>
         <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
       </div>
-      <?php form_close(); ?>
+      </form>
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-full" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="historyModalLabel">Student Invoice</h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+              <div class="card-header">
+                <strong>Learner Basic Information</strong>
+              </div><!-- /.card-header -->
+              <div class="card-body form-horizontal">
+                <div class="row form-group">
+                  <div class="col-sm-1 d-none d-sm-block" style="padding: 0px 0px 0px 15px;">
+                    <label for="" class=" form-control-label">Stud. ID:</label>
+                  </div>
+                  <div class="col-sm-3 col-xs-12">
+                    <?php echo $stud_info->stud_lrn ?>
+                    <input type="hidden" name="studid" value="<?php echo $stud_info->stud_lrn ?>">
+                  </div>
+                  <div class="col-sm-1 d-none d-sm-block">
+                    <label for="" class=" form-control-label">Invoice No#:</label>
+                  </div>
+                  <div class="col-sm-2 col-xs-12">
+                    <span id="invoiceNum"></span>
+                  </div>
+                  <div class="col-sm-1 d-none d-sm-block">
+                    <label for="" class=" form-control-label">OR No#:</label>
+                  </div>
+                  <div class="col-sm-2 col-xs-12">
+                    <span id="orNum"></span>
+                  </div>
+                </div><!-- /.row form-group -->
+                <div class="row form-group">
+                  <div class="col col-sm-1 d-none d-sm-block">
+                    <label class="form-control-label">Name:</label>
+                  </div>
+                  <div class="col col-sm-9 col-xs-12">
+                    <?php echo $stud_info->stud_lname.', '.$stud_info->stud_fname.' '.$stud_info->stud_mname ?>
+                  </div>
+                </div><!-- /.row form-group -->
+              </div><!-- /.card-body -->
+            </div><!-- /.card -->
+            <div class="card">
+              <div class="card-header">
+                Statement of Account
+              </div>
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Payables</th>
+                      <th style="text-align:right;">AmountDue</th>
+                      <th style="text-align:right;">Previous Payment</th>
+                      <th style="text-align:right;">Balance</th>
+                    </tr>
+                  </thead>
+                  <tbody id="historySoahere"></tbody>
+                </table>
+              </div>
+            </div>
+            <br/>
+            <div class="card">
+              <div class="card-body form-horizontal">
+                <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="row form-group">
+                      <div class="col col-sm-2 d-none d-sm-block" style="padding: 0px 0px 0px 15px;">
+                        <label class="form-control-label"><strong>Amount Paid:</strong></label>
+                      </div>
+                      <div class="col col-sm-3 col-xs-12" style="padding: 0px 0px 0px 0px;">
+                        <strong><span id="historyAmountPaid"></span></strong>
+                      </div>
+                    </div><!-- /.row form-group -->
+                    <div class="row form-group">
+                      <div class="col col-sm-2 d-none d-sm-block" style="padding: 0px 0px 0px 15px;">
+                        <label class="form-control-label"><strong>Change:</strong></label>
+                      </div>
+                      <div class="col col-sm-3 col-xs-12" style="padding: 0px 0px 0px 0px;">
+                        <strong><span id="historySukli"></span></strong>
+                      </div>
+                    </div><!-- /.row form-group -->
+                    <div class="row form-group">
+                      <div class="col col-sm-2 d-none d-sm-block" style="padding: 0px 0px 0px 15px;">
+                        <label class="form-control-label"><strong>Balance:</strong></label>
+                      </div>
+                      <div class="col col-sm-3 col-xs-12" style="padding: 0px 0px 0px 0px;">
+                        <strong><span id="historyBalanceHere"></span></strong>
+                      </div>
+                    </div><!-- /.row form-group -->
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="row form-group">
+                      <div class="col col-sm-2 d-none d-sm-block">
+                        <label class="form-control-label"><strong>Cashier:</strong></label>
+                      </div>
+                      <div class="col col-sm-3 col-xs-12">
+                        <strong><span id="cashierName"></span></strong>
+                      </div>
+                    </div><!-- /.row form-group -->
+                    <div class="row form-group">
+                      <div class="col col-sm-2 d-none d-sm-block" style="padding: 0px 0px 0px 15px;">
+                        <label class="form-control-label"><strong>Transaction Date:</strong></label>
+                      </div>
+                      <div class="col col-sm-9 col-xs-12">
+                        <strong><div id="transDate"></div></strong>
+                      </div>
+                    </div><!-- /.row form-group -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="uploadModalLabel">Upload Avatar</h5>
+      </div>
+      <?php echo form_open_multipart('', 'id="uploadForm"'); ?>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <input type="file" id="avatar" name="stud_avatar" required>
+            <input type="hidden" id="studLrn" name="stud_id" value="<?php echo $stud_info->stud_lrn; ?>" required>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-primary btn-sm">Upload</button>
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+      </div>
+      <?php echo form_close(); ?>
+    </div>
+  </div>
+</div>
+
+<script src="<?php echo base_url('assets/vendors/datatables.net/js/jquery.dataTables.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/vendors/datatables.net-buttons/js/dataTables.buttons.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/assets/js/init-scripts/data-table/datatables-init.js'); ?>"></script>
+
 <script src="<?php echo base_url('assets/sweet-alert/dist/sweetalert2.all.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/parsley/dist/parsley.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/assets/js/pages/assessor/seniorhs/assessment.js'); ?>"></script>
 <script src="<?php echo base_url('assets/assets/js/pages/assessor/seniorhs/assessmentInfo.js'); ?>"></script>
+<script src="<?php echo base_url('assets/assets/js/pages/registrar/seniorhs/paymentHistory.js'); ?>"></script>
+<script src="<?php echo base_url('assets/assets/js/pages/registrar/seniorhs/uploadAvatar.js'); ?>"></script>

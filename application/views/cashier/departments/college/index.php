@@ -24,9 +24,6 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header">
-            <a href="<?php echo site_url('registrar/dept/college/new'); ?>" class="btn btn-sm btn-primary pull-right"><i class="ti ti-plus"></i> Register new student</a>
-          </div><!-- /.card-header -->
           <div class="card-body">
             <table id="colTbl" class="table table-striped table-bordered" width="100%">
               <thead>

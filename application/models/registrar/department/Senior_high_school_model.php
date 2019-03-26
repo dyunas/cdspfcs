@@ -6,6 +6,22 @@ class Senior_high_school_model extends CI_Model {
 		parent::__construct();
 	}
 
+	public function check_stud_lrn($lrn)
+	{
+		$this->db->select('stud_lrn');
+		$this->db->from('tbl_stud_info_shs');
+		$this->db->where('stud_lrn', $lrn);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0)
+		{
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
+	}
+
 	public function register_student()
 	{
 		$data = array(
@@ -16,8 +32,8 @@ class Senior_high_school_model extends CI_Model {
 			"stud_status" 			=> 'registered',
 			"stud_rgstrtn_dte" 	=> date('Y-m-d'),
 			"stud_grade_lvl" 		=> $this->input->post('stud_grade_lvl'),
-			"stud_track" 				=> $this->input->post('stud_track'),
-			"stud_strand" 			=> $this->input->post('stud_strand'),
+			"stud_trk_id" 			=> $this->input->post('stud_track'),
+			"stud_strnd_id" 		=> $this->input->post('stud_strand'),
 			"stud_acad_yr" 			=> $this->input->post('stud_acad_yr'),
 			"stud_email"  			=> $this->input->post('eadd'),
 			"stud_bdate"  			=> $this->input->post('bdate'),
@@ -272,8 +288,8 @@ class Senior_high_school_model extends CI_Model {
 				'gradeLevel' 			=> $this->input->post('gradeLevel'),
 				'assessmentID' 		=> $assessmentID,
 				'paymentScheme' 	=> $this->input->post('paymentScheme'),
-				'voucher'				=> $this->input->post('voucher'),
-				'voucherDisc'		=> $this->input->post('voucherDisc'),
+				'voucher'					=> $this->input->post('voucher'),
+				'voucherDisc'			=> $this->input->post('voucherDisc'),
 				'totalAmt'				=> $this->input->post('totalAmount'),
 				'grandTotal'			=> $this->input->post('grandTotal')
 			);
@@ -296,51 +312,43 @@ class Senior_high_school_model extends CI_Model {
 				if ($this->db->insert_batch('tbl_feespayables_info', $feesPayablesData))
 				{
 					$payablesData = array();
+					array_push(
+						$payablesData,
+						array(
+							'studID' 		 => $this->input->post('stud_id'),
+							'gradeLevel' => $this->input->post('gradeLevel'),
+							'assessmentID'  => $assessmentID,
+							'payables' 	 => 'uponEnroll',
+							'amountDue'  => $this->input->post('uponEnroll')
+						)
+					);
 
-					if ($this->input->post('paymentScheme') == 'CASH')
+					foreach($this->input->post('monthly') as $key => $value)
 					{
 						array_push(
-							$payablesData,
-							array(
+						 	$payablesData,
+						 	array(
 								'studID' 		 => $this->input->post('stud_id'),
 								'gradeLevel' => $this->input->post('gradeLevel'),
 								'assessmentID'  => $assessmentID,
-								'payables' 	 => 'uponEnroll',
-								'amountDue'  => $this->input->post('uponEnroll'),
+								'payables' 	 => $key,
+								'amountDue'  => $value
 							)
 						);
-					}
-					else
-					{
-						array_push(
-							$payablesData,
-							array(
-								'studID' 		 => $this->input->post('stud_id'),
-								'gradeLevel' => $this->input->post('gradeLevel'),
-								'assessmentID'  => $assessmentID,
-								'payables' 	 => 'uponEnroll',
-								'amountDue'  => $this->input->post('uponEnroll')
-							)
-						);
-
-						foreach($this->input->post('monthly') as $key => $value)
-						{
-							array_push(
-							 	$payablesData,
-							 	array(
-									'studID' 		 => $this->input->post('stud_id'),
-									'gradeLevel' => $this->input->post('gradeLevel'),
-									'assessmentID'  => $assessmentID,
-									'payables' 	 => $key,
-									'amountDue'  => $value
-								)
-							);
-						}
 					}
 
 					if ($this->db->insert_batch('tbl_payables_info', $payablesData))
 					{
-						return TRUE;
+						$logs = array(
+							"emp_id" => $this->session->userdata('uniq_id'),
+							"c_log" => "Registered student with LRN/Student ID of ".$this->input->post('LRN'),
+							"mod_date" => date('Y-m-d h:i:s a')
+						);
+
+						if($this->db->insert('tbl_logs', $logs))
+						{
+							return TRUE;
+						}
 					}
 					else
 					{
@@ -365,10 +373,9 @@ class Senior_high_school_model extends CI_Model {
 
 	public function get_assessment_info($uniq_id)
 	{
-		$this->db->select('a.rowID, a.gradeLevel, a.assessmentID, a.paymentScheme, a.discount, a.totalDiscount, a.totalDiscAmount, a.totalAmt, a.grandTotal, b.grd_lvl, c.disc_code');
+		$this->db->select('a.rowID, a.gradeLevel, a.assessmentID, a.paymentScheme, a.voucher, a.voucherDisc, a.totalAmt, a.grandTotal, b.grd_lvl');
 		$this->db->from('tbl_assessment_info a');
 		$this->db->join('tbl_grd_level b', 'b.grd_id = a.gradeLevel', 'left');
-		$this->db->join('tbl_discount c', 'c.row_id = a.discount', 'left');
 		$this->db->where('a.studID', $uniq_id);
 		$this->db->order_by('a.rowID', 'DESC');
 		$queryAssessment = $this->db->get();
@@ -385,12 +392,8 @@ class Senior_high_school_model extends CI_Model {
 
 	public function get_assessment_details($id, $assessmentID)
 	{
-		$this->db->select('rowID, payables, amountDue, amountPaid');
-		$this->db->from('tbl_payables_info');
-		$this->db->where('gradeLevel', $id);
-		$this->db->where('assessmentID', $assessmentID);
-
-		$query = $this->db->get();
+		$sql = 'SELECT a.rowID, a.payables, a.amountDue, SUM(b.amountPaid) as amountPaid, ABS(a.amountDue - SUM(b.amountPaid)) as balance FROM tbl_payables_info a LEFT JOIN tbl_transaction_tbl b ON b.assessmentRowId = a.rowID WHERE a.gradeLevel = "'.$id.'" AND a.assessmentID = '.$assessmentID.' GROUP BY a.rowID';
+		$query = $this->db->query($sql);
 
 		if ($query->num_rows() > 0)
 		{
@@ -418,6 +421,21 @@ class Senior_high_school_model extends CI_Model {
 		else
 		{
 			return false;
+		}
+	}
+
+	public function upload_avatar($file_name)
+	{
+		$this->db->set('stud_avatar', $file_name);
+		$this->db->where('stud_lrn', $this->input->post('studLrn'));
+
+		if($this->db->update('tbl_stud_info_shs'))
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
 		}
 	}
 }	

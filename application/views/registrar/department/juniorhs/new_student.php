@@ -35,7 +35,7 @@
                 <label for="LRN" class=" form-control-label">*LRN</label>
               </div>
               <div class="col-sm-3 col-xs-12">
-                <input type="text" id="LRN" name="LRN" placeholder="Learner Reference Number" class="input-sm form-control-sm form-control resFld" required data-parsley-type="number" data-parsley-required-message="" maxlength="12" data-parsley-length="[12, 12]" data-parsley-length-message="" data-parsley-type-message="">
+                <input type="text" id="LRN" name="LRN" placeholder="Learner Reference Number" class="input-sm form-control-sm form-control resFld" required data-parsley-type="number" data-parsley-required-message="" maxlength="12" data-parsley-length="[12, 12]" data-parsley-length-message="" data-parsley-type-message="" data-parsley-remote="check_stud_lrn" data-parsley-remote-options="{ 'type': 'GET', 'dataType': 'json', 'data': { 'LRN': 'value' } }" data-parsley-remote-message="LRN already exists">
               </div>
             </div><!-- /.row form-group -->
             <div class="row form-group">

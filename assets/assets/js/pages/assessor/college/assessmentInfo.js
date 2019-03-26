@@ -40,16 +40,25 @@ String.prototype.capitalize = function() {
 jQuery.getJSON('get_assessment_info',{id: dataId, assessmentID: assessmentID}, function(result){
 	var payables;
 	var balance = 0;
+	var amountPaid = 0;
 	for(let x = 0;x <= result.length-1;x++){
 		balance = result[x].balance;
-			
-			if (balance == null) {
-				balance = parseFloat(result[x].amountDue);
-			} else if (parseFloat(balance) < 0) {
+		
+		if (balance == null) {
+			balance = parseFloat(result[x].amountDue);
+			amountPaid = result[x].amountPaid;
+		} else if (parseFloat(balance) < 0) {
+			balance = 0;
+			amountPaid = result[x].amountPaid;
+		} else {
+			if (parseFloat(result[x].amountPaid) > parseFloat(result[x].amountDue)){
 				balance = 0;
+				amountPaid = result[x].amountDue;
 			} else {
 				balance = parseFloat(result[x].balance);
+				amountPaid = result[x].amountPaid;
 			}
+		}
 
 		payables +='<tr>'+
 									'<td>'+
@@ -59,7 +68,7 @@ jQuery.getJSON('get_assessment_info',{id: dataId, assessmentID: assessmentID}, f
 									 'Php '+number_format(result[x].amountDue, 2,'.', ',')+
 									'</td>'+
 									'<td>'+
-									 'Php '+number_format(result[x].amountPaid, 2,'.', ',')+
+									 'Php '+number_format(amountPaid, 2,'.', ',')+
 									'</td>'+
 									'<td>'+
 									 'Php '+number_format(balance, 2,'.', ',')+
@@ -67,20 +76,35 @@ jQuery.getJSON('get_assessment_info',{id: dataId, assessmentID: assessmentID}, f
 								'</tr>';
 	}
 
-		jQuery('#assessmentPayables'+id).html(payables);
+	jQuery('#assessmentPayables'+id).html(payables);
 });
 
-jQuery('[class^=nav-item]').on('click', function() {
+jQuery('[class^=nav-items]').on('click', function() {
 	id = jQuery(this).attr('id');
 	dataId = jQuery(this).attr('data-id');
 	assessmentID = jQuery(this).attr('data-assessmentID');
 
 	jQuery.getJSON('get_assessment_info',{id: dataId, assessmentID: assessmentID}, function(result){
 		var payables;
+		var balance = 0;
+		var amountPaid = 0;
 		for(let x = 0;x <= result.length-1;x++){
-			var balance = parseFloat(result[x].balance);
-			if (balance > 0) {
+			balance = result[x].balance;
+			
+			if (balance == null) {
+				balance = parseFloat(result[x].amountDue);
+				amountPaid = result[x].amountPaid;
+			} else if (parseFloat(balance) < 0) {
 				balance = 0;
+				amountPaid = result[x].amountPaid;
+			} else {
+				if (parseFloat(result[x].amountPaid) > parseFloat(result[x].amountDue)){
+					balance = 0;
+					amountPaid = result[x].amountDue;
+				} else {
+					balance = parseFloat(result[x].balance);
+					amountPaid = result[x].amountPaid;
+				}
 			}
 
 			payables +='<tr>'+
@@ -91,7 +115,7 @@ jQuery('[class^=nav-item]').on('click', function() {
 										 'Php '+number_format(result[x].amountDue, 2,'.', ',')+
 										'</td>'+
 										'<td>'+
-										 'Php '+number_format(result[x].amountPaid, 2,'.', ',')+
+										 'Php '+number_format(amountPaid, 2,'.', ',')+
 										'</td>'+
 										'<td>'+
 										 'Php '+number_format(balance, 2,'.', ',')+

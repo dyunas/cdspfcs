@@ -92,48 +92,55 @@ window.onload = function() {
 	});
 
 	voucher.on('change', function() {
+		var scheme = paymentScheme.val();
 		var id = jQuery(this).val();
-		var voucherDisc;
-		if (id == 1){
-			voucherDisc = 17500;
+		var voucherDisc = 0;
+		var upon = 0;
+		var july = 0;
+		var monthly = 0;
 
-		} else if (id == 2) {
-			voucherDisc = 14000;
+		if (scheme == 'CASH') {
+			if (id == 1){
+				voucherDisc = 17500;
+				upon = parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc);
+				july = 0.00;
+				monthly = 0.00;
+			} else if (id == 2) {
+				voucherDisc = 14000;
+				upon = parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc);
+				july = 0.00;
+				monthly = 0.00;
+			} else if (id == 3) {
+				voucherDisc = 0;
+				upon = parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc);
+				july = 0.00;
+				monthly = 0.00;
+			}
 		} else {
-			voucherDisc = 0;
+			if (id == 1){
+				voucherDisc = 17500;
+				upon = parseFloat(550);
+				july = parseFloat(400);
+				monthly = Math.round((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc) - (upon + july)) / 9);
+			} else if (id == 2) {
+				voucherDisc = 14000;
+				upon = parseFloat(4050);
+				july = Math.round(((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) - upon) / 10);
+				monthly = Math.round(((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) - upon) / 10);
+			} else if (id == 3) {
+				voucherDisc = 0;
+
+				upon = parseFloat(9300);
+				july = Math.round((parseFloat(jQuery('#totalAmount').val()) - upon) / 10);
+				monthly = Math.round((parseFloat(jQuery('#totalAmount').val()) - upon) / 10);
+			}		
 		}
 
 		jQuery('#voucherDisc').val(parseFloat(voucherDisc));
 		jQuery('#vouchDischere').html('Php '+number_format(voucherDisc, 2, '.', ','));
 
-		var scheme = paymentScheme.val();
-
-		if (scheme == 'CASH') {
-			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)), 2, '.', ','));
-			jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)));
-
-			var upon = parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc);
-			var monthly = 0.00;
-		}
-		else {
-			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)), 2, '.', ','));
-			jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)));
-
-			if (scheme == 'MINIMUM')
-			{
-				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) * 0.40;
-				var monthly = ((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) * 0.60) / 9;
-			}
-			else if(scheme == 'PARTIAL')
-			{
-				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) * 0.50;
-				var monthly = parseFloat(upon) / 9;
-			}
-			else if (scheme == 'ENPL'){
-				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) / 10;
-				var monthly  = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) / 10;
-			}
-		}
+		jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)), 2, '.', ','));
+		jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)));
 
 		var payables ='<tr>'+
 											'<td>'+
@@ -145,7 +152,7 @@ window.onload = function() {
 										'</tr>'+
 										'<tr>'+
 											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>July</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[july]" value="'+monthly+'"/>'+
+											'<td>Php '+number_format(july, 2,'.', ',')+'</td><input type="hidden" name="monthly[july]" value="'+july+'"/>'+
 										'</tr>'+
 										'<tr>'+
 											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>August</strong></div></td>'+
@@ -185,34 +192,54 @@ window.onload = function() {
 
 	paymentScheme.on('change', function(){
 		var scheme = paymentScheme.val();
-		var voucherDisc = jQuery('#voucherDisc').val();
+		var id = voucher.val();
+		var voucherDisc = 0;
+		var upon = 0;
+		var july = 0;
+		var monthly = 0;
 
 		if (scheme == 'CASH') {
-			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)), 2, '.', ','));
-			jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)));
+			if (id == 1){
+				voucherDisc = 17500;
+				upon = parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc);
+				july = 0.00;
+				monthly = 0.00;
+			} else if (id == 2) {
+				voucherDisc = 14000;
+				upon = parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc);
+				july = 0.00;
+				monthly = 0.00;
+			} else if (id == 3) {
+				voucherDisc = 0;
+				upon = parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc);
+				july = 0.00;
+				monthly = 0.00;
+			}
+		} else {
+			if (id == 1){
+				voucherDisc = 17500;
+				upon = parseFloat(550);
+				july = parseFloat(400);
+				monthly = Math.round((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc) - (upon + july)) / 9);
+			} else if (id == 2) {
+				voucherDisc = 14000;
+				upon = parseFloat(4050);
+				july = Math.round(((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) - upon) / 10);
+				monthly = Math.round(((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) - upon) / 10);
+			} else if (id == 3) {
+				voucherDisc = 0;
 
-			var upon = parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc);
-			var monthly = 0.00;
+				upon = parseFloat(9300);
+				july = Math.round((parseFloat(jQuery('#totalAmount').val()) - upon) / 10);
+				monthly = Math.round((parseFloat(jQuery('#totalAmount').val()) - upon) / 10);
+			}		
 		}
-		else {
-			jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)), 2, '.', ','));
-			jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)));
 
-			if (scheme == 'MINIMUM')
-			{
-				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) * 0.40;
-				var monthly = ((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) * 0.60) / 9;
-			}
-			else if(scheme == 'PARTIAL')
-			{
-				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) * 0.50;
-				var monthly = parseFloat(upon) / 9;
-			}
-			else if (scheme == 'ENPL'){
-				var upon = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) / 10;
-				var monthly  = (parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)) / 10;
-			}
-		}
+		jQuery('#voucherDisc').val(parseFloat(voucherDisc));
+		jQuery('#vouchDischere').html('Php '+number_format(voucherDisc, 2, '.', ','));
+
+		jQuery('#totAmount').html(number_format((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)), 2, '.', ','));
+		jQuery('#grandTotal').val((parseFloat(jQuery('#totalAmount').val()) - parseFloat(voucherDisc)));
 
 		var payables ='<tr>'+
 											'<td>'+
@@ -224,7 +251,7 @@ window.onload = function() {
 										'</tr>'+
 										'<tr>'+
 											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>July</strong></div></td>'+
-											'<td>Php '+number_format(monthly, 2,'.', ',')+'</td><input type="hidden" name="monthly[july]" value="'+monthly+'"/>'+
+											'<td>Php '+number_format(july, 2,'.', ',')+'</td><input type="hidden" name="monthly[july]" value="'+july+'"/>'+
 										'</tr>'+
 										'<tr>'+
 											'<td><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong>August</strong></div></td>'+

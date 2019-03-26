@@ -92,8 +92,11 @@ class College extends MY_Controller {
 		$data = array(
 			"stud_info" => $this->coldb->get_student_info($uniq_id),
 			"fees" 			=> $this->coldb->get_school_fees(),
-			"assessmentInfo" => $this->coldb->get_assessment_info($uniq_id)
+			"assessmentInfo" => $this->coldb->get_assessment_info($uniq_id),
+			"discounts" => $this->coldb->get_discounts(),
 		);
+
+		$data['paymentHistory'] = $this->glob->get_payment_history($uniq_id);
 
 		$this->load->view('templates/header');
 		$this->load->view('templates/navigation');
@@ -106,6 +109,20 @@ class College extends MY_Controller {
 		if ($this->input->is_ajax_request())
 		{
 			$result = $this->coldb->get_tuition_fee();
+			echo $result;
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
+	public function Get_discount_amount()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$id = $this->input->get('id');
+			$result = $this->coldb->get_discounts($id);
 			echo $result;
 		}
 		else
@@ -174,6 +191,64 @@ class College extends MY_Controller {
 		else
 		{
 			exit('No direct script access allowed');
+		}
+	}
+
+	public function Get_payment_history()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$orNum = $this->input->get('orNum');
+			$result = $this->glob->get_payment_history_dtls($orNum);
+			echo $result;
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
+	public function Upload_avatar()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$config['upload_path']    = './assets/uploads/avatars/';
+      $config['file_name']      = uniqid().'.jpg';
+      $config['allowed_types']  = 'jpg|jpeg';
+      $config['max_size']       = '0';
+      $config['max_width']      = '0';
+      $config['max_height']     = '0';
+
+      $this->load->library('upload', $config);
+
+      if ($this->upload->do_upload('avatar'))
+      {
+        $file = $this->upload->data();
+        // $path = './assets/uploads/avatar/';
+        // unlink($path.$this->input->post('oldAva'));
+
+        if ($this->coldb->upload_avatar($file['file_name']))
+        {
+        	$this->output->set_status_header(200);
+        	echo json_encode(true);
+        }
+        else
+        {
+      	  $this->output->set_status_header(500);
+      	  $error = $this->upload->display_errors();
+        	echo json_encode($error);
+        }
+      }
+      else
+      {
+        $this->output->set_status_header(500);
+        $error = $this->upload->display_errors();
+      	echo json_encode($error);
+      }
+		}
+		else
+		{
+			exti('No direct script access allowed');
 		}
 	}
 }

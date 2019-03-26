@@ -18,7 +18,8 @@ class College extends MY_Controller {
 		$data = array(
 			"stud_info" 		 => $this->coldb->get_student_info($studID),
 			"assessmentInfo" => $this->coldb->get_assessment_info($studID),
-			"fees"					 => $this->coldb->get_school_fees()
+			"fees"					 => $this->coldb->get_school_fees(),
+			"paymentHistory" => $this->glob->get_payment_history($studID)
 		);
 
 		$this->load->view('templates/header');
@@ -113,6 +114,20 @@ class College extends MY_Controller {
 			{
 				echo json_encode(false);
 			}
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
+	public function Get_payment_history()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$orNum = $this->input->get('orNum');
+			$result = $this->glob->get_payment_history_dtls($orNum);
+			echo $result;
 		}
 		else
 		{

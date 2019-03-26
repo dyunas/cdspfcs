@@ -30,6 +30,12 @@
               <a href="<?php echo site_url($this->uri->segment(1).'/aysem'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-calendar"></i>A.Y and Semester</a>
             </li>
             <h3 class="menu-title">Reports</h3><!-- /.menu-title -->
+            <li class="<?php echo ($this->uri->segment(3) == 'sysem') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/reports/soa'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-folder-open-o"></i>Statement of Accounts</a>
+            </li>
+            <li class="<?php echo ($this->uri->segment(3) == 'daily') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/reports/daily'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-folder-open-o"></i>Daily Collection</a>
+            </li>
           <?php elseif ($this->uri->segment(1) == 'registrar'): ?>
             <h3 class="menu-title">Departments</h3><!-- /.menu-title -->
             <li class="<?php echo ($this->uri->segment(3) == 'elementary') ? 'active' : ''; ?> menu-item-has-children">
@@ -48,7 +54,7 @@
             <li class="<?php echo ($this->uri->segment(3) == 'sysem') ? 'active' : ''; ?> menu-item-has-children">
               <a href="<?php echo site_url($this->uri->segment(1).'/settings/sysem'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cog"></i>School Year & Semester</a>
             </li>
-            <?php elseif ($this->uri->segment(1) == 'cashier'): ?>
+          <?php elseif ($this->uri->segment(1) == 'cashier'): ?>
             <h3 class="menu-title">Departments</h3><!-- /.menu-title -->
             <li class="<?php echo ($this->uri->segment(3) == 'elementary') ? 'active' : ''; ?> menu-item-has-children">
               <a href="<?php echo site_url($this->uri->segment(1).'/dept/elementary'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Elementary</a>

@@ -17,19 +17,35 @@
   <link rel="shortcut icon" href="<?php echo base_url('assets/images/cdsp_logo.ico'); ?>">
 
   <!-- STYLESHEETS -->
-  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/bootstrap/dist/css/bootstrap.min.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/themify-icons/css/themify-icons.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/flag-icon-css/css/flag-icon.min.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/selectFX/css/cs-skin-elastic.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/assets/css/style.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/bs/bootstrap.min.css'); ?>" media="all">
+  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>" media="all">
+  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/themify-icons/css/themify-icons.css'); ?>" media="all">
+  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/flag-icon-css/css/flag-icon.min.css'); ?>" media="all">
+  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/selectFX/css/cs-skin-elastic.css'); ?>" media="all">
+  <link rel="stylesheet" href="<?php echo base_url('assets/assets/css/style.css'); ?>" media="all">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
   <!-- !STYLESHEETS -->
 
   <!-- JAVASCRIPTS -->
   <script type="text/javascript" src="<?php echo base_url('assets/vendors/jquery/dist/jquery.min.js'); ?>"></script>
   <script type="text/javascript" src="<?php echo base_url('assets/vendors/popper.js/dist/umd/popper.min.js'); ?>"></script>
-  <script type="text/javascript" src="<?php echo base_url('assets/vendors/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
+  <script type="text/javascript" src="<?php echo base_url('assets/bs/bootstrap.min.js'); ?>"></script>
   <script type="text/javascript" src="<?php echo base_url('assets/assets/js/main.js'); ?>"></script>
+  <script type="text/javascript" src="<?php echo base_url('assets/assets/js/jquery.print.js'); ?>"></script>
   <!-- !JAVASCRIPTS -->
 </head>
+<style type="text/css">
+  @media print {
+    .left-panel, .header, .breadcrumbs, .hideThis {
+      display: none!important;
+    }
+
+    #print {
+      display: none;
+    }
+
+    .printThis {
+      display: block!important;
+    }
+  }
+</style>

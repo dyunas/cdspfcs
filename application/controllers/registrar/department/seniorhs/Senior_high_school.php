@@ -64,6 +64,56 @@ class Senior_high_school extends MY_Controller {
 		}
 	}
 
+	public function Edit_student($uniq_id)
+	{
+		$data = array(
+			"stud_info" => $this->shsdb->get_student_info($uniq_id)
+		);
+
+		$this->load->view('templates/header');
+		$this->load->view('templates/navigation');
+		$this->load->view('registrar/department/seniorhs/edit_student', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function Update_student_admission_status()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			if ($this->shsdb->update_student_admission_status())
+			{
+				echo json_encode(true);
+			}
+			else
+			{
+				echo json_encode(false);
+			}
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
+	public function Update_student()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			if ($this->shsdb->update_student())
+			{
+				echo json_encode($this->input->post('LRN'));
+			}
+			else
+			{
+				echo json_encode(false);
+			}
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
 	public function Get_shs_table_data()
 	{
 		if ($this->input->is_ajax_request())
@@ -81,10 +131,10 @@ class Senior_high_school extends MY_Controller {
 	{
 		$data = array(
 			"stud_info" => $this->shsdb->get_student_info($uniq_id),
-			"assessmentInfo" => $this->shsdb->get_assessment_info($uniq_id)
+			"assessmentInfo" => $this->shsdb->get_assessment_info($uniq_id),
+			"acad_yr" => $this->glob->get_acad_year()
 		);
 
-		$data["fees"] = $this->shsdb->get_school_fees($data["stud_info"]->stud_grade_lvl);
 		$data["paymentHistory"] = $this->glob->get_payment_history($data['stud_info']->stud_lrn);
 
 		$this->load->view('templates/header');
@@ -198,47 +248,47 @@ class Senior_high_school extends MY_Controller {
 		}
 	}
 
-		public function Upload_avatar()
+	public function Upload_avatar()
+	{
+		if ($this->input->is_ajax_request())
 		{
-			if ($this->input->is_ajax_request())
-			{
-				$config['upload_path']    = './assets/uploads/avatars/';
-	      $config['file_name']      = uniqid().'.jpg';
-	      $config['allowed_types']  = 'jpg|jpeg';
-	      $config['max_size']       = '0';
-	      $config['max_width']      = '0';
-	      $config['max_height']     = '0';
+			$config['upload_path']    = './assets/uploads/avatars/';
+      $config['file_name']      = uniqid().'.jpg';
+      $config['allowed_types']  = 'jpg|jpeg';
+      $config['max_size']       = '0';
+      $config['max_width']      = '0';
+      $config['max_height']     = '0';
 
-	      $this->load->library('upload', $config);
+      $this->load->library('upload', $config);
 
-	      if ($this->upload->do_upload('avatar'))
-	      {
-	        $file = $this->upload->data();
-	        // $path = './assets/uploads/avatar/';
-	        // unlink($path.$this->input->post('oldAva'));
+      if ($this->upload->do_upload('avatar'))
+      {
+        $file = $this->upload->data();
+        // $path = './assets/uploads/avatar/';
+        // unlink($path.$this->input->post('oldAva'));
 
-	        if ($this->shsdb->upload_avatar($file['file_name']))
-	        {
-	        	$this->output->set_status_header(200);
-	        	echo json_encode(true);
-	        }
-	        else
-	        {
-	      	  $this->output->set_status_header(500);
-	      	  $error = $this->upload->display_errors();
-	        	echo json_encode($error);
-	        }
-	      }
-	      else
-	      {
-	        $this->output->set_status_header(500);
-	        $error = $this->upload->display_errors();
-	      	echo json_encode($error);
-	      }
-			}
-			else
-			{
-				exti('No direct script access allowed');
-			}
+        if ($this->shsdb->upload_avatar($file['file_name']))
+        {
+        	$this->output->set_status_header(200);
+        	echo json_encode(true);
+        }
+        else
+        {
+      	  $this->output->set_status_header(500);
+      	  $error = $this->upload->display_errors();
+        	echo json_encode($error);
+        }
+      }
+      else
+      {
+        $this->output->set_status_header(500);
+        $error = $this->upload->display_errors();
+      	echo json_encode($error);
+      }
 		}
+		else
+		{
+			exti('No direct script access allowed');
+		}
+	}
 }

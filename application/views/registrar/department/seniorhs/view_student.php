@@ -42,6 +42,7 @@
         <div class="card">
           <div class="card-header">
             <strong>Learner Basic Information</strong>
+            <a href="<?php echo site_url('registrar/dept/'.$this->uri->segment(3).'/edit/'.$stud_info->stud_lrn); ?>" class="pull-right btn btn-sm btn-outline-primary"><i class="ti ti-pencil-alt"></i> Edit student info</a>
           </div><!-- /.card-header -->
           <div class="card-body form-horizontal">
             <div class="row form-group">
@@ -211,6 +212,7 @@
         <div class="card">
           <div class="card-header">
             <strong>Admission Status</strong>
+            <button type="button" id="editAdmissionStatus" data-toggle="modal" data-target="#editAdmission" data-backdrop="static" data-keyboard="false" class="btn btn-sm btn-outline-primary pull-right"><i class="ti ti-pencil-alt"></i> Edit admission status</button>
           </div><!-- /.card-header -->
           <div class="card-body form-horizontal">
             <div class="row form-group">
@@ -254,7 +256,6 @@
         <div class="card" id="soaReload">
           <div class="card-header">
             <strong class="pull-left">Statement of Account</strong>
-            <button type="button" id="addNewAssessment" data-toggle="modal" data-target="#newAssessment" data-backdrop="static" data-keyboard="false" class="btn btn-sm btn-outline-primary pull-right"><i class="ti ti-plus"></i> Add new assessment</button>
           </div><!-- /.card-header -->
           <div class="card-body form-horizontal">
           <?php if ($assessmentInfo): ?>
@@ -285,6 +286,7 @@
                               </tr>
                             </thead>
                             <tbody>
+                              <?php $fees = $this->shsdb->get_school_fees($row->gradeLevel); ?>
                               <?php if($fees): ?>
                                 <?php foreach ($fees as $fee): ?>
                                 <tr>
@@ -426,156 +428,45 @@
   </div><!-- /.animated fadeIn -->
 </div> <!-- .content -->
 
-<div class="modal fade" id="newAssessment" tabindex="-1" role="dialog" aria-labelledby="newAssessmentModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-full" role="document">
+<div class="modal fade" id="editAdmission" tabindex="-1" role="dialog" aria-labelledby="editAdmissionLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="newAssessmentModalLabel">New Assessment</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <!-- <span aria-hidden="true">&times;</span> -->
-        </button>
+        <h5 class="modal-title" id="editAdmissionLabel">Admission Status</h5>
       </div>
-      <form action="#" role="form" id="assessmentForm">
-      <input type="hidden" name="stud_id" value="<?php echo $stud_info->stud_lrn ?>">
-      <input type="hidden" name="gradeLevel" id="gradeLevel" value="<?php echo $stud_info->stud_grade_lvl ?>">
       <div class="modal-body">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
-              <div class="card-header">
-                <strong>Admission Status</strong>
-              </div><!-- /.card-header -->
+              <form action="#" method="POST" id="editAdmissionForm">
+              <input type="hidden" name="LRN" value="<?php echo $stud_info->stud_lrn; ?>">
               <div class="card-body form-horizontal">
                 <div class="row form-group">
-                  <div class="d-none d-sm-block col-sm-1">
-                    <label for="stud_grade_lvl" class="form-control-label" placeholder="level">Level:</label>
+                  <div class="d-none d-sm-block col-sm-2 col-xs-2" style="padding: 0px 0px 0px 15px;">
+                    <label for="stud_grade_lvl" class="form-control-label" placeholder="Grade level">*Grade Level</label>
                   </div><!-- col col-sm-1 -->
-                  <div class="col-sm-1 col-xs-6">
-                    <?php echo $stud_info->stud_grade_lvl ?>
+                  <div class="col-sm-3 col-xs-6">
+                    <select class="input-sm form-control-sm form-control" name="stud_grade_lvl" required data-parsley-required-message="">
+                      <option value="">Select level</option>
+                      <option value="Grade 11" <?php echo ($stud_info->stud_grade_lvl == 'Grade 11') ? 'selected' : '' ?>>11</option>
+                      <option value="Grade 12" <?php echo ($stud_info->stud_grade_lvl == 'Grade 12') ? 'selected' : '' ?>>12</option>
+                    </select>
                   </div><!-- col col-sm-3 -->
-                  <div class="d-none d-sm-block col col-sm-1">
-                    <label for="stud_acad_yr" class="form-control-label">S.Y.:</label>
+                  <div class="d-none d-sm-block col col-sm-2" style="padding: 0px 0px 0px 15px;">
+                    <label for="stud_acad_yr" class="form-control-label">School Year</label>
                   </div><!-- col col-sm-1 -->
-                  <div class="col col-sm-2">
-                    <?php echo $stud_info->acad_yr ?>
-                  </div><!-- col col-sm-2 -->
-                  <div class="col-sm-1 d-none d-sm-block">
-                    <label class=" form-control-label">Status:</label>
-                  </div>
-                  <div class="col-sm-2 col-xs-12">
-                    <?php echo $stud_info->stud_status ?>
-                  </div><!-- /.col-sm-2 -->
+                  <div class="col col-sm-3">
+                    <?php echo $acad_yr->acad_yr ?>
+                    <input type="hidden" class="input-sm form-control-sm form-control" name="stud_acad_yr" value="<?php echo $acad_yr->acad_id; ?>">
+                  </div><!-- col col-sm-3 -->
                 </div><!-- /.row form-group -->
               </div><!-- /.card-body -->
             </div><!-- /.card -->
           </div>
         </div>
-        <small style="display:block;padding: 10px 10px 10px 0px;font-size: 11px;"><i>Fields with (*) are mandatory. Please don't leave it blank</i></small>
-        <div class="row">
-          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="card">
-              <div class="card-header">
-                <strong>Assessment</strong>
-              </div>
-              <div class="card-body">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>SCHOOL FEES</th>
-                      <th>AMOUNT</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php if($fees): ?>
-                      <?php foreach ($fees as $fee): ?>
-                      <tr>
-                        <td>
-                          <div class="checkbox">
-                            <label for="<?php echo $fee->row_id ?>" class="form-check-label ">
-                              <input type="checkbox" name="paymentCode[<?php echo $fee->row_id ?>]" id="<?php echo $fee->row_id ?>" data-name="<?php echo $fee->row_id ?>" data-id="<?php echo $fee->row_id ?>" class="fees form-check-input" value="<?php echo $fee->row_id ?>"> <?php echo $fee->fee_name; ?>
-                            </label>
-                          </div>
-                        </td>
-                        <td>
-                          <span><?php echo 'Php '.number_format($fee->amount, 2, '.', ','); ?></span>
-                          <input type="hidden" id="rowAmount<?php echo $fee->row_id ?>" value="<?php echo $fee->amount; ?>">
-                        </td>
-                      </tr>
-                      <?php endforeach ?>
-                    <?php else: ?>
-                    <?php endif ?>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td>TOTAL:</td>
-                      <td><span id="total"></span><input type="hidden" name="totalAmount" id="totalAmount" value=""></td>
-                    </tr>
-                    <tr>
-                      <td style="font-weight: bold;font-size: 14px;"><em>TOTAL AMOUNT:</em></td>
-                      <td style="text-align: right;font-style: italic;"><span id="totAmount"></span><input type="hidden" name="grandTotal" id="grandTotal" value=""></td>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="card">
-              <div class="card-header">
-                <strong>Payment Scheme</strong>
-              </div>
-              <div class="card-body">
-                <div class="col col-sm-6">
-                  <select name="paymentScheme" id="paymentScheme" class="form-control form-control-sm" disabled required>
-                    <option value="">---</option>
-                    <option value="CASH">CASH</option>
-                    <option value="MONTHLY">MONTHLY</option>
-                  </select>
-                  <input type="hidden" id="hidSchemeDiscount" value="0">
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">
-                <strong>Vouhcer</strong>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col col-sm-6">
-                    <select name="voucher" id="voucher" class="form-control form-control-sm" required disabled>
-                      <option value="">---</option>
-                      <option value="1">Public Voucher</option>
-                      <option value="2">Private Voucher</option>
-                      <option value="3">Payee</option>
-                    </select>
-                    <input type="hidden" id="voucherDisc" name="voucherDisc" value="0">
-                  </div>
-                </div>
-                <br/>
-                <div class="row">
-                  <div class="col col-sm-12 d-none d-sm-block">
-                    <strong>Voucher Discount: <span id="vouchDischere"></span></strong>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">
-                <strong>Payables</strong>
-              </div>
-              <div class="card-body">
-                <table class="table">
-                  <tbody id="payables"></tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" id="submitBtn" class="btn btn-outline-primary btn-sm">
-          <i class="fa fa-check"></i> Create
-        </button>
+        <button type="submit" class="btn btn-outline-primary btn-sm">Update</button>
         <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
       </div>
       </form>
@@ -743,3 +634,4 @@
 <script src="<?php echo base_url('assets/assets/js/pages/assessor/seniorhs/assessmentInfo.js'); ?>"></script>
 <script src="<?php echo base_url('assets/assets/js/pages/registrar/seniorhs/paymentHistory.js'); ?>"></script>
 <script src="<?php echo base_url('assets/assets/js/pages/registrar/seniorhs/uploadAvatar.js'); ?>"></script>
+<script src="<?php echo base_url('assets/assets/js/pages/registrar/seniorhs/stud_frm_validation.js'); ?>"></script>

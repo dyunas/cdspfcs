@@ -63,7 +63,75 @@ $route['logout'] = 'Login/Logout';
 
 // ADMIN
 	// DASHBOARD
+	$route['admin/dashboard/get_yearly_student_total'] = 'admin/dashboard/Dashboard/Get_yearly_student_total';
+	$route['admin/dashboard/get_student_distribution'] = 'admin/dashboard/Dashboard/Get_student_distribution';
 	$route['admin/dashboard'] = 'admin/dashboard/Dashboard/Index';
+
+	// ELEMENTARY
+	$route['admin/dept/kinder/view/process_payment'] = 'admin/department/kinder/Kinder/Process_payment';
+	$route['admin/dept/kinder/view/get_payables_info'] = 'admin/department/kinder/Kinder/Get_payables_info';
+	$route['admin/dept/kinder/view/check_fee_row'] = 'admin/department/kinder/Kinder/Check_fee_row';
+	$route['admin/dept/kinder/view/get_assessment_info'] = 'admin/department/kinder/Kinder/Get_assessment_info';
+	$route['admin/dept/kinder/view/add_assessment'] = 'admin/department/kinder/Kinder/Add_assessment';
+	$route['admin/dept/kinder/view/get_tuition_fee'] = 'admin/department/kinder/Kinder/Get_tuition_fee';
+	$route['admin/dept/kinder/view/get_discount_amount'] = 'admin/department/kinder/Kinder/Get_discount_amount';
+	$route['admin/dept/kinder/view/(:any)'] = 'admin/department/kinder/Kinder/View_student/$1';
+	$route['admin/dept/kinder/get_payment_history'] = 'admin/department/kinder/Kinder/Get_payment_history';
+	$route['admin/dept/kinder/get_kinder_table_data'] = 'registrar/department/kinder/Kinder/Get_kinder_table_data';
+	$route['admin/dept/kinder'] = 'admin/department/kinder/Kinder/Index';
+
+	// ELEMENTARY
+	$route['admin/dept/elementary/view/process_payment'] = 'admin/department/elementary/Elementary/Process_payment';
+	$route['admin/dept/elementary/view/get_payables_info'] = 'admin/department/elementary/Elementary/Get_payables_info';
+	$route['admin/dept/elementary/view/check_fee_row'] = 'admin/department/elementary/Elementary/Check_fee_row';
+	$route['admin/dept/elementary/view/get_assessment_info'] = 'admin/department/elementary/Elementary/Get_assessment_info';
+	$route['admin/dept/elementary/view/add_assessment'] = 'admin/department/elementary/Elementary/Add_assessment';
+	$route['admin/dept/elementary/view/get_tuition_fee'] = 'admin/department/elementary/Elementary/Get_tuition_fee';
+	$route['admin/dept/elementary/view/get_discount_amount'] = 'admin/department/elementary/Elementary/Get_discount_amount';
+	$route['admin/dept/elementary/view/(:any)'] = 'admin/department/elementary/Elementary/View_student/$1';
+	$route['admin/dept/elementary/get_payment_history'] = 'admin/department/elementary/Elementary/Get_payment_history';
+	$route['admin/dept/elementary/get_elem_table_data'] = 'registrar/department/elementary/Elementary/Get_elem_table_data';
+	$route['admin/dept/elementary'] = 'admin/department/elementary/Elementary/Index';
+
+	// JUNIORHS
+	$route['admin/dept/juniorhs/view/process_payment'] = 'admin/department/juniorhs/Junior_high_school/Process_payment';
+	$route['admin/dept/juniorhs/view/get_payables_info'] = 'admin/department/juniorhs/Junior_high_school/Get_payables_info';
+	$route['admin/dept/juniorhs/view/check_fee_row'] = 'admin/department/juniorhs/Junior_high_school/Check_fee_row';
+	$route['admin/dept/juniorhs/view/get_assessment_info'] = 'admin/department/juniorhs/Junior_high_school/Get_assessment_info';
+	$route['admin/dept/juniorhs/view/add_assessment'] = 'admin/department/juniorhs/Junior_high_school/Add_assessment';
+	$route['admin/dept/juniorhs/view/get_tuition_fee'] = 'admin/department/juniorhs/Junior_high_school/Get_tuition_fee';
+	$route['admin/dept/juniorhs/view/get_discount_amount'] = 'admin/department/juniorhs/Junior_high_school/Get_discount_amount';
+	$route['admin/dept/juniorhs/view/(:any)'] = 'admin/department/juniorhs/Junior_high_school/View_student/$1';
+	$route['admin/dept/juniorhs/get_payment_history'] = 'admin/department/juniorhs/Junior_high_school/Get_payment_history';
+	$route['admin/dept/juniorhs/get_jhs_table_data'] = 'registrar/department/juniorhs/Junior_high_school/Get_jhs_table_data';
+	$route['admin/dept/juniorhs'] = 'admin/department/juniorhs/Junior_high_school/Index';
+
+	// SENIORHIGH
+	$route['admin/dept/shs/view/process_payment'] = 'admin/department/seniorhigh/Senior_high_school/Process_payment';
+	$route['admin/dept/shs/view/get_payables_info'] = 'admin/department/seniorhigh/Senior_high_school/Get_payables_info';
+	$route['admin/dept/shs/view/check_fee_row'] = 'admin/department/seniorhigh/Senior_high_school/Check_fee_row';
+	$route['admin/dept/shs/view/get_assessment_info'] = 'admin/department/seniorhigh/Senior_high_school/Get_assessment_info';
+	$route['admin/dept/shs/view/add_assessment'] = 'admin/department/seniorhigh/Senior_high_school/Add_assessment';
+	$route['admin/dept/shs/view/get_tuition_fee'] = 'admin/department/seniorhigh/Senior_high_school/Get_tuition_fee';
+	$route['admin/dept/shs/view/get_discount_amount'] = 'admin/department/seniorhigh/Senior_high_school/Get_discount_amount';
+	$route['admin/dept/shs/view/(:any)'] = 'admin/department/seniorhigh/Senior_high_school/View_student/$1';
+	$route['admin/dept/shs/get_payment_history'] = 'admin/department/seniorhigh/Senior_high_school/Get_payment_history';
+	$route['admin/dept/shs/get_shs_table_data'] = 'registrar/department/seniorhs/Senior_high_school/Get_shs_table_data';
+	$route['admin/dept/shs'] = 'admin/department/seniorhigh/Senior_high_school/Index';
+
+	// COLLEGE
+	$route['admin/dept/college/view/process_payment'] = 'admin/department/college/College/Process_payment';
+	$route['admin/dept/college/view/get_payables_info'] = 'admin/department/college/College/Get_payables_info';
+	$route['admin/dept/college/view/check_fee_row'] = 'admin/department/college/College/Check_fee_row';
+	$route['admin/dept/college/view/get_assessment_info'] = 'admin/department/college/College/Get_assessment_info';
+	$route['admin/dept/college/view/add_assessment'] = 'admin/department/college/College/Add_assessment';
+	$route['admin/dept/college/view/get_discount_amount'] = 'admin/department/college/College/Get_discount_amount';
+	$route['admin/dept/college/view/get_thesis_fee'] = 'admin/department/college/College/Get_thesis_fee';
+	$route['admin/dept/college/view/get_tuition_fee'] = 'admin/department/college/College/Get_tuition_fee';
+	$route['admin/dept/college/view/(:any)'] = 'admin/department/college/College/View_student/$1';
+	$route['admin/dept/college/get_payment_history'] = 'admin/department/college/College/Get_payment_history';
+	$route['admin/dept/college/get_col_table_data'] = 'admin/department/college/College/Get_col_table_data';
+	$route['admin/dept/college'] = 'admin/department/college/College/Index';
 
 	// ACCOUNT MANAGER
 	$route['admin/accnt-mgr/register_account'] = 'admin/account_manager/Account_manager/Register_account';
@@ -74,6 +142,7 @@ $route['logout'] = 'Login/Logout';
 	$route['admin/accnt-mgr'] = 'admin/account_manager/Account_manager/Index';
 
 	// FEE MANAGER
+	$route['admin/fee-mgr/update_fee'] = 'admin/fee_manager/Fee_manager/Update_fee';
 	$route['admin/fee-mgr/create_new_fee'] = 'admin/fee_manager/Fee_manager/Create_new_fee';
 	$route['admin/fee-mgr/check_feecode'] = 'admin/fee_manager/Fee_manager/Check_feecode';
 	$route['admin/fee-mgr/get_grade_levels'] = 'admin/fee_manager/Fee_manager/Get_grade_levels';
@@ -102,16 +171,33 @@ $route['logout'] = 'Login/Logout';
 
 // REGISTRAR
 	// DASHBOARD
+	$route['registrar/dashboard/get_yearly_student_total'] = 'registrar/dashboard/Dashboard/Get_yearly_student_total';
+	$route['registrar/dashboard/get_student_distribution'] = 'registrar/dashboard/Dashboard/Get_student_distribution';
 	$route['registrar/dashboard'] = 'registrar/dashboard/Dashboard/Index';
+
+	// ELEMENTARY
+	$route['registrar/dept/kinder/view/upload_avatar'] = 'registrar/department/kinder/Kinder/Upload_avatar';
+	$route['registrar/dept/kinder/view/check_fee_row'] = 'registrar/department/kinder/Kinder/Check_fee_row';
+	$route['registrar/dept/kinder/view/get_assessment_info'] = 'registrar/department/kinder/Kinder/Get_assessment_info';
+	$route['registrar/dept/kinder/edit/(:any)'] = 'registrar/department/kinder/Kinder/Edit_student/$1';
+	$route['registrar/dept/kinder/view/(:any)'] = 'registrar/department/kinder/Kinder/View_student/$1';
+	$route['registrar/dept/kinder/update_student_admission_status'] = 'registrar/department/kinder/Kinder/Update_student_admission_status';
+	$route['registrar/dept/kinder/update_student'] = 'registrar/department/kinder/Kinder/Update_student';
+	$route['registrar/dept/kinder/register_student'] = 'registrar/department/kinder/Kinder/Register_student';
+	$route['registrar/dept/kinder/new'] = 'registrar/department/kinder/Kinder/New_student';
+	$route['registrar/dept/kinder/check_stud_lrn'] = 'registrar/department/kinder/Kinder/Check_lrn';
+	$route['registrar/dept/kinder/get_payment_history'] = 'registrar/department/kinder/Kinder/Get_payment_history';
+	$route['registrar/dept/kinder/get_kinder_table_data'] = 'registrar/department/kinder/Kinder/Get_kinder_table_data';
+	$route['registrar/dept/kinder'] = 'registrar/department/kinder/Kinder/Index';
 
 	// ELEMENTARY
 	$route['registrar/dept/elementary/view/upload_avatar'] = 'registrar/department/elementary/Elementary/Upload_avatar';
 	$route['registrar/dept/elementary/view/check_fee_row'] = 'registrar/department/elementary/Elementary/Check_fee_row';
 	$route['registrar/dept/elementary/view/get_assessment_info'] = 'registrar/department/elementary/Elementary/Get_assessment_info';
-	$route['registrar/dept/elementary/view/add_assessment'] = 'registrar/department/elementary/Elementary/Add_assessment';
-	$route['registrar/dept/elementary/view/get_tuition_fee'] = 'registrar/department/elementary/Elementary/Get_tuition_fee';
-	$route['registrar/dept/elementary/view/get_discount_amount'] = 'registrar/department/elementary/Elementary/Get_discount_amount';
+	$route['registrar/dept/elementary/edit/(:any)'] = 'registrar/department/elementary/Elementary/Edit_student/$1';
 	$route['registrar/dept/elementary/view/(:any)'] = 'registrar/department/elementary/Elementary/View_student/$1';
+	$route['registrar/dept/elementary/update_student_admission_status'] = 'registrar/department/elementary/Elementary/Update_student_admission_status';
+	$route['registrar/dept/elementary/update_student'] = 'registrar/department/elementary/Elementary/Update_student';
 	$route['registrar/dept/elementary/register_student'] = 'registrar/department/elementary/Elementary/Register_student';
 	$route['registrar/dept/elementary/new'] = 'registrar/department/elementary/Elementary/New_student';
 	$route['registrar/dept/elementary/check_stud_lrn'] = 'registrar/department/elementary/Elementary/Check_lrn';
@@ -123,10 +209,10 @@ $route['logout'] = 'Login/Logout';
 	$route['registrar/dept/juniorhs/view/upload_avatar'] = 'registrar/department/juniorhs/Junior_high_school/Upload_avatar';
 	$route['registrar/dept/juniorhs/view/check_fee_row'] = 'registrar/department/juniorhs/Junior_high_school/Check_fee_row';
 	$route['registrar/dept/juniorhs/view/get_assessment_info'] = 'registrar/department/juniorhs/Junior_high_school/Get_assessment_info';
-	$route['registrar/dept/juniorhs/view/add_assessment'] = 'registrar/department/juniorhs/Junior_high_school/Add_assessment';
-	$route['registrar/dept/juniorhs/view/get_tuition_fee'] = 'registrar/department/juniorhs/Junior_high_school/Get_tuition_fee';
-	$route['registrar/dept/juniorhs/view/get_discount_amount'] = 'registrar/department/juniorhs/Junior_high_school/Get_discount_amount';
+	$route['registrar/dept/juniorhs/edit/(:any)'] = 'registrar/department/juniorhs/Junior_high_school/Edit_student/$1';
 	$route['registrar/dept/juniorhs/view/(:any)'] = 'registrar/department/juniorhs/Junior_high_school/View_student/$1';
+	$route['registrar/dept/juniorhs/update_student_admission_status'] = 'registrar/department/juniorhs/Junior_high_school/Update_student_admission_status';
+	$route['registrar/dept/juniorhs/update_student'] = 'registrar/department/juniorhs/Junior_high_school/Update_student';
 	$route['registrar/dept/juniorhs/register_student'] = 'registrar/department/juniorhs/Junior_high_school/Register_student';
 	$route['registrar/dept/juniorhs/new'] = 'registrar/department/juniorhs/Junior_high_school/New_student';
 	$route['registrar/dept/juniorhs/check_stud_lrn'] = 'registrar/department/juniorhs/Junior_high_school/Check_lrn';
@@ -138,9 +224,10 @@ $route['logout'] = 'Login/Logout';
 	$route['registrar/dept/shs/view/upload_avatar'] = 'registrar/department/seniorhs/Senior_high_school/Upload_avatar';
 	$route['registrar/dept/shs/view/check_fee_row'] = 'registrar/department/seniorhs/Senior_high_school/Check_fee_row';
 	$route['registrar/dept/shs/view/get_assessment_info'] = 'registrar/department/seniorhs/Senior_high_school/Get_assessment_info';
-	$route['registrar/dept/shs/view/add_assessment'] = 'registrar/department/seniorhs/Senior_high_school/Add_assessment';
-	$route['registrar/dept/shs/view/get_tuition_fee'] = 'registrar/department/seniorhs/Senior_high_school/Get_tuition_fee';
+	$route['registrar/dept/shs/edit/(:any)'] = 'registrar/department/seniorhs/Senior_high_school/Edit_student/$1';
 	$route['registrar/dept/shs/view/(:any)'] = 'registrar/department/seniorhs/Senior_high_school/View_student/$1';
+	$route['registrar/dept/shs/update_student_admission_status'] = 'registrar/department/seniorhs/Senior_high_school/Update_student_admission_status';
+	$route['registrar/dept/shs/update_student'] = 'registrar/department/seniorhs/Senior_high_school/Update_student';
 	$route['registrar/dept/shs/register_student'] = 'registrar/department/seniorhs/Senior_high_school/Register_student';
 	$route['registrar/dept/shs/new'] = 'registrar/department/seniorhs/Senior_high_school/New_student';
 	$route['registrar/dept/shs/check_stud_lrn'] = 'registrar/department/seniorhs/Senior_high_school/Check_lrn';
@@ -154,11 +241,10 @@ $route['logout'] = 'Login/Logout';
 	$route['registrar/dept/college/view/upload_avatar'] = 'registrar/department/college/College/Upload_avatar';
 	$route['registrar/dept/college/view/check_fee_row'] = 'registrar/department/college/College/Check_fee_row';
 	$route['registrar/dept/college/view/get_assessment_info'] = 'registrar/department/college/College/Get_assessment_info';
-	$route['registrar/dept/college/view/add_assessment'] = 'registrar/department/college/College/Add_assessment';
-	$route['registrar/dept/college/view/get_discount_amount'] = 'registrar/department/college/College/Get_discount_amount';
-	$route['registrar/dept/college/view/get_thesis_fee'] = 'registrar/department/college/College/Get_thesis_fee';
-	$route['registrar/dept/college/view/get_tuition_fee'] = 'registrar/department/college/College/Get_tuition_fee';
+	$route['registrar/dept/college/edit/(:any)'] = 'registrar/department/college/College/Edit_student/$1';
 	$route['registrar/dept/college/view/(:any)'] = 'registrar/department/college/College/View_student/$1';
+	$route['registrar/dept/college/update_student_admission_status'] = 'registrar/department/college/College/Update_student_admission_status';
+	$route['registrar/dept/college/update_student'] = 'registrar/department/college/College/Update_student';
 	$route['registrar/dept/college/register_student'] = 'registrar/department/college/College/Register_student';
 	$route['registrar/dept/college/new'] = 'registrar/department/college/College/New_student';
 	$route['registrar/dept/college/get_payment_history'] = 'registrar/department/college/College/Get_payment_history';
@@ -172,10 +258,25 @@ $route['logout'] = 'Login/Logout';
 	$route['cashier/dashboard'] = 'cashier/dashboard/Dashboard/Index';
 
 	// ELEMENTARY
+	$route['cashier/dept/kinder/view/process_payment'] = 'cashier/department/kinder/Kinder/Process_payment';
+	$route['cashier/dept/kinder/view/get_payables_info'] = 'cashier/department/kinder/Kinder/Get_payables_info';
+	$route['cashier/dept/kinder/view/check_fee_row'] = 'cashier/department/kinder/Kinder/Check_fee_row';
+	$route['cashier/dept/kinder/view/get_assessment_info'] = 'cashier/department/kinder/Kinder/Get_assessment_info';
+	$route['cashier/dept/kinder/view/add_assessment'] = 'cashier/department/kinder/Kinder/Add_assessment';
+	$route['cashier/dept/kinder/view/get_tuition_fee'] = 'cashier/department/kinder/Kinder/Get_tuition_fee';
+	$route['cashier/dept/kinder/view/get_discount_amount'] = 'cashier/department/kinder/Kinder/Get_discount_amount';
+	$route['cashier/dept/kinder/view/(:any)'] = 'cashier/department/kinder/Kinder/View_student/$1';
+	$route['cashier/dept/kinder/get_payment_history'] = 'cashier/department/kinder/Kinder/Get_payment_history';
+	$route['cashier/dept/kinder/get_kinder_table_data'] = 'registrar/department/kinder/Kinder/Get_kinder_table_data';
+	$route['cashier/dept/kinder'] = 'cashier/department/kinder/Kinder/Index';
+
+	// ELEMENTARY
 	$route['cashier/dept/elementary/view/process_payment'] = 'cashier/department/elementary/Elementary/Process_payment';
 	$route['cashier/dept/elementary/view/get_payables_info'] = 'cashier/department/elementary/Elementary/Get_payables_info';
 	$route['cashier/dept/elementary/view/check_fee_row'] = 'cashier/department/elementary/Elementary/Check_fee_row';
 	$route['cashier/dept/elementary/view/get_assessment_info'] = 'cashier/department/elementary/Elementary/Get_assessment_info';
+	$route['cashier/dept/elementary/view/add_assessment'] = 'cashier/department/elementary/Elementary/Add_assessment';
+	$route['cashier/dept/elementary/view/get_tuition_fee'] = 'cashier/department/elementary/Elementary/Get_tuition_fee';
 	$route['cashier/dept/elementary/view/get_discount_amount'] = 'cashier/department/elementary/Elementary/Get_discount_amount';
 	$route['cashier/dept/elementary/view/(:any)'] = 'cashier/department/elementary/Elementary/View_student/$1';
 	$route['cashier/dept/elementary/get_payment_history'] = 'cashier/department/elementary/Elementary/Get_payment_history';
@@ -187,6 +288,8 @@ $route['logout'] = 'Login/Logout';
 	$route['cashier/dept/juniorhs/view/get_payables_info'] = 'cashier/department/juniorhs/Junior_high_school/Get_payables_info';
 	$route['cashier/dept/juniorhs/view/check_fee_row'] = 'cashier/department/juniorhs/Junior_high_school/Check_fee_row';
 	$route['cashier/dept/juniorhs/view/get_assessment_info'] = 'cashier/department/juniorhs/Junior_high_school/Get_assessment_info';
+	$route['cashier/dept/juniorhs/view/add_assessment'] = 'cashier/department/juniorhs/Junior_high_school/Add_assessment';
+	$route['cashier/dept/juniorhs/view/get_tuition_fee'] = 'cashier/department/juniorhs/Junior_high_school/Get_tuition_fee';
 	$route['cashier/dept/juniorhs/view/get_discount_amount'] = 'cashier/department/juniorhs/Junior_high_school/Get_discount_amount';
 	$route['cashier/dept/juniorhs/view/(:any)'] = 'cashier/department/juniorhs/Junior_high_school/View_student/$1';
 	$route['cashier/dept/juniorhs/get_payment_history'] = 'cashier/department/juniorhs/Junior_high_school/Get_payment_history';
@@ -198,6 +301,8 @@ $route['logout'] = 'Login/Logout';
 	$route['cashier/dept/shs/view/get_payables_info'] = 'cashier/department/seniorhigh/Senior_high_school/Get_payables_info';
 	$route['cashier/dept/shs/view/check_fee_row'] = 'cashier/department/seniorhigh/Senior_high_school/Check_fee_row';
 	$route['cashier/dept/shs/view/get_assessment_info'] = 'cashier/department/seniorhigh/Senior_high_school/Get_assessment_info';
+	$route['cashier/dept/shs/view/add_assessment'] = 'cashier/department/shs/Senior_high_school/Add_assessment';
+	$route['cashier/dept/shs/view/get_tuition_fee'] = 'cashier/department/shs/Senior_high_school/Get_tuition_fee';
 	$route['cashier/dept/shs/view/get_discount_amount'] = 'cashier/department/seniorhigh/Senior_high_school/Get_discount_amount';
 	$route['cashier/dept/shs/view/(:any)'] = 'cashier/department/seniorhigh/Senior_high_school/View_student/$1';
 	$route['cashier/dept/shs/get_payment_history'] = 'cashier/department/seniorhigh/Senior_high_school/Get_payment_history';
@@ -209,7 +314,10 @@ $route['logout'] = 'Login/Logout';
 	$route['cashier/dept/college/view/get_payables_info'] = 'cashier/department/college/College/Get_payables_info';
 	$route['cashier/dept/college/view/check_fee_row'] = 'cashier/department/college/College/Check_fee_row';
 	$route['cashier/dept/college/view/get_assessment_info'] = 'cashier/department/college/College/Get_assessment_info';
+	$route['cashier/dept/college/view/add_assessment'] = 'cashier/department/college/College/Add_assessment';
 	$route['cashier/dept/college/view/get_discount_amount'] = 'cashier/department/college/College/Get_discount_amount';
+	$route['cashier/dept/college/view/get_thesis_fee'] = 'cashier/department/college/College/Get_thesis_fee';
+	$route['cashier/dept/college/view/get_tuition_fee'] = 'cashier/department/college/College/Get_tuition_fee';
 	$route['cashier/dept/college/view/(:any)'] = 'cashier/department/college/College/View_student/$1';
 	$route['cashier/dept/college/get_payment_history'] = 'cashier/department/college/College/Get_payment_history';
 	$route['cashier/dept/college/get_col_table_data'] = 'cashier/department/college/College/Get_col_table_data';

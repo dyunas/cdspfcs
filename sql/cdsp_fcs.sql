@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2019 at 12:12 PM
+-- Generation Time: Mar 29, 2019 at 01:42 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -124,13 +124,8 @@ CREATE TABLE `tbl_assessment_info` (
 --
 
 INSERT INTO `tbl_assessment_info` (`rowID`, `studID`, `gradeLevel`, `course_id`, `assessmentID`, `paymentScheme`, `discount`, `totalDiscount`, `totalDiscAmount`, `escGrant`, `escGrantAmnt`, `voucher`, `voucherDisc`, `numUnits`, `numThesis`, `totalAmt`, `grandTotal`) VALUES
-(1, '19-0001-52', '4th Yr', 3, 236541, 'INSTALLMENT', 0, '0.00', '0.00', '0.00', '0.00', 0, '0.00', 24, 1, '26600.00', '26600.00'),
-(2, '123456789012', 'Grade 1', 0, 742309, 'CASH', 3, '40.00', '5020.00', '0.00', '0.00', 0, '0.00', 0, 0, '36295.00', '31275.00'),
-(3, '534255555555', 'Grade 1', 0, 85571, 'MINIMUM', 5, '100.00', '12550.00', '0.00', '0.00', 0, '0.00', 0, 0, '36295.00', '23745.00'),
-(4, '123456789013', 'Grade 8', 0, 725982, 'CASH', 0, '10.00', '1345.00', '1.00', '9000.00', 0, '0.00', 0, 0, '38635.00', '28290.00'),
-(5, '123456789019', 'Grade 4', 0, 322894, 'CASH', 5, '100.00', '12550.00', '0.00', '0.00', 0, '0.00', 0, 0, '37560.00', '25010.00'),
-(6, '123456789014', 'Grade 12', 0, 720327, 'MONTHLY', 0, '0.00', '0.00', '0.00', '0.00', 3, '0.00', 0, 0, '20950.00', '20950.00'),
-(7, '19-0010-52', '1st Yr', 3, 647620, 'INSTALLMENT', 11, '20.00', '1920.00', '0.00', '0.00', 0, '0.00', 24, 0, '21550.00', '19630.00');
+(1, '123456789102', 'Grade 1', 0, 939098, 'MINIMUM', 3, '30.00', '3765.00', '0.00', '0.00', 0, '0.00', 0, 0, '36295.00', '32530.00'),
+(2, '19-0001-52', '4th Yr', 3, 730763, 'INSTALLMENT', 0, '0.00', '0.00', '0.00', '0.00', 0, '0.00', 9, 1, '20200.00', '20200.00');
 
 -- --------------------------------------------------------
 
@@ -296,65 +291,22 @@ CREATE TABLE `tbl_feespayables_info` (
 --
 
 INSERT INTO `tbl_feespayables_info` (`rowID`, `studID`, `assessmentID`, `feeId`) VALUES
-(1, '19-0001-52', 236541, 28),
-(2, '19-0001-52', 236541, 29),
-(3, '19-0001-52', 236541, 34),
-(4, '19-0001-52', 236541, 35),
-(5, '19-0001-52', 236541, 36),
-(6, '19-0001-52', 236541, 37),
-(7, '19-0001-52', 236541, 38),
-(8, '123456789012', 742309, 1),
-(9, '123456789012', 742309, 2),
-(10, '123456789012', 742309, 3),
-(11, '123456789012', 742309, 4),
-(12, '123456789012', 742309, 5),
-(13, '123456789012', 742309, 6),
-(14, '123456789012', 742309, 7),
-(15, '123456789012', 742309, 8),
-(16, '123456789012', 742309, 9),
-(17, '534255555555', 85571, 1),
-(18, '534255555555', 85571, 2),
-(19, '534255555555', 85571, 3),
-(20, '534255555555', 85571, 4),
-(21, '534255555555', 85571, 5),
-(22, '534255555555', 85571, 6),
-(23, '534255555555', 85571, 7),
-(24, '534255555555', 85571, 8),
-(25, '534255555555', 85571, 9),
-(26, '123456789013', 725982, 10),
-(27, '123456789013', 725982, 11),
-(28, '123456789013', 725982, 12),
-(29, '123456789013', 725982, 13),
-(30, '123456789013', 725982, 14),
-(31, '123456789013', 725982, 15),
-(32, '123456789013', 725982, 16),
-(33, '123456789013', 725982, 17),
-(34, '123456789013', 725982, 18),
-(35, '123456789019', 322894, 39),
-(36, '123456789019', 322894, 40),
-(37, '123456789019', 322894, 41),
-(38, '123456789019', 322894, 42),
-(39, '123456789019', 322894, 43),
-(40, '123456789019', 322894, 44),
-(41, '123456789019', 322894, 45),
-(42, '123456789019', 322894, 46),
-(43, '123456789019', 322894, 47),
-(44, '123456789014', 720327, 19),
-(45, '123456789014', 720327, 20),
-(46, '123456789014', 720327, 21),
-(47, '123456789014', 720327, 22),
-(48, '123456789014', 720327, 23),
-(49, '123456789014', 720327, 24),
-(50, '123456789014', 720327, 25),
-(51, '123456789014', 720327, 26),
-(52, '123456789014', 720327, 27),
-(53, '19-0010-52', 647620, 28),
-(54, '19-0010-52', 647620, 29),
-(55, '19-0010-52', 647620, 30),
-(56, '19-0010-52', 647620, 31),
-(57, '19-0010-52', 647620, 32),
-(58, '19-0010-52', 647620, 33),
-(59, '19-0010-52', 647620, 38);
+(1, '123456789102', 939098, 1),
+(2, '123456789102', 939098, 2),
+(3, '123456789102', 939098, 3),
+(4, '123456789102', 939098, 4),
+(5, '123456789102', 939098, 5),
+(6, '123456789102', 939098, 6),
+(7, '123456789102', 939098, 7),
+(8, '123456789102', 939098, 8),
+(9, '123456789102', 939098, 9),
+(10, '19-0001-52', 730763, 28),
+(11, '19-0001-52', 730763, 29),
+(12, '19-0001-52', 730763, 34),
+(13, '19-0001-52', 730763, 35),
+(14, '19-0001-52', 730763, 36),
+(15, '19-0001-52', 730763, 37),
+(16, '19-0001-52', 730763, 38);
 
 -- --------------------------------------------------------
 
@@ -426,114 +378,24 @@ CREATE TABLE `tbl_logs` (
 --
 
 INSERT INTO `tbl_logs` (`row_id`, `emp_id`, `c_log`, `mod_date`) VALUES
-(1, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789012', '2019-01-12 00:00:00'),
-(2, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0001-52', '2019-01-12 00:00:00'),
-(3, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789013', '2019-01-12 00:00:00'),
-(4, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789014', '2019-01-12 00:00:00'),
-(6, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0002-52', '2019-01-16 00:00:00'),
-(7, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789015', '2019-01-16 00:00:00'),
-(8, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0003-52', '2019-01-17 00:00:00'),
-(9, '5c3f86c85a1d6', 'Created a new fee: EEP-EL - Early Enrollment Program - 10.00 for 2', '2019-02-02 06:55:44'),
-(10, '5c3f86c85a1d6', 'Created a new fee: TFJHS - Tuition Fee - 12,500.00', '2019-02-12 11:14:52'),
-(11, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0004-52', '2019-02-22 07:12:05'),
-(12, '5c3f86c85a1d6', 'Created a new fee: IDLNEL - ID Lanyard - 200.00', '2019-02-23 09:49:40'),
-(13, '5c3f86c85a1d6', 'Created a new fee: MSCJHS - Miscellaneous - 8,550.00', '2019-02-28 04:53:07'),
-(14, '5c3f86c85a1d6', 'Created a new fee: CFJHS - Computer Fee - 3,500.00', '2019-02-28 04:53:51'),
-(15, '5c3f86c85a1d6', 'Created a new fee: ENJHS - Energy Fee - 3,000.00', '2019-02-28 04:54:28'),
-(16, '5c3f86c85a1d6', 'Created a new fee: BKSJHS - Books - Junior High - 6,545.00', '2019-02-28 04:55:06'),
-(17, '5c3f86c85a1d6', 'Created a new fee: EDTRJHS - Educational Tour - 2,200.00', '2019-02-28 04:56:15'),
-(18, '5c3f86c85a1d6', 'Created a new fee: FDJHS - Foundation T- shirt - 250.00', '2019-02-28 04:58:03'),
-(19, '5c3f86c85a1d6', 'Created a new fee: LIPJHS - Learner\'s Insurance Premium - 150.00', '2019-02-28 04:58:24'),
-(20, '5c3f86c85a1d6', 'Created a new fee: IDLNJHS - ID Lanyard - 200.00', '2019-02-28 04:59:17'),
-(21, '5c3f86c85a1d6', 'Created a new fee: EEP-JHS - Early Enrollment Program - 20.00 for 3', '2019-03-01 08:23:51'),
-(22, '5c3f86c85a1d6', 'Created a new fee: Tuition Fee - 12,550.00 for Grade 1', '2019-03-05 05:46:19'),
-(23, '5c3f86c85a1d6', 'Created a new fee: Miscellaneous - 8,550.00 for Grade 1', '2019-03-05 05:47:46'),
-(24, '5c3f86c85a1d6', 'Created a new fee: Computer Fee - 3,500.00 for Grade 1', '2019-03-05 05:48:06'),
-(25, '5c3f86c85a1d6', 'Created a new fee: Energy Fee - 3,000.00 for Grade 1', '2019-03-05 05:48:20'),
-(26, '5c3f86c85a1d6', 'Created a new fee: Books - 5,895.00 for Grade 1', '2019-03-05 05:48:51'),
-(27, '5c3f86c85a1d6', 'Created a new fee: Educational Tour - 2,200.00 for Grade 1', '2019-03-05 05:49:13'),
-(28, '5c3f86c85a1d6', 'Created a new fee: Foundation Day - 250.00 for Grade 1', '2019-03-05 05:49:29'),
-(29, '5c3f86c85a1d6', 'Created a new fee: Learner\'s Insurance Premium - 150.00 for Grade 1', '2019-03-05 05:50:34'),
-(30, '5c3f86c85a1d6', 'Created a new fee: ID Lanyard - 200.00 for Grade 1', '2019-03-05 05:51:02'),
-(31, '5c080710142a2', 'Registered student with LRN/Student ID of 534255555555', '2019-03-09 07:10:19'),
-(32, '5c3f86c85a1d6', 'Created a new fee: Tuition Fee - 13,450.00 for Grade 8', '2019-03-09 06:41:45'),
-(33, '5c3f86c85a1d6', 'Created a new fee: Miscellaneous - 8,550.00 for Grade 8', '2019-03-09 06:42:02'),
-(34, '5c3f86c85a1d6', 'Created a new fee: Computer Fee - 3,500.00 for Grade 8', '2019-03-09 06:42:19'),
-(35, '5c3f86c85a1d6', 'Created a new fee: Energy Fee - 3,000.00 for Grade 8', '2019-03-09 06:42:40'),
-(36, '5c3f86c85a1d6', 'Created a new fee: Books - 7,335.00 for Grade 8', '2019-03-09 06:42:58'),
-(37, '5c3f86c85a1d6', 'Created a new fee: Educational Tour - 2,200.00 for Grade 8', '2019-03-09 06:43:24'),
-(38, '5c3f86c85a1d6', 'Created a new fee: Foundation Day - 250.00 for Grade 8', '2019-03-09 06:43:42'),
-(39, '5c3f86c85a1d6', 'Created a new fee: Learner\'s Insurance Premium - 150.00 for Grade 8', '2019-03-09 06:44:01'),
-(40, '5c3f86c85a1d6', 'Created a new fee: ID Lanyard - 200.00 for Grade 8', '2019-03-09 06:44:21'),
-(41, '5c3f86c85a1d6', 'Created a new fee: Tuition Fee - 6,400.00 for Grade 12', '2019-03-10 08:01:32'),
-(42, '5c3f86c85a1d6', 'Created a new fee: Miscellaneous - 8,100.00 for Grade 12', '2019-03-10 08:01:54'),
-(43, '5c3f86c85a1d6', 'Created a new fee: Laboratory Fee - 3,000.00 for Grade 12', '2019-03-10 08:02:12'),
-(44, '5c3f86c85a1d6', 'Created a new fee: Student Handbook - 100.00 for Grade 12', '2019-03-10 08:02:34'),
-(45, '5c3f86c85a1d6', 'Created a new fee: Educational Tour - 2,200.00 for Grade 12', '2019-03-10 08:02:49'),
-(46, '5c3f86c85a1d6', 'Created a new fee: Foundation Day - 300.00 for Grade 12', '2019-03-10 08:03:05'),
-(47, '5c3f86c85a1d6', 'Created a new fee: ID w/ Lanyard - 200.00 for Grade 12', '2019-03-10 08:03:26'),
-(48, '5c3f86c85a1d6', 'Created a new fee: Student\'s Physical Examination - 350.00 for Grade 12', '2019-03-10 08:04:09'),
-(49, '5c3f86c85a1d6', 'Created a new fee: Acquaintance Party - 300.00 for Grade 12', '2019-03-10 08:04:29'),
-(50, '5c3f86c85a1d6', 'Created a new fee: Tuition Fee(per unit) - 400.00 for College', '2019-03-11 10:00:43'),
-(51, '5c3f86c85a1d6', 'Created a new fee: Miscellaneous - 6,100.00 for College', '2019-03-11 10:02:32'),
-(52, '5c3f86c85a1d6', 'Created a new fee: Computer Fee - 1,500.00 for College', '2019-03-11 10:05:01'),
-(53, '5c3f86c85a1d6', 'Created a new fee: Science Laboratory - 1,500.00 for College', '2019-03-11 10:05:13'),
-(54, '5c3f86c85a1d6', 'Created a new fee: NSTP - 150.00 for College', '2019-03-11 10:05:25'),
-(55, '5c3f86c85a1d6', 'Created a new fee: ID with Lanyard - 200.00 for College', '2019-03-11 10:05:49'),
-(56, '5c3f86c85a1d6', 'Created a new fee: Thesis Defense Fee - 400.00 for College', '2019-03-11 10:06:24'),
-(57, '5c3f86c85a1d6', 'Created a new fee: Graduation Fee - 3,000.00 for College', '2019-03-11 10:06:46'),
-(58, '5c3f86c85a1d6', 'Created a new fee: Year Book - 2,500.00 for College', '2019-03-11 10:06:58'),
-(59, '5c3f86c85a1d6', 'Created a new fee: Retreat - 2,500.00 for College', '2019-03-11 10:07:07'),
-(60, '5c3f86c85a1d6', 'Created a new fee: Team Building - 2,500.00 for College', '2019-03-11 10:07:36'),
-(61, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0005-52', '2019-03-12 05:11:35'),
-(62, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789020', '2019-03-12 12:18:02'),
-(63, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0006-52', '2019-03-12 12:20:10'),
-(64, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0007-52', '2019-03-12 12:43:30'),
-(65, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789019', '2019-03-12 01:05:26'),
-(66, '5c3f86c85a1d6', 'Created a new fee: Tuition Fee - 12,550.00 for Grade 4', '2019-03-12 01:08:18'),
-(67, '5c3f86c85a1d6', 'Created a new fee: Miscellaneous - 8,550.00 for Grade 4', '2019-03-12 01:09:06'),
-(68, '5c3f86c85a1d6', 'Created a new fee: Computer Fee - 3,500.00 for Grade 4', '2019-03-12 01:11:20'),
-(69, '5c3f86c85a1d6', 'Created a new fee: Energy Fee - 3,000.00 for Grade 4', '2019-03-12 01:11:49'),
-(70, '5c3f86c85a1d6', 'Created a new fee: Books - 7,160.00 for Grade 4', '2019-03-12 01:12:27'),
-(71, '5c3f86c85a1d6', 'Created a new fee: Educational Tour - 2,200.00 for Grade 4', '2019-03-12 01:12:58'),
-(72, '5c3f86c85a1d6', 'Created a new fee: Foundation Tshirt - 250.00 for Grade 4', '2019-03-12 01:13:32'),
-(73, '5c3f86c85a1d6', 'Created a new fee: LIP - 150.00 for Grade 4', '2019-03-12 01:13:56'),
-(74, '5c3f86c85a1d6', 'Created a new fee: ID Lanyard - 200.00 for Grade 4', '2019-03-12 01:14:20'),
-(75, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0008-52', '2019-03-12 01:14:20'),
-(76, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0009-52', '2019-03-12 01:24:06'),
-(77, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0010-52', '2019-03-12 01:37:48'),
-(78, '5c080710142a2', 'Generated assessment for student with LRN/Student ID of 19-0001-52 with Assessment ID of 236541', '2019-03-14 12:31:12'),
-(79, '5c40dd75c74fc', 'Processed payment of student with LRN/Student ID of 19-0001-52 with Invoice No.# of 20190314-433898 and with O.R. No# of 113213', '2019-03-14 12:32:52'),
-(80, '5c3f86c85a1d6', 'Created a new fee: RET-EL - Retention Promo - 30.00 for 2', '2019-03-14 04:26:49'),
-(81, '5c3f86c85a1d6', 'Created a new fee: RET-JH - Retention Promo - 30.00 for 3', '2019-03-14 04:27:05'),
-(82, '5c3f86c85a1d6', 'Created a new fee: HighestHon - Highest Honors - 100.00 for 2', '2019-03-14 04:28:48'),
-(83, '5c3f86c85a1d6', 'Created a new fee: HighHon - High Honor - 40.00 for 2', '2019-03-14 05:15:28'),
-(84, '5c3f86c85a1d6', 'Created a new fee: HON - Honor - 15.00 for 2', '2019-03-14 05:16:03'),
-(85, '5c3f86c85a1d6', 'Created a new fee: 1st Daugther/Son - 75.00 for 1', '2019-03-14 05:36:36'),
-(86, '5c3f86c85a1d6', 'Created a new fee: 2nd Daughter/Son - 50.00 for 2', '2019-03-14 05:37:12'),
-(87, '5c3f86c85a1d6', 'Created a new fee: Niece/Nephew - 50.00 for 2', '2019-03-14 05:39:03'),
-(88, '5c3f86c85a1d6', 'Updated academic year to 2019-2020', '2019-03-14 08:07:32'),
-(89, '5c3f86c85a1d6', 'Updated semester to  Semester.', '2019-03-14 08:25:50'),
-(90, '5c3f86c85a1d6', 'Updated semester to  Semester.', '2019-03-14 08:25:55'),
-(91, '5c3f86c85a1d6', 'Updated academic year to 2019-2020', '2019-03-14 08:29:52'),
-(92, '5c3f86c85a1d6', 'Updated academic year to 2019-2020', '2019-03-14 08:30:54'),
-(93, '5c3f86c85a1d6', 'Updated academic year to 2019-2020', '2019-03-14 08:31:56'),
-(94, '5c3f86c85a1d6', 'Updated semester to 1st Semester.', '2019-03-14 08:36:33'),
-(95, '5c3f86c85a1d6', 'Updated semester to 2nd Semester.', '2019-03-14 08:36:38'),
-(96, '5c3f86c85a1d6', 'Updated academic year to 2018-2019', '2019-03-14 08:39:47'),
-(97, '5c3f86c85a1d6', 'Updated semester to 2nd Semester.', '2019-03-14 08:39:52'),
-(98, '5c40dd75c74fc', 'Processed payment of student with LRN/Student ID of 19-0001-52 with Invoice No.# of 20190314-800140 and with O.R. No# of 123499', '2019-03-14 09:18:41'),
-(99, '5c080710142a2', 'Generated assessment for student with LRN/Student ID of  with Assessment ID of 322894', '2019-03-15 08:26:49'),
-(100, '5c40dd75c74fc', 'Processed payment of student with LRN/Student ID of 19-0001-52 with Invoice No.# of 20190315-990851 and with O.R. No# of 312321', '2019-03-15 03:37:09'),
-(101, '5c080710142a2', 'Registered student with LRN/Student ID of ', '2019-03-15 09:39:01'),
-(102, '5c40dd75c74fc', 'Processed payment of student with LRN/Student ID of 123456789012 with Invoice No.# of 20190316-673945 and with O.R. No# of 565564', '2019-03-16 11:01:06'),
-(103, '5c40dd75c74fc', 'Processed payment of student with LRN/Student ID of 123456789013 with Invoice No.# of 20190316-052455 and with O.R. No# of 213213', '2019-03-16 02:20:44'),
-(104, '5c40dd75c74fc', 'Processed payment of student with LRN/Student ID of 123456789014 with Invoice No.# of 20190316-664742 and with O.R. No# of 432531', '2019-03-16 03:53:19'),
-(105, '5c3f86c85a1d6', 'Created a new fee: Working Student - 20.00 for 5', '2019-03-19 11:47:09'),
-(106, '5c080710142a2', 'Generated assessment for student with LRN/Student ID of 19-0010-52 with Assessment ID of 647620', '2019-03-20 12:45:57'),
-(107, '5c080710142a2', 'Registered student with LRN/Student ID of 432144343241', '2019-03-20 12:53:31'),
-(108, '5c40dd75c74fc', 'Processed payment of student with LRN/Student ID of 123456789013 with Invoice No.# of 20190320-821788 and with O.R. No# of 654654', '2019-03-20 02:14:22'),
-(109, '5c40dd75c74fc', 'Processed payment of student with LRN/Student ID of 19-0001-52 with Invoice No.# of 20190320-928491 and with O.R. No# of 414234', '2019-03-20 03:01:28');
+(1, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789101', '2019-03-29 03:40:11'),
+(2, '5c080710142a2', 'Registered student with LRN/Student ID of 19-0001-52', '2019-03-29 03:43:15'),
+(3, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789102', '2019-03-29 03:45:59'),
+(4, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789013', '2019-03-29 03:50:06'),
+(5, '5c080710142a2', 'Registered student with LRN/Student ID of 123456789104', '2019-03-29 03:53:20'),
+(6, '5c3f86c85a1d6', 'Generated assessment for student with LRN/Student ID of  with Assessment ID of 939098', '2019-03-29 03:55:39'),
+(7, '5c40dd75c74fc', 'Processed payment of student with LRN/Student ID of 123456789102 with Invoice No.# of 20190329-907611 and with O.R. No# of 123456', '2019-03-29 03:57:49'),
+(8, '5c3f86c85a1d6', 'Generated assessment for student with LRN/Student ID of 19-0001-52 with Assessment ID of 730763', '2019-03-29 03:59:42'),
+(9, '5c40dd75c74fc', 'Processed payment of student with LRN/Student ID of 19-0001-52 with Invoice No.# of 20190329-351679 and with O.R. No# of 123457', '2019-03-29 04:00:35'),
+(10, '5c080710142a2', 'Updated record of student with LRN/Student ID of 19-0001-52', '2019-03-29 06:03:43'),
+(11, '5c080710142a2', 'Updated record of student with LRN/Student ID of 19-0001-52', '2019-03-29 06:04:12'),
+(12, '5c080710142a2', 'Updated record of student with LRN/Student ID of 19-0001-52', '2019-03-29 06:04:22'),
+(13, '5c080710142a2', 'Updated record of student with LRN/Student ID of 19-0001-52', '2019-03-29 06:04:37'),
+(14, '5c080710142a2', 'Updated record of student with LRN/Student ID of 19-0001-52', '2019-03-29 06:04:46'),
+(15, '5c080710142a2', 'Updated record of student with LRN/Student ID of ', '2019-03-29 06:15:26'),
+(16, '5c080710142a2', 'Updated record of student with LRN/Student ID of 19-0001-52', '2019-03-29 06:17:16'),
+(17, '5c080710142a2', 'Updated record of student with LRN/Student ID of 19-0001-52', '2019-03-29 06:18:50'),
+(18, '5c080710142a2', 'Updated record of student with LRN/Student ID of 19-0001-52', '2019-03-29 06:19:07');
 
 -- --------------------------------------------------------
 
@@ -555,37 +417,20 @@ CREATE TABLE `tbl_payables_info` (
 --
 
 INSERT INTO `tbl_payables_info` (`rowID`, `studID`, `gradeLevel`, `assessmentID`, `payables`, `amountDue`) VALUES
-(1, '19-0001-52', '4th Yr', 236541, 'uponEnroll', '5000.00'),
-(2, '19-0001-52', '4th Yr', 236541, 'prelim', '8866.67'),
-(3, '19-0001-52', '4th Yr', 236541, 'midterm', '8866.67'),
-(4, '19-0001-52', '4th Yr', 236541, 'finals', '8866.67'),
-(5, '123456789012', 'Grade 1', 742309, 'uponEnroll', '31275.00'),
-(6, '534255555555', 'Grade 1', 85571, 'uponEnroll', '9498.00'),
-(7, '534255555555', 'Grade 1', 85571, 'july', '1583.00'),
-(8, '534255555555', 'Grade 1', 85571, 'august', '1583.00'),
-(9, '534255555555', 'Grade 1', 85571, 'september', '1583.00'),
-(10, '534255555555', 'Grade 1', 85571, 'october', '1583.00'),
-(11, '534255555555', 'Grade 1', 85571, 'november', '1583.00'),
-(12, '534255555555', 'Grade 1', 85571, 'december', '1583.00'),
-(13, '534255555555', 'Grade 1', 85571, 'january', '1583.00'),
-(14, '534255555555', 'Grade 1', 85571, 'february', '1583.00'),
-(15, '534255555555', 'Grade 1', 85571, 'march', '1583.00'),
-(16, '123456789013', 'Grade 8', 725982, 'uponEnroll', '28290.00'),
-(17, '123456789019', 'Grade 4', 322894, 'uponEnroll', '25010.00'),
-(18, '123456789014', 'Grade 12', 720327, 'uponEnroll', '9300.00'),
-(19, '123456789014', 'Grade 12', 720327, 'july', '1165.00'),
-(20, '123456789014', 'Grade 12', 720327, 'august', '1165.00'),
-(21, '123456789014', 'Grade 12', 720327, 'september', '1165.00'),
-(22, '123456789014', 'Grade 12', 720327, 'october', '1165.00'),
-(23, '123456789014', 'Grade 12', 720327, 'november', '1165.00'),
-(24, '123456789014', 'Grade 12', 720327, 'december', '1165.00'),
-(25, '123456789014', 'Grade 12', 720327, 'january', '1165.00'),
-(26, '123456789014', 'Grade 12', 720327, 'february', '1165.00'),
-(27, '123456789014', 'Grade 12', 720327, 'march', '1165.00'),
-(28, '19-0010-52', '1st Yr', 647620, 'uponEnroll', '5000.00'),
-(29, '19-0010-52', '1st Yr', 647620, 'prelim', '4876.67'),
-(30, '19-0010-52', '1st Yr', 647620, 'midterm', '4876.67'),
-(31, '19-0010-52', '1st Yr', 647620, 'finals', '4876.67');
+(1, '123456789102', 'Grade 1', 939098, 'uponEnroll', '13012.00'),
+(2, '123456789102', 'Grade 1', 939098, 'july', '2168.67'),
+(3, '123456789102', 'Grade 1', 939098, 'august', '2168.67'),
+(4, '123456789102', 'Grade 1', 939098, 'september', '2168.67'),
+(5, '123456789102', 'Grade 1', 939098, 'october', '2168.67'),
+(6, '123456789102', 'Grade 1', 939098, 'november', '2168.67'),
+(7, '123456789102', 'Grade 1', 939098, 'december', '2168.67'),
+(8, '123456789102', 'Grade 1', 939098, 'january', '2168.67'),
+(9, '123456789102', 'Grade 1', 939098, 'february', '2168.67'),
+(10, '123456789102', 'Grade 1', 939098, 'march', '2168.67'),
+(11, '19-0001-52', '4th Yr', 730763, 'uponEnroll', '5000.00'),
+(12, '19-0001-52', '4th Yr', 730763, 'prelim', '5066.67'),
+(13, '19-0001-52', '4th Yr', 730763, 'midterm', '5066.67'),
+(14, '19-0001-52', '4th Yr', 730763, 'finals', '5066.67');
 
 -- --------------------------------------------------------
 
@@ -631,7 +476,8 @@ INSERT INTO `tbl_shs_strand` (`row_id`, `strnd_id`, `trk_id`, `strand`, `strand_
 (2, 2, 1, 'GAS', 'General Academic Strand'),
 (3, 3, 1, 'HUMSS', 'Humanities and Social Sciences'),
 (4, 4, 2, 'HE', 'Home Economics'),
-(5, 5, 2, 'ICT', 'Information and Communications Technology');
+(5, 5, 2, 'ICT', 'Information and Communications Technology'),
+(6, 6, 1, 'STEM', 'Science, Technology, Engineering and Mathematics');
 
 -- --------------------------------------------------------
 
@@ -674,16 +520,7 @@ CREATE TABLE `tbl_stud_adtnl_info_col` (
 --
 
 INSERT INTO `tbl_stud_adtnl_info_col` (`row_id`, `stud_id`, `stud_grdns_name`, `stud_grdns_tnum`, `stud_grdns_cnum`, `stud_grdns_adrs`) VALUES
-(1, '19-0001-52', 'Nanay Ochoa', 0, 9121234567, 'sample'),
-(3, '19-0002-52', 'Amelia A. Quebral', 0, 9229298026, 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna'),
-(4, '19-0003-52', 'Eric Lehnsherr', 0, 639561234567, 'Sokovia'),
-(5, '19-0004-52', 'nanay nikas', 1223467, 12424214142, 'dito lang sa dulo'),
-(6, '19-0005-52', 'papito pepito', 1234321, 9265403493, 'San Pedro, Laguna'),
-(7, '19-0006-52', 'Vicente', 1234322, 9265403493, 'Binan Laguna'),
-(8, '19-0007-52', 'Joy Vista', 2324234, 9734635644, 'Binan Laguna'),
-(9, '19-0008-52', 'Vilma Montoya', 1234321, 9265403493, 'Binan Laguna'),
-(10, '19-0009-52', 'Michael maliquid', 1234321, 9265403493, 'sta.rosa laguna'),
-(11, '19-0010-52', 'malou curry', 1234321, 9265403493, 'San Pedro, Laguna');
+(1, '19-0001-52', 'Jinky Ochoa', 1234568, 9121234567, 'Brgy. Tagapo, Sta. Rosa');
 
 -- --------------------------------------------------------
 
@@ -705,11 +542,7 @@ CREATE TABLE `tbl_stud_adtnl_info_elem` (
 --
 
 INSERT INTO `tbl_stud_adtnl_info_elem` (`row_id`, `stud_lrn`, `stud_grdns_name`, `stud_grdns_tnum`, `stud_grdns_cnum`, `stud_grdns_adrs`) VALUES
-(1, 123456789012, 'Maria Dela Cruz', 0, 9229298026, 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna'),
-(2, 123456789015, 'adelaida dela cruz', 0, 9123456789, 'dyan sa tabi'),
-(3, 534255555555, 'papito pepito', 1234321, 9265403493, 'Tagapo'),
-(4, 123456789020, 'Tita Judith', 0, 0, 'Muntinlupa'),
-(5, 123456789019, 'Jinky Ochoa', 0, 9265403493, 'sta.rosa laguna');
+(1, 123456789102, 'nanay nidar', 1223467, 9121234567, 'dito lang sa dulo');
 
 -- --------------------------------------------------------
 
@@ -731,7 +564,29 @@ CREATE TABLE `tbl_stud_adtnl_info_jhs` (
 --
 
 INSERT INTO `tbl_stud_adtnl_info_jhs` (`row_id`, `stud_lrn`, `stud_grdns_name`, `stud_grdns_tnum`, `stud_grdns_cnum`, `stud_grdns_adrs`) VALUES
-(1, 123456789013, 'Rebecca Bucayan', 0, 9121234567, '#16 Kamagong St. Pacita Complex 1 San Pedro City Laguna');
+(1, 123456789013, 'Wilmina Fajardo', 1223467, 9121234567, 'Cadena de Amor St.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_stud_adtnl_info_kinder`
+--
+
+CREATE TABLE `tbl_stud_adtnl_info_kinder` (
+  `row_id` int(11) NOT NULL,
+  `stud_lrn` bigint(12) NOT NULL,
+  `stud_grdns_name` varchar(255) NOT NULL,
+  `stud_grdns_tnum` bigint(20) NOT NULL,
+  `stud_grdns_cnum` bigint(11) NOT NULL,
+  `stud_grdns_adrs` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_stud_adtnl_info_kinder`
+--
+
+INSERT INTO `tbl_stud_adtnl_info_kinder` (`row_id`, `stud_lrn`, `stud_grdns_name`, `stud_grdns_tnum`, `stud_grdns_cnum`, `stud_grdns_adrs`) VALUES
+(1, 123456789101, 'Maria Dela Cruz', 1223467, 9121234567, 'Bagong Bayan');
 
 -- --------------------------------------------------------
 
@@ -753,8 +608,7 @@ CREATE TABLE `tbl_stud_adtnl_info_shs` (
 --
 
 INSERT INTO `tbl_stud_adtnl_info_shs` (`row_id`, `stud_lrn`, `stud_grdns_name`, `stud_grdns_tnum`, `stud_grdns_cnum`, `stud_grdns_adrs`) VALUES
-(1, 123456789014, 'Wilmina Fajardo', 0, 9121234567, 'Cade de Amor Str. Phase 6 Pacita Complex 1 San Pedro City Laguna'),
-(2, 432144343241, 'nanay nikas', 1223467, 12424214142, 'dito lang sa dulo');
+(1, 123456789104, 'Amelia Quebral', 0, 9229298026, 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna');
 
 -- --------------------------------------------------------
 
@@ -777,11 +631,7 @@ CREATE TABLE `tbl_stud_documents` (
 --
 
 INSERT INTO `tbl_stud_documents` (`row_id`, `stud_lrn`, `bCertPSA`, `certGMC`, `certHonDis`, `frm137`, `frm138`) VALUES
-(1, 123456789012, 1, 1, 1, 1, 1),
-(2, 123456789015, 1, 1, 1, 1, 1),
-(3, 534255555555, 1, 1, 1, 1, 1),
-(4, 123456789020, 1, 0, 0, 1, 0),
-(5, 123456789019, 1, 1, 0, 1, 1);
+(1, 123456789102, 1, 1, 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -805,16 +655,7 @@ CREATE TABLE `tbl_stud_documents_col` (
 --
 
 INSERT INTO `tbl_stud_documents_col` (`row_id`, `stud_id`, `bCertPSA`, `certGMC`, `certHonDis`, `frm137`, `frm138`, `TOR`) VALUES
-(1, '19-0001-52', 1, 1, 1, 1, 1, 0),
-(3, '19-0002-52', 1, 1, 1, 1, 1, 0),
-(4, '19-0003-52', 1, 1, 1, 1, 1, 1),
-(5, '19-0004-52', 1, 1, 1, 1, 1, 1),
-(6, '19-0005-52', 1, 0, 0, 1, 0, 0),
-(7, '19-0006-52', 1, 0, 0, 1, 0, 0),
-(8, '19-0007-52', 1, 0, 0, 1, 0, 0),
-(9, '19-0008-52', 1, 1, 0, 1, 1, 0),
-(10, '19-0009-52', 1, 1, 0, 1, 1, 0),
-(11, '19-0010-52', 1, 1, 0, 1, 1, 0);
+(1, '19-0001-52', 1, 1, 0, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -837,7 +678,28 @@ CREATE TABLE `tbl_stud_documents_jhs` (
 --
 
 INSERT INTO `tbl_stud_documents_jhs` (`row_id`, `stud_lrn`, `bCertPSA`, `certGMC`, `certHonDis`, `frm137`, `frm138`) VALUES
-(1, 123456789013, 0, 1, 1, 1, 1);
+(1, 123456789013, 1, 1, 1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_stud_documents_kinder`
+--
+
+CREATE TABLE `tbl_stud_documents_kinder` (
+  `row_id` int(11) NOT NULL,
+  `stud_lrn` bigint(12) NOT NULL,
+  `bCertPSA` tinyint(4) NOT NULL,
+  `frm137` tinyint(4) NOT NULL,
+  `frm138` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_stud_documents_kinder`
+--
+
+INSERT INTO `tbl_stud_documents_kinder` (`row_id`, `stud_lrn`, `bCertPSA`, `frm137`, `frm138`) VALUES
+(1, 123456789101, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -860,8 +722,7 @@ CREATE TABLE `tbl_stud_documents_shs` (
 --
 
 INSERT INTO `tbl_stud_documents_shs` (`row_id`, `stud_lrn`, `bCertPSA`, `certGMC`, `certHonDis`, `frm137`, `frm138`) VALUES
-(1, 123456789014, 1, 1, 0, 1, 1),
-(2, 432144343241, 1, 1, 1, 1, 1);
+(1, 123456789104, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -896,16 +757,7 @@ CREATE TABLE `tbl_stud_info_col` (
 --
 
 INSERT INTO `tbl_stud_info_col` (`row_id`, `stud_id`, `stud_avatar`, `stud_lname`, `stud_fname`, `stud_mname`, `stud_status`, `stud_rgstrtn_dte`, `stud_year_lvl`, `stud_sem`, `stud_course`, `stud_acad_yr`, `stud_email`, `stud_bdate`, `stud_tnum`, `stud_cnum`, `stud_gender`, `stud_cur_adrs`, `stud_perm_adrs`) VALUES
-(1, '19-0001-52', '5c98aaebe1569.jpg', 'Ochoa', 'Cara', 'Martillosa', 'enrolled', '2019-01-12', '4th Yr', 2, 3, 1, '', '1997-04-28', 0, 0, 2, 'sample', 'sample'),
-(3, '19-0002-52', '', 'Quebral', 'Jonathan', 'Almodiel', 'registered', '2019-01-16', '4th Yr', 2, 3, 1, 'jonathan.almodiel.quebral@gmail.com', '1992-06-27', 0, 9566031598, 1, 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna', 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna'),
-(5, '19-0003-52', '', 'Maximoff', 'Wanda', '', 'registered', '2019-01-17', '2nd Yr', 2, 1, 1, 'wanda.maximoff@gmail.com', '1992-02-06', 0, 0, 2, 'Sokovia', 'Sokovia'),
-(11, '19-0004-52', '', 'Español', 'Kastin', '', 'registered', '2019-02-22', '4th Yr', 2, 3, 1, 'kas.español@gmail.com', '1998-12-30', 0, 0, 2, 'dito lang sa dulo', 'dito lang sa dulo'),
-(12, '19-0005-52', '', 'Padlan', 'Malou', 'Vargas', 'registered', '2019-03-12', '1st Yr', 2, 3, 1, '', '1999-02-01', 0, 0, 2, 'San Pedro, Laguna', 'San Pedro, Laguna'),
-(13, '19-0006-52', '', 'Canillo', 'Wendy', 'Carcer', 'registered', '2019-03-12', '2nd Yr', 2, 3, 1, '', '1999-03-11', 0, 0, 2, 'Binan, Laguna', 'Binan, Laguna'),
-(14, '19-0007-52', '', 'Vista', 'Jake', 'Baluyot ', 'registered', '2019-03-12', '3rd Yr', 2, 3, 1, 'mikhailalon21@gmail.com', '1998-11-29', 0, 9357650034, 1, 'Binan, Laguna', 'Binan, Laguna'),
-(15, '19-0008-52', '', 'Montoya', 'Jhonas Vincent', 'Canillo', 'registered', '2019-03-12', '1st Yr', 2, 3, 1, 'montoyajhonas@yahoo.com', '1999-02-23', 0, 9974454906, 1, 'Binan, Laguna', 'Binan, Laguna'),
-(16, '19-0009-52', '', 'Maliquid', 'Zaira Ann', 'Pidlaoan', 'registered', '2019-03-12', '1st Yr', 2, 3, 1, 'zairaannmaliquid@gmail.com', '1999-10-14', 0, 9358514271, 2, 'sta.rosa laguna', 'sta.rosa laguna'),
-(17, '19-0010-52', '', 'curry', 'Malou', 'stephen', 'registered', '2019-03-12', '1st Yr', 2, 3, 1, 'curry@yahoo.com', '1999-04-28', 0, 9358514271, 2, 'San Pedro, Laguna', 'San Pedro, Laguna');
+(1, '19-0001-52', '5c9d24101331e.jpg', 'Ochoa', 'Cara', 'Martillosa', 'enrolled', '2019-03-29', '4th Yr', 2, 3, 1, '', '1998-04-28', 0, 0, 2, 'Brgy. Tagapo, Sta. Rosa', 'Brgy. Tagapo, Sta. Rosa');
 
 -- --------------------------------------------------------
 
@@ -939,11 +791,7 @@ CREATE TABLE `tbl_stud_info_elem` (
 --
 
 INSERT INTO `tbl_stud_info_elem` (`row_id`, `stud_lrn`, `stud_avatar`, `stud_lname`, `stud_fname`, `stud_mname`, `stud_status`, `stud_rgstrtn_dte`, `stud_grade_lvl`, `stud_section`, `stud_acad_yr`, `stud_email`, `stud_bdate`, `stud_tnum`, `stud_cnum`, `stud_gender`, `stud_cur_adrs`, `stud_perm_adrs`) VALUES
-(1, 123456789012, '5c98a3b8559a5.jpg', 'Dela Cruz', 'Juan', '', 'enrolled', '2019-01-12', 'Grade 1', '', 1, '', '2013-02-06', 0, 0, 1, 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna', 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna'),
-(2, 123456789015, '', 'Dela Cruz', 'Leonor', 'Rivera', 'registered', '2019-01-16', 'Grade 3', '', 1, '', '2010-09-21', 0, 0, 2, 'dyan sa tabi', 'dyan sa tabi'),
-(4, 534255555555, '', 'What', 'If', '', 'registered', '2019-03-09', 'Grade 1', '', 1, '', '2019-03-09', 0, 0, 1, 'Tagapo', 'Tagapo'),
-(5, 123456789020, '', 'Espanol', 'Kastin', 'Toledo', 'registered', '2019-03-12', 'Grade 4', '', 1, '', '1998-10-12', 0, 0, 2, 'Muntinlupa', 'Muntinlupa'),
-(8, 123456789019, '', 'ochoa', 'cara', 'ochoa', 'registered', '2019-03-12', 'Grade 4', '', 1, 'ochoacara@gmail.com', '1998-04-28', 0, 9358514271, 2, 'blk 9 lot 15 rosewood village tagapo sta.rosa laguna', 'blk 9 lot 15 rosewood village tagapo sta.rosa laguna');
+(1, 123456789102, '5c9d248187879.jpg', 'Biboso', 'Darwin', 'Jondanero', 'enrolled', '2019-03-29', 'Grade 1', '', 1, '', '2014-03-22', 0, 0, 1, 'dito lang sa dulo', 'dito lang sa dulo');
 
 -- --------------------------------------------------------
 
@@ -977,7 +825,41 @@ CREATE TABLE `tbl_stud_info_jhs` (
 --
 
 INSERT INTO `tbl_stud_info_jhs` (`row_id`, `stud_lrn`, `stud_avatar`, `stud_lname`, `stud_fname`, `stud_mname`, `stud_status`, `stud_rgstrtn_dte`, `stud_grade_lvl`, `stud_section`, `stud_acad_yr`, `stud_email`, `stud_bdate`, `stud_tnum`, `stud_cnum`, `stud_gender`, `stud_cur_adrs`, `stud_perm_adrs`) VALUES
-(1, 123456789013, '5c98a878b4e69.jpg', 'Tornea', 'Erick Joseph', 'Bucayan', 'enrolled', '2019-01-12', 'Grade 8', '', 1, 'ericktornea@yahoo.com', '2006-06-19', 0, 0, 1, '#16 Kamagong St. Pacita Complex 1 San Pedro City Laguna', '#16 Kamagong St. Pacita Complex 1 San Pedro City Laguna');
+(1, 123456789013, '5c9d25ab6e76d.jpg', 'Fajardo', 'Bernard Mico', 'Tulabut', 'registered', '2019-03-29', 'Grade 7', '', 1, 'bmfajardo@gmail.com', '2006-12-12', 0, 0, 1, 'Cadena de Amor St.', 'Cadena de Amor St.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_stud_info_kinder`
+--
+
+CREATE TABLE `tbl_stud_info_kinder` (
+  `row_id` int(11) NOT NULL,
+  `stud_lrn` bigint(12) NOT NULL,
+  `stud_avatar` char(50) NOT NULL,
+  `stud_lname` varchar(255) NOT NULL,
+  `stud_fname` varchar(255) NOT NULL,
+  `stud_mname` varchar(255) NOT NULL,
+  `stud_status` char(50) NOT NULL,
+  `stud_rgstrtn_dte` date NOT NULL,
+  `stud_grade_lvl` varchar(10) NOT NULL,
+  `stud_section` varchar(50) NOT NULL,
+  `stud_acad_yr` int(11) NOT NULL,
+  `stud_email` varchar(255) NOT NULL,
+  `stud_bdate` date NOT NULL,
+  `stud_tnum` bigint(20) NOT NULL,
+  `stud_cnum` bigint(20) NOT NULL,
+  `stud_gender` int(11) NOT NULL,
+  `stud_cur_adrs` text NOT NULL,
+  `stud_perm_adrs` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_stud_info_kinder`
+--
+
+INSERT INTO `tbl_stud_info_kinder` (`row_id`, `stud_lrn`, `stud_avatar`, `stud_lname`, `stud_fname`, `stud_mname`, `stud_status`, `stud_rgstrtn_dte`, `stud_grade_lvl`, `stud_section`, `stud_acad_yr`, `stud_email`, `stud_bdate`, `stud_tnum`, `stud_cnum`, `stud_gender`, `stud_cur_adrs`, `stud_perm_adrs`) VALUES
+(1, 123456789101, '5c9d2371788b2.jpg', 'Dela Cruz', 'Juan', '', 'registered', '2019-03-29', 'Kinder 1', '', 1, '', '2016-06-19', 0, 0, 1, 'Bagong Bayan', 'Bagong Bayan');
 
 -- --------------------------------------------------------
 
@@ -1013,8 +895,7 @@ CREATE TABLE `tbl_stud_info_shs` (
 --
 
 INSERT INTO `tbl_stud_info_shs` (`row_id`, `stud_lrn`, `stud_avatar`, `stud_lname`, `stud_fname`, `stud_mname`, `stud_status`, `stud_rgstrtn_dte`, `stud_grade_lvl`, `stud_trk_id`, `stud_strnd_id`, `stud_section`, `stud_acad_yr`, `stud_email`, `stud_bdate`, `stud_tnum`, `stud_cnum`, `stud_gender`, `stud_cur_adrs`, `stud_perm_adrs`) VALUES
-(1, 123456789014, '5c98a97896a83.jpg', 'Fajardo', 'Bernard Mico', 'Tulabut', 'enrolled', '2019-01-12', 'Grade 12', 2, 5, '', 1, 'bmfajardo@gmail.com', '1999-12-11', 0, 0, 1, 'Cade de Amor Str. Phase 6 Pacita Complex 1 San Pedro City Laguna', 'Cade de Amor Str. Phase 6 Pacita Complex 1 San Pedro City Laguna'),
-(2, 432144343241, '', 'Chuchu', 'chacha', 'cheche', 'registered', '2019-03-20', 'Grade 12', 1, 2, '', 1, '', '2015-12-31', 0, 0, 1, 'dito lang sa dulo', 'dito lang sa dulo');
+(1, 123456789104, '5c9d26772d1e7.jpg', 'Quebral', 'Jonathan', 'Almodiel', 'registered', '2019-03-29', 'Grade 11', 2, 5, '', 1, 'jonathan.quebral0627@gmail.com', '2001-06-27', 0, 0, 1, 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna', 'Phase 3b Block 9 Lot 32, Olympic Drive, Pacita 1, Brgy. San Francisco, City of Biñan, Laguna');
 
 -- --------------------------------------------------------
 
@@ -1040,14 +921,8 @@ CREATE TABLE `tbl_transaction_tbl` (
 --
 
 INSERT INTO `tbl_transaction_tbl` (`rowID`, `assessmentRowId`, `assessmentID`, `studid`, `emp_uniq_id`, `transDate`, `invoiceNum`, `orNum`, `amountPaid`, `balanceAmt`) VALUES
-(1, 1, 236541, '19-0001-52', '5c40dd75c74fc', '2019-03-14 12:32:52', '20190314-433898', 113213, '5000.00', '0.00'),
-(2, 2, 236541, '19-0001-52', '5c40dd75c74fc', '2019-03-14 09:18:40', '20190314-800140', 123499, '5000.00', '3866.67'),
-(3, 2, 236541, '19-0001-52', '5c40dd75c74fc', '2019-03-15 03:37:09', '20190315-990851', 312321, '2000.00', '1866.67'),
-(4, 5, 742309, '123456789012', '5c40dd75c74fc', '2019-03-16 11:01:06', '20190316-673945', 565564, '31275.00', '0.00'),
-(5, 16, 725982, '123456789013', '5c40dd75c74fc', '2019-03-16 02:20:44', '20190316-052455', 213213, '25000.00', '3290.00'),
-(6, 18, 720327, '123456789014', '5c40dd75c74fc', '2019-03-16 03:53:19', '20190316-664742', 432531, '9300.00', '0.00'),
-(7, 16, 725982, '123456789013', '5c40dd75c74fc', '2019-03-20 02:14:22', '20190320-821788', 654654, '3500.00', '0.00'),
-(8, 2, 236541, '19-0001-52', '5c40dd75c74fc', '2019-03-20 03:01:28', '20190320-928491', 414234, '1900.00', '0.00');
+(1, 1, 939098, '123456789102', '5c40dd75c74fc', '2019-03-29 03:57:49', '20190329-907611', 123456, '13100.00', '0.00'),
+(2, 11, 730763, '19-0001-52', '5c40dd75c74fc', '2019-03-29 04:00:35', '20190329-351679', 123457, '5000.00', '0.00');
 
 --
 -- Indexes for dumped tables
@@ -1196,6 +1071,13 @@ ALTER TABLE `tbl_stud_adtnl_info_jhs`
   ADD KEY `stud_lrn` (`stud_lrn`);
 
 --
+-- Indexes for table `tbl_stud_adtnl_info_kinder`
+--
+ALTER TABLE `tbl_stud_adtnl_info_kinder`
+  ADD PRIMARY KEY (`row_id`),
+  ADD KEY `stud_lrn` (`stud_lrn`);
+
+--
 -- Indexes for table `tbl_stud_adtnl_info_shs`
 --
 ALTER TABLE `tbl_stud_adtnl_info_shs`
@@ -1220,6 +1102,13 @@ ALTER TABLE `tbl_stud_documents_col`
 -- Indexes for table `tbl_stud_documents_jhs`
 --
 ALTER TABLE `tbl_stud_documents_jhs`
+  ADD PRIMARY KEY (`row_id`),
+  ADD KEY `stud_id` (`stud_lrn`);
+
+--
+-- Indexes for table `tbl_stud_documents_kinder`
+--
+ALTER TABLE `tbl_stud_documents_kinder`
   ADD PRIMARY KEY (`row_id`),
   ADD KEY `stud_id` (`stud_lrn`);
 
@@ -1256,6 +1145,14 @@ ALTER TABLE `tbl_stud_info_elem`
 ALTER TABLE `tbl_stud_info_jhs`
   ADD PRIMARY KEY (`row_id`),
   ADD UNIQUE KEY `stud_lrn` (`stud_lrn`),
+  ADD KEY `stud_acad_yr` (`stud_acad_yr`),
+  ADD KEY `stud_gender` (`stud_gender`);
+
+--
+-- Indexes for table `tbl_stud_info_kinder`
+--
+ALTER TABLE `tbl_stud_info_kinder`
+  ADD PRIMARY KEY (`row_id`),
   ADD KEY `stud_acad_yr` (`stud_acad_yr`),
   ADD KEY `stud_gender` (`stud_gender`);
 
@@ -1305,7 +1202,7 @@ ALTER TABLE `tbl_act_type`
 -- AUTO_INCREMENT for table `tbl_assessment_info`
 --
 ALTER TABLE `tbl_assessment_info`
-  MODIFY `rowID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `rowID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_col_course`
@@ -1335,7 +1232,7 @@ ALTER TABLE `tbl_fees`
 -- AUTO_INCREMENT for table `tbl_feespayables_info`
 --
 ALTER TABLE `tbl_feespayables_info`
-  MODIFY `rowID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `rowID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tbl_gender`
@@ -1353,13 +1250,13 @@ ALTER TABLE `tbl_grd_level`
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tbl_payables_info`
 --
 ALTER TABLE `tbl_payables_info`
-  MODIFY `rowID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `rowID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_semester`
@@ -1371,7 +1268,7 @@ ALTER TABLE `tbl_semester`
 -- AUTO_INCREMENT for table `tbl_shs_strand`
 --
 ALTER TABLE `tbl_shs_strand`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_shs_track`
@@ -1383,13 +1280,13 @@ ALTER TABLE `tbl_shs_track`
 -- AUTO_INCREMENT for table `tbl_stud_adtnl_info_col`
 --
 ALTER TABLE `tbl_stud_adtnl_info_col`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_stud_adtnl_info_elem`
 --
 ALTER TABLE `tbl_stud_adtnl_info_elem`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_stud_adtnl_info_jhs`
@@ -1398,22 +1295,28 @@ ALTER TABLE `tbl_stud_adtnl_info_jhs`
   MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `tbl_stud_adtnl_info_kinder`
+--
+ALTER TABLE `tbl_stud_adtnl_info_kinder`
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tbl_stud_adtnl_info_shs`
 --
 ALTER TABLE `tbl_stud_adtnl_info_shs`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_stud_documents`
 --
 ALTER TABLE `tbl_stud_documents`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_stud_documents_col`
 --
 ALTER TABLE `tbl_stud_documents_col`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_stud_documents_jhs`
@@ -1422,22 +1325,28 @@ ALTER TABLE `tbl_stud_documents_jhs`
   MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `tbl_stud_documents_kinder`
+--
+ALTER TABLE `tbl_stud_documents_kinder`
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tbl_stud_documents_shs`
 --
 ALTER TABLE `tbl_stud_documents_shs`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_stud_info_col`
 --
 ALTER TABLE `tbl_stud_info_col`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_stud_info_elem`
 --
 ALTER TABLE `tbl_stud_info_elem`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_stud_info_jhs`
@@ -1446,16 +1355,22 @@ ALTER TABLE `tbl_stud_info_jhs`
   MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `tbl_stud_info_kinder`
+--
+ALTER TABLE `tbl_stud_info_kinder`
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tbl_stud_info_shs`
 --
 ALTER TABLE `tbl_stud_info_shs`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_transaction_tbl`
 --
 ALTER TABLE `tbl_transaction_tbl`
-  MODIFY `rowID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `rowID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -1489,7 +1404,7 @@ ALTER TABLE `tbl_shs_strand`
 -- Constraints for table `tbl_stud_adtnl_info_col`
 --
 ALTER TABLE `tbl_stud_adtnl_info_col`
-  ADD CONSTRAINT `tbl_stud_adtnl_info_col_ibfk_1` FOREIGN KEY (`stud_id`) REFERENCES `tbl_stud_info_col` (`stud_id`);
+  ADD CONSTRAINT `tbl_stud_adtnl_info_col_ibfk_1` FOREIGN KEY (`stud_id`) REFERENCES `tbl_stud_info_col` (`stud_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_stud_adtnl_info_elem`
@@ -1519,7 +1434,7 @@ ALTER TABLE `tbl_stud_documents`
 -- Constraints for table `tbl_stud_documents_col`
 --
 ALTER TABLE `tbl_stud_documents_col`
-  ADD CONSTRAINT `tbl_stud_documents_col_ibfk_1` FOREIGN KEY (`stud_id`) REFERENCES `tbl_stud_info_col` (`stud_id`);
+  ADD CONSTRAINT `tbl_stud_documents_col_ibfk_1` FOREIGN KEY (`stud_id`) REFERENCES `tbl_stud_info_col` (`stud_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_stud_documents_jhs`
@@ -1537,10 +1452,10 @@ ALTER TABLE `tbl_stud_documents_shs`
 -- Constraints for table `tbl_stud_info_col`
 --
 ALTER TABLE `tbl_stud_info_col`
-  ADD CONSTRAINT `tbl_stud_info_col_ibfk_1` FOREIGN KEY (`stud_acad_yr`) REFERENCES `tbl_acad_year` (`acad_id`),
-  ADD CONSTRAINT `tbl_stud_info_col_ibfk_2` FOREIGN KEY (`stud_sem`) REFERENCES `tbl_semester` (`sem_id`),
-  ADD CONSTRAINT `tbl_stud_info_col_ibfk_3` FOREIGN KEY (`stud_course`) REFERENCES `tbl_col_course` (`course_id`),
-  ADD CONSTRAINT `tbl_stud_info_col_ibfk_5` FOREIGN KEY (`stud_gender`) REFERENCES `tbl_gender` (`gdr_id`);
+  ADD CONSTRAINT `tbl_stud_info_col_ibfk_1` FOREIGN KEY (`stud_acad_yr`) REFERENCES `tbl_acad_year` (`acad_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `tbl_stud_info_col_ibfk_2` FOREIGN KEY (`stud_sem`) REFERENCES `tbl_semester` (`sem_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `tbl_stud_info_col_ibfk_3` FOREIGN KEY (`stud_course`) REFERENCES `tbl_col_course` (`course_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `tbl_stud_info_col_ibfk_5` FOREIGN KEY (`stud_gender`) REFERENCES `tbl_gender` (`gdr_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `tbl_stud_info_elem`

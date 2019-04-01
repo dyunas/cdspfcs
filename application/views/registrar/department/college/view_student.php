@@ -48,6 +48,7 @@
         <div class="card">
           <div class="card-header">
             <strong>Learner Basic Information</strong>
+            <a href="<?php echo site_url('registrar/dept/'.$this->uri->segment(3).'/edit/'.$stud_info->stud_id); ?>" class="pull-right btn btn-sm btn-outline-primary"><i class="ti ti-pencil-alt"></i> Edit student info</a>
           </div><!-- /.card-header -->
           <div class="card-body form-horizontal">
             <div class="row form-group">
@@ -153,7 +154,7 @@
                 <label for="cnum1" class=" form-control-label">Telephone Number:</label>
               </div>
               <div class="col col-sm-3">
-                <?php echo 'N/A' ?>
+                <?php echo ($stud_info->stud_grdns_tnum != 0) ? $stud_info->stud_grdns_tnum : 'N/A' ?>
               </div>
               <div class="col col-sm-2 d-none d-sm-block" style="padding: 0px 0px 0px 15px;">
                 <label for="cnum1" class=" form-control-label">Cellphone Number:</label>
@@ -222,6 +223,7 @@
         <div class="card">
           <div class="card-header">
             <strong>Admission Status</strong>
+            <button type="button" id="editAdmissionStatus" data-toggle="modal" data-target="#editAdmission" data-backdrop="static" data-keyboard="false" class="btn btn-sm btn-outline-primary pull-right"><i class="ti ti-pencil-alt"></i> Edit admission status</button>
           </div><!-- /.card-header -->
           <div class="card-body form-horizontal">
             <div class="row form-group">
@@ -267,7 +269,6 @@
         <div class="card" id="soaReload">
           <div class="card-header">
             <strong class="pull-left">Statement of Account</strong>
-            <button type="button" id="addNewAssessment" data-toggle="modal" data-target="#newAssessment" data-backdrop="static" data-keyboard="false" class="btn btn-sm btn-outline-primary pull-right"><i class="ti ti-plus"></i> Add new assessment</button>
           </div><!-- /.card-header -->
           <div class="card-body form-horizontal">
           <?php if ($assessmentInfo): ?>
@@ -451,191 +452,51 @@
   </div><!-- /.animated fadeIn -->
 </div> <!-- .content -->
 
-<div class="modal fade" id="newAssessment" tabindex="-1" role="dialog" aria-labelledby="newAssessmentModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-full" role="document">
+<div class="modal fade" id="editAdmission" tabindex="-1" role="dialog" aria-labelledby="editAdmissionLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="newAssessmentModalLabel">New Assessment</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <!-- <span aria-hidden="true">&times;</span> -->
-        </button>
+        <h5 class="modal-title" id="editAdmissionLabel">Admission Status</h5>
       </div>
-      <form action="#" role="form" id="assessmentForm">
-      <input type="hidden" name="stud_id" value="<?php echo $stud_info->stud_id ?>">
-      <input type="hidden" name="gradeLevel" id="gradeLevel" value="<?php echo $stud_info->stud_year_lvl ?>">
-      <input type="hidden" name="course_id" id="course_id" value="<?php echo $stud_info->stud_course ?>">
-      <input type="hidden" id="totalDiscount" name="totalDiscount" value="0.00">
-      <input type="hidden" id="totalDiscAmount" name="totalDiscAmount" value="0.00">
       <div class="modal-body">
-        <div class="row form-group">
-          <div class="col col-sm-12">
-            <div class="col-sm-1 d-none d-sm-block">
-              <label class=" form-control-label">Level:</label>
-            </div>
-            <div class="col-sm-1 col-xs-12">
-              <?php echo $stud_info->stud_year_lvl ?>
-            </div>
-            <div class="col-sm-1 d-none d-sm-block">
-              <label class=" form-control-label">Semester:</label>
-            </div>
-            <div class="col-sm-1 col-xs-12">
-              <?php echo $stud_info->semester ?>
-            </div>
-            <div class="col-sm-1 d-none d-sm-block">
-              <label class=" form-control-label">Course:</label>
-            </div>
-            <div class="col-sm-1 col-xs-12">
-              <?php echo $stud_info->course_code ?>
-            </div>
-            <div class="col-sm-1 d-none d-sm-block">
-              <label class=" form-control-label">A.Y.:</label>
-            </div>
-            <div class="col-sm-2 col-xs-12">
-              <?php echo $stud_info->acad_yr ?>
-            </div>
-            <div class="col-sm-1 d-none d-sm-block">
-              <label class=" form-control-label">Status:</label>
-            </div>
-            <div class="col-sm-2 col-xs-12">
-              <?php echo $stud_info->stud_status ?>
-            </div>
-          </div><!-- /.col col-sm-12 -->
-        </div><!-- /.row form-group -->
-        <small style="display:block;padding: 10px 10px 10px 0px;font-size: 11px;"><i>Fields with (*) are mandatory. Please don't leave it blank</i></small>
         <div class="row">
-          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
-              <div class="card-header">
-                <strong>Assessment</strong>
-              </div>
-              <div class="card-body">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>SCHOOL FEES</th>
-                      <th></th>
-                      <th>AMOUNT</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php if($fees): ?>
-                      <?php foreach ($fees as $fee): ?>
-                      <tr>
-                        <td>
-                          <div class="checkbox">
-                            <label for="<?php echo $fee->row_id ?>" class="form-check-label ">
-                              <input type="checkbox" name="paymentCode[<?php echo $fee->row_id ?>]" id="<?php echo $fee->row_id ?>" data-name="<?php echo $fee->row_id ?>" data-id="<?php echo $fee->row_id ?>" class="fees form-check-input" value="<?php echo $fee->row_id ?>"> <?php echo $fee->fee_name; ?>
-                            </label>
-                          </div>
-                        </td>
-                        <td>
-                          <?php if(stripos($fee->fee_name, 'tuition') !== FALSE): ?>
-                            <input type="text" class="form-control-sm form-control tuition-fee" name="numUnits" id="numUnits" data-id="<?php echo $fee->row_id ?>" value="" data-parsley-type="number" data-parsley-type-message="" maxlength="2" required data-parsley-required-message="" disabled>
-                            <input type="hidden" id="tuitionFee" value="<?php echo $fee->amount; ?>">
-                            <input type="hidden" id="totalTuitionFee" value="0">
-                          <?php elseif(stripos($fee->fee_name, 'thesis') !== FALSE): ?>
-                            <input type="text" class="form-control-sm form-control tuition-fee" id="numThesis" data-id="<?php echo $fee->row_id ?>" value="" data-parsley-type="number" data-parsley-type-message="" maxlength="2" disabled>
-                            <input type="hidden" id="thesisFee" value="<?php echo $fee->amount; ?>">
-                            <input type="hidden" id="totalThesisFee" value="0">
-                          <?php endif; ?>
-                        </td>
-                        <td>
-                          <?php if(stripos($fee->fee_name, 'tuition') !== FALSE): ?>
-                            <span id="totalTuitionHere"><?php echo 'Php '.number_format($fee->amount, 2, '.', ','); ?></span>
-                            <input type="hidden" id="rowAmount<?php echo $fee->row_id ?>" value="<?php echo $fee->amount; ?>">
-                          <?php elseif(stripos($fee->fee_name, 'thesis') !== FALSE): ?>
-                            <span id="totalThesisHere"><?php echo 'Php '.number_format($fee->amount, 2, '.', ','); ?></span>
-                            <input type="hidden" id="rowAmount<?php echo $fee->row_id ?>" value="<?php echo $fee->amount; ?>">
-                          <?php else: ?>
-                            <span><?php echo 'Php '.number_format($fee->amount, 2, '.', ','); ?></span>
-                            <input type="hidden" id="rowAmount<?php echo $fee->row_id ?>" value="<?php echo $fee->amount; ?>">
-                          <?php endif; ?>
-                        </td>
-                      </tr>
-                      <?php endforeach ?>
-                      <input type="hidden" name="numThesis" id="numOfThesis" value="0">
-                    <?php else: ?>
-                    <?php endif ?>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td>TOTAL:</td>
-                      <td></td>
-                      <td><span id="total"></span><input type="hidden" name="totalAmount" id="totalAmount" value="0"></td>
-                    </tr>
-                    <tr>
-                      <td style="font-weight: bold;font-size: 14px;"><em>TOTAL AMOUNT:</em></td>
-                      <td></td>
-                      <td style="text-align: right;font-style: italic;"><span id="totAmount"></span><input type="hidden" name="grandTotal" id="grandTotal" value="0"></td>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="card">
-              <div class="card-header">
-                <strong>Payment Scheme</strong>
-              </div>
-              <div class="card-body">
-                <div class="col col-sm-6">
-                  <select name="paymentScheme" id="paymentScheme" class="form-control form-control-sm" disabled required>
-                    <option value="">---</option>
-                    <option value="CASH">CASH</option>
-                    <option value="INSTALLMENT">INSTALLMENT</option>
-                  </select>
-                </div>
-                <input type="hidden" id="hidSchemeDiscount" value="0">
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">
-                <strong>Discounts</strong>
-              </div>
-              <div class="card-body">
-                <div class="col col-sm-12">
-                  <table class="table">
-                    <tbody>
-                      <tr>
-                        <td colspan="3">
-                          <div class="col col-sm-2 d-none d-sm-block">
-                            <label for="tnum1" class=" form-control-label">Discount</label>
-                          </div>
-                          <div class="col col-sm-6">
-                            <select name="discount" id="discount" class="form-control form-control-sm" disabled>
-                              <option value="">---</option>
-                              <?php foreach ($discounts as $discount): ?>
-                                <option value="<?php echo $discount->row_id ?>"><?php echo $discount->discount ?></option>
-                              <?php endforeach ?>
-                            </select>
-                            <input type="hidden" id="hidDiscount" value="0">
-                          </div>
-                        </td>
-                      </tr>
-                      <tr id="discHere"></tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">
-                <strong>Payables</strong>
-              </div>
-              <div class="card-body">
-                <table class="table">
-                  <tbody id="payables"></tbody>
-                </table>
-              </div>
-            </div>
+              <form action="#" method="POST" id="editAdmissionForm">
+              <input type="hidden" name="stud_id" value="<?php echo $stud_info->stud_id; ?>">
+              <div class="card-body form-horizontal">
+                <div class="row form-group">
+                  <div class="d-none d-sm-block col-sm-1 col-xs-2">
+                    <label for="stud_course" class="form-control-label" placeholder="Course">*Course</label>
+                  </div><!-- col col-sm-1 -->
+                  <div class="col-sm-2 col-xs-6">
+                    <select class="input-sm form-control-sm form-control" id="stud_course" name="stud_course" required data-parsley-required-message="">
+                      <option value="<?php echo $stud_info->stud_course ?>" selected><?php echo $stud_info->stud_course ?></option>
+                    </select>
+                  </div><!-- col col-sm-3 -->
+                  <div class="d-none d-sm-block col-sm-1 col-xs-1">
+                    <label for="stud_year_lvl" class="form-control-label" placeholder="level">*Level</label>
+                  </div><!-- col col-sm-1 -->
+                  <div class="col-sm-2 col-xs-6">
+                    <select class="input-sm form-control-sm form-control" id="yr_lvl" name="stud_year_lvl" required data-parsley-required-message="">
+                      <option value="">---</option>
+                    </select>
+                  </div><!-- col col-sm-3 -->
+                  <div class="d-none d-sm-block col-sm-1">
+                    <label for="stud_acad_yr" class="form-control-label">A.Y.</label>
+                  </div><!-- col col-sm-1 -->
+                  <div class="col col-sm-2">
+                    <?php echo $acad_yr->acad_yr ?>
+                    <input type="hidden" class="input-sm form-control-sm form-control" name="stud_acad_yr" value="<?php echo $acad_yr->acad_id; ?>" readonly>
+                  </div><!-- col col-sm-3 -->
+                </div><!-- /.row form-group -->
+              </div><!-- /.card-body -->
+            </div><!-- /.card -->
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" id="submitBtn" class="btn btn-outline-primary btn-sm">
-          <i class="fa fa-check"></i> Create
-        </button>
+        <button type="submit" class="btn btn-outline-primary btn-sm">Update</button>
         <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
       </div>
       </form>
@@ -803,3 +664,74 @@
 <script src="<?php echo base_url('assets/assets/js/pages/assessor/college/assessmentInfo.js'); ?>"></script>
 <script src="<?php echo base_url('assets/assets/js/pages/registrar/college/paymentHistory.js'); ?>"></script>
 <script src="<?php echo base_url('assets/assets/js/pages/registrar/college/uploadAvatar.js'); ?>"></script>
+<script src="<?php echo base_url('assets/assets/js/pages/registrar/college/stud_frm_validation.js'); ?>"></script>
+<script>
+  jQuery(document).ready(function() {
+    var courseID = <?php echo $stud_info->stud_course; ?>;
+    var yearLevel = '<?php echo $stud_info->stud_year_lvl; ?>';
+    jQuery.ajax({
+      type: 'GET',
+      dataType: 'json',
+      url: '../get_student_course',
+      success:function(course){
+        // console.log(course);
+        var html = '<option value="">Course</option>';
+        if (course != false) {
+          for(var x = 0; x <= course.length-1; x++){
+            if (courseID == course[x].course_id){
+              html += '<option value="'+course[x].course_id+'" selected>'+course[x].course_code+'</option>';
+            } else {
+              html += '<option value="'+course[x].course_id+'">'+course[x].course_code+'</option>';
+            }
+          }
+        }
+        // console.log(html);
+        jQuery('#stud_course').html(html);
+      }
+    });
+
+    jQuery.ajax({
+      type: 'GET',
+      dataType: 'json',
+      data: {id: courseID},
+      url: '../get_course_years',
+      success:function(yrLvl){
+        var html = '<option value="">---</option>';
+        var suffix = ['st Yr', 'nd Yr', 'rd Yr', 'th Yr', 'th Yr'];
+        if (yrLvl != false) {
+          for(var x = 1; x <= yrLvl.no_of_yrs; x++){
+           if (yearLevel == x+suffix[x-1]) {
+             html += '<option value="'+x+suffix[x-1]+'" selected>'+x+'</option>';
+           } else {
+             html += '<option value="'+x+suffix[x-1]+'">'+x+'</option>';
+           }
+          }
+        }
+        // console.log(html);
+        jQuery('#yr_lvl').html(html);
+      }
+    });
+
+    jQuery('#stud_course').change(function() {
+      var course_id = jQuery('#stud_course').val();
+      jQuery.ajax({
+        type: 'GET',
+        dataType: 'json',
+        data: {id: course_id},
+        url: '../get_course_years',
+        success:function(yrLvl){
+          console.log(yrLvl);
+          var html = '<option value="">---</option>';
+          var suffix = ['st Yr', 'nd Yr', 'rd Yr', 'th Yr', 'th Yr'];
+          if (yrLvl != false) {
+            for(var x = 1; x <= yrLvl.no_of_yrs; x++){
+              html += '<option value="'+x+suffix[x-1]+'">'+x+'</option>';
+            }
+          }
+          // console.log(html);
+          jQuery('#yr_lvl').html(html);
+        }
+      });
+    });
+  });
+</script>

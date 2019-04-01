@@ -33,7 +33,11 @@
       <div class="col-md-3">
         <div class="card">
           <div class="card-body">
-            <img class="mx-auto d-block" src="<?php echo base_url('assets/images/avatar/blank_profile_pic.jpg'); ?>">
+            <?php if ($stud_info->stud_avatar == ""): ?>
+              <img class="mx-auto d-block" src="<?php echo base_url('assets/images/avatar/blank_profile_pic.jpg'); ?>">
+            <?php else: ?>
+              <img class="mx-auto d-block" src="<?php echo base_url('assets/uploads/avatars/'.$stud_info->stud_avatar); ?>">
+            <?php endif; ?>
           </div><!-- /.card-body -->
         </div><!-- /.card -->
       </div><!-- /.col-md-3 -->

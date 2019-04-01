@@ -46,7 +46,7 @@ class Fee_manager_model extends CI_model {
 					$sbdata[] = '<span class="text-right" style="display:block">'.number_format($row->amount, 2, '.', ',').'</span>';
 					$sbdata[] = '<span class="text-center" style="display:block">'.$row->fee_for.'</span>';
 					$sbdata[] = '<span class="text-center" style="display:block">'.$status.'</span>';
-					$sbdata[] = '<button type="button" data-id="'.$row->row_id.'" data-toggle="modal" data-target="#editFeeModal" data-backdrop="static" data-keyboard="false" class="editRow btn btn-outline-primary btn-sm"><i class="ti ti-pencil"></i></button>';
+					$sbdata[] = '<button type="button" data-id="'.$row->row_id.'" data-toggle="modal" data-target="#editPaymentModal" data-backdrop="static" data-keyboard="false" class="editRow btn btn-outline-primary btn-sm"><i class="ti ti-pencil"></i></button>';
 
 					$data[] = $sbdata;
 				}
@@ -145,6 +145,37 @@ class Fee_manager_model extends CI_model {
 				{
 					return json_encode(false);
 				}
+			}
+			else
+			{
+				return json_encode(false);
+			}
+		}
+		else
+		{
+			return json_encode(false);
+		}
+	}
+
+	public function update_fee()
+	{
+		$data = array(
+			'fee_name' => $this->input->post('editFname'),
+			'amount'   => $this->input->post('editAmnt'),
+			'fee_for'  => $this->input->post('fFor')
+		);
+		$this->db->where('row_id', $this->input->post('row_id'));
+		if ($this->db->update('tbl_fees', $data))
+		{
+			$log = array(
+				'emp_id' => $this->session->userdata('uniq_id'),
+				'c_log' => 'Update a fee: '.$this->input->post('editFname').' - '.number_format($this->input->post('editAmnt'), 2, '.', ',').' for '.$this->input->post('fFor'),
+				'mod_date' => date('Y-m-d h:i:s a')
+			);
+
+			if ($this->db->insert('tbl_logs', $log))
+			{
+				return json_encode(true);
 			}
 			else
 			{

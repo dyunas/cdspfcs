@@ -94,6 +94,7 @@ class College extends MY_Controller {
 			"fees" 			=> $this->coldb->get_school_fees(),
 			"assessmentInfo" => $this->coldb->get_assessment_info($uniq_id),
 			"discounts" => $this->coldb->get_discounts(),
+			"acad_yr" => $this->glob->get_acad_year()
 		);
 
 		$data['paymentHistory'] = $this->glob->get_payment_history($uniq_id);
@@ -102,6 +103,56 @@ class College extends MY_Controller {
 		$this->load->view('templates/navigation');
 		$this->load->view('registrar/department/college/view_student', $data);
 		$this->load->view('templates/footer');
+	}
+
+	public function Edit_student($uniq_id)
+	{
+		$data = array(
+			"stud_info" => $this->coldb->get_student_info($uniq_id)
+		);
+
+		$this->load->view('templates/header');
+		$this->load->view('templates/navigation');
+		$this->load->view('registrar/department/college/edit_student', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function Update_student_admission_status()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			if ($this->coldb->update_student_admission_status())
+			{
+				echo json_encode(true);
+			}
+			else
+			{
+				echo json_encode(false);
+			}
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
+	public function Update_student()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			if ($this->coldb->update_student())
+			{
+				echo json_encode($this->input->post('stud_id'));
+			}
+			else
+			{
+				echo json_encode(false);
+			}
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
 	}
 
 	public function Get_tuition_fee()

@@ -1,5 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Elementary extends MY_Controller {
 	public function __construct()
 	{
@@ -80,16 +79,65 @@ class Elementary extends MY_Controller {
 		$data = array(
 			"stud_info" => $this->elemdb->get_student_info($uniq_id),
 			"discounts" => $this->elemdb->get_discounts(),
-			"assessmentInfo" => $this->elemdb->get_assessment_info($uniq_id)
+			"assessmentInfo" => $this->elemdb->get_assessment_info($uniq_id),
+			"acad_yr" => $this->glob->get_acad_year()
 		);
-
-		$data["fees"] = $this->elemdb->get_school_fees($data["stud_info"]->stud_grade_lvl);
 		$data["paymentHistory"] = $this->glob->get_payment_history($data['stud_info']->stud_lrn);
 
 		$this->load->view('templates/header');
 		$this->load->view('templates/navigation');
 		$this->load->view('registrar/department/elementary/view_student', $data);
 		$this->load->view('templates/footer');
+	}
+
+	public function Edit_student($uniq_id)
+	{
+		$data = array(
+			"stud_info" => $this->elemdb->get_student_info($uniq_id)
+		);
+
+		$this->load->view('templates/header');
+		$this->load->view('templates/navigation');
+		$this->load->view('registrar/department/elementary/edit_student', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function Update_student_admission_status()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			if ($this->elemdb->update_student_admission_status())
+			{
+				echo json_encode(true);
+			}
+			else
+			{
+				echo json_encode(false);
+			}
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
+	}
+
+	public function Update_student()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			if ($this->elemdb->update_student())
+			{
+				echo json_encode($this->input->post('LRN'));
+			}
+			else
+			{
+				echo json_encode(false);
+			}
+		}
+		else
+		{
+			exit('No direct script access allowed');
+		}
 	}
 	
 	public function Get_discount_amount()

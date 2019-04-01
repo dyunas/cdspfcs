@@ -9,7 +9,26 @@ jQuery(document).ready(function() {
   });
 
   var form = jQuery('#regForm');
+  var editStudInfoForm = jQuery('#editStudInfoForm');
+  var editAdmissionForm = jQuery('#editAdmissionForm');
+
   form.parsley({
+    errorClass: 'is-invalid text-danger',
+    // successClass: 'is-valid', // Comment this option if you don't want the field to become green when valid. Recommended in Google material design to prevent too many hints for user experience. Only report when a field is wrong.
+    errorsWrapper: '<span class="form-text text-danger" style="font-size: 12px;"></span>',
+    errorTemplate: '<span></span>',
+    trigger: 'change'
+  });
+
+  editStudInfoForm.parsley({
+    errorClass: 'is-invalid text-danger',
+    // successClass: 'is-valid', // Comment this option if you don't want the field to become green when valid. Recommended in Google material design to prevent too many hints for user experience. Only report when a field is wrong.
+    errorsWrapper: '<span class="form-text text-danger" style="font-size: 12px;"></span>',
+    errorTemplate: '<span></span>',
+    trigger: 'change'
+  });
+
+  editAdmissionForm.parsley({
     errorClass: 'is-invalid text-danger',
     // successClass: 'is-valid', // Comment this option if you don't want the field to become green when valid. Recommended in Google material design to prevent too many hints for user experience. Only report when a field is wrong.
     errorsWrapper: '<span class="form-text text-danger" style="font-size: 12px;"></span>',
@@ -52,6 +71,93 @@ jQuery(document).ready(function() {
               Swal(
                 'Error!',
                 'Failed to add student to the record! Please try again.',
+                'error'
+              );
+            }
+          }
+        });
+      }
+    })
+  });
+
+  editStudInfoForm.on('submit', function(e) {
+    e.preventDefault();
+
+    Swal({
+      title: 'Update record?',
+      text: "",
+      type: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, continue.'
+    }).then((result) => {
+      if (result.value) {
+        jQuery.ajax({
+          type: 'POST',
+          data: editStudInfoForm.serialize(),
+          dataType: 'json',
+          url: '../update_student',
+          success:function(data){
+            if (data != false) {
+              Swal(
+              {
+                title: 'Success!',
+                text:  'Student record has been updated.',
+                type:  'success',
+              }).then(
+              function(){
+                window.location = 'http://localhost/cdspsrcms/registrar/dept/shs/view/'+data;
+              });
+            }
+            else {
+              Swal(
+                'Error!',
+                'Failed to update student record! Please try again.',
+                'error'
+              );
+            }
+          }
+        });
+      }
+    })
+  });
+
+  editAdmissionForm.on('submit', function(e) {
+    e.preventDefault();
+
+    Swal({
+      title: 'Update record?',
+      text: "",
+      type: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, continue.'
+    }).then((result) => {
+      if (result.value) {
+        jQuery.ajax({
+          type: 'POST',
+          data: editAdmissionForm.serialize(),
+          dataType: 'json',
+          url: '../update_student_admission_status',
+          success:function(data){
+            if (data != false) {
+              Swal(
+              {
+                title: 'Success!',
+                text:  'Student record has been updated.',
+                type:  'success',
+              }).then(
+              function(){
+                  jQuery('#editAdmission').modal('hide');
+                  window.location.reload();
+              });
+            }
+            else {
+              Swal(
+                'Error!',
+                'Failed to update student record! Please try again.',
                 'error'
               );
             }

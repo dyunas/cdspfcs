@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/vendors/selectFX/css/cs-skin-elastic.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/vendors/chosen/chosen.min.css'); ?>">
 <div class="breadcrumbs">
   <div class="col-sm-4">
     <div class="page-header float-left">
@@ -61,14 +63,36 @@
           <!-- <span aria-hidden="true">&times;</span> -->
         </button>
       </div>
-      <?php echo form_open('', 'role="form" id="PaymentForm"'); ?>
+      <form action="#" role="form" id="PaymentForm">
       <div class="modal-body">
         <small style="display:block;padding: 10px 10px 10px 0px;font-size: 11px;"><i>Fields with (*) are mandatory. Please don't leave it blank</i></small>
         <div class="row form-group">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="col-lg-1 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*Payment Name:</label></div>
+            <div class="col-lg-1 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*Fee Name:</label></div>
             <div class="col-lg-9 col-sm-10 col-xs-12">
-              <input type="text" id="fname" name="fname" placeholder="Payment Name" class="form-control form-control-sm" required data-parsley-required-message="This field is required" maxlength="50">
+              <select data-placeholder="Choose fee name" id="fname" name="fname" class="standardSelect" tabindex="-1" required data-parsley-required-message="This field is required">
+                <option value=""></option>
+                <option value="Tuition Fee">Tuition Fee</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+                <option value="Computer Fee">Computer Fee</option>
+                <option value="Energy Fee">Energy Fee</option>
+                <option value="Books">Books</option>
+                <option value="Educational Tour">Educational Tour</option>
+                <option value="Foundation Day">Foundation Day</option>
+                <option value="Learner's Insurance Premium">Learner's Insurance Premium</option>
+                <option value="ID Lanyard">ID Lanyard</option>
+                <option value="Laboratory Fee">Laboratory Fee</option>
+                <option value="Student Handbook">Student Handbook</option>
+                <option value="Student's Physical Examination">Student's Physical Examination</option>
+                <option value="Acquaintance Party">Acquaintance Party</option>
+                <option value="Science Laboratory">Science Laboratory</option>
+                <option value="NSTP">NSTP</option>
+                <option value="Thesis Defense Fee">Thesis Defense Fee</option>
+                <option value="Graduation Fee">Graduation Fee</option>
+                <option value="Year Book">Year Book</option>
+                <option value="Retreat">Retreat</option>
+                <option value="Team Building">Team Building</option>
+              </select>
             </div>
           </div>
         </div><!-- /.row form-group -->
@@ -105,7 +129,80 @@
         </button>
         <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
       </div>
-      <?php form_close(); ?>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editPaymentModal" tabindex="-1" role="dialog" aria-labelledby="editPaymentModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editPaymentModalLabel">Edit Payment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <!-- <span aria-hidden="true">&times;</span> -->
+        </button>
+      </div>
+      <form action="#" role="form" id="editForm">
+      <input type="hidden" id="row_id" name="row_id" value="">
+      <div class="modal-body">
+        <small style="display:block;padding: 10px 10px 10px 0px;font-size: 11px;"><i>Fields with (*) are mandatory. Please don't leave it blank</i></small>
+        <div class="row form-group">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-1 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*Fee Name:</label></div>
+            <div class="col-lg-9 col-sm-10 col-xs-12">
+              <select data-placeholder="Choose fee name" id="editFname" name="editFname" class="form-control form-control-sm" tabindex="-1" required data-parsley-required-message="This field is required">
+                <option value=""></option>
+                <option value="Tuition Fee">Tuition Fee</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+                <option value="Computer Fee">Computer Fee</option>
+                <option value="Energy Fee">Energy Fee</option>
+                <option value="Books">Books</option>
+                <option value="Educational Tour">Educational Tour</option>
+                <option value="Foundation Day">Foundation Day</option>
+                <option value="Learner's Insurance Premium">Learner's Insurance Premium</option>
+                <option value="ID Lanyard">ID Lanyard</option>
+                <option value="Laboratory Fee">Laboratory Fee</option>
+                <option value="Student Handbook">Student Handbook</option>
+                <option value="Student's Physical Examination">Student's Physical Examination</option>
+                <option value="Acquaintance Party">Acquaintance Party</option>
+                <option value="Science Laboratory">Science Laboratory</option>
+                <option value="NSTP">NSTP</option>
+                <option value="Thesis Defense Fee">Thesis Defense Fee</option>
+                <option value="Graduation Fee">Graduation Fee</option>
+                <option value="Year Book">Year Book</option>
+                <option value="Retreat">Retreat</option>
+                <option value="Team Building">Team Building</option>
+              </select>
+            </div>
+          </div>
+        </div><!-- /.row form-group -->
+        <div class="row form-group">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-1 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*Amount:</label></div>
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+              <input type="text" id="editAmnt" name="editAmnt" placeholder="Amount" class="form-control form-control-sm" data-parsley-type="integer" required data-parsley-required-message="This field is required" maxlength="5">
+            </div>
+          </div>
+        </div><!-- /.row form-group -->
+        <div class="row form-group">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-1 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*For:</label></div>
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+              <select name="fFor" class="fFor form-control form-control-sm" required data-parsley-required-message="This field is required">
+                <option value="">---</option>
+              </select>
+            </div>
+          </div>
+        </div><!-- /.row form-group -->
+      </div>
+      <div class="modal-footer">
+        <button type="submit" id="submitBtn" class="btn btn-outline-primary btn-sm">
+          <i class="fa fa-save"></i> Save
+        </button>
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+      </div>
+      </form>
     </div>
   </div>
 </div>
@@ -117,6 +214,7 @@
 <script src="<?php echo base_url('assets/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/vendors/datatables.net-buttons/js/dataTables.buttons.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/vendors/chosen/chosen.jquery.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/assets/js/init-scripts/data-table/datatables-init.js'); ?>"></script>
 <script src="<?php echo base_url('assets/parsley/dist/parsley.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/assets/js/pages/admin/fee_manager/feeManager.js'); ?>"></script>
@@ -145,5 +243,11 @@
     if (flashSuccess) {
       notice.append(success);
     }
+
+    jQuery(".standardSelect").chosen({
+      disable_search_threshold: 10,
+      no_results_text: "Oops, nothing found!",
+      width: "100%"
+    });
   });
 </script>

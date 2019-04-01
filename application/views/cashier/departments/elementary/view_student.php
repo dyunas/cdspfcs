@@ -27,7 +27,11 @@
       <div class="col-md-3">
         <div class="card">
           <div class="card-body">
-            <img class="mx-auto d-block" src="<?php echo base_url('assets/images/avatar/blank_profile_pic.jpg'); ?>">
+            <?php if ($stud_info->stud_avatar == ""): ?>
+              <img class="mx-auto d-block" src="<?php echo base_url('assets/images/avatar/blank_profile_pic.jpg'); ?>">
+            <?php else: ?>
+              <img class="mx-auto d-block" src="<?php echo base_url('assets/uploads/avatars/'.$stud_info->stud_avatar); ?>">
+            <?php endif; ?>
           </div><!-- /.card-body -->
         </div><!-- /.card -->
       </div><!-- /.col-md-3 -->
@@ -584,5 +588,5 @@
 
 <script src="<?php echo base_url('assets/sweet-alert/dist/sweetalert2.all.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/parsley/dist/parsley.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/assets/js/pages/cashier/juniorhs/assessmentInfo.js'); ?>"></script>
-<script src="<?php echo base_url('assets/assets/js/pages/registrar/juniorhs/paymentHistory.js'); ?>"></script>
+<script src="<?php echo base_url('assets/assets/js/pages/cashier/elementary/assessmentInfo.js'); ?>"></script>
+<script src="<?php echo base_url('assets/assets/js/pages/registrar/elementary/paymentHistory.js'); ?>"></script>

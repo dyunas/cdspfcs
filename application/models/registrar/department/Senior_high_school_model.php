@@ -90,6 +90,109 @@ class Senior_high_school_model extends CI_Model {
 		}
 	}
 
+	public function update_student()
+	{
+		$data = array(
+			"stud_lrn"    			=> $this->input->post('LRN'),
+			"stud_lname"  			=> $this->input->post('lname'),
+			"stud_fname"  			=> $this->input->post('fname'),
+			"stud_mname"  			=> $this->input->post('mname'),
+			"stud_email"  			=> $this->input->post('eadd'),
+			"stud_bdate"  			=> $this->input->post('bdate'),
+			"stud_tnum"   			=> $this->input->post('tnum'),
+			"stud_cnum"   			=> $this->input->post('cnum'),
+			"stud_gender" 			=> $this->input->post('gender'),
+			"stud_cur_adrs"   	=> $this->input->post('cur_addrs'),
+			"stud_perm_adrs"   	=> $this->input->post('perm_addrs'),
+		);
+
+		$this->db->where('row_id', $this->input->post('row_id'));
+
+		if ($this->db->update('tbl_stud_info_shs', $data))
+		{
+			$adtnl_data = array(
+				"stud_lrn" 				=> $this->input->post('LRN'),
+				"stud_grdns_name" => $this->input->post('grdns_name'),
+				"stud_grdns_tnum" => $this->input->post('tnum1'),
+				"stud_grdns_cnum" => $this->input->post('cnum1'),
+				"stud_grdns_adrs" => $this->input->post('addrs2'),
+			);
+
+			$this->db->where('row_id', $this->input->post('row_id'));
+
+			if ($this->db->update('tbl_stud_adtnl_info_shs', $adtnl_data))
+			{				
+				$sub_docs = array(
+					"stud_lrn" 		=> $this->input->post('LRN'),
+					"bCertPSA"		=> ($this->input->post('bCertPSA') != NULL) ? $this->input->post('bCertPSA') : 0,
+					"certGMC"			=> ($this->input->post('certGMC') != NULL) ? $this->input->post('certGMC') : 0,
+					"certHonDis"	=> ($this->input->post('certHonDis') != NULL) ? $this->input->post('certHonDis') : 0,
+					"frm137"			=> ($this->input->post('frm137') != NULL) ? $this->input->post('frm137') : 0,
+					"frm138"			=> ($this->input->post('frm138') != NULL) ? $this->input->post('frm138') : 0
+				);
+				$this->db->where('row_id', $this->input->post('row_id'));
+				if ($this->db->update('tbl_stud_documents_shs', $sub_docs))
+				{
+					$logs = array(
+						"emp_id" => $this->session->userdata('uniq_id'),
+						"c_log" => "Updated record of student with LRN/Student ID of ".$this->input->post('LRN'),
+						"mod_date" => date('Y-m-d h:i:s a')
+					);
+
+					if($this->db->insert('tbl_logs', $logs))
+					{
+						return TRUE;
+					}
+					else
+					{
+						return FALSE;
+					}
+				}
+				else
+				{
+					return FALSE;
+				}
+			}
+			else
+			{
+				return FALSE;
+			}
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
+	public function update_student_admission_status()
+	{
+		$this->db->set('stud_grade_lvl', $this->input->post('stud_grade_lvl'));
+		$this->db->set('stud_acad_yr', $this->input->post('stud_acad_yr'));
+		$this->db->where('stud_lrn', $this->input->post('LRN'));
+
+		if ($this->db->update('tbl_stud_info_shs'))
+		{
+			$logs = array(
+				"emp_id" => $this->session->userdata('uniq_id'),
+				"c_log" => "Updated record of student with LRN/Student ID of ".$this->input->post('LRN'),
+				"mod_date" => date('Y-m-d h:i:s a')
+			);
+
+			if($this->db->insert('tbl_logs', $logs))
+			{
+				return TRUE;
+			}
+			else
+			{
+				return FALSE;
+			}
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
 	public function get_shs_table_data()
 	{
 		$this->db->select('a.stud_lrn, a.stud_lname, a.stud_fname, a.stud_grade_lvl, a.stud_status, c.track, d.strand');
@@ -208,7 +311,7 @@ class Senior_high_school_model extends CI_Model {
 	public function get_student_info($uniq_id)
 	{
 		$this->db->select('
-			a.stud_lrn, a.stud_avatar, a.stud_lname, a.stud_fname, a.stud_mname, a.stud_status, a.stud_rgstrtn_dte, a.stud_grade_lvl, a.stud_section, a.stud_acad_yr, a.stud_email, a.stud_bdate, a.stud_tnum, a.stud_cnum, a.stud_gender, a.stud_cur_adrs, a.stud_perm_adrs,
+			a.row_id, a.stud_lrn, a.stud_avatar, a.stud_lname, a.stud_fname, a.stud_mname, a.stud_status, a.stud_rgstrtn_dte, a.stud_grade_lvl, a.stud_section, a.stud_acad_yr, a.stud_email, a.stud_bdate, a.stud_tnum, a.stud_cnum, a.stud_gender, a.stud_cur_adrs, a.stud_perm_adrs,
 			b.stud_grdns_name, b.stud_grdns_tnum, b.stud_grdns_cnum, b.stud_grdns_adrs,
 			c.bCertPSA, c.certGMC, c.certHonDis, c.frm137, c.frm138,
 			e.trk_id, e.track,

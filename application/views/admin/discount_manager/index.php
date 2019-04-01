@@ -61,14 +61,14 @@
           <!-- <span aria-hidden="true">&times;</span> -->
         </button>
       </div>
-      <?php echo form_open('', 'role="form" id="discForm"'); ?>
+      <form action="#" role="form" id="discForm">
       <div class="modal-body">
         <small style="display:block;padding: 10px 10px 10px 0px;font-size: 11px;"><i>Fields with (*) are mandatory. Please don't leave it blank</i></small>
         <div class="row form-group">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="col-lg-2 col-sm-2 d-none d-sm-block" style="padding: 5px 0px 5px 0px;"><label class="form-control-label">*Discount Name:</label></div>
             <div class="col-lg-9 col-sm-10 col-xs-12">
-              <input type="text" id="dname" name="dname" placeholder="Fee Name" class="form-control form-control-sm" required data-parsley-required-message="This field is required" maxlength="50">
+              <input type="text" id="dname" name="dname" placeholder="Discount Name" class="form-control form-control-sm" required data-parsley-required-message="This field is required" maxlength="50">
             </div>
           </div>
         </div><!-- /.row form-group -->
@@ -97,7 +97,7 @@
         </button>
         <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
       </div>
-      <?php form_close(); ?>
+      </form>
     </div>
   </div>
 </div>

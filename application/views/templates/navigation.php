@@ -16,6 +16,22 @@
             <a href="<?php echo site_url($this->uri->segment(1).'/dashboard'); ?>"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
           </li>
           <?php if ($this->uri->segment(1) == 'admin'): ?>
+            <h3 class="menu-title">Student Record</h3><!-- /.menu-title -->
+            <li class="<?php echo ($this->uri->segment(3) == 'kinder') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/dept/kinder'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Kinder</a>
+            </li>
+            <li class="<?php echo ($this->uri->segment(3) == 'elementary') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/dept/elementary'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Elementary</a>
+            </li>
+            <li class="<?php echo ($this->uri->segment(3) == 'juniorhs') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/dept/juniorhs'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Junior High School</a>
+            </li>
+            <li class="<?php echo ($this->uri->segment(3) == 'shs') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/dept/shs'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Senior High School</a>
+            </li>
+            <li class="<?php echo ($this->uri->segment(3) == 'college') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/dept/college'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>College</a>
+            </li>
             <h3 class="menu-title">Settings</h3><!-- /.menu-title -->
             <li class="<?php echo ($this->uri->segment(2) == 'accnt-mgr') ? 'active' : ''; ?> menu-item-has-children">
               <a href="<?php echo site_url($this->uri->segment(1).'/accnt-mgr'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Account Manager</a>
@@ -38,6 +54,9 @@
             </li>
           <?php elseif ($this->uri->segment(1) == 'registrar'): ?>
             <h3 class="menu-title">Departments</h3><!-- /.menu-title -->
+            <li class="<?php echo ($this->uri->segment(3) == 'kinder') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/dept/kinder'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Kinder</a>
+            </li>
             <li class="<?php echo ($this->uri->segment(3) == 'elementary') ? 'active' : ''; ?> menu-item-has-children">
               <a href="<?php echo site_url($this->uri->segment(1).'/dept/elementary'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Elementary</a>
             </li>
@@ -56,6 +75,9 @@
             </li>
           <?php elseif ($this->uri->segment(1) == 'cashier'): ?>
             <h3 class="menu-title">Departments</h3><!-- /.menu-title -->
+            <li class="<?php echo ($this->uri->segment(3) == 'kinder') ? 'active' : ''; ?> menu-item-has-children">
+              <a href="<?php echo site_url($this->uri->segment(1).'/dept/kinder'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Kinder</a>
+            </li>
             <li class="<?php echo ($this->uri->segment(3) == 'elementary') ? 'active' : ''; ?> menu-item-has-children">
               <a href="<?php echo site_url($this->uri->segment(1).'/dept/elementary'); ?>" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Elementary</a>
             </li>

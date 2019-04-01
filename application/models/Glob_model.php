@@ -73,4 +73,65 @@ class Glob_model extends CI_Model {
 			return FALSE;
 		}
 	}
+
+	public function get_total_number_student()
+	{
+		$query = $this->db->query('SELECT(SELECT COUNT(*) FROM tbl_stud_info_kinder ) AS Total_kinder, (SELECT COUNT(*) FROM tbl_stud_info_elem ) AS Total_elem, (SELECT COUNT(*) FROM tbl_stud_info_jhs ) AS Total_jhs, (SELECT COUNT(*) FROM tbl_stud_info_shs ) AS Total_shs, (SELECT COUNT(*) FROM tbl_stud_info_col ) AS Total_college');
+
+		if ($query)
+		{
+			return $query->row();
+			$query->fee_result();
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
+	public function get_yearly_student_total()
+	{
+		$data = array();
+		$query = $this->db->query('SELECT DATE_FORMAT(stud_rgstrtn_dte, "%Y") AS year, COUNT(*) AS total FROM tbl_stud_info_kinder GROUP BY DATE_FORMAT(stud_rgstrtn_dte, "%Y")');
+
+		if ($query)
+		{
+			$data['kinder'] = $query->result();
+			$query->free_result();
+		}
+
+		$query = $this->db->query('SELECT DATE_FORMAT(stud_rgstrtn_dte, "%Y") AS year, COUNT(*) AS total FROM tbl_stud_info_elem GROUP BY DATE_FORMAT(stud_rgstrtn_dte, "%Y")');
+
+		if ($query)
+		{
+			$data['elem'] = $query->result();
+			$query->free_result();
+		}
+
+		$query = $this->db->query('SELECT DATE_FORMAT(stud_rgstrtn_dte, "%Y") AS year, COUNT(*) AS total FROM tbl_stud_info_jhs GROUP BY DATE_FORMAT(stud_rgstrtn_dte, "%Y")');
+
+		if ($query)
+		{
+			$data['jhs'] = $query->result();
+			$query->free_result();
+		}
+
+		$query = $this->db->query('SELECT DATE_FORMAT(stud_rgstrtn_dte, "%Y") AS year, COUNT(*) AS total FROM tbl_stud_info_shs GROUP BY DATE_FORMAT(stud_rgstrtn_dte, "%Y")');
+
+		if ($query)
+		{
+			$data['shs'] = $query->result();
+			$query->free_result();
+		}
+
+		$query = $this->db->query('SELECT DATE_FORMAT(stud_rgstrtn_dte, "%Y") AS year, COUNT(*) AS total FROM tbl_stud_info_col GROUP BY DATE_FORMAT(stud_rgstrtn_dte, "%Y")');
+
+		if ($query)
+		{
+			$data['college'] = $query->result();
+			$query->free_result();
+		}
+
+		return $data;
+	}
 }

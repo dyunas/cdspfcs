@@ -82,4 +82,17 @@ class Fee_manager extends MY_Controller {
 			exit('No direct script access allowed!');
 		}
 	}
+
+	public function Update_fee()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$result = $this->feedb->update_fee();
+			echo $result;
+		}
+		else
+		{
+			exit('No direct script access allowed!');
+		}
+	}
 }
